@@ -2,5 +2,6 @@
 /include
 /lib
 /lib64
-pyenv.cfg
+pyvenv.cfg
 .env
+/share

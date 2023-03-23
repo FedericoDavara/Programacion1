@@ -1,0 +1,11 @@
+requerimientos back:    
+    usuarios get
+             post
+             delete
+    log in 
+    interaccion base de datos
+    permisos de cada rol
+    crear planificaciones 
+    fichas de trabajo de alumnos 
+    gestor de archivos
+    dar de baja y de alta a distintos usuarios

@@ -1,11 +1,19 @@
 from flask import Flask
-import os
 from dotenv import load_dotenv
+from flask_restful import Api
 
-#vamos a crear un metodo que inicializara la app y todos los modulos
+import main.resources as resources
+
+api = Api()
+
 def create_app():
-    #inicio flask
     app = Flask(__name__)
-    #variables de entorno
-    load_dotenv()
+    load_dotenv() 
+    api.add_resource(resources.UsuariosResource, '/usuarios')
+    api.add_resource(resources.UsuarioResource, '/usuario/<id>')
+    api.add_resource(resources.UsuariosResource, '/usuarios')
+    api.add_resource(resources.UsuarioResource, '/usuario/<id>')
+    api.add_resource(resources.UsuariosResource, '/usuarios')
+    api.add_resource(resources.UsuarioResource, '/usuario/<id>')
+    api.init_app(app)
     return app

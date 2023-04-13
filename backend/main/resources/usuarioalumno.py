@@ -6,6 +6,11 @@ USUARIOS = {
     2: {'nombre':'Benjamin', 'rol':'Alumno'}
 }
 
+USUARIOS_PROFESOR = {
+    1: {"nombre":"Armando","apellido":"Barreras"}
+}        
+
+
 class UsuarioAlumno(Resource):
     def get(self, id):
         if int(id) in USUARIOS:
@@ -36,4 +41,21 @@ class Usuarios(Resource):
         id = int(max(USUARIOS.keys()))+1
         USUARIOS[id] = usuario
         return USUARIOS[id], 201
-        
+
+
+class UsuarioProfesor(Resource):
+    def get(self,id):
+        if int(id) in USUARIOS_PROFESOR:
+            return USUARIOS_PROFESOR[int(id)]
+        return "", 404
+    
+    def put(self,id):
+        if int(id) in USUARIOS_PROFESOR:
+            usuario = USUARIOS_PROFESOR[int(id)]
+            data = request.get_json()
+            usuario.update(data)
+            return "", 201
+        return "", 404
+    
+    
+    

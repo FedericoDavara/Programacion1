@@ -5,4 +5,5 @@ from .login import Login as LoginResource
 from .pago import Pago as PagoResource
 from .planificacion import PlanificacionAlumno as PlanificacionAlumnoResource
 from .planificacion import PlanificacionProfesor as PlanificacionProfesorResource
-from .planificacion import PlanificacionesProfesores as PlanificacionesProfesresResources
+from .planificacion import PlanificacionesProfesores as PlanificacionesProfesoresResources
+from .profesor import ProfesorClases as ProfesorClasesResource

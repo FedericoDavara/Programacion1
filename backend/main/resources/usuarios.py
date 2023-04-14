@@ -7,7 +7,8 @@ USUARIOS = {
 }
 
 USUARIOS_PROFESOR = {
-    1: {"nombre":"Armando","apellido":"Barreras"}
+    1: {"nombre":"Armando","apellido":"Barreras"},
+    2: {"nombre":"Felix","apellido":"Barrios"}
 }        
 
 

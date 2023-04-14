@@ -6,13 +6,7 @@ USUARIOS = {
     2: {'nombre':'Benjamin', 'rol':'Alumno'}
 }
 
-USUARIOS_PROFESOR = {
-    1: {"nombre":"Armando","apellido":"Barreras"},
-    2: {"nombre":"Felix","apellido":"Barrios"}
-}        
-
-
-class UsuarioAlumno(Resource):
+class Usuario(Resource):
     def get(self, id):
         if int(id) in USUARIOS:
             return USUARIOS[int(id)]
@@ -44,19 +38,6 @@ class Usuarios(Resource):
         return USUARIOS[id], 201
 
 
-class UsuarioProfesor(Resource):
-    def get(self,id):
-        if int(id) in USUARIOS_PROFESOR:
-            return USUARIOS_PROFESOR[int(id)]
-        return "", 404
-    
-    def put(self,id):
-        if int(id) in USUARIOS_PROFESOR:
-            usuario = USUARIOS_PROFESOR[int(id)]
-            data = request.get_json()
-            usuario.update(data)
-            return "", 201
-        return "", 404
     
     
     

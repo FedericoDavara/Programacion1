@@ -1,0 +1,602 @@
+{
+	"info": {
+		"_postman_id": "2cd05e0a-2da3-49cc-ac8a-271eea411db8",
+		"name": "Grupo B",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26925398"
+	},
+	"item": [
+		{
+			"name": "Lista de usuarios",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/usuarios",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"usuarios"
+					]
+				},
+				"description": "listadodealumnos"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"nombre\": \"Alberto\",\n        \"rol\": \"Alumno\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/usuarios",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un usuario",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"nombre\": \"José\",\n        \"rol\": \"Alumno\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/usuario/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"usuario",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar un usuario",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"nombre\": \"José\",\n        \"rol\": \"Alumno\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/usuario/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"usuario",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar un usuario",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/usuario/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"usuario",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lista de usuarios alumnos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/usuariosalumnos",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"usuariosalumnos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear usuario alumno",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Armando\",\n    \"rol\": \"Alumno\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/usuariosalumnos",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"usuariosalumnos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener usuario profesor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/usuarioprofesor/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"usuarioprofesor",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar usuario alumno desde usuario profesor",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Alejandro\",\n    \"rol\": \"Alumno\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/usuarioprofesor/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"usuarioprofesor",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener usuario alumno",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/usuarioalumno/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"usuarioalumno",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar usuario alumno",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Samuel\",\n    \"rol\": \"Alumno\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/usuarioalumno/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"usuarioalumno",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar usuario alumno",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/usuarioalumno/3",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"usuarioalumno",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener las planificaciones para un alumno",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/planificacionalumno/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"planificacionalumno",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener las planificaciones desde planificaciones profesores",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/planificacionesprofesores",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"planificacionesprofesores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear planificaciones",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"1\": \"Peso muerto\",\n    \"2\": \"Extension de gemelos\",\n    \"3\": \"Flexiones\",\n    \"4\": \"Press banco inclinado con mancuernas\",\n    \"5\": \"Curl de biceps\",\n    \"6\": \"Extension de triceps\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/planificacionesprofesores",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"planificacionesprofesores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una planificacion",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/planificacionprofesor/3",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"planificacionprofesor",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar una planificacion",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"1\": \"Sentadillas\",\n    \"2\": \"Dominadas\",\n    \"3\": \"Remo sentado\",\n    \"4\": \"Press de hombros con barra\",\n    \"5\": \"Peso muerto rumano\",\n    \"6\": \"crunches\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/planificacionprofesor/3",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"planificacionprofesor",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar una planificacion",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/planificacionprofesor/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"planificacionprofesor",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un listado de profesores con clases",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/clases",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"clases"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener pago por alumno",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/pago/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"pago",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar el estado del pago",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id alumno\": \"1\",\n    \"pago\": \"efectuado\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/pago/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"pago",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear acceso a la app",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"usuario:\":\"Terminator\",\n    \"contrasena\":\"hastalavista\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -3,7 +3,8 @@ from flask import request
 
 USUARIOS = {
     1: {'nombre':'Federico', 'rol':'Alumno'},
-    2: {'nombre':'Benjamin', 'rol':'Alumno'}
+    2: {'nombre':'Benjamin', 'rol':'Alumno'},
+    3: {'nombre':'Adriano', 'rol':'Alumno'}
 }
 
 class Usuario(Resource):

@@ -4,6 +4,14 @@ from .. import db
 from main.models import UsuarioModel
 
 
+<<<<<<< HEAD
+=======
+USUARIOS = {
+    1: {'nombre':'Federico', 'rol':'Alumno'},
+    2: {'nombre':'Benjamin', 'rol':'Alumno'},
+    3: {'nombre':'Adriano', 'rol':'Alumno'}
+}
+>>>>>>> refs/remotes/origin/main
 
 class Usuario(Resource):
     def get(self,id):

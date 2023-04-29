@@ -1,50 +1,42 @@
 from flask_restful import Resource
-from flask import request
-
-PLANIFICACIONES ={
-    1:{1:"Press de Banca",2:"Sentadillas",3:"Remos con barra",4:"Press militar",5:"Curl de biceps",6:"Extension de triceps"},
-    2:{1:"Peso muerto",2:"Flexiones de pecho",3:"Dominadas",4:"Press de hombros con mancuernas",5:"Curl de martillo", 6:"Patada de tríceps"},
-    3: {1:"Sentadillas",2:"Press de banca inclinado",3:"Remo con mancuernas", 4:"Press de hombros con barra", 5:"Curl de bíceps con mancuernas", 6:"Extensión de tríceps con mancuernas"}
-}
-
-PLANIFICACION_ALUMNO = {
-    1:{"id_alumno":"1","id_plan":"1"}
-}
+from flask import request, jsonify
+from .. import db
+from main.models import PlanificacionModel
 
 class PlanificacionAlumno(Resource):
     def get(self,id):
-        if int(id) in PLANIFICACION_ALUMNO:
-            return PLANIFICACION_ALUMNO[int(id)]
-        return "", 404
+        planificacionalumno = db.session.query(PlanificacionModel).get_or_404(id)
+        return planificacionalumno.to_json()
     
 class PlanificacionesProfesores(Resource):
     def get(self):
-        return PLANIFICACIONES
+        planificacionesprofesores = db.session.query(PlanificacionModel).get_or_404(id)
+        return planificacionesprofesores.to_json()
 
     def post(self):
-        planificacion = request.get_json()
-        id = int(max(PLANIFICACIONES.keys()))+1
-        PLANIFICACIONES[id] = planificacion
-        return PLANIFICACIONES[id], 201
+        planificacionesprofesores = PlanificacionModel.from_json(request.get_json())
+        db.session.add(planificacionesprofesores)
+        db.session.commit()
+        return planificacionesprofesores.to_json(), 201
     
 class PlanificacionProfesor(Resource):
     def get(self,id):
-        if int(id) in PLANIFICACIONES:
-            return PLANIFICACIONES[int(id)]
-        return "", 404
+        planificacionprofesor = db.session.query(PlanificacionModel).get_or_404(id)
+        return planificacionprofesor.to_json()
     
     def put(self,id):
-        if int(id) in PLANIFICACIONES:
-            planificacion = PLANIFICACIONES[int(id)]
-            data = request.get_json()
-            planificacion.update(data)
-            return "", 201
-        return "", 404
+        planificacionprofesor = db.session.query(PlanificacionModel).get_or_404(id)
+        data = request.get_json().items()
+        for key, value in data:
+            setattr(planificacionprofesor, key, value)
+        db.session.add(planificacionprofesor)
+        db.session.commit()
+        return planificacionprofesor.to_json() , 201
+
     
     def delete(self,id):
-        if int(id) in PLANIFICACIONES:
-            del PLANIFICACIONES[int(id)]
-            return "", 204
-        return "", 404
-    
+        planificacionprofesor = db.session.query(PlanificacionModel).get_or_404(id)
+        db.session.delete(planificacionprofesor)
+        db.session.commit()
+        return '', 204
     

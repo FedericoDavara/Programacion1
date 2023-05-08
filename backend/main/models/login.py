@@ -2,49 +2,35 @@ from .. import db
 
 class Login(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    dni = db.Column(db.models.Integer, nullable=False)
-    nombre = db.Column(db.models.Varchar(50), nullable=False)
-    apellido = db.Column(db.models.Varchar(50), nullable=False)    
-    email = db.Column(db.models.Varchar(50), nullable=False)
-    telefono = db.Column(db.models.Integer, nullable=False)
+    nombre_usuario = db.Column(db.models.String(20), nullable=False)
+    contraseña = db.Column(db.models.String(20), nullable=False)
     
     def __repr__(self):
-        return '<Usuario: %r >' % (self.nombre)
+        return '<login: %r >' % (self.nombre_usuario)
     
     def to_json(self):
         usuario_json = {
             'id': self.id,
-            'dni': int(self.nombre),
-            'nombre': str(self.nombre),
-            'apellido': str(self.nombre),
-            'email': str(self.nombre),
-            'telefono': int(self.nombre),
+            'nombre_usuario': str(self.nombre_usuario),
+            'contraseña': str(self.contraseña)
         }
         return usuario_json
 
     def to_json_short(self):
         usuario_json = {
             'id': self.id,
-            'dni': int(self.nombre),
-            'nombre': str(self.nombre),
-            'apellido': str(self.nombre),
-            'email': str(self.nombre),
-            'telefono': int(self.nombre),
+            'nombre_usuario': str(self.nombre_usuario),
+            'contraseña': str(self.contraseña),
         }
         return usuario_json
 
     @staticmethod
-    def from_json(usuario_json):
-        id = usuario_json.get('id')
-        dni = usuario_json.get('dni')
-        nombre = usuario_json.get('nombre')
-        apellido = usuario_json.get('apellido')
-        email = usuario_json.get('email')
-        telefono = usuario_json.get('telefono')
-        return Usuario(id=id,
-                    dni=dni, 
-                    nombre=nombre, 
-                    apellido=apellido,
-                    email=email,
-                    telefono=telefono,
+    def from_json(login_json):
+        id = login_json.get('id')
+        nombre_usuario = login_json.get('nombre_usuario')
+        contraseña = login_json.get('contraseña')
+
+        return Login(id=id,
+                    nombre_usuario=nombre_usuario, 
+                    contraseña=contraseña, 
                     )

@@ -1,8 +1,7 @@
 from flask_restful import Resource
 from flask import request, jsonify
 from .. import db
-from main.models import UsuarioModel
-
+from main.models import UsuarioModel, ProfesorModel, UsuarioAlumnoModel, profesor_clases
 #USUARIOS = {
 #    1: {'nombre':'Federico', 'rol':'Alumno'},
 #    2: {'nombre':'Benjamin', 'rol':'Alumno'},
@@ -13,7 +12,7 @@ class Usuario(Resource):
 
     def get(self, id):
         usuario = db.session.query(UsuarioModel).get_or_404(id)
-        return usuario.to_json()
+        return usuario.to_json_complete()
 
     def delete(self, id):
         usuario = db.session.query(UsuarioModel).get_or_404(id)

@@ -5,3 +5,4 @@ backend/lib64
 backend/main/__pycache__
 backend/main/models/__pycache__
 backend/main/resources/__pycache__
+.env

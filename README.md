@@ -7,7 +7,6 @@
 <div align="justify">
 
 <!-- Profile -->
-<p align="left"><strong><samp>「</samp></strong></p>
   <p align="center">
     <samp>
       <b>
@@ -16,18 +15,12 @@
       </b>
       <br>
         <image src="https://readme-typing-svg.herokuapp.com/?font=Iosevka&duration=3000&pause=1000&color=FFFFFF&center=true&width=435&lines=Federico+Gabriel+Davara+Herrera;Legajo%3A+XXXXXX;f.davara%40alumno.um.edu.ar">
-      <br>
-      <b>
-      </b>
-    </samp>
   </p>
-<p align="right"><strong><samp>」</samp></strong></p>
       
 <!-- Francisco Saldaña -->
 <div align="justify">
 
 <!-- Profile -->
-<p align="left"><strong><samp>「</samp></strong></p>
   <p align="center">
     <samp>
       <b>
@@ -41,13 +34,11 @@
       </b>
     </samp>
   </p>
-<p align="right"><strong><samp>」</samp></strong></p>
       
 <!-- Victor Giménez -->
 <div align="justify">
 
 <!-- Profile -->
-<p align="left"><strong><samp>「</samp></strong></p>
   <p align="center">
     <samp>
       <b>
@@ -61,13 +52,11 @@
       </b>
     </samp>
   </p>
-<p align="right"><strong><samp>」</samp></strong></p>
 
 <!-- Adriano Tisera -->
 <div align="justify">
 
 <!-- Profile -->
-<p align="left"><strong><samp>「</samp></strong></p>
   <p align="center">
     <samp>
       <b>
@@ -81,4 +70,3 @@
       </b>
     </samp>
   </p>
-<p align="right"><strong><samp>」</samp></strong></p>

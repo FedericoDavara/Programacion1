@@ -1,0 +1,7 @@
+backend/.env
+backend/bin
+backend/include
+backend/lib
+backend/lib64
+backend/pyvenv.cfg
+

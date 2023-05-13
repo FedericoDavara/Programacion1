@@ -4,4 +4,6 @@ backend/include
 backend/lib
 backend/lib64
 backend/pyvenv.cfg
+backend/main/__pycache__
+
 

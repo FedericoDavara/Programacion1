@@ -3,7 +3,7 @@
 /lib
 /lib64
 pyvenv.cfg
-.env
+/.env
 /share
 /__pycache__
 

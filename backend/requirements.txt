@@ -4,3 +4,5 @@ flask-RESTful
 flask-SQLAlchemy
 python-dotenv
 SQLAlchemy
+regex
+

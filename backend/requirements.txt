@@ -1,5 +1,6 @@
 flask
+flask-Migrate
+flask-RESTful
+flask-SQLAlchemy
 python-dotenv
-flask-restful
-flask_sqlalchemy
 SQLAlchemy

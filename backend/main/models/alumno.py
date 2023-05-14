@@ -1,10 +1,14 @@
-from .. import db
+from .. import db, sa
+from . import UsuariosModel
 
 class Alumno(db.Model):
-    id_alumno = db.Column(db.Integer, primary_key=True)
-    edad = db.Column(db.Integer, nullable=False)
-    peso = db.Column(db.Integer, nullable=False)
-    altura = db.Column(db.Integer, nullable=False)
+    id_alumno = sa.Column(sa.Integer, sa.ForeignKey(UsuariosModel.dni),primary_key=True)
+    edad = sa.Column(sa.Integer, nullable=False)
+    peso = sa.Column(sa.Integer, nullable=False)
+    altura = sa.Column(sa.Integer, nullable=False)
+    usuario = db.relationship('Usuarios', uselist = False, back_populates = 'alumno',
+                              cascade = 'all, delete-orphan', single_parent= True)
+
 
     def __repr__(self):
         return f'<ID: {self.id_alumno}, Edad: {self.edad}, Peso: {self.peso}, Altura: {self.altura}> '
@@ -16,15 +20,23 @@ class Alumno(db.Model):
             'PESO': self.peso,
             'ALTURA': self.altura
             }
-        
+        return alumno_json
+    
+    def to_json_complete(self):
+        alumno_json = {
+            "Edad": self.edad,
+            "Sexo": self.sexo,
+            "Usuario": self.usuario.to_json() if self.usuario != None else "",
+            "Clases": [clase.to_json() for clase in self.clases],
+            "Planificaciones" : [planificacion.to_json() for planificacion in self.planificaciones]
+        }
+        return alumno_json
+
+
     @staticmethod
     def from_json(alumno_json):
-        id_alumno = alumno_json.get('ID')
-        edad = alumno_json.get('EDAD')
-        peso = alumno_json.get('PESO')
-        altura = alumno_json.get('ALTURA')
-        return Alumno(id_alumno=id_alumno,
-                      edad=edad,
-                      peso=peso,
-                      altura=altura
+        return Alumno(id_alumno= alumno_json.get('ID'),
+                      edad= alumno_json.get('EDAD'),
+                      peso= alumno_json.get('EDAD'),
+                      altura= alumno_json.get('ALTURA')
                       )    

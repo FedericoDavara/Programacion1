@@ -1,19 +1,27 @@
-from .. import db
+from .. import db, sa
+
 
 class Usuarios(db.Model):
-    dni = db.Column(db.Integer, primary_key=True)
-    nombre = db.Column(db.String(100), nullable=False)
-    apellido = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.Integer, nullable=False)
-    telefono = db.Column(db.Integer, nullable=False)
+    id = sa.Column(sa.Integer, primary_key=True)
+    nombre = sa.Column(sa.String(100), nullable=False)
+    apellido = sa.Column(sa.String(100), nullable=False)
+    email = sa.Column(sa.Integer, nullable=False)
+    dni = sa.Column(sa.Integer, nullable=False)
+    telefono = sa.Column(sa.Integer, nullable=False)
+    profesor = db.relationship("Profesor", uselist = False, back_populates= "usuario",
+                               cascade="all, delete-orphan", single_parent = True)
+    alumno = db.relationship("Alumno", uselist = False, back_populates = "usuario", 
+                              cascade = "all, delete-orphan", single_parent = True)
+
 
     def __repr__(self):
         return (
-            f'< DNI: {self.dni}, Nombre: {self.nombre}, Apellido: {self.apellido}, Email: {self.email}, Telefono: {self.telefono}'
+            f'< ID: {self.usuario_id},DNI: {self.dni}, Nombre: {self.nombre}, Apellido: {self.apellido}, Email: {self.email}, Telefono: {self.telefono}'
         )
 
     def to_json(self):
         usuarios_json = {
+            'ID': int(self.id),
             'DNI': int(self.dni),
             'Nombre': str(self.nombre),
             'Apellidos': str(self.apellido),
@@ -22,20 +30,28 @@ class Usuarios(db.Model):
             
         }
         return usuarios_json
-    
+
+    def to_json_complete(self):
+        usuario_json = {
+            'ID' : int(self.id),
+            "Nombre": str(self.nombre),
+            "Apelidos": str(self.apellido),
+            "Telefono": str(self.telefono),
+            "Email": str(self.email),
+            
+        }
+        return usuario_json
+
+
     @staticmethod
     def from_json(usuario_json):
-        dni = usuario_json.get('DNI')
-        nombre = usuario_json.get('Nombre')
-        apellido = usuario_json.get('Apellido')
-        email = usuario_json.get('Email')
-        telefono = usuario_json.get('Telefono')
         return Usuarios(
-            dni=dni,
-            nombre=nombre,
-            apellido=apellido,
-            email=email,
-            telefono=telefono
+            id = usuario_json.get('ID'),
+            dni=usuario_json.get('DNI'),
+            nombre=usuario_json.get('Nombre'),
+            apellido=usuario_json.get('Apellido'),
+            email= usuario_json.get('Email'),
+            telefono=usuario_json.get('Telefono')
             )
 
 

@@ -1,35 +1,51 @@
-from .. import db
+from .. import db, sa
+
+profesor_clases = db.Table("profesor_clases",
+    sa.Column("profesor_id",db.Integer,db.ForeignKey("profesor.id"),primary_key=True),
+    sa.Column("id_clase",db.Integer,db.ForeignKey("clases.id"),primary_key=True)   
+    )
+
 
 class Clases(db.Model):
-    id_clases = db.Column(db.Integer, primary_key=True)
-    horario_clases = db.Column(db.Integer, nullable=True)
-    nombre_clases = db.Column(db.String, nullable=False)
+    id = sa.Column(db.Integer, primary_key = True)
+    horario = sa.Column(db.String(100),nullable = False)
+    nombre = sa.Column(db.String(100),nullable = False)
+    dia = sa.Column(db.String(100),nullable = False)
+    profesor = db.relationship('Profesor', secondary=profesor_clases, backref=db.backref('clases', lazy='dynamic'))
+
+    
 
 
     def __repr__(self):
-        return f'< Nro° Clase : {self.id_clases},Horario_de_Clases: {self.horario_clases}, Nombre_de_Clases: {self.nombre_clases} '
-
-
-
-
-    def tp_json(self):
+        return '<Clases : %r %r %r >' & (self.horario, self.nombre, self.dia)
+    
+    def to_json(self):
         clases_json = {
-            'Nro° Clase' : self.id_clases,
-            'Horario_de_clases': self.horario_clases,
-            'Nombre_de_Clases': self.nombre_clases
+            'id' : self.id,
+            'horario' : str(self.horario),
+            'nombre' : str(self.nombre),
+            'dia' : str(self.dia)
         }
         return clases_json
     
+    def to_json_complete(self):
+        clase_json = {
+            'Nro° Clase' : self.id,
+            'Horario_de_clases': self.horario,
+            'Nombre_de_Clases': self.nombre,
+            'Dia': self.dia,
+            "Profesores": [profesor.to_json() for profesor in self.profesores]
+        }
+        return clase_json
+
+
 
     @staticmethod
 
     def from_json(clases_json):
-        id_clases = clases_json.get('Clase_id')
-        horario_clases = clases_json.get('Horario_de_clases')
-        nombre_clases = clases_json.get('Nombres de clases')
-        return Clases(id_clases=id_clases,
-                      horario_clases=horario_clases,
-                      nombre_clases=nombre_clases
+        return Clases(id=clases_json.get('Clase_id'),
+                      horario=clases_json.get('Horario_de_clases'),
+                      nombre=clases_json.get('Nombres de clases')
                       )
     
 

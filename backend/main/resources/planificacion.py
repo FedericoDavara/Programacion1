@@ -30,14 +30,44 @@ class PlanificacionAlumno(Resource):
     
 class Planificacion(Resource):
     def get(self):
-        planificacion = db.session.query(PlanificacionModel).all()
-        response = jsonify({rutina.to_json() for rutina in planificacion})
-        return response
+        page, per_page = 1, 10
+        if request.args.get("page"):
+            page = int(request.args.get("page"))
+        if request.args.get("per_page"):
+            per_page = int(request.args.get("per_page"))
+        plan = db.session.query(PlanificacionModel)
+
+        if request.args.get("alumno_dni"):
+            plan = plan.filter(PlanificacionModel.alumno_dni.like(request.args.get("alumno_dni")))
+
+        if request.args.get("profesor_dni"):
+            plan = plan.filter(PlanificacionModel.profesor_dni.like(request.args.get("profesor_dni")))
+
+        if request.args.get("estado"):
+            plan = plan.filter(PlanificacionModel.estado == request.args.get("estado"))
+
+        if request.args.get('order_by_date') == 'asc':
+            plan=plan.order_by(asc(PlanificacionModel.creation_date))
+            
+        if request.args.get('order_by_date') == 'desc':
+            plan=plan.order_by(desc(PlanificacionModel.creation_date))
+
+        plan = plan.paginate(page=page, per_page=per_page, error_out=True, max_per_page=20)
+        return jsonify(
+            {"Planificaciones": [plan.to_json() for plan in plan],
+            "total": plan.total,
+            "pages": plan.pages,
+            "page": page})
+
     def post(self):
-        plan = PlanificacionModel.from_json(request.get_json())
+        try:
+            plan = PlanificacionModel.from_json(request.get_json())
+        except:
+            return 'Formato no correcto', 400
         db.session.add(plan)
         db.session.commit()
-        return plan.to_json(), 201    
+        return plan.to_json(), 201
+    
     
 class PlanificacionProfesor(Resource):
     def get(self, dni):

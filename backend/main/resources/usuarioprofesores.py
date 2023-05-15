@@ -26,9 +26,25 @@ class UsuarioProfesor(Resource):
 
 class UsuarioProfesores(Resource):
     def get(self):
-        profesores = db.session.query(ProfesorModel).all()
-        return jsonify([profesor.to_json() for profesor in profesores])
-
+        page=1
+        per_page=10
+        profesor = db.session.query(ProfesorModel)
+        if request.args.get('page'):
+            page=int(request.args.get('page'))
+        if request.args.get('per_page'):
+            per_page=int(request.args.get('per_page'))
+        if 'by_especialidad' in request.args.keys():
+            profesor = profesor.order_by(asc(ProfesorModel.especialidad))
+        if 'by_dni' in request.args.keys():
+            profesor = profesor.order_by(desc(ProfesorModel.dni))
+        profesor = profesor.paginate(page=page, per_page=per_page, error_out=True, max_per_page=20)
+        return jsonify({
+            "profesores":[profesor.to_json() for profesor in profesor],
+            "total": profesor.total,
+            "pages": profesor.pages,
+            "page": profesor.page
+            })
+    
     def post(self):
         try:
             profesor = ProfesorModel.from_json(request.get_json())
@@ -38,4 +54,5 @@ class UsuarioProfesores(Resource):
         db.session.add(profesor)
         db.session.commit()
         return profesor.to_json(), 201
+    
     

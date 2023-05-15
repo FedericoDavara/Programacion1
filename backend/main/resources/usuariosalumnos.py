@@ -4,7 +4,7 @@ from .. import db
 from main.models import UsuariosModel,ProfesorModel,AlumnoModel
 import regex
 from datetime import datetime
-
+from sqlalchemy import func, desc, asc
 
 
 class UsuarioAlumno(Resource):
@@ -23,8 +23,24 @@ class UsuarioAlumno(Resource):
     
 class UsuariosAlumnos(Resource):
     def get(self):
-        alumnos = db.session.query(AlumnoModel).all()
-        return jsonify([alumno.to_json() for alumno in alumnos])
+        page=1
+        per_page=10
+        alumnos = db.session.query(AlumnoModel)
+        if request.args.get('page'):
+            page=int(request.args.get('page'))
+        if request.args.get('per_page'):
+            per_page=int(request.args.get('per_page'))
+        if 'by_edad' in request.args.keys():
+            alumnos = alumnos.order_by(asc(AlumnoModel.edad))
+        if 'by_dni' in request.args.keys():
+            alumnos = alumnos.order_by(desc(AlumnoModel.dni))
+        alumnos = alumnos.paginate(page=page, per_page=per_page, error_out=True, max_per_page=20)
+        return jsonify({
+            "alumnos":[alumnos.to_json() for alumnos in alumnos],
+            "total": alumnos.total,
+            "pages": alumnos.pages,
+            "page": alumnos.page
+            })
 
     def post(self):
         alumno = AlumnoModel.from_json(request.get_json())

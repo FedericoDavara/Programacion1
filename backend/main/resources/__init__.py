@@ -8,6 +8,6 @@ from .login import Login as LoginResource
 from .pago import Pago as PagoResource
 from .planificacion import PlanificacionAlumno as PlanificacionAlumnoResource
 from .planificacion import PlanificacionProfesor as PlanificacionProfesorResource
-#from .clases import ClasesProfesores as ClasesProfesorResource
-#from .clases import ClasesAlumnos as ClasesAlumnosResoure
+from .clases import ClasesProfesores as ClasesProfesorResource
+from .clases import ClasesAlumnos as ClasesAlumnosResoure
 

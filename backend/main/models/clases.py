@@ -1,9 +1,10 @@
 from .. import db, sa
 
-#profesor_clases = db.Table("profesor_clases",
-#   sa.Column("profesor_id",db.Integer,db.ForeignKey("profesor.id"),primary_key=True),
-#   sa.Column("id_clase",db.Integer,db.ForeignKey("clases.id"),primary_key=True)   
-#  )
+profesor_clases = db.Table("profesor_clases",
+   sa.Column("id_profesor",db.Integer,db.ForeignKey("profesor.id_profesor")),
+   sa.Column("id_clase",db.Integer,db.ForeignKey("clases.id")), 
+   extend_existing = True    
+  )
 
 
 class Clases(db.Model):
@@ -11,7 +12,7 @@ class Clases(db.Model):
     horario = sa.Column(db.String(100),nullable = False)
     nombre = sa.Column(db.String(100),nullable = False)
     dia = sa.Column(db.String(100),nullable = False)
-    #profesor = db.relationship('Profesor', secondary=profesor_clases, backref=db.backref('clases', lazy='dynamic'))
+    profesor = db.relationship('Profesor', secondary=profesor_clases, backref=db.backref('clases', lazy='dynamic'))
 
     
 

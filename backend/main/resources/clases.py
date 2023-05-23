@@ -1,4 +1,4 @@
-"""
+
 from flask_restful import Resource
 from flask import request, jsonify
 from .. import db
@@ -72,4 +72,3 @@ class ClasesProfesores(Resource):
         db.session.commit()
         return '', 204
     
-"""   

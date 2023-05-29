@@ -10,4 +10,5 @@ from .planificacion import PlanificacionAlumno as PlanificacionAlumnoResource
 from .planificacion import PlanificacionProfesor as PlanificacionProfesorResource
 from .clases import ClasesProfesores as ClasesProfesorResource
 from .clases import ClasesAlumnos as ClasesAlumnosResoure
-
+from .clases import Clase as ClaseResource
+from .clases import Clases as ClasesResource

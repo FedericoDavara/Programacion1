@@ -3,7 +3,7 @@ from . import ProfesorModel, AlumnoModel
 from datetime import datetime 
 
 class Planificacion(db.Model):
-    id_rutinas = sa.Column(sa.Integer, primary_key=True, autoincrement=True)
+    planificacion_id = sa.Column(sa.Integer, primary_key=True, autoincrement=True)
     tipo_planficacion =sa.Column(sa.String(50), nullable=False)
     id_alumno = sa.Column(sa.Integer,sa.ForeignKey(AlumnoModel.id_alumno), nullable=False)
     id_profesor = sa.Column(sa.Integer,sa.ForeignKey(ProfesorModel.id_profesor) ,nullable=False)
@@ -13,12 +13,12 @@ class Planificacion(db.Model):
     
     
     def __repr__(self):
-        return f'<N°Rutina: {self.id_rutinas,}, Rutina: {self.tipo_planficacion},Horario:{self.horario}'
+        return f'<Planificacion: {self.planificacion_id,}>'
     
 
     def to_json(self):
         rutina_json = {
-            'id_rutinas': self.id_rutinas,
+            'planificacion_id': self.planificacion_id,
             'tipo_planificacion': self.tipo_planficacion,
             'id_alumno': self.id_alumno,
             'id_profesor': self.id_profesor,
@@ -28,13 +28,14 @@ class Planificacion(db.Model):
     
     def to_json_complete(self):
         rutina_json = {
-            "id_rutinas": self.id_rutinas,
-            'tipo_planificacion': self.tipo_planficacion,
-            "horario": str(self.creation_date.strftime("%d/%m")),
+            "planificacion_id": self.planificacion_id,
+            "tipo_planificacion": self.tipo_planficacion,
+            "horario": str(self.creation_date.strftime("%d/%m/%Y")),
             "Profesor": self.profesor.to_json() if self.profesor != None else "",
             "Alumno": self.alumno.to_json() if self.alumno != None else "",
             
         }
+        
         return rutina_json
 
 

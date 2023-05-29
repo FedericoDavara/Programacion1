@@ -25,11 +25,12 @@ def create_app():
     api.add_resource(resources.UsuarioProfesorResource, '/usuarioprofesor/<id>')
     api.add_resource(resources.PlanificacionAlumnoResource, "/planificacionalumno/<id>")
     api.add_resource(resources.PlanificacionProfesorResource,"/planificacionprofesor/<id>")
-    #api.add_resource(resources.ClasesProfesorResource,"/clases")
+    api.add_resource(resources.ClaseResource,"/clase")
     api.add_resource(resources.PagoResource, "/pago/<id>")
     api.add_resource(resources.LoginResource, "/login")
-    #api.add_resource(resources.ClasesProfesorResource, '/prof_clas/<id_profe>/<dni>')
-    #api.add_resource(resources.ClasesAlumnosResoure, '/alumn_clas/<id_alumno>/<dni>')
+    api.add_resource(resources.ClasesResource, "/clases")
+    api.add_resource(resources.ClasesProfesorResource, '/prof_clas/<id_profe>/')
+    api.add_resource(resources.ClasesAlumnosResoure, '/alumn_clas/<id_alumno>/')
     
     
     if not os.path.exists(os.getenv('DATABASE_PATH')+os.getenv('DATABASE_NAME')):
@@ -42,6 +43,6 @@ def create_app():
     migrate.init_app(app,db)
     
     with app.app_context():
-        #db.create_all()
+        db.create_all()
         return app
 

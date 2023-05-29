@@ -1,7 +1,7 @@
 from flask_restful import Resource
 from flask import request,jsonify
 from .. import db
-from main.models import UsuariosModel,ProfesorModel,AlumnoModel
+from main.models import UsuariosModel,AlumnoModel
 import regex
 from datetime import datetime
 from sqlalchemy import func, desc, asc

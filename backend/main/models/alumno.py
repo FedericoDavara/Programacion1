@@ -16,16 +16,16 @@ class Alumno(db.Model):
     def to_json(self):
         alumno_json = {
             'ID': self.id_alumno,
-            'EDAD': self.edad,
-            'PESO': self.peso,
-            'ALTURA': self.altura
+            'Edad': self.edad,
+            'Peso': self.peso,
+            'Altura': self.altura
             }
         return alumno_json
     
     def to_json_complete(self):
         alumno_json = {
             "Edad": self.edad,
-            "Sexo": self.sexo,
+            "Peso": self.peso,
             "Usuario": self.usuario.to_json() if self.usuario != None else "",
             "Clases": [clase.to_json() for clase in self.clases],
             "Planificaciones" : [planificacion.to_json() for planificacion in self.planificaciones]
@@ -35,8 +35,8 @@ class Alumno(db.Model):
 
     @staticmethod
     def from_json(alumno_json):
-        return Alumno(id_alumno= alumno_json.get('ID'),
-                      edad= alumno_json.get('EDAD'),
-                      peso= alumno_json.get('EDAD'),
-                      altura= alumno_json.get('ALTURA')
+        return Alumno(id_alumno= alumno_json.get('Id'),
+                      edad= alumno_json.get('Edad'),
+                      peso= alumno_json.get('Peso'),
+                      altura= alumno_json.get('Altura')
                       )    

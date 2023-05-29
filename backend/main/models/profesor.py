@@ -5,7 +5,7 @@ class Profesor(db.Model):
     titulo = sa.Column(sa.String(100), nullable=False)
     especialidad = sa.Column(sa.String(100), nullable=False)
     planificaciones = db.relationship('Planificacion', back_populates='profesor',cascade='all, delete-orphan')
-    usuario = db.relationship('Usuario', uselist = False, back_populates = 'Profesor', cascade = 'all, delete-orphan',single_parent=True)
+    usuario = db.relationship('Usuarios', uselist = False, back_populates = 'Profesor', cascade = 'all, delete-orphan',single_parent=True)
     
     def __repr__(self):
         return (
@@ -14,7 +14,7 @@ class Profesor(db.Model):
     
     def to_json(self):
         profesor_json = {
-            'ID': int(self.id_profesor),
+            'Id': int(self.id_profesor),
             'Titulo': str(self.titulo),
             'Especialidad': str(self.especialidad) 
         }
@@ -34,9 +34,9 @@ class Profesor(db.Model):
     @staticmethod
     def from_json(usuario_json):
         return Profesor(
-            id_profesor=usuario_json.get('ID'),
+            id_profesor=usuario_json.get('Id'),
             titulo=usuario_json.get('Titulo'),
-            especialidad=usuario_json.get('especialidad')
+            especialidad=usuario_json.get('Especialidad')
 
         )        
     

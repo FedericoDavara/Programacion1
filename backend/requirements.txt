@@ -1,8 +1,6 @@
 flask
-flask-Migrate
-flask_restful
-flask-SQLAlchemy
 python-dotenv
-SQLAlchemy
-regex
-
+flask-restful
+flask_sqlalchemy
+flask_migrate
+flask_jwt_extended

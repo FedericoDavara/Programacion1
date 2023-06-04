@@ -2,8 +2,7 @@
 /include
 /lib
 /lib64
-/pyvenv.cfg
+pyvenv.cfg
 .env
 /share
 /__pycache__
-

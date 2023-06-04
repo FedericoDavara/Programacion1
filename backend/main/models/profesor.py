@@ -1,43 +1,47 @@
-from .. import db, sa
-from . import UsuariosModel
+from .. import db
+from .clase import procla
+from . import UsuarioModel
+
+
 class Profesor(db.Model):
-    id_profesor = sa.Column(sa.Integer,sa.ForeignKey(UsuariosModel.dni), primary_key=True)
-    titulo = sa.Column(sa.String(100), nullable=False)
-    especialidad = sa.Column(sa.String(100), nullable=False)
-    planificaciones = db.relationship('Planificacion', back_populates='profesor',cascade='all, delete-orphan')
-    usuario = db.relationship('Usuarios', uselist = False, back_populates = 'Profesor', cascade = 'all, delete-orphan',single_parent=True)
+    dni = db.Column(db.Integer, db.ForeignKey(UsuarioModel.dni), primary_key=True)
+    especialidad = db.Column(db.String(100), nullable=False)
+
+    usuario = db.relationship("Usuario", uselist=False, back_populates="profesor",cascade="all, delete-orphan",single_parent=True)
     
+    planificaciones = db.relationship("Planificacion", back_populates="profesor",cascade="all, delete-orphan")
+
     def __repr__(self):
-        return (
-            f'<ID: {self.id_profesor}, Titulo: {self.titulo},Especialidad{self.especialidad}'
-        )
+        return '<Profesor: %r >'% (self.especialidad)
     
     def to_json(self):
         profesor_json = {
-            'Id': int(self.id_profesor),
-            'Titulo': str(self.titulo),
-            'Especialidad': str(self.especialidad) 
+            'dni': self.dni,
+            'especialidad': str(self.especialidad)
         }
         return profesor_json
-    
-    def to_jsoon_complete(self):
+
+    def to_json_complete(self):
+        planificaciones = [planificacion.to_json() for planificacion in self.planificaciones]
         profesor_json = {
-            "Especialidad": str(self.especialidad),
-            "Titulo": str(self.titulo),
-            "Usuario": self.usuario.to_json() if self.usuario != None else "",
-            "Planificaciones": [planificacion.to_json() for planificacion in self.planificaciones]
+            'dni': self.dni,
+            'especialidad': str(self.especialidad),
+            'planificaciones':planificaciones
+        }
+        return profesor_json    
+
+    def to_json_short(self):
+        profesor_json = {
+            'dni': self.dni,
+            'especialidad': str(self.especialidad)
         }
         return profesor_json
-
-
 
     @staticmethod
-    def from_json(usuario_json):
-        return Profesor(
-            id_profesor=usuario_json.get('Id'),
-            titulo=usuario_json.get('Titulo'),
-            especialidad=usuario_json.get('Especialidad')
-
-        )        
     
-    
+    def from_json(profesor_json):
+        dni = profesor_json.get('dni')
+        especialidad = profesor_json.get('especialidad')
+        return Profesor(dni=dni,
+                    especialidad=especialidad,
+                    )

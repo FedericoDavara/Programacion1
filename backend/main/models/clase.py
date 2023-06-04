@@ -1,55 +1,51 @@
-from .. import db, sa
-import datetime
+from .. import db
 
-profesor_clases = db.Table("profesor_clases",
-   sa.Column("id_profesor",db.Integer,db.ForeignKey("profesor.id_profesor")),
-   sa.Column("id_clase",db.Integer,db.ForeignKey("clases.id")), 
-   extend_existing = True    
-  )
-
+procla = db.Table("procla",
+    db.Column("clase_id",db.Integer,db.ForeignKey("clase.id"),primary_key=True),
+    db.Column("profesor_dni",db.Integer,db.ForeignKey("profesor.dni"),primary_key=True)
+    )
 
 class Clase(db.Model):
-    clase_id = sa.Column(db.Integer, primary_key = True)
-    horario = sa.Column(db.String(100),nullable = False)
-    nombre = sa.Column(db.String(100),nullable = False)
-    dia = sa.Column(db.String(100),nullable = False)
-    profesor = db.relationship('Profesor', secondary=profesor_clases, 
-                               backref = db.backref('clases', lazy='dynamic'))
-
-    
-
+    id = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(100), nullable=False)
+    dia = db.Column(db.String(100), nullable=False)
+    horario = db.Column(db.String(250), nullable=False)
+    profesores = db.relationship('Profesor', secondary=procla, backref=db.backref('clases', lazy='dynamic'))
 
     def __repr__(self):
-        return (f'<Clase_id: {self.clase_id}, Horario: {self.horario}, '+ 
-        f'Nombre: {self.nombre}, Dia: {self.dia}>')     
-    def to_json(self):
-        clases_json = {
-            'Clase_id' : self.id,
-            'Horario' : str(self.horario),
-            'Nombre' : str(self.nombre),
-            'Dia' : str(self.dia)
-        }
-        return clases_json
+        return '<Clase: %r %r %r>'% (self.nombre, self.dia, self.horario)
     
-    def to_json_complete(self):
+    def to_json(self):
         clase_json = {
-            'Clase_id' : self.clase_id,
-            'Horario': self.horario,
-            'Nombre': self.nombre,
-            'Dia': self.dia,
-            "Profesores": [profesor.to_json() for profesor in self.profesores]
+            'id': self.id,
+            'nombre': str(self.nombre),
+            'dia': str(self.dia),
+            'horario': str(self.horario)
+
         }
         return clase_json
 
+    def to_json_short(self):
+        clase_json = {
+            'id': self.id,
+            'nombre': str(self.nombre),
+            'dia': str(self.dia),
+            'horario': str(self.horario)
 
+        }
+        return clase_json
 
     @staticmethod
-
+    
     def from_json(clase_json):
-        return Clase(clase_id = clase_json.get('Clase_id'),
-                      nombre = clase_json.get('Nombre'),
-                      horario = datetime.strptime(clase_json.get("horario"), "%H:%M")
-                      )
-    
+        id = clase_json.get('id')
+        nombre = clase_json.get('nombre')
+        dia = clase_json.get('dia')
+        horario = clase_json.get('horario')
+        
+        return Clase(id=id,
+                    nombre=nombre,
+                    dia=dia,
+                    horario=horario,
 
-    
+                    )

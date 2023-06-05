@@ -1,10 +1,10 @@
 {
 	"info": {
 		"_postman_id": "031d2416-7e18-47d6-ba79-9683520e5fa9",
-		"name": "Grupo_B",
+		"name": "Grupo_B2.0",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "26834652",
-		"_collection_link": "https://winter-escape-871719.postman.co/workspace/My-Workspace~849dd5e1-4919-4897-8aea-e9848da3edab/collection/26834652-031d2416-7e18-47d6-ba79-9683520e5fa9?action=share&creator=26834652&source=collection_link"
+		"_collection_link": "https://web.postman.co/workspace/My-Workspace~849dd5e1-4919-4897-8aea-e9848da3edab/collection/26834652-031d2416-7e18-47d6-ba79-9683520e5fa9?source=collection_link"
 	},
 	"item": [
 		{
@@ -292,20 +292,20 @@
 					"response": []
 				},
 				{
-					"name": "arreglar",
+					"name": "Modificar planificacion",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{   \n    \"fecha\": \"9-05-2023\",\n    \"planificacion_id\": 2\n    }",
+							"raw": "{\n    \"descripcion\": \"Tonificar\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://127.0.0.1:5000/planificacion_p/1"
+						"url": "http://127.0.0.1:5000/planificacion_p/34567890"
 					},
 					"response": []
 				},
@@ -319,11 +319,11 @@
 					"response": []
 				},
 				{
-					"name": "arreglar",
+					"name": "Listado de alumnos",
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://127.0.0.1:5000/planificacion_a/1"
+						"url": "http://127.0.0.1:5000/planificacion_a/19012018"
 					},
 					"response": []
 				},
@@ -401,6 +401,47 @@
 							}
 						},
 						"url": "http://127.0.0.1:5000/login"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"email\": \"vb.gimenez@alumno\",\n        \"password\": \"123hola\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:5000/auth/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"apellido\": \"Gallo\",\n        \"password\": \"clavegallo\",\n        \"dni\": \"33439345\",\n        \"email\": \"elba_gallo.h@gmail.com\",\n        \"nombre\": \"Elba\",\n        \"telefono\": \"542617429342\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:5000/auth/register"
 					},
 					"response": []
 				}

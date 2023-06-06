@@ -2,7 +2,7 @@ from flask_restful import Resource
 from flask import request
 
 LOGIN ={
-    1:{"usuario:":"carlitos","contrasena":"hola123"}
+    1:{"usuario:":"pepe","contrasena":"queseyo124"}
 }
 
 class Login(Resource):

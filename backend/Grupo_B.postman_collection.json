@@ -1,0 +1,647 @@
+{
+	"info": {
+		"_postman_id": "51d52c51-cbb0-4861-947c-b4632b795b87",
+		"name": "Grupo_B",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "26834652",
+		"_collection_link": "https://winter-escape-871719.postman.co/workspace/My-Workspace~849dd5e1-4919-4897-8aea-e9848da3edab/collection/26834652-51d52c51-cbb0-4861-947c-b4632b795b87?action=share&creator=26834652&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Usuario/s",
+			"item": [
+				{
+					"name": "Crear Usuarios",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"apellido\": \"O'Hearn\",\n        \"contrasena\": \"BabyDontHurtMe\",\n        \"dni\": \"33439347\",\n        \"email\": \"mike.ohearn@hotmail.com\",\n        \"nombre\": \"Michael\",\n        \"telefono\": \"542617494852\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:6003/usuarios"
+					},
+					"response": []
+				},
+				{
+					"name": "Ver un Usuario",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:6003/usuario/33439347"
+					},
+					"response": []
+				},
+				{
+					"name": "Listado de Usuarios",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"apellido\": \"Gallo\",\n        \"contrasena\": \"clavegallo\",\n        \"dni\": \"33439345\",\n        \"email\": \"elba_gallo.h@gmail.com\",\n        \"nombre\": \"Elba\",\n        \"telefono\": \"542617429342\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:6003/usuarios"
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar Usuario",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\n    \"apellido\": \"O'Hearn\",\n    \"contrasena\": \"BabyDontHurtMe\",\n    \"dni\": \"33439347\",\n    \"email\": \"mike.ohearn@hotmail.com\",\n    \"nombre\": \"Michael\",\n    \"telefono\": \"542617494852\"\n  }\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:6003/usuario/33439347"
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:6003/usuario/33439347"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Alumno/s",
+			"item": [
+				{
+					"name": "Crear Usuarios Alumnos",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"altura\": \"1,64\",\n\t\"dni\": \"33439345\",\n\t\"edad\": \"42\",\n\t\"peso\": \"67\",\n\t\"sexo\": \"Femenino\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:6003/usuarios_a"
+					},
+					"response": []
+				},
+				{
+					"name": "Listado de Usuarios Alumnos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:6003/usuarios_a"
+					},
+					"response": []
+				},
+				{
+					"name": "Ver un Usuario Alumno",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:6003/usuario_a/32234545"
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar Usuario Alumno",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \n    \"edad\": \"43\",\n    \"peso\": \"82\",\n    \"altura\": \"1,77\",\n    \"sexo\": \"Masculino\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:6003/usuario_a/32234545"
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Usuario Alumno",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{         \n    \"altura\": \"1,77\",\n    \"dni\": \"32234545\",\n    \"edad\": \"43\",\n    \"peso\": \"81\",\n    \"sexo\": \"Masculino\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:6003/usuario_a/32234545"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Profesor/es",
+			"item": [
+				{
+					"name": "Crear Usuario Profesor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"dni\": 33439347,\n\t\"especialidad\": \"fisicoculturismo\",\n    \"clases\": [1,33439347]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:6003/usuarios_p"
+					},
+					"response": []
+				},
+				{
+					"name": "Ver un Usuario Profesor",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:6003/usuario_p/33439347"
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar Usuario Profesor",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:6003/usuario_p/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Clase/s",
+			"item": [
+				{
+					"name": "Crear una Clase",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"dia\": \"Viernes\",\n\t\"horario\": \"11 AM\",\n\t\"nombre\": \"musculacion\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:6003/clases"
+					},
+					"response": []
+				},
+				{
+					"name": "Ver una Clase",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://127.0.0.1:6003/clase/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar una Clase",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://127.0.0.1:6003/clase/2"
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar una Clase",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"musculacion\",\n    \"dia\": \"Viernes\",\n    \"horario\": \"12 AM\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:6003/clase/2"
+					},
+					"response": []
+				},
+				{
+					"name": "Listado de Clases",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://127.0.0.1:6003/clases"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Planificacion/es",
+			"item": [
+				{
+					"name": "Crear Planificaciones ",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"descripcion\": \"Editar\",\n    \"fecha\": \"11-05-2023\",\n    \"lunes\": \"Jalones\",\n    \"martes\": \"Press\",\n    \"miercoles\": \"\",\n    \"jueves\": \" Press\",\n    \"viernes\": \"Press\",\n    \"sabado\": \"\",\n    \"alumno_dni\": \"32234545\",\n    \"profesor_dni\": \"33439347\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:6003/planificaciones"
+					},
+					"response": []
+				},
+				{
+					"name": "Listado de Planificaciones",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:6003/planificaciones_ps"
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar Planificaciones",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:6003/planificacion_p/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Planificacion",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:6003/planificacion_p/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Listado de Planificacion de Alumnos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:6003/planificacion_a/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Listado de Planificacion de Profesor",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:6003/planificacion_p/33439347"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Otros",
+			"item": [
+				{
+					"name": "Listado de pagos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": "http://127.0.0.1:6003/pago/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar pagos",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:6003/pago/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Crear acceso a la app",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:6003/login"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -11,5 +11,3 @@ from .planificacion import PlanificacionProfesor as PlanificacionProfesorResourc
 from .planificacion import PlanificacionesProfesores as PlanificacionesProfesoresResource
 from .clases import Clase as ClaseResource
 from .clases import Clases as ClasesResource
-from .pago import Pago as PagoResource
-from .login import Login as LoginResource

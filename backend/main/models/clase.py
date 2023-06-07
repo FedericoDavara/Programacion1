@@ -47,5 +47,4 @@ class Clase(db.Model):
                     nombre=nombre,
                     dia=dia,
                     horario=horario,
-
                     )

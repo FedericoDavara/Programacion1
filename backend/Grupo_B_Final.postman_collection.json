@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "5c94e5df-6305-492b-8427-5846626f4909",
-		"name": "Grupo_B",
+		"_postman_id": "8bb7ac9a-2dcc-4f27-acd0-61a56bae91ca",
+		"name": "Grupo_B Final",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
-		"_exporter_id": "26654933",
-		"_collection_link": "https://warped-rocket-740098.postman.co/workspace/Team-Workspace~2873c989-2ad5-4c6a-8263-e2d3d54096dc/collection/26654933-5c94e5df-6305-492b-8427-5846626f4909?action=share&creator=26654933&source=collection_link"
+		"_exporter_id": "26834652",
+		"_collection_link": "https://winter-escape-871719.postman.co/workspace/My-Workspace~849dd5e1-4919-4897-8aea-e9848da3edab/collection/26834652-8bb7ac9a-2dcc-4f27-acd0-61a56bae91ca?action=share&creator=26834652&source=collection_link"
 	},
 	"item": [
 		{
@@ -154,7 +154,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"altura\": \"1,64\",\n\t\"dni\": \"33439345\",\n\t\"edad\": \"42\",\n\t\"peso\": \"67\",\n\t\"sexo\": \"Femenino\"\n}",
+							"raw": "{\n\t\"altura\": \"1,70\",\n\t\"dni\": \"44757796\",\n\t\"edad\": \"19\",\n\t\"peso\": \"69\",\n\t\"sexo\": \"Masculino\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -249,8 +249,8 @@
 						"method": "DELETE",
 						"header": [
 							{
-								"key": "Content-Type",
-								"value": "application/json",
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4NjE0OTk2NSwianRpIjoiNjNmMTAxNzQtZmQzZS00NmM2LTg3YjEtZjFmZTg1M2U3NDI2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MzkxMjMxMjM0LCJuYmYiOjE2ODYxNDk5NjUsImV4cCI6MTY4NjE1MzU2NSwicm9sIjoiYWRtaW4iLCJkbmkiOjM5MTIzMTIzNCwiZW1haWwiOiJjcjdAZ21haWwuY29tIn0.7GQInPTyGnvq0McBCvkp1LYpleHzvzZMkBGNORD3P8Y",
 								"type": "text"
 							}
 						],
@@ -263,7 +263,7 @@
 								}
 							}
 						},
-						"url": "http://127.0.0.1:5000/usuario_alumno/32234545"
+						"url": "http://127.0.0.1:5000/usuario_alumno/33439345"
 					},
 					"response": []
 				}
@@ -285,7 +285,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"dni\": 12341234,\n\t\"especialidad\": \"boxeo\",\n    \"clases\": [1,12341234]\n}",
+							"raw": "{\n\t\"dni\": 391234332,\n\t\"especialidad\": \"Agilidad\",\n    \"clases\": [1,391234332]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -426,14 +426,14 @@
 						"method": "POST",
 						"header": [
 							{
-								"key": "Content-Type",
-								"value": "application/json",
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4NjE0OTk2NSwianRpIjoiNjNmMTAxNzQtZmQzZS00NmM2LTg3YjEtZjFmZTg1M2U3NDI2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MzkxMjMxMjM0LCJuYmYiOjE2ODYxNDk5NjUsImV4cCI6MTY4NjE1MzU2NSwicm9sIjoiYWRtaW4iLCJkbmkiOjM5MTIzMTIzNCwiZW1haWwiOiJjcjdAZ21haWwuY29tIn0.7GQInPTyGnvq0McBCvkp1LYpleHzvzZMkBGNORD3P8Y",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"descripcion\": \"Editar\",\n    \"fecha\": \"2-07-2023\",\n    \"lunes\": \"Pecho\",\n    \"martes\": \"Biceps\",\n    \"miercoles\": \"Espalda\",\n    \"jueves\": \"\",\n    \"viernes\": \"Piernas\",\n    \"sabado\": \"Hombros\",\n    \"alumno_dni\": \"\",\n    \"profesor_dni\": \"\"\n    }",
+							"raw": "{\n    \"descripcion\": \"Modificar\",\n    \"fecha\": \"2-07-2023\",\n    \"lunes\": \"Pecho\",\n    \"martes\": \"Biceps\",\n    \"miercoles\": \"Espalda\",\n    \"jueves\": \"\",\n    \"viernes\": \"Piernas\",\n    \"sabado\": \"Hombros\",\n    \"alumno_dni\": \"42123531\",\n    \"profesor_dni\": \"123795681\"\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -477,14 +477,14 @@
 						"method": "PUT",
 						"header": [
 							{
-								"key": "Content-Type",
-								"value": "application/json",
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4NjE0OTk2NSwianRpIjoiNjNmMTAxNzQtZmQzZS00NmM2LTg3YjEtZjFmZTg1M2U3NDI2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MzkxMjMxMjM0LCJuYmYiOjE2ODYxNDk5NjUsImV4cCI6MTY4NjE1MzU2NSwicm9sIjoiYWRtaW4iLCJkbmkiOjM5MTIzMTIzNCwiZW1haWwiOiJjcjdAZ21haWwuY29tIn0.7GQInPTyGnvq0McBCvkp1LYpleHzvzZMkBGNORD3P8Y",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
+							"raw": "{\n    \"descripcion\": \"Modificar\",\n    \"fecha\": \"2-07-2023\",\n    \"lunes\": \"Pecho\",\n    \"martes\": \"Biceps\",\n    \"miercoles\": \"Espalda\",\n    \"jueves\": \"\",\n    \"viernes\": \"Piernas\",\n    \"sabado\": \"Hombros\",\n    \"alumno_dni\": \"42123531\",\n    \"profesor_dni\": \"123795681\"\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -653,7 +653,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n        \"email\": \"cr7@gmail.com\",\n        \"password\": \"madrid15\"\n}",
+							"raw": "{\n        \"email\": \"cr7@gmail.com\",\n        \"password\": \"madrid15\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -671,7 +671,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n        \"apellido\": \"Cuello\",\n        \"password\": \"boca123\",\n        \"dni\": \"12399844\",\n        \"email\": \"rodrigo18@gmail.com\",\n        \"nombre\": \"Rodrigo\",\n        \"telefono\": \"2634791832\"\n}",
+							"raw": "{\n        \"apellido\": \"lol\",\n        \"password\": \"sopasctm\",\n        \"dni\": \"78456123\",\n        \"email\": \"grupobfacultad@gmail.com\",\n        \"nombre\": \"kakakakaka\",\n        \"telefono\": \"156023456\",\n        \"rol\": \"admin\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"

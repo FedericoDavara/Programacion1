@@ -1,14 +1,14 @@
 {
 	"info": {
-		"_postman_id": "51d52c51-cbb0-4861-947c-b4632b795b87",
+		"_postman_id": "5c94e5df-6305-492b-8427-5846626f4909",
 		"name": "Grupo_B",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
-		"_exporter_id": "26834652",
-		"_collection_link": "https://winter-escape-871719.postman.co/workspace/My-Workspace~849dd5e1-4919-4897-8aea-e9848da3edab/collection/26834652-51d52c51-cbb0-4861-947c-b4632b795b87?action=share&creator=26834652&source=collection_link"
+		"_exporter_id": "26654933",
+		"_collection_link": "https://warped-rocket-740098.postman.co/workspace/Team-Workspace~2873c989-2ad5-4c6a-8263-e2d3d54096dc/collection/26654933-5c94e5df-6305-492b-8427-5846626f4909?action=share&creator=26654933&source=collection_link"
 	},
 	"item": [
 		{
-			"name": "Usuario/s",
+			"name": "Usuarios",
 			"item": [
 				{
 					"name": "Crear Usuarios",
@@ -23,14 +23,14 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n        \"apellido\": \"O'Hearn\",\n        \"contrasena\": \"BabyDontHurtMe\",\n        \"dni\": \"33439347\",\n        \"email\": \"mike.ohearn@hotmail.com\",\n        \"nombre\": \"Michael\",\n        \"telefono\": \"542617494852\"\n}",
+							"raw": "{\n        \"apellido\": \"Gaucho\",\n        \"password\": \"jogabonito\",\n        \"dni\": \"123795681\",\n        \"email\": \"jogabonito@gmail.com\",\n        \"nombre\": \"Ronaldinho\",\n        \"telefono\": \"2634412351\",\n        \"rol\" : \"admin\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://127.0.0.1:6003/usuarios"
+						"url": "http://127.0.0.1:5000/usuarios"
 					},
 					"response": []
 				},
@@ -57,7 +57,7 @@
 								}
 							}
 						},
-						"url": "http://127.0.0.1:6003/usuario/33439347"
+						"url": "http://127.0.0.1:5000/usuario/33439347"
 					},
 					"response": []
 				},
@@ -70,8 +70,8 @@
 						"method": "GET",
 						"header": [
 							{
-								"key": "Content-Type",
-								"value": "application/json",
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4NjA5NzA2NiwianRpIjoiNWM5OWExMDQtNzA3Zi00NGY2LWFkMGItODQ0MTM1ZGU5MjQzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MzkxMjMxMjM0LCJuYmYiOjE2ODYwOTcwNjYsImV4cCI6MTY4NjEwMDY2Niwicm9sIjoiYWRtaW4iLCJkbmkiOjM5MTIzMTIzNCwiZW1haWwiOiJjcjdAZ21haWwuY29tIn0.zNcytVMETx3_VjhNws4wwFzuiqs2tt4MCf6vVaJGQXc",
 								"type": "text"
 							}
 						],
@@ -84,7 +84,7 @@
 								}
 							}
 						},
-						"url": "http://127.0.0.1:6003/usuarios"
+						"url": "http://127.0.0.1:5000/usuarios_profesores"
 					},
 					"response": []
 				},
@@ -108,7 +108,7 @@
 								}
 							}
 						},
-						"url": "http://127.0.0.1:6003/usuario/33439347"
+						"url": "http://127.0.0.1:5000/usuario/33439347"
 					},
 					"response": []
 				},
@@ -118,8 +118,8 @@
 						"method": "DELETE",
 						"header": [
 							{
-								"key": "Content-Type",
-								"value": "application/json",
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4NjA5NjYzNywianRpIjoiYjliYzM3ZWItNWQ1YS00N2ZlLTgwOTgtYTI0MzhmZDhkYzQwIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MzkxMjM0MzMyLCJuYmYiOjE2ODYwOTY2MzcsImV4cCI6MTY4NjEwMDIzNywicm9sIjoiYWRtaW4iLCJkbmkiOjM5MTIzNDMzMiwiZW1haWwiOiJsZW9tZXNzaTEwQGdtYWlsLmNvbSJ9.PmOirXEhaO6L-lFf2nnn_reAJkSMSfQn_z2_aVku0pc",
 								"type": "text"
 							}
 						],
@@ -132,14 +132,14 @@
 								}
 							}
 						},
-						"url": "http://127.0.0.1:6003/usuario/33439347"
+						"url": "http://127.0.0.1:5000/usuario/1618621"
 					},
 					"response": []
 				}
 			]
 		},
 		{
-			"name": "Alumno/s",
+			"name": "Alumno",
 			"item": [
 				{
 					"name": "Crear Usuarios Alumnos",
@@ -161,7 +161,7 @@
 								}
 							}
 						},
-						"url": "http://127.0.0.1:6003/usuarios_a"
+						"url": "http://127.0.0.1:5000/usuarios_alumnos"
 					},
 					"response": []
 				},
@@ -188,7 +188,7 @@
 								}
 							}
 						},
-						"url": "http://127.0.0.1:6003/usuarios_a"
+						"url": "http://127.0.0.1:5000/usuarios_alumno"
 					},
 					"response": []
 				},
@@ -215,7 +215,7 @@
 								}
 							}
 						},
-						"url": "http://127.0.0.1:6003/usuario_a/32234545"
+						"url": "http://127.0.0.1:5000/usuario_alumno/32234545"
 					},
 					"response": []
 				},
@@ -239,7 +239,7 @@
 								}
 							}
 						},
-						"url": "http://127.0.0.1:6003/usuario_a/32234545"
+						"url": "http://127.0.0.1:5000/usuario_alumno/32234545"
 					},
 					"response": []
 				},
@@ -263,14 +263,14 @@
 								}
 							}
 						},
-						"url": "http://127.0.0.1:6003/usuario_a/32234545"
+						"url": "http://127.0.0.1:5000/usuario_alumno/32234545"
 					},
 					"response": []
 				}
 			]
 		},
 		{
-			"name": "Profesor/es",
+			"name": "Profesores",
 			"item": [
 				{
 					"name": "Crear Usuario Profesor",
@@ -285,14 +285,14 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"dni\": 33439347,\n\t\"especialidad\": \"fisicoculturismo\",\n    \"clases\": [1,33439347]\n}",
+							"raw": "{\n\t\"dni\": 12341234,\n\t\"especialidad\": \"boxeo\",\n    \"clases\": [1,12341234]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://127.0.0.1:6003/usuarios_p"
+						"url": "http://127.0.0.1:5000/usuarios_profesores"
 					},
 					"response": []
 				},
@@ -319,7 +319,7 @@
 								}
 							}
 						},
-						"url": "http://127.0.0.1:6003/usuario_p/33439347"
+						"url": "http://127.0.0.1:5000/usuario_profesor/33439347"
 					},
 					"response": []
 				},
@@ -343,14 +343,14 @@
 								}
 							}
 						},
-						"url": "http://127.0.0.1:6003/usuario_p/1"
+						"url": "http://127.0.0.1:5000/usuario_profesor/1"
 					},
 					"response": []
 				}
 			]
 		},
 		{
-			"name": "Clase/s",
+			"name": "Clases",
 			"item": [
 				{
 					"name": "Crear una Clase",
@@ -359,14 +359,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"dia\": \"Viernes\",\n\t\"horario\": \"11 AM\",\n\t\"nombre\": \"musculacion\"\n}",
+							"raw": "{\n\t\"dia\": \"Lunes\",\n\t\"horario\": \"9 AM\",\n\t\"nombre\": \"Cardio\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://127.0.0.1:6003/clases"
+						"url": "http://127.0.0.1:5000/clases"
 					},
 					"response": []
 				},
@@ -375,7 +375,7 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://127.0.0.1:6003/clase/1"
+						"url": "http://127.0.0.1:5000/clase/1"
 					},
 					"response": []
 				},
@@ -384,7 +384,7 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "http://127.0.0.1:6003/clase/2"
+						"url": "http://127.0.0.1:5000/clase/2"
 					},
 					"response": []
 				},
@@ -395,14 +395,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nombre\": \"musculacion\",\n    \"dia\": \"Viernes\",\n    \"horario\": \"12 AM\"\n}",
+							"raw": "{\n    \"nombre\": \"Cardio\",\n    \"dia\": \"Martes\",\n    \"horario\": \"5 PM\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://127.0.0.1:6003/clase/2"
+						"url": "http://127.0.0.1:5000/clase/2"
 					},
 					"response": []
 				},
@@ -411,14 +411,14 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": "http://127.0.0.1:6003/clases"
+						"url": "http://127.0.0.1:5000/clases"
 					},
 					"response": []
 				}
 			]
 		},
 		{
-			"name": "Planificacion/es",
+			"name": "Planificaciones",
 			"item": [
 				{
 					"name": "Crear Planificaciones ",
@@ -433,14 +433,14 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"descripcion\": \"Editar\",\n    \"fecha\": \"11-05-2023\",\n    \"lunes\": \"Jalones\",\n    \"martes\": \"Press\",\n    \"miercoles\": \"\",\n    \"jueves\": \" Press\",\n    \"viernes\": \"Press\",\n    \"sabado\": \"\",\n    \"alumno_dni\": \"32234545\",\n    \"profesor_dni\": \"33439347\"\n    }",
+							"raw": "{\n    \"descripcion\": \"Editar\",\n    \"fecha\": \"2-07-2023\",\n    \"lunes\": \"Pecho\",\n    \"martes\": \"Biceps\",\n    \"miercoles\": \"Espalda\",\n    \"jueves\": \"\",\n    \"viernes\": \"Piernas\",\n    \"sabado\": \"Hombros\",\n    \"alumno_dni\": \"\",\n    \"profesor_dni\": \"\"\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://127.0.0.1:6003/planificaciones"
+						"url": "http://127.0.0.1:5000/planificaciones"
 					},
 					"response": []
 				},
@@ -467,7 +467,7 @@
 								}
 							}
 						},
-						"url": "http://127.0.0.1:6003/planificaciones_ps"
+						"url": "http://127.0.0.1:5000/planificaciones_profesores"
 					},
 					"response": []
 				},
@@ -491,7 +491,7 @@
 								}
 							}
 						},
-						"url": "http://127.0.0.1:6003/planificacion_p/1"
+						"url": "http://127.0.0.1:5000/planificacion_profesor/1"
 					},
 					"response": []
 				},
@@ -515,7 +515,7 @@
 								}
 							}
 						},
-						"url": "http://127.0.0.1:6003/planificacion_p/1"
+						"url": "http://127.0.0.1:5000/planificacion_profesor/1"
 					},
 					"response": []
 				},
@@ -542,7 +542,7 @@
 								}
 							}
 						},
-						"url": "http://127.0.0.1:6003/planificacion_a/1"
+						"url": "http://127.0.0.1:5000/planificacion_alumno/1"
 					},
 					"response": []
 				},
@@ -569,14 +569,14 @@
 								}
 							}
 						},
-						"url": "http://127.0.0.1:6003/planificacion_p/33439347"
+						"url": "http://127.0.0.1:5000/planificacion_profesor/33439347"
 					},
 					"response": []
 				}
 			]
 		},
 		{
-			"name": "Otros",
+			"name": "Ultimos",
 			"item": [
 				{
 					"name": "Listado de pagos",
@@ -589,7 +589,7 @@
 								"type": "text"
 							}
 						],
-						"url": "http://127.0.0.1:6003/pago/1"
+						"url": "http://127.0.0.1:5000/pago/1"
 					},
 					"response": []
 				},
@@ -613,7 +613,7 @@
 								}
 							}
 						},
-						"url": "http://127.0.0.1:6003/pago/1"
+						"url": "http://127.0.0.1:5000/pago/1"
 					},
 					"response": []
 				},
@@ -637,7 +637,48 @@
 								}
 							}
 						},
-						"url": "http://127.0.0.1:6003/login"
+						"url": "http://127.0.0.1:5000/login"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"email\": \"cr7@gmail.com\",\n        \"password\": \"madrid15\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:5000/auth/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"apellido\": \"Cuello\",\n        \"password\": \"boca123\",\n        \"dni\": \"12399844\",\n        \"email\": \"rodrigo18@gmail.com\",\n        \"nombre\": \"Rodrigo\",\n        \"telefono\": \"2634791832\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:5000/auth/register"
 					},
 					"response": []
 				}

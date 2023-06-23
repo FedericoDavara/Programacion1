@@ -17,7 +17,7 @@
         <image src="https://readme-typing-svg.herokuapp.com/?font=Iosevka&duration=3000&pause=1000&color=FFFFFF&center=true&width=435&lines=Federico+Gabriel+Davara+Herrera;Legajo%3A+59098;f.davara%40alumno.um.edu.ar">
   </p>
       
-<!-- Francisco Saldaña -->
+<!-- Marcos Díaz -->
 <div align="justify">
 
 <!-- Profile -->
@@ -25,10 +25,10 @@
     <samp>
       <b>
       <br>
-        <image src="https://images.weserv.nl/?url=https://avatars.githubusercontent.com/u/26966877?v=latest&h=128&w=128&fit=cover&mask=circle&maxage=7d">
+        <image src="https://images.weserv.nl/?url=https://avatars.githubusercontent.com/u/102602403?v=latest&h=128&w=128&fit=cover&mask=circle&maxage=7d">
       </b>
       <br>
-        <image src="https://readme-typing-svg.herokuapp.com/?font=Iosevka&duration=3000&pause=1000&color=FFFFFF&center=true&width=435&lines=Francisco+Felipe+Salda%C3%B1a+Adams;Legajo%3A+56107;f.saldana%40alumno.um.edu.ar">
+        <image src="https://readme-typing-svg.herokuapp.com/?font=Iosevka&duration=3000&pause=1000&color=FFFFFF&center=true&width=435&lines=Marcos+Nicolás+Díaz;Legajo%3A+61177;mani.diaz%40alumno.um.edu.ar">
       <br>
       <b>
       </b>

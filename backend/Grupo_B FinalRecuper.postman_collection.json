@@ -1,10 +1,9 @@
 {
 	"info": {
-		"_postman_id": "8bb7ac9a-2dcc-4f27-acd0-61a56bae91ca",
+		"_postman_id": "d2130fe4-8348-4965-93cd-ef242593ffc2",
 		"name": "Grupo_B Final",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
-		"_exporter_id": "26834652",
-		"_collection_link": "https://winter-escape-871719.postman.co/workspace/My-Workspace~849dd5e1-4919-4897-8aea-e9848da3edab/collection/26834652-8bb7ac9a-2dcc-4f27-acd0-61a56bae91ca?action=share&creator=26834652&source=collection_link"
+		"_exporter_id": "26834652"
 	},
 	"item": [
 		{
@@ -679,6 +678,59 @@
 							}
 						},
 						"url": "http://127.0.0.1:5000/auth/register"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Roles",
+			"item": [
+				{
+					"name": "Crear roles",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4NzM1NjQzOSwianRpIjoiNmQ2Y2NlMzQtZjAxNS00NDM2LWJlNTYtOWU0NTMxYmIyOTg5IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6NDMyNzAzMTcsIm5iZiI6MTY4NzM1NjQzOSwiZXhwIjoxNjg3MzYzNjM5LCJyb2wiOiJhZG1pbiIsImRuaSI6NDMyNzAzMTcsImVtYWlsIjoiaS5kZWx1Y2FAYWx1bW5vLnVtLmVkdS5hciJ9.8D16g7QJwaOs1QgOGOke4IL4dh_wmqNxkUeKXVwJZtU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rol\": \"admin\",\n    \"recurso\": \"usuarioprofesor\",\n    \"metodo\": \"PUT\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:6003/permisos"
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar roles",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY4NzM1NjQzOSwianRpIjoiNmQ2Y2NlMzQtZjAxNS00NDM2LWJlNTYtOWU0NTMxYmIyOTg5IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6NDMyNzAzMTcsIm5iZiI6MTY4NzM1NjQzOSwiZXhwIjoxNjg3MzYzNjM5LCJyb2wiOiJhZG1pbiIsImRuaSI6NDMyNzAzMTcsImVtYWlsIjoiaS5kZWx1Y2FAYWx1bW5vLnVtLmVkdS5hciJ9.8D16g7QJwaOs1QgOGOke4IL4dh_wmqNxkUeKXVwJZtU",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"1\",\n    \"rol\": \"user\",\n    \"recurso\": \"clase\",\n    \"metodo\": \"GET\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:6003/permiso/1"
 					},
 					"response": []
 				}

@@ -1,6 +1,11 @@
-### [Link a Figma](https://www.figma.com/file/eMVja4xZXQaOs7R6Dxjofd/Grupo_B?type=design&node-id=0%3A1&mode=design&t=wmPhyalveFt5GsZg-1)
+<h1 align="center">🧑‍💻 Programación 1</h1>
+<h3 align="center">
+  
+[👉 Link a Figma 🎨](https://www.figma.com/file/eMVja4xZXQaOs7R6Dxjofd/Grupo_B?type=design&node-id=0%3A1&mode=design&t=wmPhyalveFt5GsZg-1)
 
-<table>
+</h3>
+
+<table align="center">
   <tr>
     <td>
       <!-- Federico Davara -->

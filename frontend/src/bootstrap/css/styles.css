@@ -1,3 +1,7 @@
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
 /* Establecer el fondo de imagen */
 .background-image {
     background-image: linear-gradient(to bottom, #0A372F, black); /* Reemplaza con la ruta de tu imagen de fondo */
@@ -12,7 +16,9 @@
 .card {
     margin-bottom: 20px;
     border: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    background-image: linear-gradient(to bottom, #D2FF52, #45FFA6);
 
 }
 
@@ -21,31 +27,44 @@
     min-height: 128px;
     object-fit: contain;
     width: 100%;
-/*  padding-bottom: 100%; */ 
-       
+    background-image: linear-gradient(to bottom, #D2FF52, #FFFDC3);
+    border-radius: 20px 20px 0 0;
+    padding: 20px;
 }
 
 /* Cambiar el color del texto de las cards */
 .card-title {
-    color: #440808;
+    color: black;
+    font-weight: bold;
 }
 
 .card-text {
-    color: #680c0c;
+    color: black;
+    font-style: italic;
+}
+
+/* Estilos para el navbar */
+.navbar {
+    background-color: black;
+    background-image: linear-gradient(to right, #D2FF5280, #45FFA680);
+    border-bottom: 1px solid #FFFDC3;
+    font-weight: bold;
 }
 
 /* Estilos para el footer */
 .footer {
     text-align: center;
-    background-color: #f8faf8;
-    border-top: 1px solid #ccc;
+    background-image: linear-gradient(to right, #D2FF5280, #45FFA680);
+    border-top: 1px solid #FFFDC3;
 }
 
 .welcome-text {
-    font-size: 24px;
-    color: rgb(250, 250, 250);
+    font-size: 20px;
+    color: #FFFDC3;
     text-align: center;
     position: relative;
+    text-shadow: 0px 4px 8px black;
+    font-style: italic;
 }
 
 .welcome-text::before {
@@ -55,10 +74,10 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to right, transparent, rgba(178, 248, 131, 0.664), transparent);
+    background: linear-gradient(to right, transparent, #FFFDC330, transparent);
     transform-origin: 100% 0;
     transform: scaleX(0);
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.15s ease-in-out;
 }
 
 .welcome-text:hover::before {
@@ -66,6 +85,10 @@
 }
 
 .welcome-text h1 {
-    -webkit-text-stroke: 1px black; /* Borde negro de 2px */
-    color: transparent; /* Hace que el texto sea transparente */
+    -webkit-text-stroke: 0px black; /* Borde negro de 2px */
+    color: #FFFDC3; /* Hace que el texto sea transparente */
+    font-weight: bold;
+    font-style: normal;
+    font-size: 3.5rem;
+    text-shadow: 0px 4px 8px black;
 }

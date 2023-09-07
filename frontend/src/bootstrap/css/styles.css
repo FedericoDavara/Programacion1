@@ -49,6 +49,7 @@ body {
     background-image: linear-gradient(to right, #D2FF5280, #45FFA680);
     border-bottom: 1px solid #FFFDC3;
     font-weight: bold;
+    backdrop-filter: blur(15px);
 }
 
 /* Estilos para el footer */
@@ -56,6 +57,7 @@ body {
     text-align: center;
     background-image: linear-gradient(to right, #D2FF5280, #45FFA680);
     border-top: 1px solid #FFFDC3;
+    backdrop-filter: blur(15px);
 }
 
 .welcome-text {

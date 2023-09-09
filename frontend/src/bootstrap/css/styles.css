@@ -3,7 +3,7 @@ body {
 }
 
 /* Establecer el fondo de imagen */
-.background-image {
+.background-image { 
     background-image: linear-gradient(to bottom, #0A372F, black); /* Reemplaza con la ruta de tu imagen de fondo */
     background-size: cover;
     background-position: center;
@@ -62,7 +62,7 @@ body {
 
 .welcome-text {
     font-size: 20px;
-    color: #FFFDC3;
+    color: #9c980d;
     text-align: center;
     position: relative;
     text-shadow: 0px 4px 8px black;
@@ -93,4 +93,27 @@ body {
     font-style: normal;
     font-size: 3.5rem;
     text-shadow: 0px 4px 8px black;
+}
+
+.card2 {
+    margin-bottom: 20px;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    background-image: linear-gradient(to bottom, #D2FF52, #45FFA6);
+}
+
+.card-title2 {
+    color: yellow; /* Cambia el color del título a amarillo */
+    font-weight: bold; /* Hace que el título sea negrita */
+}
+
+.card-body2 p {
+    color: yellow; /* Cambia el color del texto a amarillo */
+    font-weight: normal; /* Elimina la negrita del texto */
+}
+
+.btn-secondary2 {
+    background-image: linear-gradient(to bottom, #0A372F, black); /* Cambia el fondo del botón */
+    color: white; /* Cambia el color del texto del botón a blanco */
 }

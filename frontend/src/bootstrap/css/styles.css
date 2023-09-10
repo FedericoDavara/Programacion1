@@ -76,10 +76,10 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to right, transparent, #FFFDC330, transparent);
-    transform-origin: 100% 0;
+    /* background: linear-gradient(to right, transparent, #FFFDC330, transparent); */
+    /* transform-origin: 100% 0;
     transform: scaleX(0);
-    transition: transform 0.15s ease-in-out;
+    transition: transform 0.15s ease-in-out; */
 }
 
 .welcome-text:hover::before {
@@ -117,3 +117,25 @@ body {
     background-image: linear-gradient(to bottom, #0A372F, black); /* Cambia el fondo del botón */
     color: white; /* Cambia el color del texto del botón a blanco */
 }
+
+.btn {
+    transform: skew(-15deg);   
+    color: black;
+    font-weight: bold;
+}
+
+.carousel-indicators {
+    bottom: -48px;
+     /* Ajusta la cantidad de espacio deseada */
+}
+
+.text-titulo {
+    color: #FFFDC3;
+    font-weight: bold;
+}
+.text-parrafo {
+    color: #FFFDC3;
+    font-weight: normal;
+    font-size: 1.5rem;
+}
+

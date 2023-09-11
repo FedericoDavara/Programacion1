@@ -132,10 +132,30 @@ body {
 .text-titulo {
     color: #FFFDC3;
     font-weight: bold;
+    font-size: 2.75rem;
 }
 .text-parrafo {
     color: #FFFDC3;
     font-weight: normal;
-    font-size: 1.5rem;
+    font-style: italic;
+    font-size: 1.25rem;
 }
 
+#nombreprof {
+  margin-top: 20px;
+  color: #D2FF52;
+  font-weight: bold;
+}
+
+.img-fluid {
+  border-radius: 50%;
+  border: 5px solid #D2FF52;
+}
+
+#login-img {
+  border-radius: 16px 16px 0px 0px;
+  width: 100%;
+  height: auto;
+  margin: -16px;
+  margin-bottom: 16px;
+}

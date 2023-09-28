@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/home">
+        <img src="assets/logo.png" alt="Logo" width="30" height="35" class="d-inline-block align-text-top">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" routerLink="/home">
+              <img src="assets/casas.png" alt="Casa" width="20" height="20" class="d-inline-block align-text-top">
+              GYM
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/clases">
+              <img src="assets/tabla.png" alt="Lista" width="20" height="20" class="d-inline-block align-text-top">
+              Clases
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/profesores">
+              <img src="assets/profesores.png" alt="Bocina" width="20" height="20" class="d-inline-block align-text-top">
+              Profesores
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="assets/usuario.png" alt="Bocina" width="20" height="20" class="d-inline-block align-text-top">
+              Login
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" routerLink="/login">Iniciar Sesión</a></li>
+              <li><a class="dropdown-item" routerLink="/registro">Registrarse</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>

@@ -1,45 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="index.html">
-        <img src="assets/logo.png" alt="Logo" width="30" height="35" class="d-inline-block align-text-top">
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="index.html">
-              <img src="assets/casas.png" alt="Casa" width="20" height="20" class="d-inline-block align-text-top">
-              GYM
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="clases.html">
-              <img src="assets/tabla.png" alt="Lista" width="20" height="20" class="d-inline-block align-text-top">
-              Clases
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="profesores.html">
-              <img src="assets/profesores.png" alt="Bocina" width="20" height="20" class="d-inline-block align-text-top">
-              Profesores
-            </a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="assets/usuario.png" alt="Bocina" width="20" height="20" class="d-inline-block align-text-top">
-              Login
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="login.html">Iniciar Sesión</a></li>
-              <li><a class="dropdown-item" href="registro.html">Registrarse</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+<app-nav></app-nav>
   <div class="background-image">
     <div class="container mt-5">
         <div class="row">
@@ -47,7 +6,7 @@
                 <img src="assets/logo.png" alt="Logo" width="128" class="d-inline-block align-text-top">
                 <h1 >Bienvenido a Gym Of Legends</h1>
                 <p>En Gym Of Legends, aprende de leyendas en deportes como Michael Jordan, Lionel Messi, Mike Tyson y Paula Pareto. ¡Conviértete en un campeón con nosotros!</p>
-                <a type="button" href="clases.html" style="background-color: #D2FF52;" class="btn btn-primary btn-lg">Ver Clases</a>
+                <a type="button" routerLink="/clases" style="background-color: #D2FF52;" class="btn btn-primary btn-lg">Ver Clases</a>
                 <br>
                 <br>
                 <img src="assets/fondo.png" alt="Leyendas" width="256" class="d-inline-block align-text-top">

@@ -19,6 +19,7 @@ import { VistaProfeComponent } from './pages/vista-profe/vista-profe.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { NavComponent } from './components/nav/nav.component';
 import { PlanificacionesComponent } from './pages/planificaciones/planificaciones.component';
+import { HttpClientModule } from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { PlanificacionesComponent } from './pages/planificaciones/planificacione
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

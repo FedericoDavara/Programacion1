@@ -15,6 +15,7 @@ import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { VistaAdminComponent } from './pages/vista-admin/vista-admin.component';
 import { VistaProfeComponent } from './pages/vista-profe/vista-profe.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
+import { authsessionGuard } from './guards/authsession.guard';
 
 const routes: Routes = [
   {path: 'home',component: HomeComponent},
@@ -23,7 +24,7 @@ const routes: Routes = [
   {path: 'planificacion',component: PlanificacionesComponent},
   {path: 'profesores',component: ProfesoresComponent},
   {path: 'registro',component: RegistroComponent},
-  {path: 'usuarios',component: UsuariosComponent}, 
+  {path: 'usuarios',component: UsuariosComponent, canActivate:[authsessionGuard]}, 
   {path: 'vista-admin',component: VistaAdminComponent},
   {path: 'vista-profe',component: VistaProfeComponent},
   {path: 'alta-alumnoadmin',component: AltaAlumnoadminComponent},

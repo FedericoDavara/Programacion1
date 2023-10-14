@@ -32,7 +32,10 @@
               Login
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" routerLink="/login">Iniciar Sesión</a></li>
+              <li>
+                <a *ngIf="!isToken" class="dropdown-item" routerLink="/login">Iniciar Sesión</a>
+                <a *ngIf="!isToken" class="dropdown-item" href="?" (click)="cerrarSesion()">Cerrar Sesión</a>
+              </li>
               <li><a class="dropdown-item" routerLink="/registro">Registrarse</a></li>
             </ul>
           </li>

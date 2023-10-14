@@ -18,8 +18,11 @@ import { VistaAdminComponent } from './pages/vista-admin/vista-admin.component';
 import { VistaProfeComponent } from './pages/vista-profe/vista-profe.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { NavComponent } from './components/nav/nav.component';
+import { FotComponent } from './components/fot/fot.component';
 import { PlanificacionesComponent } from './pages/planificaciones/planificaciones.component';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { AlertComponent } from './components/alert/alert.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -39,12 +42,17 @@ import { HttpClientModule } from '@angular/common/http'
     VistaProfeComponent,
     ErrorPageComponent,
     NavComponent,
-    PlanificacionesComponent
+    PlanificacionesComponent,
+    FotComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

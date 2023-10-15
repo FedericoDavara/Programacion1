@@ -8,7 +8,7 @@
                     <div class="card-body">
                         
                         <h2 class="card-title text-center">Iniciar sesión</h2>
-                        <form [formGroup='loginForm']>
+                        <form [formGroup]="loginForm">
                             <div class="mb-3">
                                 <label for="email" class="form-label">Correo electrónico</label>
                                 <input type="email" class="form-control" formControlName="email" placeholder="Tu correo electrónico">

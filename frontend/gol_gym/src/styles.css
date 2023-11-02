@@ -1,9 +1,9 @@
 body {
     font-family: 'Noto Sans', sans-serif;
   }
-  
+
   /* Establecer el fondo de imagen */
-  .background-image { 
+  .background-image {
       background-image: linear-gradient(to bottom, #0A372F, black); /* Reemplaza con la ruta de tu imagen de fondo */
       background-size: cover;
       background-position: center;
@@ -11,7 +11,7 @@ body {
       min-height: 100vh;
       padding: 100px 0; /* Agregar un espacio arriba y abajo */
   }
-  
+
   /* Ajustar estilos de los cards */
   .card {
       margin-bottom: 20px;
@@ -19,18 +19,18 @@ body {
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
       border-radius: 20px;
       background-image: linear-gradient(to bottom, #D2FF52, #45FFA6);
-  
+
   }
-  
+
   .card-body {
       padding: 20px;
       border-radius: 100px;
   }
-  
-  
-  
-  
-  
+
+
+
+
+
   .card-img-top {
       max-height: 256px;
       min-height: 128px;
@@ -40,35 +40,34 @@ body {
       border-radius: 20px 20px 0 0;
       padding: 20px;
   }
-  
+
   /* Cambiar el color del texto de las cards */
   .card-title {
       color: black;
       font-weight: bold;
   }
-  
+
   .card-text {
       color: black;
       font-style: italic;
   }
-  
+
   /* Estilos para el navbar */
   .navbar {
-      background-color: black;
-      background-image: linear-gradient(to right, #D2FF5280, #45FFA680);
+      background: linear-gradient(to right, #D2FF52, #45FFA6);
       border-bottom: 1px solid #FFFDC3;
       font-weight: bold;
       backdrop-filter: blur(15px);
   }
-  
+
   /* Estilos para el footer */
   .footer {
       text-align: center;
-      background-image: linear-gradient(to right, #D2FF5280, #45FFA680);
+      background-image: linear-gradient(to right, #D2FF52, #45FFA6);
       border-top: 1px solid #FFFDC3;
       backdrop-filter: blur(15px);
   }
-  
+
   .welcome-text {
       font-size: 20px;
       color: #9c980d;
@@ -77,7 +76,7 @@ body {
       text-shadow: 0px 4px 8px black;
       font-style: italic;
   }
-  
+
   .welcome-text::before {
       content: "";
       position: absolute;
@@ -90,11 +89,11 @@ body {
       transform: scaleX(0);
       transition: transform 0.15s ease-in-out; */
   }
-  
+
   .welcome-text:hover::before {
       transform: scaleX(1);
   }
-  
+
   .welcome-text h1 {
       -webkit-text-stroke: 0px black; /* Borde negro de 2px */
       color: #FFFDC3; /* Hace que el texto sea transparente */
@@ -103,7 +102,7 @@ body {
       font-size: 3.5rem;
       text-shadow: 0px 4px 8px black;
   }
-  
+
   .card2 {
       margin-bottom: 20px;
       border: none;
@@ -111,33 +110,33 @@ body {
       border-radius: 20px;
       background-image: linear-gradient(to bottom, #D2FF52, #45FFA6);
   }
-  
+
   .card-title2 {
       color: yellow; /* Cambia el color del título a amarillo */
       font-weight: bold; /* Hace que el título sea negrita */
   }
-  
+
   .card-body2 p {
       color: yellow; /* Cambia el color del texto a amarillo */
       font-weight: normal; /* Elimina la negrita del texto */
   }
-  
+
   .btn-secondary2 {
       background-image: linear-gradient(to bottom, #0A372F, black); /* Cambia el fondo del botón */
       color: white; /* Cambia el color del texto del botón a blanco */
   }
-  
+
   .btn {
-      transform: skew(-15deg);   
+      transform: skew(-15deg);
       color: black;
       font-weight: bold;
   }
-  
+
   .carousel-indicators {
       bottom: -48px;
        /* Ajusta la cantidad de espacio deseada */
   }
-  
+
   .text-titulo {
       color: #FFFDC3;
       font-weight: bold;
@@ -149,22 +148,22 @@ body {
       font-style: italic;
       font-size: 1.25rem;
   }
-  
+
   #nombreprof {
     margin-top: 20px;
     color: #D2FF52;
     font-weight: bold;
   }
-  
+
   .img-fluid {
     border-radius: 50%;
     border: 5px solid #D2FF52;
   }
-  
+
   #login-img {
     border-radius: 16px 16px 0px 0px;
     width: 100%;
     height: auto;
   }
-  
-  
+
+

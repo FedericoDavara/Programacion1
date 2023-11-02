@@ -1,21 +1,46 @@
 .alert-top {
     position: fixed;
-    top: 20px;
+    top: 80px;
     left: 50%;
     transform: translateX(-50%);
     max-width: 400px;
     padding: 15px;
-    background-color: #45FFA6; /* Fondo de la alerta */
+    background: linear-gradient(to right, #00f09b, #D2FF52); /* Colores de fondo */
     border-radius: 10px; /* Bordes redondeados */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     text-align: center;
+    animation: alert-top 0.5s ease-in-out forwards, alert-hold 5s 0.5s forwards, alert-bottom 0.5s 7s ease-in-out forwards;
   }
-  
+
+@keyframes alert-top {
+  0% {
+    top: -100px;
+  }
+  100% {
+    top: 80px;
+  }
+}
+
+@keyframes alert-hold {
+  0%, 100% {
+    top: 80px;
+  }
+}
+
+@keyframes alert-bottom {
+  0% {
+    top: 80px;
+  }
+  100% {
+    top: -100px;
+  }
+}
+
   .alert-box {
     padding: 20px;
   }
-  
+
   .close-button {
     position: absolute;
     top: 10px;
@@ -24,4 +49,4 @@
     color: #000000; /* Color del icono de cierre */
     font-size: 24px;
   }
-  
+

@@ -1,9 +1,3 @@
-.logo-nav {
-  background-color: black; /* Color de fondo negro */
-  border-radius: 50%; /* Establece el radio para hacer un círculo */
-  width: 100%;
-}
-
 .navbar {
   box-shadow: 0 0 10px black;
 }

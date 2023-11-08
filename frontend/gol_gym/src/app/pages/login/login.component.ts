@@ -44,7 +44,7 @@ export class LoginComponent {
       }
     });
   }
-  
+
   submit() {
     if (this.loginForm.valid) {
       console.log('Form login: ', this.loginForm.value);
@@ -53,7 +53,7 @@ export class LoginComponent {
       alert('Formulario inválido');
     }
   }
-  
+
   cerrarSesion() {
     localStorage.removeItem('token');
     this.isToken = false; // El usuario ha cerrado sesión, establece isToken en false

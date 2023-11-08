@@ -28,7 +28,7 @@
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="assets/usuario.png" alt="Bocina" width="20" height="20" class="d-inline-block align-text-top">
+            <img src="assets/usuario.png" alt="Bocina" width="20" height="20" class="d-inline-block align-text-top">
             Login
           </a>
           <ul class="dropdown-menu">
@@ -36,7 +36,7 @@
               <a *ngIf="!isToken" class="dropdown-item" routerLink="/login">Iniciar Sesión</a>
               <a *ngIf="isToken" class="dropdown-item" href="?" (click)="cerrarSesion()">Cerrar Sesión</a>
             </li>
-            <li><a class="dropdown-item" routerLink="/registro">Registrarse</a></li>
+            <li *ngIf="!isToken"><a class="dropdown-item" routerLink="/registro">Registrarse</a></li>
           </ul>
         </li>
       </ul>

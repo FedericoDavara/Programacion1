@@ -17,12 +17,19 @@
                                 <label for="password" class="form-label">Contraseña</label>
                                 <input type="password" class="form-control" formControlName="password" placeholder="Tu contraseña">
                             </div>
-                            <!-- <a type="button" href="index.html" class="btn btn-secondary w-100">Ingresar</a> -->
+                            <button class="btn btn-secondary w-100" (click)="submit()">Ingresar</button>
                         </form>
-                        <button class= "btn btn-secondary w-100"(click)='submit()'>Ingresar</button> 
-                        <p class="mt-3 text-center">¿Aún no tienes una cuenta? <a routerLink="/registro">Regístrate aquí</a></p>
+                        
+                        <div *ngIf="!isToken">
+                            <p class="mt-3 text-center">¿Aún no tienes una cuenta? <a routerLink="/registro">Regístrate aquí</a></p>
+                        </div>
+                        
+                        <div *ngIf="isToken">
+                            <p class="mt-3 text-center">Has iniciado sesión. <a (click)="cerrarSesion()">Cerrar Sesión</a></p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>

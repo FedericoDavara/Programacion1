@@ -33,6 +33,7 @@ class Usuario(db.Model):
             'nombre': str(self.nombre),
             'apellido': str(self.apellido),
             'email': str(self.email),
+            'password': str(self.password),
             'telefono': str(self.telefono),
 
         }
@@ -46,6 +47,7 @@ class Usuario(db.Model):
             'nombre': str(self.nombre),
             'apellido': str(self.apellido),
             'email': str(self.email),
+            'password': str(self.password),
             'telefono': str(self.telefono),
             'alumno': alumno,
             'profesor': profesor

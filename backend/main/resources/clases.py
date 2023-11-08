@@ -35,7 +35,7 @@ class Clases(Resource):
     def get(self):
         clases=db.session.query(ClaseModel).all()
         return jsonify([clase.to_json() for clase in clases])
-     
+    
     def post(self):
         clases=ClaseModel.from_json(request.get_json())
         print(clases)

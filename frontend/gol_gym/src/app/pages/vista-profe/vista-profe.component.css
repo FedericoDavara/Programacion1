@@ -1,0 +1,15 @@
+.logo-prof {
+  animation: flotar 3s ease-in-out infinite;
+}
+
+@keyframes flotar {
+  0% {
+    transform: translateY(-30px);
+  }
+  50% {
+    transform: translateY(-60px);
+  }
+  100% {
+    transform: translateY(-30px);
+  }
+}

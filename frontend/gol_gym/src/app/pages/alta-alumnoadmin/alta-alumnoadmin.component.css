@@ -1,0 +1,28 @@
+.form-control {
+  background-color: #00000080;
+  color: #ffffff;
+  border: solid 2px #000;
+}
+
+input::placeholder {
+  color: #ffffff80;
+}
+
+.form-select {
+    background-color: #000000bf;
+    color: #ffffff;
+}
+
+.btn {
+  background-color: #D0FF53;
+  color: #000;
+  border: solid 2px #000;
+}
+
+.btn:hover {
+  background-color: #000;
+  color: #d0ff53;
+  border: solid 2px #d0ff53;
+  box-shadow: 0px 5px 0px #000;
+}
+

@@ -7,7 +7,7 @@
     padding: 15px;
     background: linear-gradient(to right, #00f09b, #D2FF52); /* Colores de fondo */
     border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.75);
     z-index: 1000;
     text-align: center;
     animation: alert-top 0.5s ease-in-out forwards, alert-hold 5s 0.5s forwards, alert-bottom 0.5s 7s ease-in-out forwards;

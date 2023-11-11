@@ -23,6 +23,7 @@ import { PlanificacionesComponent } from './pages/planificaciones/planificacione
 import { HttpClientModule } from '@angular/common/http';
 import { AlertComponent } from './components/alert/alert.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AdminComponent } from './pages/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NavComponent,
     PlanificacionesComponent,
     FotComponent,
-    AlertComponent
+    AlertComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

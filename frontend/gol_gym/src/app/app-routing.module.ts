@@ -16,6 +16,7 @@ import { VistaAdminComponent } from './pages/vista-admin/vista-admin.component';
 import { VistaProfeComponent } from './pages/vista-profe/vista-profe.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { authsessionGuard } from './guards/authsession.guard';
+import { AdminComponent } from './pages/admin/admin.component';
 
 const routes: Routes = [
   {path: 'home',component: HomeComponent},
@@ -32,9 +33,9 @@ const routes: Routes = [
   {path: 'baja-alumnoadmin',component: BajaAlumnoadminComponent},
   {path: 'baja-claseprofe',component: BajaClaseprofeComponent},
   {path: 'baja-profesoradmin',component: BajaProfesoradminComponent},
-  {path: 'error-page',component: ErrorPageComponent},
+  {path: 'admin',component: AdminComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'},
-  {path: '**', redirectTo: 'error-page'},
+  {path: '**', redirectTo: 'error-page'}
 ];
 
 @NgModule({

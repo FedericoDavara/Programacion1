@@ -22,7 +22,7 @@ const routes: Routes = [
   {path: 'home',component: HomeComponent},
   {path: 'login',component: LoginComponent},
   {path: 'clases',component: ClasesComponent},
-  {path: 'planificacion',component: PlanificacionesComponent},
+  {path: 'planificacion',component: PlanificacionesComponent, canActivate:[authsessionGuard]},
   {path: 'profesores',component: ProfesoresComponent},
   {path: 'registro',component: RegistroComponent},
   {path: 'usuarios',component: UsuariosComponent, canActivate:[authsessionGuard]}, 

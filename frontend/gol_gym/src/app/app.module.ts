@@ -26,6 +26,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminComponent } from './pages/admin/admin.component';
 import { ListaUsuariosComponent } from './components/lista-usuarios/lista-usuarios.component';
 import { PlanificacionComponent } from './components/planificacion/planificacion.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { PlanificacionComponent } from './components/planificacion/planificacion
     AlertComponent,
     AdminComponent,
     ListaUsuariosComponent,
-    PlanificacionComponent
+    PlanificacionComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,

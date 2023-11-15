@@ -24,6 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AlertComponent } from './components/alert/alert.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminComponent } from './pages/admin/admin.component';
+import { ListaUsuariosComponent } from './components/lista-usuarios/lista-usuarios.component';
+import { PlanificacionComponent } from './components/planificacion/planificacion.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { AdminComponent } from './pages/admin/admin.component';
     PlanificacionesComponent,
     FotComponent,
     AlertComponent,
-    AdminComponent
+    AdminComponent,
+    ListaUsuariosComponent,
+    PlanificacionComponent
   ],
   imports: [
     BrowserModule,

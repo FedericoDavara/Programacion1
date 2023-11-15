@@ -1,0 +1,150 @@
+<div class="container mt-5">
+    <div class="row center">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="text-center mb-4">Bienvenido {{selectedRole}}</h1>
+            <div class="d-flex mb-3">
+                <input type="text" class="form-control me-2 flex-grow-1" placeholder="Buscar usuario..."[(ngModel)]="searchTerm" (input)="buscarUsuarios()">
+
+                <button *ngIf="selectedRole === 'admin'" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#nuevoUsuarioModal">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </div>
+            
+            <div *ngIf="selectedRole === 'admin'" class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false"><span class="fa-solid fa-filter"></span>
+                    Filtrar Por
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" (click)="filtrarUsuarios('user')">Alumno</a></li>
+                    <li><a class="dropdown-item" (click)="filtrarUsuarios('profesor')">Profesor</a></li>
+                    <li><a class="dropdown-item" (click)="eliminarFiltro()">Todos</a></li>
+                </ul>
+            </div>
+            
+            <!-- Paginación -->
+            <ul *ngFor="let user of arrayUsers" class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <a  class='custom-hover-cursor' (click)="verPerfil(user.dni)">
+                    {{user.nombre}} {{user.apellido}}
+                    </a>
+                    <div>
+                        <a type="button" *ngIf="selectedRole === 'admin'" (click)="saveDni(user)" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editarUsuarioModal"><i class="fa-solid fa-pen-to-square text-white"></i></a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para agregar nuevo usuario -->
+<div class="modal fade" id="nuevoUsuarioModal" tabindex="-1" aria-labelledby="nuevoUsuarioModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="nuevoUsuarioModalLabel">Agregar Nuevo Usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Formulario para cargar un nuevo usuario -->
+                <form>
+                    <div>
+                        <label for="nombre" class="form-label">Rol</label>
+                    </div>
+                    <div class="btn-group d-flex justify-content-center" style="margin-bottom: 15px;" role="group" aria-label="Basic radio toggle button group">
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" [(ngModel)]="newUser.rol" value="admin">
+                        <label class="btn btn-outline-primary" for="btnradio1">Admin</label>
+                        
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" [(ngModel)]="newUser.rol" value="profesor">
+                        <label class="btn btn-outline-primary" for="btnradio2">Profesor</label>
+                        
+                        <input type="radio" class="btn-check" name="btnradio" id="btnradio3" [(ngModel)]="newUser.rol" value="user">
+                        <label class="btn btn-outline-primary" for="btnradio3">Alumno</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="newUser.nombre">
+                    </div>
+                    <div class="mb-3">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" id="apellido" name="apellido" [(ngModel)]="newUser.apellido">
+                    </div>
+                    <div class="mb-3">
+                        <label for="dni" class="form-label">DNI</label>
+                        <input type="number" class="form-control" id="dni" name="dni" [(ngModel)]="newUser.dni">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" [(ngModel)]="newUser.email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="password" name="password" [(ngModel)]="newUser.password">
+                    </div>
+                    <div class="mb-3">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input type="number" class="form-control" id="telefono" name="telefono" [(ngModel)]="newUser.telefono">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary btn-success" (click)="crearUsuario()" data-bs-dismiss="modal">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal para editar usuario -->
+<div class="modal fade" id="editarUsuarioModal" tabindex="-1" aria-labelledby="editarUsuarioModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editarUsuarioModalLabel">Editar Usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Formulario para editar un usuario -->
+                <form>
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="usuarioAEditar.nombre">
+                    </div>
+                    <div class="mb-3">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" id="apellido" name="apellido" [(ngModel)]="usuarioAEditar.apellido">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" [(ngModel)]="usuarioAEditar.email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="password" name="password" [(ngModel)]="usuarioAEditar.password">
+                    </div>
+                    <div class="mb-3">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input type="number" class="form-control" id="telefono" name="telefono" [(ngModel)]="usuarioAEditar.telefono">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary btn-success" (click)="editarUsuario()" data-bs-dismiss="modal">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Botones de Navegación -->
+<nav aria-label="Page navigation example" class="nav-bar-num">
+    <ul class="pagination">
+        <li class="page-item custom-hover-cursor"><a class="page-link" (click)="cargarPaginaPrevia()" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+        <li class="page-item"><a class="page-link">{{currentPage}}</a></li>
+        <li class="page-item custom-hover-cursor"><a class="page-link" (click)="cargarPaginaSiguiente()" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+    </ul>
+</nav>

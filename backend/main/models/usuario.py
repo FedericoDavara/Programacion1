@@ -9,7 +9,7 @@ class Usuario(db.Model):
     email = db.Column(db.String(250), unique=True, index=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
     telefono = db.Column(db.Integer, nullable=False)
-    rol = db.Column(db.String(10), nullable=False, server_default="users")
+    rol = db.Column(db.String(10), nullable=True)
 
     profesor = db.relationship("Profesor",uselist=False,back_populates="usuario",cascade="all, delete-orphan",single_parent=True)
     alumno = db.relationship("Alumno",uselist=False,back_populates="usuario",cascade="all, delete-orphan",single_parent=True)
@@ -25,7 +25,7 @@ class Usuario(db.Model):
         return check_password_hash(self.password, password)
     
     def __repr__(self):
-        return '<Usuario: %r %r %r %r %r>'% (self.dni, self.nombre, self.apellido, self.email, self.telefono)
+        return '<Usuario: %r %r %r %r %r %r>'% (self.dni, self.nombre, self.apellido, self.email, self.telefono, self.rol)
     
     def to_json(self):
         usuario_json = {
@@ -33,22 +33,24 @@ class Usuario(db.Model):
             'nombre': str(self.nombre),
             'apellido': str(self.apellido),
             'email': str(self.email),
-            'password': str(self.password),
             'telefono': str(self.telefono),
-
+            'password':str(self.password),
+            'rol': str(self.rol)
         }
         return usuario_json
     
     def to_json_complete(self):
-        alumno = [alumn.to_json() for alumn in self.alumno]
-        profesor=[profe.to_json() for profe in self.profesor]
+        alumno = self.alumno.to_json() if self.alumno else None
+        profesor = self.profesor.to_json() if self.profesor else None
+
         usuario_json = {
             'dni': str(self.dni),
             'nombre': str(self.nombre),
             'apellido': str(self.apellido),
             'email': str(self.email),
-            'password': str(self.password),
             'telefono': str(self.telefono),
+            'rol': str(self.rol),
+            'password':str(self.password),
             'alumno': alumno,
             'profesor': profesor
 
@@ -61,7 +63,7 @@ class Usuario(db.Model):
             'nombre': str(self.nombre),
             'apellido': str(self.apellido),
             'telefono': str(self.telefono),
-
+            'rol': str(self.rol)
         }
         return usuario_json
 
@@ -82,5 +84,4 @@ class Usuario(db.Model):
                     telefono=telefono,
                     plain_password=password,
                     rol=rol
-                    
                     )

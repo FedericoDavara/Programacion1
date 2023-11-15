@@ -4,7 +4,7 @@ body {
 
   /* Establecer el fondo de imagen */
   .background-image {
-      background-image: linear-gradient(to bottom, #0A372F, black); /* Reemplaza con la ruta de tu imagen de fondo */
+      background-image: url(assets/blob.svg); /* Reemplaza con la ruta de tu imagen de fondo */
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -123,7 +123,6 @@ body {
   }
 
   .btn {
-      transform: skew(-15deg);
       color: black;
       font-weight: bold;
   }

@@ -1,5 +1,5 @@
 .logo-home {
-  animation: flotar 3s ease-in-out infinite;
+  animation: flotar 1.5s ease-in-out infinite;
 }
 
 @keyframes flotar {

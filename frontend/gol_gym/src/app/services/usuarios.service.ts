@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { jwtDecode } from "node_modules/jwt-decode";
+import { jwtDecode } from "/home/victor/Escritorio/Nueva carpeta 1/Programacion1/frontend/gol_gym/node_modules/jwt-decode/build/cjs/index"
 import { Observable } from 'rxjs';
 
 

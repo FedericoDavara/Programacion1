@@ -22,7 +22,7 @@ const routes: Routes = [
   {path: 'home',component: HomeComponent},
   {path: 'login',component: LoginComponent},
   {path: 'clases',component: ClasesComponent},
-  {path: 'planificacion',component: PlanificacionesComponent, canActivate:[authsessionGuard]},
+  {path: 'vPlanif',component: PlanificacionesComponent, canActivate:[authsessionGuard]},
   {path: 'profesores',component: ProfesoresComponent},
   {path: 'registro',component: RegistroComponent},
   {path: 'usuarios',component: UsuariosComponent, canActivate:[authsessionGuard]}, 
@@ -33,7 +33,7 @@ const routes: Routes = [
   {path: 'baja-alumnoadmin',component: BajaAlumnoadminComponent},
   {path: 'baja-claseprofe',component: BajaClaseprofeComponent},
   {path: 'baja-profesoradmin',component: BajaProfesoradminComponent},
-  {path: 'admin',component: AdminComponent},
+  {path: 'vPerfil',component: AdminComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: '**', redirectTo: 'error-page'}
 ];

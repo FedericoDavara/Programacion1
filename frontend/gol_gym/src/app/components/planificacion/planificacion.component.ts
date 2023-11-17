@@ -86,14 +86,14 @@ export class PlanificacionComponent {
       dni: dni
     };
 
-    this.router.navigate(['/vPerfil'], { state: parametrosOcultos });
+    this.router.navigate(['/vista-perfil'], { state: parametrosOcultos });
   }
 
   crearPlanificacion() {
     const fechaParts = this.planificacionData.fecha.split('-');
     const fechaFormatted = `${fechaParts[0]}-${fechaParts[1]}-${fechaParts[2]}`;
     this.planificacionData.fecha = fechaFormatted;
-  
+
     this.planificacionService.getPlanif(this.perfilDni).subscribe(
       (UserPlanif) => {
         if (Array.isArray(UserPlanif) && UserPlanif.length > 0) {
@@ -125,5 +125,5 @@ export class PlanificacionComponent {
       }
     );
   }
-  
+
 }

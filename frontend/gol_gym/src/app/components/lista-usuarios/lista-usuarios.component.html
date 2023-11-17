@@ -1,15 +1,18 @@
+<br>
+<br>
+<br>
 <div class="container mt-5">
     <div class="row center">
         <div class="col-md-8 offset-md-2">
-            <h1 class="text-center mb-4">Bienvenido {{selectedRole}}</h1>
+            <h1 class="text-center mb-4">Panel de {{selectedRole}}</h1>
             <div class="d-flex mb-3">
                 <input type="text" class="form-control me-2 flex-grow-1" placeholder="Buscar usuario..."[(ngModel)]="searchTerm" (input)="buscarUsuarios()">
 
                 <button *ngIf="selectedRole === 'admin'" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#nuevoUsuarioModal">
-                    <i class="fa-solid fa-plus"></i>
+                    <b>+</b>
                 </button>
             </div>
-            
+
             <div *ngIf="selectedRole === 'admin'" class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                     aria-expanded="false"><span class="fa-solid fa-filter"></span>
@@ -20,8 +23,10 @@
                     <li><a class="dropdown-item" (click)="filtrarUsuarios('profesor')">Profesor</a></li>
                     <li><a class="dropdown-item" (click)="eliminarFiltro()">Todos</a></li>
                 </ul>
+        <br>
+        <br>
             </div>
-            
+
             <!-- Paginación -->
             <ul *ngFor="let user of arrayUsers" class="list-group">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -29,12 +34,16 @@
                     {{user.nombre}} {{user.apellido}}
                     </a>
                     <div>
-                        <a type="button" *ngIf="selectedRole === 'admin'" (click)="saveDni(user)" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editarUsuarioModal"><i class="fa-solid fa-pen-to-square text-white"></i></a>
+                        <a type="button" *ngIf="selectedRole === 'admin'" (click)="saveDni(user)" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editarUsuarioModal"><img src="../../../assets/pencil.svg">
+</a>
                     </div>
                 </li>
             </ul>
         </div>
     </div>
+  <br>
+  <br>
+  <br>
 </div>
 
 <!-- Modal para agregar nuevo usuario -->
@@ -55,10 +64,10 @@
                     <div class="btn-group d-flex justify-content-center" style="margin-bottom: 15px;" role="group" aria-label="Basic radio toggle button group">
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio1" [(ngModel)]="newUser.rol" value="admin">
                         <label class="btn btn-outline-primary" for="btnradio1">Admin</label>
-                        
+
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio2" [(ngModel)]="newUser.rol" value="profesor">
                         <label class="btn btn-outline-primary" for="btnradio2">Profesor</label>
-                        
+
                         <input type="radio" class="btn-check" name="btnradio" id="btnradio3" [(ngModel)]="newUser.rol" value="user">
                         <label class="btn btn-outline-primary" for="btnradio3">Alumno</label>
                     </div>
@@ -141,7 +150,7 @@
 
 
 <!-- Botones de Navegación -->
-<nav aria-label="Page navigation example" class="nav-bar-num">
+<nav aria-label="Page navigation example" class="nav-bar-num fixed-bottom">
     <ul class="pagination">
         <li class="page-item custom-hover-cursor"><a class="page-link" (click)="cargarPaginaPrevia()" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
         <li class="page-item"><a class="page-link">{{currentPage}}</a></li>

@@ -62,6 +62,11 @@ def create_app():
 
     api.add_resource(resources.PermisoResource,"/permiso/<id>")
 
+
+    #api.add_resource(resources.PagoResource, "/pago/<id>")
+
+    #api.add_resource(resources.LoginResource, "/login")
+
     api.init_app(app)
 
     app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')

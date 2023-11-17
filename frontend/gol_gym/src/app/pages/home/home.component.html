@@ -1,15 +1,149 @@
-<app-nav></app-nav>
+<app-navbar></app-navbar>
 <app-alert></app-alert>
-  <div class="background-image">
-    <div class="container mt-5">
+<div id="Inicio" class="altura-min-3">
+  <img src="assets/logo.png" class="portada img-fluid">
+  <h1 align="center"><b>¡Bienvenido a Gym Of Legends!</b></h1>
+  <p align="center" class="description">En Gym Of Legends, aprende de leyendas en deportes como Lionel Messi, Michael Jordan, Mike Tyson y Paula Pareto.<br>¡Conviértete en un campeón con nosotros!</p>
+</div>
+
+  <!-- Clases -->
+  <div id="Clasesid" class="altura-min-3">
+    <div>
+    <br>
+    <br>
+    <br>
+    <h1 class="text-center"><b>Nuestras clases</b></h1>
+    <p class="text-center description"><i>Exercise or DIE!!!</i></p>
+    </div>
+    <div class="container" style="margin-bottom: 50px;">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 card-space">
+          <div class="card-clase">
+            <div class="card-c-header">
+              <img src="assets/zumba.png" class="header-img">
+            </div>
+            <div class="card-c-body">
+              <p class="card-c-text text-center class-title">Zumba</p>
+              <p class="card-c-text text-center class-hour">19:00 a 21:00</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 card-space">
+          <div class="card-clase">
+            <div class="card-c-header">
+              <img src="assets/maquina.png" class="header-img">
+            </div>
+            <div class="card-c-body">
+              <p class="card-c-text text-center class-title">Máquinas</p>
+              <p class="card-c-text text-center class-hour">7:00 a 22:00</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 card-space">
+          <div class="card-clase">
+            <div class="card-c-header">
+              <img src="assets/spinning.png" class="header-img">
+            </div>
+            <div class="card-c-body">
+              <p class="card-c-text text-center class-title">Spinning</p>
+              <p class="card-c-text text-center class-hour">7:00 a 22:00</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 card-space">
+          <div class="card-clase">
+            <div class="card-c-header">
+              <img src="assets/boxeo.png" class="header-img">
+            </div>
+            <div class="card-c-body">
+              <p class="card-c-text text-center class-title">Boxeo</p>
+            <p class="card-c-text text-center class-hour">17:00 a 20:00</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 card-space">
+          <div class="card-clase">
+            <div class="card-c-header">
+              <img src="assets/cardio.png" class="header-img">
+            </div>
+            <div class="card-c-body">
+              <p class="card-c-text text-center class-title">Cardio</p>
+              <p class="card-c-text text-center class-hour">9:00 a 12:00</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 card-space">
+          <div class="card-clase">
+            <div class="card-c-header">
+              <img src="assets/aerobics.png" class="header-img">
+            </div>
+            <div class="card-c-body">
+              <p class="card-c-text text-center class-title">Aerobics</p>
+              <p class="card-c-text text-center class-hour">9:00 a 12:00</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Profesores -->
+<div id="Profesid" class="altura-min-3">
+  <h1 class="text-center title-main"><b>Nuestros Profesores</b></h1>
+    <div id="carouselExample" class="carousel slide">
+        <div class="carousel-inner text-center">
+            <div class="carousel-item active">
+                <div class="d-inline-block mx-auto">
+                    <div class="card">
+                        <img src="assets/profe1.jpg" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Lionel Andrés Messi</h5>
+                            <p class="card-text">El GOAT.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngFor="let profe of arrayProfes" class="carousel-item">
+                <div class="d-inline-block mx-auto">
+                    <div class="card">
+                        <img src={{profe.foto}} class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">{{profe.nombre}}</h5>
+                            <p class="card-text">{{profe.info}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon button-container" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon button-container" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
+<!-- Pie de Página -->
+<footer class="footer py-3">
+    <div class="text-center footer_text container">
         <div class="row">
-            <div class="col-md-8 offset-md-2 text-center welcome-text">
-                <img src="assets/logo.png" alt="Logo" width="512" class="d-inline-block align-text-top logo-home">
-                <h1 >Bienvenido a Gym Of Legends</h1>
-                <p class="description">Bienvenido a Gym Of Legends, aprende de leyendas en deportes como Michael Jordan, Lionel Messi, Mike Tyson y Paula Pareto. ¡Conviértete en un campeón con nosotros!</p>
-                <a type="button" routerLink="/clases" style="background-color: #D2FF52;" class="btn btn-primary btn-lg">Ver Clases</a>
+            <div class="col-md-4">
+        <p><img src="assets/brand-instagram.svg"><b> @golgym</b></p>
+            </div>
+            <div class="col-md-4">
+        <p><img src="assets/brand-x.svg"><b> @golgym</b></p>
+            </div>
+            <div class="col-md-4">
+        <p><img src="assets/brand-facebook.svg"><b> /golgym</b></p>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <span>© 2023 Gym Of Legends, GOL GYM.</span>
             </div>
         </div>
     </div>
-  </div>
-<app-fot></app-fot>
+</footer>

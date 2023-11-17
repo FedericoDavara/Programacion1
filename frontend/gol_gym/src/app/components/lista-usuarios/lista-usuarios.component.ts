@@ -15,7 +15,7 @@ export class ListaUsuariosComponent {
   perPage: number = 10;
   filtroRol: string = '';
   searchTerm: string = '';
-  
+
   actualContraseña: string= ''
 
   usuarioAEditar: any = {
@@ -57,13 +57,13 @@ export class ListaUsuariosComponent {
     const parametrosOcultos = {
       dni: dni
     };
-  
-    this.router.navigate(['/vPerfil'], { state: parametrosOcultos });
+
+    this.router.navigate(['/vista-perfil'], { state: parametrosOcultos });
   }
 
   cargarPaginaSiguiente() {
     const nextPage = this.currentPage + 1;
-  
+
     this.usuariosService.getUsers(nextPage, this.perPage, this.filtroRol).subscribe((data: any) => {
       if (data.usuarios && data.usuarios.length > 0) {
         this.currentPage = nextPage;
@@ -73,7 +73,7 @@ export class ListaUsuariosComponent {
       }
     });
   }
-  
+
   cargarPaginaPrevia() {
     if (this.currentPage > 1) {
       this.currentPage--;
@@ -89,7 +89,7 @@ export class ListaUsuariosComponent {
   eliminarFiltro() {
     this.filtroRol = '';
     this.currentPage = 1;
-    this.cargarUsuarios(); 
+    this.cargarUsuarios();
   }
 
 
@@ -104,7 +104,7 @@ export class ListaUsuariosComponent {
     }
 }
 
-  
+
   crearUsuario() {
     this.usuariosService.createUser(this.newUser).subscribe((data: any) => {
       // Lógica para manejar la respuesta después de crear el usuario
@@ -118,20 +118,20 @@ export class ListaUsuariosComponent {
     this.usuarioAEditar = user;
     this.actualContraseña = user.password;
   }
-  
+
   editarUsuario() {
     if (this.actualContraseña === this.usuarioAEditar.password) {
       delete this.usuarioAEditar.password;
     }
-    
+
     this.usuariosService.updateUser(this.usuarioAEditar.dni, this.usuarioAEditar).subscribe((data: any) => {
       console.log('Usuario editado:', data);
       this.cargarUsuarios();
     });
   }
-  
-  
-  
+
+
+
   selectedRole = localStorage.getItem('role');
 }
 

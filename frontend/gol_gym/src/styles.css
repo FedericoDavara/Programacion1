@@ -1,166 +1,165 @@
+/* Fondo */
+* {
+  font-family: "Noto Sans";
+}
+
 body {
-    font-family: 'Noto Sans', sans-serif;
-  }
+    background-image: url("assets/blob.svg");
+    background-size: cover;
+    background-position: center;
+    backgroun-repeat: no-repeat;
+}
 
-  /* Establecer el fondo de imagen */
-  .background-image {
-      background-image: url(assets/blob.svg); /* Reemplaza con la ruta de tu imagen de fondo */
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      min-height: 100vh;
-      padding: 100px 0; /* Agregar un espacio arriba y abajo */
-  }
-
-  /* Ajustar estilos de los cards */
-  .card {
-      margin-bottom: 20px;
-      border: none;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-      border-radius: 20px;
-      background-image: linear-gradient(to bottom, #D2FF52, #45FFA6);
-
-  }
-
-  .card-body {
-      padding: 20px;
-      border-radius: 100px;
-  }
-
-  .card-img-top {
-      max-height: 256px;
-      min-height: 128px;
-      object-fit: contain;
-      width: 100%;
-      background-image: linear-gradient(to bottom, #D2FF52, #FFFDC3);
-      border-radius: 20px 20px 0 0;
-      padding: 20px;
-  }
-
-  /* Cambiar el color del texto de las cards */
-  .card-title {
-      color: black;
-      font-weight: bold;
-  }
-
-  .card-text {
-      color: black;
-      font-style: italic;
-  }
-
-  /* Estilos para el navbar */
-  .navbar {
-      background: linear-gradient(to right, #D2FF52, #45FFA6);
-      border-bottom: 1px solid #FFFDC3;
-      font-weight: bold;
-      backdrop-filter: blur(15px);
-  }
-
-  /* Estilos para el footer */
-  .footer {
-      text-align: center;
-      background-image: linear-gradient(to right, #D2FF52, #45FFA6);
-      border-top: 1px solid #FFFDC3;
-      backdrop-filter: blur(15px);
-  }
-
-  .welcome-text {
-      font-size: 20px;
-      color: #D2FF52;
-      text-align: center;
-      position: relative;
-      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
-      font-style: italic;
-  }
-
-  .welcome-text::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      /* background: linear-gradient(to right, transparent, #FFFDC330, transparent); */
-      /* transform-origin: 100% 0;
-      transform: scaleX(0);
-      transition: transform 0.15s ease-in-out; */
-  }
-
-  .welcome-text:hover::before {
-      transform: scaleX(1);
-  }
-
-  .welcome-text h1 {
-      -webkit-text-stroke: 0px black; /* Borde negro de 2px */
-      color: #FFFDC3; /* Hace que el texto sea transparente */
-      font-weight: bold;
-      font-style: normal;
-      font-size: 3.5rem;
-      text-shadow: 0px 4px 8px black;
-  }
-
-  .card2 {
-      margin-bottom: 20px;
-      border: none;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-      border-radius: 20px;
-      background-image: linear-gradient(to bottom, #D2FF52, #45FFA6);
-  }
-
-  .card-title2 {
-      color: yellow; /* Cambia el color del título a amarillo */
-      font-weight: bold; /* Hace que el título sea negrita */
-  }
-
-  .card-body2 p {
-      color: yellow; /* Cambia el color del texto a amarillo */
-      font-weight: normal; /* Elimina la negrita del texto */
-  }
-
-  .btn-secondary2 {
-      background-image: linear-gradient(to bottom, #0A372F, black); /* Cambia el fondo del botón */
-      color: white; /* Cambia el color del texto del botón a blanco */
-  }
-
-  .btn {
-      color: black;
-      font-weight: bold;
-  }
-
-  .carousel-indicators {
-      bottom: -48px;
-       /* Ajusta la cantidad de espacio deseada */
-  }
-
-  .text-titulo {
-      color: #FFFDC3;
-      font-weight: bold;
-      font-size: 2.75rem;
-  }
-  .text-parrafo {
-      color: #FFFDC3;
-      font-weight: normal;
-      font-style: italic;
-      font-size: 1.25rem;
-  }
-
-  #nombreprof {
-    margin-top: 20px;
-    color: #D2FF52;
+h1 {
+    font-size: 40pt;
+    font-family: 'Noto Sans';
     font-weight: bold;
+    color: #FFFDC3;
+    text-shadow:
+      0px 1px 0px #000,
+      0px 2px 0px #000,
+      0px 3px 0px #000,
+      0px 4px 0px #000,
+      0px 5px 0px #000,
+      0px 6px 0px #000,
+      0px 7px 0px #000;
+}
+
+.title-main{
+    font-size: 45px;
+    text-align: center;
+    margin-bottom: 40px;
+    margin-top: 50px;
+}
+
+
+/* Otros Ajustes*/
+
+.altura-min-1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 85vh;
+}
+.altura-min-2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+}
+.altura-min-3{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+@font-face {
+    font-family: 'titlefont';
+    src: url(assets/commando-webfont.woff) format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* clases y planificaciones*/
+
+.card-space{
+    padding-bottom: 20px;
+}
+.card-clase {
+    background-position: center;
+    border-radius: 15px;
+    background-color: #00122080;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 0 black;
+    border: 5px solid black;
+}
+.card-c-header {
+    text-align: center;
+    background-color: #d2ff52;
+    border-bottom: 5px solid black;
+    color: #000;
+    text-shadow: 0 0 0 transparent;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.card-c-body {
+    border-top: 0px solid black;
+    background-color: none;
+}
+.event-card {
+    margin-bottom: 20px;
+}
+.card-c-title {
+    font-weight: bold;
+    font-size: 16pt;
+    padding: 10px;
+}
+.card-c-text {
+    font-size: 20px;
+    color: #fffdc3;
+}
+
+/*botones navegacion*/
+
+.btn-primary{
+    background-color: #1e293b;
+}
+.btn-secondary {
+    background-color: #1e293b;
+    border-color: #d2ff52;
+    margin-bottom: 15px;
   }
+.btn-secondary:hover {
+    background-color: #d2ff52;
+}
+.dropdown-item {
+    color: white;
+}
+.dropdown-item:hover {
+    background-color: #d2ff52;
+}
+.dropdown-menu {
+    background-color: #000;
+}
+.btn-outline-secondary{
+    background-color: rgba(30, 41, 59, 0.7);
+    color: rgb(255,255,255);
+}
 
-  .img-fluid {
-    border-radius: 50%;
-    border: 5px solid #D2FF52;
-  }
+/*paginacion*/
 
-  #login-img {
-    border-radius: 16px 16px 0px 0px;
-    width: 100%;
-    height: auto;
-  }
+.nav-bar-num{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: bold;
+}
 
+/* Vista datos usuario */
+.rounded-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+.custom-button {
+    font-size: 24px;
+    text-align: center;
+    width: 200px;
+}
+.icon-link {
+    text-decoration: none;
+    color: inherit;
+}
 
-
-
+.list-group-item a {
+    text-decoration: none;
+    color: inherit;
+}
+.flecha{
+    background-position-x: right;
+}

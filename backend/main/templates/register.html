@@ -4,59 +4,58 @@
   <meta charset="UTF-8">
   <style>
     .main {
-      border: 1px solid #333;
+      border: 1px solid black;
       padding: 30px;
-      background-color: #f0f0f0;
-      margin: 20px;
-    }
-    body {
-      background-color: #eaeaea;
-      font-family: Arial, sans-serif;
+      background-color: #fbdc74;
+      margin: 0px;
     }
     .services {
-      background-color: #c8dfff;
-      box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
+      background-color: #bbfbf3;
+      box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
       padding: 10px;
-      border: 1px solid #333;
+      margin-right: 50px;
+      border: 1px solid black;
       width: 250px;
     }
     h1 {
       font-weight: bold;
       font-size: 25px;
-      color: #001d62;
-      margin-top: 0;
-    }
-    p {
-      color: #333;
-      line-height: 1.5;
+      color: #063940;
     }
     .button {
       background-color: #3680f2;
       border-radius: 2px;
-      border: none;
+      border: 1px solid black;
       display: inline-block;
       color: #ffffff;
       font-size: 13px;
       padding: 6px 24px;
       text-decoration: none;
       margin-right: 3px;
-      cursor: pointer;
+    }
+    .container {
+        display: flex;
+        align-items:center;
     }
   </style>
 </head>
-<body>
+<body style="background-color: #ffffff;">
+  <br/>
   <div class="main">
-    <h1>Bienvenido {{usuario.nombre}} {{usuario.apellido}}!</h1>
-    <p>¡Bienvenido al gimnasio!</p>
-    <p>Estamos emocionados de recibirte en nuestro gimnasio. Aquí encontrarán un ambiente motivador y equipos de última generación para ayudarte a alcanzar sus metas fitness. Nuestro equipo de entrenadores está listo para brindarte una orientación personalizada y clases grupales emocionantes. ¡Disfruta de tu tiempo aquí y hagamos que cada entrenamiento cuente!</p>
-    <div class="services">
-      <p>Con nuestro servicio podrás:</p>
-      <ul>
-        <li>Ver las planificaciones</li>
-        <li>Ver Horarios</li>
-        <li>Ver a los profesores</li>
-      </ul>
+    <h1>¡Bienvenido {{usuario.nombre}} {{usuario.apellido}}!</h1>
+    <p>¡Te has registrado en GOL GYM!</p>
+    <div class= "container">
+        <div class="services">
+          <p>Con nuestro servicio podrás:</p>
+          <ul>
+            <li><a>Elegir tu entrenador.</a></li>
+            <li><a>Ver tus Planificaciones.</a></li>
+            <li><a>Participar de clases exclusivas.</a></li>
+          </ul>
+        </div>
+        <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZDE1OTBmZmRlZGQ2OWVmOTA3ZTNiYWU0ZjU3NDRmNTQxMWFkMzlhYiZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/dxiby8E15lZKjJyQgC/giphy.gif" width="240">
     </div>
+    <br>
   </div>
 </body>
 </html>

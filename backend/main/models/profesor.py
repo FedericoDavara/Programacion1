@@ -51,5 +51,3 @@ class Profesor(db.Model):
         return Profesor(dni=dni,
                     especialidad=especialidad,
                     )
-        
-        

@@ -1,66 +1,45 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
-import { ClasesComponent } from './pages/clases/clases.component';
-import { ProfesoresComponent } from './pages/profesores/profesores.component';
-import { AltaAlumnoadminComponent } from './pages/alta-alumnoadmin/alta-alumnoadmin.component';
-import { AltaProfesoresadminComponent } from './pages/alta-profesoresadmin/alta-profesoresadmin.component';
-import { BajaProfesoradminComponent } from './pages/baja-profesoradmin/baja-profesoradmin.component';
-import { BajaAlumnoadminComponent } from './pages/baja-alumnoadmin/baja-alumnoadmin.component';
-import { BajaClaseprofeComponent } from './pages/baja-claseprofe/baja-claseprofe.component';
-import { RegistroComponent } from './pages/registro/registro.component';
-import { UsuariosComponent } from './pages/usuarios/usuarios.component';
-import { VistaAdminComponent } from './pages/vista-admin/vista-admin.component';
-import { VistaProfeComponent } from './pages/vista-profe/vista-profe.component';
-import { ErrorPageComponent } from './pages/error-page/error-page.component';
-import { NavComponent } from './components/nav/nav.component';
-import { FotComponent } from './components/fot/fot.component';
-import { PlanificacionesComponent } from './pages/planificaciones/planificaciones.component';
-import { HttpClientModule } from '@angular/common/http';
-import { AlertComponent } from './components/alert/alert.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AdminComponent } from './pages/admin/admin.component';
-import { ListaUsuariosComponent } from './components/lista-usuarios/lista-usuarios.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { NavcloseComponent } from './components/navclose/navclose.component';
 import { PlanificacionComponent } from './components/planificacion/planificacion.component';
+import { VistaPlanificacionComponent } from './pages/vista-planificacion/vista-planificacion.component';
+import { ListaUsuariosComponent } from './components/lista-usuarios/lista-usuarios.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
+import { VistaPerfilComponent } from './pages/vista-perfil/vista-perfil.component';
+import { VistaInicioComponent } from './pages/vista-inicio/vista-inicio.component';
+import { VistaErrorComponent } from './pages/vista-error/vista-error.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AlertComponent } from './components/alert/alert.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    ClasesComponent,
-    ProfesoresComponent,
-    AltaAlumnoadminComponent,
-    AltaProfesoresadminComponent,
-    BajaProfesoradminComponent,
-    BajaAlumnoadminComponent,
-    BajaClaseprofeComponent,
-    RegistroComponent,
-    UsuariosComponent,
-    VistaAdminComponent,
-    VistaProfeComponent,
-    ErrorPageComponent,
-    NavComponent,
-    PlanificacionesComponent,
-    FotComponent,
-    AlertComponent,
-    AdminComponent,
-    ListaUsuariosComponent,
+    NavbarComponent,
+    NavcloseComponent,
     PlanificacionComponent,
-    PerfilComponent
+    VistaPlanificacionComponent,
+    PerfilComponent,
+    VistaPerfilComponent,
+    VistaInicioComponent,
+    ListaUsuariosComponent,
+    VistaErrorComponent,
+    AlertComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
-
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

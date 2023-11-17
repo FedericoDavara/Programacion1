@@ -1,10 +1,11 @@
 <!-- Tabla de planificación -->
+
 <div class="container mt-5" style="margin-bottom: 50px;">
     <div class="row justify-content-center">
         <div class="col-md-8">
 
             <div class="rounded-box" style="margin-bottom: 25px;">
-                
+
                 <div class="d-flex align-items-center justify-content-center titulo-edit-alumno">
                     <h1 style="margin-top: 15px; padding-right: 50px;">Planificación</h1>
                     <button *ngIf="selectedRole === 'admin' || selectedRole === 'profesor'" data-bs-toggle="modal" data-bs-target="#editarPlanificacion" class="btn btn-primary btn-lm me-2"><i class="fa-solid fa-pen-to-square text-white fa-lg"></i></button>
@@ -17,14 +18,14 @@
                     <h5>Fecha</h5>
                     <h2>{{ UserPlanif[0]?.fecha }}</h2>
                     <hr>
-                    
+
                 </div>
                 <div style="display: flex; align-items: center; justify-content: flex-end;">
                     <button class="btn btn-primary btn-lm" (click)="verPerfil(perfilDni)">
                         <i class="fa-solid fa-left-long fa-lg"></i>
                     </button>
                 </div>
-                
+
             </div>
             <div>
                 <div class="container" style="margin-bottom: 50px;">
@@ -35,7 +36,7 @@
                                     <h4 class="card-c-title">Lunes</h4>
                                 </div>
                                 <div class="card-c-body">
-                                    <p class="card-c-text">{{ UserPlanif[0]?.lunes }}</p>
+                                    <p class="card-c-text text-center">{{ UserPlanif[0]?.lunes }}</p>
                                 </div>
                             </div>
                         </div>
@@ -45,7 +46,7 @@
                                     <h4 class="card-c-title">Martes</h4>
                                 </div>
                                 <div class="card-c-body">
-                                    <p class="card-c-text">{{ UserPlanif[0]?.martes }}</p>
+                                    <p class="card-c-text text-center">{{ UserPlanif[0]?.martes }}</p>
                                 </div>
                             </div>
                         </div>
@@ -55,7 +56,7 @@
                                     <h4 class="card-c-title">Miércoles</h4>
                                 </div>
                                 <div class="card-c-body">
-                                    <p class="card-c-text">{{ UserPlanif[0]?.miercoles }}</p>
+                                    <p class="card-c-text text-center">{{ UserPlanif[0]?.miercoles }}</p>
                                 </div>
                             </div>
                         </div>
@@ -65,7 +66,7 @@
                                     <h4 class="card-c-title">Jueves</h4>
                                 </div>
                                 <div class="card-c-body">
-                                    <p class="card-c-text">{{ UserPlanif[0]?.jueves }}</p>
+                                    <p class="card-c-text text-center">{{ UserPlanif[0]?.jueves }}</p>
                                 </div>
                             </div>
                         </div>
@@ -75,7 +76,7 @@
                                     <h4 class="card-c-title">Viernes</h4>
                                 </div>
                                 <div class="card-c-body">
-                                    <p class="card-c-text">{{ UserPlanif[0]?.viernes }}</p>
+                                    <p class="card-c-text text-center">{{ UserPlanif[0]?.viernes }}</p>
                                 </div>
                             </div>
                         </div>
@@ -85,7 +86,7 @@
                                     <h4 class="card-c-title">Sábado</h4>
                                 </div>
                                 <div class="card-c-body">
-                                    <p class="card-c-text">{{ UserPlanif[0]?.sabado }}</p>
+                                    <p class="card-c-text text-center">{{ UserPlanif[0]?.sabado }}</p>
                                 </div>
                             </div>
                         </div>

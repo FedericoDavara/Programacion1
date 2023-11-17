@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "gol_gym": {
+    "app_gym": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/gol_gym",
+            "outputPath": "dist/app_gym",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -63,10 +63,10 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "gol_gym:build:production"
+              "browserTarget": "app_gym:build:production"
             },
             "development": {
-              "browserTarget": "gol_gym:build:development"
+              "browserTarget": "app_gym:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -74,7 +74,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "gol_gym:build"
+            "browserTarget": "app_gym:build"
           }
         },
         "test": {
@@ -99,6 +99,6 @@
     }
   },
   "cli": {
-    "analytics": "5f059cd9-d75a-4582-9286-1874649e234d"
+    "analytics": "8bb097ef-792a-4b82-9150-8b442c0ba4f7"
   }
 }

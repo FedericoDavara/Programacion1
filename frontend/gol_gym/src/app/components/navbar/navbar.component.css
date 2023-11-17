@@ -1,0 +1,32 @@
+/* Barra de Navegación */
+
+.custom-bg-color{
+  background: linear-gradient(90deg, #D2FF5280 0%, #73E5EB80 100%);
+  backdrop-filter: blur(15px);
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+}
+
+.logo{
+    width: 50px;
+    height: 50px;
+}
+
+.nav-link {
+  font-family: 'Noto Sans', sans-serif;
+  cursor: pointer;
+  color: #FFFDC3;
+  text-shadow:
+    0px 0px 3px #000;
+  transition: all .1s ease-in-out;
+}
+
+.nav-link:hover {
+  color: #D0FD51;
+  text-shadow:
+    0px 0px 3px #000;
+  font-weight: bold;
+}
+
+.nav-item a.nav-link {
+  margin: 0 5vw 0 5vw; /* Ajusta el valor de margen según tu preferencia */
+}

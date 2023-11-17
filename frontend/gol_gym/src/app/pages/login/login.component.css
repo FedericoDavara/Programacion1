@@ -1,0 +1,47 @@
+* {
+  font-family: "Noto Sans";
+}
+
+body {
+    background-image: url("../../../assets/blob.svg");
+    background-size: cover;
+    background-position: center;
+    margin: 0; /* Agrega margen cero para asegurarte de que el fondo cubra toda la ventana */
+    padding: 0; /* Añade padding cero para evitar desbordamientos */
+}
+
+.login-centrado {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.btn {
+    margin: 10px;
+    background-color: #D2FF52;
+    color: black;
+    border-radius: 10px;
+    border: 5px solid #000;
+    box-shadow: 0 5px 0px #000;
+    transition: 0.15s ease-in;
+}
+
+.btn:hover {
+    box-shadow: 0 0px 0px #000;
+    transform: translateY(5px);
+}
+
+
+.form-label {
+  color: #D2FF52;
+  text-shadow: 0 3px 0 black;
+}
+
+#email {
+    margin-bottom: 15px;
+}
+
+#password {
+    margin-bottom: 15px;
+}

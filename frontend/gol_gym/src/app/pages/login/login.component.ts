@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import jwtDecode from 'jwt-decode';
+
+
 
 @Component({
   selector: 'app-login',
@@ -10,11 +13,10 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class LoginComponent {
   loginForm!: FormGroup;
-  isToken: boolean = false; // Inicialmente, el usuario no ha iniciado sesión
 
   constructor(
     private authService: AuthService,
-    private router: Router,
+    private router : Router,
     private formBuilder: FormBuilder
   ) {}
 
@@ -25,37 +27,43 @@ export class LoginComponent {
     });
   }
 
-  login(dataLogin: any = {}) {
+  login(dataLogin:any = {} ){
     console.log('comprobando credenciales');
     this.authService.login(dataLogin).subscribe({
-      next: (rta: any) => {
-        alert('login exitoso');
-        console.log('respuesta login:', rta.access_token);
-        localStorage.setItem('token', rta.access_token);
-        this.isToken = true; // El usuario ha iniciado sesión, establece isToken en true
-        this.router.navigateByUrl('home');
-      },
-      error: (error) => {
-        alert('Credenciales incorrectas');
-        localStorage.removeItem('token');
-      },
-      complete: () => {
-        console.log('finalizo');
+      next: (rta:any) => {
+        console.log('Respuesta login: ',rta.access_token);
+        localStorage.setItem('token', rta.access_token)
+
+        const decodedToken: any = jwtDecode(rta.access_token);
+        localStorage.setItem('role', decodedToken.rol)
+        localStorage.setItem('dni', decodedToken.dni)
+
+        if (localStorage.getItem('role') === 'admin' || localStorage.getItem('role') === 'profesor') {
+          this.router.navigateByUrl('vInicio');
+        } else if (localStorage.getItem('role') === 'user') {
+          this.router.navigateByUrl('/vista-perfil');
+        } else {
+          console.error('No posee rol de usuario');
+        }
+
+      }, error:(error) => {
+          alert('Credenciales incorrectas');
+          localStorage.removeItem('dni');
+          localStorage.removeItem('role');
+          localStorage.removeItem('token');
+
+      }, complete: () => {
+        console.log('Finalizo')
       }
-    });
+    })
   }
 
   submit() {
-    if (this.loginForm.valid) {
-      console.log('Form login: ', this.loginForm.value);
-      this.login(this.loginForm.value);
+    if(this.loginForm.valid) {
+      console.log('Form login: ',this.loginForm.value);
+      this.login(this.loginForm.value)
     } else {
       alert('Formulario inválido');
     }
-  }
-
-  cerrarSesion() {
-    localStorage.removeItem('token');
-    this.isToken = false; // El usuario ha cerrado sesión, establece isToken en false
   }
 }

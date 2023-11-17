@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-lg navbar-dark custom-bg-color fixed-top">
+  <div class="container-fluid">
+    <a routerLink="/home" (click)="scrollToInicio()"><img src="assets/logo.png" class="logo"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse flex-column justify-content-between px-0" id="navbarNav">
+      <ul class="navbar-nav fs-5 justify-content-center">
+
+        <li *ngIf="rutavisible" class="nav-item">
+          <a routerLink="/login" class="nav-link"><img src="../../../assets/user.svg"> Ingresar</a>
+        </li>
+        <li class="nav-item">
+          <a (click)="scrollToClases()" class="nav-link"><img src="../../../assets/stretching.svg"> Clases</a>
+        </li>
+        <li class="nav-item">
+          <a (click)="scrollToProfes()" class="nav-link"><img src="../../../assets/school.svg"> Profesores</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</nav>

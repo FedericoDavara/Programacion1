@@ -1,3 +1,79 @@
+* {
+  font-family: "Noto Sans";
+}
+
 .custom-hover-cursor:hover {
     cursor: pointer;
   }
+
+.btn {
+    margin-bottom: 5px;
+    background-color: #D2FF52;
+    color: black;
+    border-radius: 10px;
+    border: 5px solid #000;
+    box-shadow: 0 5px 0px #000;
+    transition: 0.15s ease-in;
+}
+
+.btn:hover {
+    box-shadow: 0 0px 0px #000;
+    transform: translateY(5px);
+}
+
+.list-group-item {
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border: 5px solid #000;
+  background-color: #00122080;
+  backdrop-filter: blur(10px);
+  color: #FFFDC3;
+  text-shadow: 0 3px 0 black;
+  font-weight: bold;
+  box-shadow: 5px 5px 5px rgb(0 0 0 / 50%);
+}
+
+.list-group-item:hover {
+  color: #D2FF52;
+}
+
+.form-control {
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border: 5px solid #000;
+  background-color: #00122080;
+  backdrop-filter: blur(10px);
+  color: #FFFDC3;
+  font-weight: bold;
+  box-shadow: 5px 5px 5px rgb(0 0 0 / 50%);
+}
+
+.form-control::placeholder {
+  color: #FFFDC350;
+}
+
+.modal-content {
+  background-color: #00898280;
+  border-radius: 20px;
+  border: solid 5px black;
+  backdrop-filter: blur(10px);
+}
+
+.modal-title {
+  color: #D2FF52;
+  font-weight: bold;
+  text-shadow: 0 3px 0 black;
+}
+
+.form-label {
+  color: #D2FF52;
+  text-shadow: 0 3px 0 black;
+}
+
+/* Cambiar el color del botón de paginación en Bootstrap */
+.page-link {
+  color: #D2FF52; /* Cambia el color del texto del botón */
+  background-color: #000; /* Cambia el color de fondo del botón */
+  border: 5px solid black; /* Cambia el color del borde del botón */
+  border-radius: 10px;
+}

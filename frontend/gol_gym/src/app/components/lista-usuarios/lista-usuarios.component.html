@@ -1,19 +1,16 @@
-<br>
-<br>
-<br>
 <div class="container mt-5">
     <div class="row center">
         <div class="col-md-8 offset-md-2">
-            <h1 class="text-center mb-4">Panel de {{selectedRole}}</h1>
+            <h1 class="text-center mb-4">Bienvenido {{selectedRole}}</h1>
             <div class="d-flex mb-3">
                 <input type="text" class="form-control me-2 flex-grow-1" placeholder="Buscar usuario..."[(ngModel)]="searchTerm" (input)="buscarUsuarios()">
 
                 <button *ngIf="selectedRole === 'admin'" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#nuevoUsuarioModal">
-                    <b>+</b>
+                    <i class="fa-solid fa-plus"></i>
                 </button>
             </div>
-
-            <div *ngIf="selectedRole === 'admin'" class="dropdown">
+            
+            <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                     aria-expanded="false"><span class="fa-solid fa-filter"></span>
                     Filtrar Por
@@ -23,10 +20,8 @@
                     <li><a class="dropdown-item" (click)="filtrarUsuarios('profesor')">Profesor</a></li>
                     <li><a class="dropdown-item" (click)="eliminarFiltro()">Todos</a></li>
                 </ul>
-        <br>
-        <br>
             </div>
-
+            
             <!-- Paginación -->
             <ul *ngFor="let user of arrayUsers" class="list-group">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -34,17 +29,22 @@
                     {{user.nombre}} {{user.apellido}}
                     </a>
                     <div>
-                        <a type="button" *ngIf="selectedRole === 'admin'" (click)="saveDni(user)" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editarUsuarioModal"><img src="../../../assets/pencil.svg">
-</a>
+                        <a type="button" *ngIf="selectedRole === 'admin'" (click)="saveDni(user)" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editarUsuarioModal"><i class="fa-solid fa-pen-to-square text-white"></i></a>
                     </div>
                 </li>
             </ul>
         </div>
     </div>
-  <br>
-  <br>
-  <br>
 </div>
+
+<!-- Botones de Navegación -->
+<nav aria-label="Page navigation example" class="nav-bar-num">
+    <ul class="pagination">
+        <li class="page-item custom-hover-cursor"><a class="page-link" (click)="cargarPaginaPrevia()" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+        <li class="page-item"><a class="page-link">{{currentPage}}</a></li>
+        <li class="page-item custom-hover-cursor"><a class="page-link" (click)="cargarPaginaSiguiente()" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+    </ul>
+</nav>
 
 <!-- Modal para agregar nuevo usuario -->
 <div class="modal fade" id="nuevoUsuarioModal" tabindex="-1" aria-labelledby="nuevoUsuarioModalLabel"
@@ -56,55 +56,110 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <!-- Formulario para cargar un nuevo usuario -->
-                <form>
+                <!-- Formulario para crear un nuevo usuario -->
+                <form [formGroup]="newUserForm">
                     <div>
-                        <label for="nombre" class="form-label">Rol</label>
+                      <label for="nombre" class="form-label">Rol <span class="text-danger">*</span></label>
                     </div>
                     <div class="btn-group d-flex justify-content-center" style="margin-bottom: 15px;" role="group" aria-label="Basic radio toggle button group">
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" [(ngModel)]="newUser.rol" value="admin">
+                        
+                        <input type="radio" class="btn-check" name="rol" formControlName="rol" value="admin" id="btnradio1">
                         <label class="btn btn-outline-primary" for="btnradio1">Admin</label>
-
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" [(ngModel)]="newUser.rol" value="profesor">
+                        
+                        <input type="radio" class="btn-check" name="rol" formControlName="rol" value="profesor" id="btnradio2">
                         <label class="btn btn-outline-primary" for="btnradio2">Profesor</label>
-
-                        <input type="radio" class="btn-check" name="btnradio" id="btnradio3" [(ngModel)]="newUser.rol" value="user">
+                        
+                        <input type="radio" class="btn-check" name="rol" formControlName="rol" value="user" id="btnradio3">
                         <label class="btn btn-outline-primary" for="btnradio3">Alumno</label>
+                        
+                    </div>
+                    
+                    <!-- MENSAJE QUE APARECE CUANDO SE SELECCIONA PROFESOR -->
+                    <div class="alert alert-info d-flex align-items-center mb-3" role="alert" 
+                         *ngIf="newUserForm.get('rol')?.value === 'profesor'">
+                        <i class="fa-solid fa-info-circle me-2"></i>
+                        <span><strong>Recordatorio:</strong> Recuerda que después de crear este usuario, deberás asignarle una especialidad en su perfil.</span>
+                    </div>
+                    
+                    <div class="invalid-feedback d-block" *ngIf="newUserForm.get('rol')?.invalid && newUserForm.get('rol')?.touched">
+                        <div *ngIf="newUserForm.get('rol')?.errors?.['required']">Debe seleccionar un rol</div>
                     </div>
                     <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="newUser.nombre">
+                        <label for="nombre" class="form-label">Nombre <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="nombre" 
+                               [class.is-invalid]="newUserForm.get('nombre')?.invalid && newUserForm.get('nombre')?.touched"
+                               placeholder="Ingrese el nombre">
+                        <div class="invalid-feedback" *ngIf="newUserForm.get('nombre')?.invalid && newUserForm.get('nombre')?.touched">
+                            <div *ngIf="newUserForm.get('nombre')?.errors?.['required']">El nombre es requerido</div>
+                            <div *ngIf="newUserForm.get('nombre')?.errors?.['minlength']">El nombre debe tener al menos 2 caracteres</div>
+                            <div *ngIf="newUserForm.get('nombre')?.errors?.['maxlength']">El nombre no puede exceder 50 caracteres</div>
+                            <div *ngIf="newUserForm.get('nombre')?.errors?.['pattern']">Solo se permiten letras y espacios</div>
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <label for="apellido" class="form-label">Apellido</label>
-                        <input type="text" class="form-control" id="apellido" name="apellido" [(ngModel)]="newUser.apellido">
+                        <label for="apellido" class="form-label">Apellido <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="apellido" 
+                               [class.is-invalid]="newUserForm.get('apellido')?.invalid && newUserForm.get('apellido')?.touched"
+                               placeholder="Ingrese el apellido">
+                        <div class="invalid-feedback" *ngIf="newUserForm.get('apellido')?.invalid && newUserForm.get('apellido')?.touched">
+                            <div *ngIf="newUserForm.get('apellido')?.errors?.['required']">El apellido es requerido</div>
+                            <div *ngIf="newUserForm.get('apellido')?.errors?.['minlength']">El apellido debe tener al menos 2 caracteres</div>
+                            <div *ngIf="newUserForm.get('apellido')?.errors?.['maxlength']">El apellido no puede exceder 50 caracteres</div>
+                            <div *ngIf="newUserForm.get('apellido')?.errors?.['pattern']">Solo se permiten letras y espacios</div>
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <label for="dni" class="form-label">DNI</label>
-                        <input type="number" class="form-control" id="dni" name="dni" [(ngModel)]="newUser.dni">
+                        <label for="dni" class="form-label">DNI <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control" formControlName="dni" 
+                               [class.is-invalid]="newUserForm.get('dni')?.invalid && newUserForm.get('dni')?.touched"
+                               placeholder="Ingrese el DNI (7-8 dígitos)">
+                        <div class="invalid-feedback" *ngIf="newUserForm.get('dni')?.invalid && newUserForm.get('dni')?.touched">
+                            <div *ngIf="newUserForm.get('dni')?.errors?.['required']">El DNI es requerido</div>
+                            <div *ngIf="newUserForm.get('dni')?.errors?.['pattern']">El DNI debe contener solo números</div>
+                            <div *ngIf="newUserForm.get('dni')?.errors?.['minlength'] || newUserForm.get('dni')?.errors?.['maxlength']">El DNI debe tener entre 7 y 8 dígitos</div>
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" [(ngModel)]="newUser.email">
+                        <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                        <input type="email" class="form-control" formControlName="email" 
+                               [class.is-invalid]="newUserForm.get('email')?.invalid && newUserForm.get('email')?.touched"
+                               placeholder="Ingrese el correo electrónico">
+                        <div class="invalid-feedback" *ngIf="newUserForm.get('email')?.invalid && newUserForm.get('email')?.touched">
+                            <div *ngIf="newUserForm.get('email')?.errors?.['required']">El email es requerido</div>
+                            <div *ngIf="newUserForm.get('email')?.errors?.['email']">Ingrese un email válido</div>
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <label for="password" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="password" name="password" [(ngModel)]="newUser.password">
+                        <label for="password" class="form-label">Contraseña <span class="text-danger">*</span></label>
+                        <input type="password" class="form-control" formControlName="password" 
+                               [class.is-invalid]="newUserForm.get('password')?.invalid && newUserForm.get('password')?.touched"
+                               placeholder="Ingrese la contraseña (min. 6 caracteres)">
+                        <div class="invalid-feedback" *ngIf="newUserForm.get('password')?.invalid && newUserForm.get('password')?.touched">
+                            <div *ngIf="newUserForm.get('password')?.errors?.['required']">La contraseña es requerida</div>
+                            <div *ngIf="newUserForm.get('password')?.errors?.['minlength']">La contraseña debe tener al menos 6 caracteres</div>
+                            <div *ngIf="newUserForm.get('password')?.errors?.['maxlength']">La contraseña no puede exceder 20 caracteres</div>
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <label for="telefono" class="form-label">Teléfono</label>
-                        <input type="number" class="form-control" id="telefono" name="telefono" [(ngModel)]="newUser.telefono">
+                        <label for="telefono" class="form-label">Teléfono <span class="text-danger">*</span></label>
+                        <input type="tel" class="form-control" formControlName="telefono" 
+                               [class.is-invalid]="newUserForm.get('telefono')?.invalid && newUserForm.get('telefono')?.touched"
+                               placeholder="Ingrese el número de teléfono">
+                        <div class="invalid-feedback" *ngIf="newUserForm.get('telefono')?.invalid && newUserForm.get('telefono')?.touched">
+                            <div *ngIf="newUserForm.get('telefono')?.errors?.['required']">El teléfono es requerido</div>
+                            <div *ngIf="newUserForm.get('telefono')?.errors?.['pattern']">El teléfono debe tener entre 8 y 15 dígitos</div>
+                        </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary btn-success" (click)="crearUsuario()" data-bs-dismiss="modal">Guardar</button>
+                <button type="button" class="btn btn-primary btn-success" (click)="crearUsuario()" 
+                        [disabled]="newUserForm.invalid" data-bs-dismiss="modal">Guardar</button>
             </div>
         </div>
     </div>
 </div>
-
 
 <!-- Modal para editar usuario -->
 <div class="modal fade" id="editarUsuarioModal" tabindex="-1" aria-labelledby="editarUsuarioModalLabel"
@@ -117,43 +172,71 @@
             </div>
             <div class="modal-body">
                 <!-- Formulario para editar un usuario -->
-                <form>
+                <form [formGroup]="editUserForm">
                     <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="usuarioAEditar.nombre">
+                        <label for="nombre" class="form-label">Nombre <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="nombre" 
+                               [class.is-invalid]="editUserForm.get('nombre')?.invalid && editUserForm.get('nombre')?.touched"
+                               placeholder="Ingrese el nombre">
+                        <div class="invalid-feedback" *ngIf="editUserForm.get('nombre')?.invalid && editUserForm.get('nombre')?.touched">
+                            <div *ngIf="editUserForm.get('nombre')?.errors?.['required']">El nombre es requerido</div>
+                            <div *ngIf="editUserForm.get('nombre')?.errors?.['minlength']">El nombre debe tener al menos 2 caracteres</div>
+                            <div *ngIf="editUserForm.get('nombre')?.errors?.['maxlength']">El nombre no puede exceder 50 caracteres</div>
+                            <div *ngIf="editUserForm.get('nombre')?.errors?.['pattern']">Solo se permiten letras y espacios</div>
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <label for="apellido" class="form-label">Apellido</label>
-                        <input type="text" class="form-control" id="apellido" name="apellido" [(ngModel)]="usuarioAEditar.apellido">
+                        <label for="apellido" class="form-label">Apellido <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="apellido" 
+                               [class.is-invalid]="editUserForm.get('apellido')?.invalid && editUserForm.get('apellido')?.touched"
+                               placeholder="Ingrese el apellido">
+                        <div class="invalid-feedback" *ngIf="editUserForm.get('apellido')?.invalid && editUserForm.get('apellido')?.touched">
+                            <div *ngIf="editUserForm.get('apellido')?.errors?.['required']">El apellido es requerido</div>
+                            <div *ngIf="editUserForm.get('apellido')?.errors?.['minlength']">El apellido debe tener al menos 2 caracteres</div>
+                            <div *ngIf="editUserForm.get('apellido')?.errors?.['maxlength']">El apellido no puede exceder 50 caracteres</div>
+                            <div *ngIf="editUserForm.get('apellido')?.errors?.['pattern']">Solo se permiten letras y espacios</div>
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" [(ngModel)]="usuarioAEditar.email">
+                        <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                        <input type="email" class="form-control" formControlName="email" 
+                               [class.is-invalid]="editUserForm.get('email')?.invalid && editUserForm.get('email')?.touched"
+                               placeholder="Ingrese el correo electrónico">
+                        <div class="invalid-feedback" *ngIf="editUserForm.get('email')?.invalid && editUserForm.get('email')?.touched">
+                            <div *ngIf="editUserForm.get('email')?.errors?.['required']">El email es requerido</div>
+                            <div *ngIf="editUserForm.get('email')?.errors?.['email']">Ingrese un email válido</div>
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <label for="password" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="password" name="password" [(ngModel)]="usuarioAEditar.password">
+                        <label for="password" class="form-label">Contraseña <span class="text-danger">*</span></label>
+                        <input type="password" class="form-control" formControlName="password" 
+                               [class.is-invalid]="editUserForm.get('password')?.invalid && editUserForm.get('password')?.touched"
+                               placeholder="Ingrese la nueva contraseña">
+                        <div class="invalid-feedback" *ngIf="editUserForm.get('password')?.invalid && editUserForm.get('password')?.touched">
+                            <div *ngIf="editUserForm.get('password')?.errors?.['required']">La contraseña es requerida</div>
+                            <div *ngIf="editUserForm.get('password')?.errors?.['minlength']">La contraseña debe tener al menos 6 caracteres</div>
+                            <div *ngIf="editUserForm.get('password')?.errors?.['maxlength']">La contraseña no puede exceder 20 caracteres</div>
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <label for="telefono" class="form-label">Teléfono</label>
-                        <input type="number" class="form-control" id="telefono" name="telefono" [(ngModel)]="usuarioAEditar.telefono">
+                        <label for="telefono" class="form-label">Teléfono <span class="text-danger">*</span></label>
+                        <input type="tel" class="form-control" formControlName="telefono" 
+                               [class.is-invalid]="editUserForm.get('telefono')?.invalid && editUserForm.get('telefono')?.touched"
+                               placeholder="Ingrese el número de teléfono">
+                        <div class="invalid-feedback" *ngIf="editUserForm.get('telefono')?.invalid && editUserForm.get('telefono')?.touched">
+                            <div *ngIf="editUserForm.get('telefono')?.errors?.['required']">El teléfono es requerido</div>
+                            <div *ngIf="editUserForm.get('telefono')?.errors?.['pattern']">El teléfono debe tener entre 8 y 15 dígitos</div>
+                        </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary btn-success" (click)="editarUsuario()" data-bs-dismiss="modal">Guardar</button>
+                <button type="button" class="btn btn-primary btn-success" (click)="editarUsuario()" 
+                        [disabled]="editUserForm.invalid" data-bs-dismiss="modal">Guardar</button>
             </div>
         </div>
     </div>
 </div>
 
 
-<!-- Botones de Navegación -->
-<nav aria-label="Page navigation example" class="nav-bar-num fixed-bottom">
-    <ul class="pagination">
-        <li class="page-item custom-hover-cursor"><a class="page-link" (click)="cargarPaginaPrevia()" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-        <li class="page-item"><a class="page-link">{{currentPage}}</a></li>
-        <li class="page-item custom-hover-cursor"><a class="page-link" (click)="cargarPaginaSiguiente()" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
-    </ul>
-</nav>

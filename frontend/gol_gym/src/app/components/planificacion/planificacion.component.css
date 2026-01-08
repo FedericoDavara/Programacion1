@@ -1,35 +1,17 @@
-.rounded-box {
-  margin-top: 50px;
-  margin-bottom: -50px;
-  background-color: #00122080;
-  border-radius: 20px;
-  border: 5px solid black;
-  backdrop-filter: blur(10px);
-  box-shadow: 5px 5px 5px rgb(0 0 0 / 50%);
+.btn-group {
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 15px;
 }
 
-.col-md-6 {
-  color: #FFFDC3;
-  text-shadow: 0 3px 0 black;
-}
-
+.btn-check,
 .btn {
-    margin-bottom: 5px;
-    font-size: 11pt;
-    background-color: #D2FF52;
-    color: black;
-    font-weight: bold;
-    border-radius: 10px;
-    border: 5px solid #000;
-    box-shadow: 0 5px 0px #000;
-    transition: 0.15s ease-in;
+  margin-bottom: 5px;
 }
 
-.btn:hover {
-    box-shadow: 0 0px 0px #000;
-    transform: translateY(5px);
+.btn-group .btn {
+  min-width: 90px;
+  max-width: 90px;
+  border-radius: 5px;
 }
 
-.btn-danger {
-  background-color: #cc241d;
-}

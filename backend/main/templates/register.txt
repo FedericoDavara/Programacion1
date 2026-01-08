@@ -1,3 +1,9 @@
-¡Te damos la bienvenida, {{usuario.nombre}} {{usuario.apellido}}!
+¡Bienvenido {{usuario.nombre}} {{usuario.apellido}}!
 
-¡Te has registrado a GOL GYM!
+Gracias por registrarte en el gimnasio "El Chicho".
+
+Con nuestro servicio podrás:
+
+- Elegir tu entrenador.
+- Ver tus Planificaciones.
+- Participar de clases exclusivas.

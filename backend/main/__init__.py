@@ -16,18 +16,36 @@ mailsender = Mail()
 #metodo que inicializa la app y todos los modulos
 
 def create_app():
-
     app = Flask(__name__)
     load_dotenv()
 
-    if not os.path.exists(os.getenv('DATABASE_PATH')+os.getenv('DATABASE_NAME')):
-        os.mknod(os.getenv('DATABASE_PATH')+os.getenv('DATABASE_NAME'))
+    # Construcción segura de la ruta de la base de datos
+    db_path = os.getenv('DATABASE_PATH')
+    db_name = os.getenv('DATABASE_NAME')
+    full_db_path = os.path.join(db_path, db_name)
 
+    # Configuración de base de datos
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    #Url de configuración de base de datos
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////'+os.getenv('DATABASE_PATH')+os.getenv('DATABASE_NAME')
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:////{full_db_path}'
+    
     db.init_app(app)
-    migrate.init_app(app,db)
+    migrate.init_app(app, db)
+    
+    # Configuración JWT - Convertir a int el tiempo de expiración
+    app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
+    app.config['JWT_ACCESS_TOKEN_EXPIRES'] = int(os.getenv('JWT_ACCESS_TOKEN_EXPIRES'))
+    jwt.init_app(app)
+
+    # Configuración de Mail con conversiones de tipos
+    app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
+    app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT'))
+    # Convertir el string "True" a un booleano real
+    app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS').lower() in ['true', '1', 't']
+    app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+    app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
+    app.config['FLASKY_MAIL_SENDER'] = os.getenv('FLASKY_MAIL_SENDER')
+    
+    mailsender.init_app(app)
     
     #Importar directorio de recursos
     import main.resources as resources

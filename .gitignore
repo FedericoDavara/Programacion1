@@ -1,2 +1,44 @@
+# --- PYTHON (Backend) ---
+# Byte-compiled / Optimized / DLL files
 __pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Entornos Virtuales (Esto soluciona tu problema actual)
+env/
+venv/
+.venv/
+
+# Variables de entorno y secretos (¡MUY IMPORTANTE!)
+.env
+.flaskenv
+
+# Bases de datos (No se suben, son locales)
+*.db
+*.sqlite3
+instance/
+
+# --- ANGULAR / NODE (Frontend) ---
+# Dependencias (Nunca subir esto, pesa demasiado)
+node_modules/
+
+# Builds de producción
+dist/
+build/
+
+# Configuración de Angular y temporales
+.angular/
+.sass-cache/
+connect.lock
+coverage/
+lib/
+
+# Logs de errores
+npm-debug.log
+yarn-error.log
+
+# --- IDEs y SISTEMA ---
 .vscode/
+.idea/
+.DS_Store

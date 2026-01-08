@@ -13,7 +13,7 @@ class Planificacion(Resource):
         planificacion=db.session.query(PlanificacionModel).get_or_404(id)
         return planificacion.to_json()
     
-    @role_required(roles=["admin"])
+    @role_required(roles=["admin", "profesor"])
     def delete(self,id):
         planificacion=db.session.query(PlanificacionModel).get_or_404(id)
         db.session.delete(planificacion)
@@ -25,22 +25,64 @@ class Planificacion(Resource):
         planificacion = db.session.query(PlanificacionModel).get_or_404(id)
         data = request.get_json()
         
-        # Verifica si la fecha está presente en los datos
-        if 'fecha' in data:
-            fecha_str = data['fecha']
+        try:
+            if 'fecha' in data:
+                fecha_str = data['fecha']
+                try:
+                    fecha = datetime.strptime(fecha_str, '%Y-%m-%d')
+                    data['fecha'] = fecha
+                except ValueError:
+                    return {"error": "Formato de fecha incorrecto. Use 'yyyy-MM-dd'."}, 400
+
+            for key, value in data.items():
+                setattr(planificacion, key, value)
+
+            db.session.add(planificacion)
+            db.session.commit()
+            
+            # **ENVIAR EMAIL DE PLANIFICACIÓN ACTUALIZADA**
             try:
-                fecha = datetime.strptime(fecha_str, '%Y-%m-%d')
-                data['fecha'] = fecha
-            except ValueError:
-                return {"message": "Formato de fecha incorrecto. Use 'yyyy-MM-dd'."}, 400
-
-        # Actualiza la planificación con los datos
-        for key, value in data.items():
-            setattr(planificacion, key, value)
-
-        db.session.add(planificacion)
-        db.session.commit()
-        return planificacion.to_json(), 201
+                from main.models import AlumnoModel, ProfesorModel, UsuarioModel
+                
+                alumno = db.session.query(AlumnoModel).get(planificacion.alumno_dni)
+                profesor = db.session.query(ProfesorModel).get(planificacion.profesor_dni)
+                
+                if alumno and profesor:
+                    usuario_alumno = db.session.query(UsuarioModel).get(alumno.dni)
+                    usuario_profesor = db.session.query(UsuarioModel).get(profesor.dni)
+                    
+                    if usuario_alumno and usuario_alumno.email:
+                        from main.mail.functions import sendMail
+                        
+                        email_data = {
+                            'alumno': usuario_alumno,
+                            'profesor': usuario_profesor,
+                            'planificacion': {
+                                'descripcion': planificacion.descripcion,
+                                'fecha': planificacion.fecha.strftime("%d/%m/%Y")
+                            }
+                        }
+                        
+                        result = sendMail(
+                            to=[usuario_alumno.email],
+                            subject="📝 Planificación Actualizada - Gym El Chicho",
+                            template="planificacion_actualizada",  # Crear este template también
+                            **email_data
+                        )
+                        
+                        print(f"✅ Email de actualización enviado a {usuario_alumno.email}")
+                        
+            except Exception as email_error:
+                print(f"❌ Error en envío de email de actualización: {str(email_error)}")
+            
+            return planificacion.to_json(), 200
+            
+        except ValueError as e:
+            db.session.rollback()
+            return {'error': str(e)}, 400
+        except Exception as e:
+            db.session.rollback()
+            return {'error': 'Error interno del servidor'}, 500
 
 class Planificaciones(Resource):
 
@@ -92,14 +134,65 @@ class Planificaciones(Resource):
 
     @role_required(roles=["admin", "profesor"])
     def post(self):
-        planificaciones=PlanificacionModel.from_json(request.get_json())
-        print(planificaciones)
         try:
+            planificaciones = PlanificacionModel.from_json(request.get_json())
+            print(planificaciones)
             db.session.add(planificaciones)
             db.session.commit()
-        except:
-            return 'Formato no correcto', 400
-        return planificaciones.to_json(), 201
+            
+            # **ENVIAR EMAIL AL ALUMNO**
+            try:
+                # Obtener datos del alumno y profesor
+                from main.models import AlumnoModel, ProfesorModel, UsuarioModel
+                
+                alumno = db.session.query(AlumnoModel).get(planificaciones.alumno_dni)
+                profesor = db.session.query(ProfesorModel).get(planificaciones.profesor_dni)
+                
+                if alumno and profesor:
+                    # Obtener el usuario del alumno (para el email)
+                    usuario_alumno = db.session.query(UsuarioModel).get(alumno.dni)
+                    usuario_profesor = db.session.query(UsuarioModel).get(profesor.dni)
+                    
+                    if usuario_alumno and usuario_alumno.email:
+                        from main.mail.functions import sendMail
+                        
+                        # Datos para el template
+                        email_data = {
+                            'alumno': usuario_alumno,
+                            'profesor': usuario_profesor,
+                            'planificacion': {
+                                'descripcion': planificaciones.descripcion,
+                                'fecha': planificaciones.fecha.strftime("%d/%m/%Y")
+                            }
+                        }
+                        
+                        # Enviar email
+                        result = sendMail(
+                            to=[usuario_alumno.email],
+                            subject="🏋️ Nueva Planificación Disponible - Gym El Chicho",
+                            template="nueva_planificacion",
+                            **email_data
+                        )
+                        
+                        if result == True:
+                            print(f"✅ Email enviado exitosamente a {usuario_alumno.email}")
+                        else:
+                            print(f"❌ Error enviando email: {result}")
+                    else:
+                        print(f"⚠️ No se encontró email para el alumno DNI: {alumno.dni}")
+                        
+            except Exception as email_error:
+                print(f"❌ Error en envío de email: {str(email_error)}")
+                # No interrumpir el proceso si falla el email
+            
+            return planificaciones.to_json(), 201
+            
+        except ValueError as e:
+            db.session.rollback()
+            return {'error': str(e)}, 400
+        except Exception as e:
+            db.session.rollback()
+            return {'error': 'Formato no correcto o error interno'}, 500
 
 class PlanificacionAlumno(Resource):
 
@@ -138,6 +231,6 @@ class PlanificacionesProfesores(Resource):
         dni_profesor = request.args.get("dni_profesor")
         planificaciones = db.session.query(PlanificacionModel)
         if dni_profesor:
-            planificaciones = planificaciones.filter(PlanificacionModel.dni_profesor == dni_profesor)
+            planificaciones = planificaciones.filter(PlanificacionModel.profesor_dni == dni_profesor)
         planificaciones = planificaciones.all()
         return jsonify({"planificaciones": [planificacion.to_json() for planificacion in planificaciones]})

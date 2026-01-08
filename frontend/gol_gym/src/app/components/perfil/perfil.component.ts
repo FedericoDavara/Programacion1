@@ -4,6 +4,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
+import { AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-perfil',
@@ -11,7 +12,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./perfil.component.css']
 })
 export class PerfilComponent implements OnInit {
-  profileForm!: FormGroup 
+  profileForm!: FormGroup
   selectedRole = localStorage.getItem('role');
 
   UserData: any = {
@@ -19,7 +20,7 @@ export class PerfilComponent implements OnInit {
     "apellido": null,
     "dni": null,
     "rol": null
-    };
+  };
 
   AlumData: any = {
     "dni": null,
@@ -27,7 +28,7 @@ export class PerfilComponent implements OnInit {
     "peso": null,
     "altura": null,
     "sexo": null,
-    };
+  };
 
   newAlumData: any = {
     "dni": null,
@@ -35,17 +36,18 @@ export class PerfilComponent implements OnInit {
     "peso": null,
     "altura": null,
     "sexo": null,
-    };
+  };
 
   ProfData: any = {
     "dni": null,
     "especialidad": null,
-    };
+  };
 
   newProfData: any = {
     "dni": null,
     "especialidad": null,
-    };
+  };
+
   private perfilDni: any;
   private parametrosOcultos: any;
 
@@ -54,20 +56,18 @@ export class PerfilComponent implements OnInit {
     private route: ActivatedRoute,
     private usuariosService: UsuariosService,
     private formBuilder: FormBuilder,
-    private location: Location
   ) {
     this.profileForm = this.formBuilder.group({
-      dni: [''],
-      edad: [''],
-      peso: [''],
-      altura: [''],
-      sexo: [''],
-      especialidad: ['']
+      dni: ['', [Validators.required, Validators.pattern(/^[0-9]+$/), Validators.minLength(7), Validators.maxLength(8)]],
+      edad: ['', [Validators.required, Validators.min(13), Validators.max(100), edadEnteraPositivaValidator]],
+      peso: ['', [Validators.required, Validators.pattern(/^[0-9]{2,3}(,[0-9]{1,2})?$/), pesoRangoValidator]],
+      altura: ['', [Validators.required, Validators.pattern(/^[1-2],[0-9]{1,2}$/), alturaRangoValidator]],
+      sexo: ['', [Validators.required, Validators.pattern(/^(Masculino|Femenino|masculino|femenino|M|F|m|f)$/)]],
+      especialidad: ['', [Validators.minLength(3), Validators.maxLength(50), Validators.pattern(/^[a-zA-ZÀ-ÿ\s]+$/)]]
     });
   }
 
   ngOnInit(): void {
-
     const userDNI = this.usuariosService.getUserDNIFromToken();
     this.parametrosOcultos = history.state;
 
@@ -75,57 +75,91 @@ export class PerfilComponent implements OnInit {
       this.perfilDni = this.parametrosOcultos.dni;
     });
 
+    // SIEMPRE inicializa el formulario con TODAS las validaciones
+    this.profileForm = this.formBuilder.group({
+      dni: [this.perfilDni, [Validators.required, Validators.pattern(/^[0-9]+$/), Validators.minLength(7), Validators.maxLength(8)]],
+      edad: ['', [Validators.required, Validators.min(13), Validators.max(100), edadEnteraPositivaValidator]],
+      peso: ['', [Validators.required, Validators.pattern(/^[0-9]{2,3}(,[0-9]{1,2})?$/), pesoRangoValidator]],
+      altura: ['', [Validators.required, Validators.pattern(/^[1-2],[0-9]{1,2}$/), alturaRangoValidator]],
+      sexo: ['', [Validators.required, Validators.pattern(/^(Masculino|Femenino)$/)]],
+      especialidad: ['', [Validators.minLength(3), Validators.maxLength(50), Validators.pattern(/^[a-zA-ZÀ-ÿ\s]+$/)]]
+    });
+
     if (userDNI && this.selectedRole === 'user') {
       this.usuariosService.getUser(userDNI).subscribe(
         (userData) => {
           this.UserData = userData;
-          console.log('UserData: ', this.UserData);
-
           if (this.UserData.rol === 'user') {
             this.usuariosService.getUserAlum(userDNI).subscribe(
               (alumData) => {
                 this.AlumData = alumData;
-                console.log('AlumData: ', this.AlumData);
+                // Si hay datos, actualiza los valores del formulario
+                if (this.AlumData) {
+                  // Convertir punto a coma para edición y visualización
+                  let peso = this.AlumData.peso;
+                  let altura = this.AlumData.altura;
+                  if (peso !== null && peso !== undefined) {
+                    peso = peso.toString().replace('.', ',');
+                  }
+                  if (altura !== null && altura !== undefined) {
+                    altura = altura.toString().replace('.', ',');
+                  }
+                  this.profileForm.patchValue({
+                    dni: this.perfilDni,
+                    edad: this.AlumData.edad,
+                    peso: peso,
+                    altura: altura,
+                    sexo: this.AlumData.sexo,
+                  });
+                  // También actualizar los datos para la vista
+                  this.AlumData.peso = peso;
+                  this.AlumData.altura = altura;
+                }
               },
               (alumError) => {
-                console.error('Error fetching AlumData: ', alumError);
+                // Si es nuevo, solo setea el dni
+                this.profileForm.patchValue({ dni: this.perfilDni });
               }
             );
           }
         },
         (userError) => {
-          console.error('Error fetching UserData: ', userError);
+          // Si es nuevo, solo setea el dni
+          this.profileForm.patchValue({ dni: this.perfilDni });
         }
       );
     } else if (this.perfilDni && (this.selectedRole === 'admin' || this.selectedRole === 'profesor')) {
       this.usuariosService.getUser(this.perfilDni).subscribe(
         (userData) => {
           this.UserData = userData;
-          console.log('UserData: ', this.UserData);
-
           if (this.UserData.rol === 'user') {
             this.usuariosService.getUserAlum(this.perfilDni).subscribe(
               (alumData) => {
                 this.AlumData = alumData;
-                console.log('AlumData: ', this.AlumData);
-                this.newAlumData = {
-                  "dni": this.AlumData.dni,
-                  "edad": this.AlumData.edad,
-                  "peso": this.AlumData.peso,
-                  "altura": this.AlumData.altura,
-                  "sexo": this.AlumData.sexo,
-                  };
-
-                this.profileForm = this.formBuilder.group({
-                  dni: [this.perfilDni, Validators.required],
-                  edad: [this.AlumData.edad, Validators.required],
-                  peso: [this.AlumData.peso, Validators.required],
-                  altura: [this.AlumData.altura, Validators.required],
-                  sexo: [this.AlumData.sexo, Validators.required],
-                })
+                if (this.AlumData) {
+                  // Convertir punto a coma para edición y visualización
+                  let peso = this.AlumData.peso;
+                  let altura = this.AlumData.altura;
+                  if (peso !== null && peso !== undefined) {
+                    peso = peso.toString().replace('.', ',');
+                  }
+                  if (altura !== null && altura !== undefined) {
+                    altura = altura.toString().replace('.', ',');
+                  }
+                  this.profileForm.patchValue({
+                    dni: this.perfilDni,
+                    edad: this.AlumData.edad,
+                    peso: peso,
+                    altura: altura,
+                    sexo: this.AlumData.sexo,
+                  });
+                  // También actualizar los datos para la vista
+                  this.AlumData.peso = peso;
+                  this.AlumData.altura = altura;
+                }
               },
               (alumError) => {
-                console.error('Error fetching AlumData: ', alumError);
+                this.profileForm.patchValue({ dni: this.perfilDni });
               }
             );
           } else if (this.UserData.rol === 'profesor') {
@@ -133,68 +167,82 @@ export class PerfilComponent implements OnInit {
               (profData) => {
                 this.ProfData = profData;
                 console.log('ProfData: ', this.ProfData);
-                this.newProfData = {
-                  "dni": this.ProfData.dni,
-                  "especialidad": this.ProfData.especialidad,
-                  };
-
-                this.profileForm = this.formBuilder.group({
-                  dni: [this.perfilDni, Validators.required],
-                  especialidad: [this.ProfData.especialidad, Validators.required],
-       
-                  })
+                
+                // ✅ NO RECREAR EL FORMULARIO. SOLO ACTUALIZAR VALORES.
+                if (this.ProfData) {
+                  this.profileForm.patchValue({
+                    dni: this.perfilDni,
+                    especialidad: this.ProfData.especialidad
+                  });
+                }
               },
               (profError) => {
                 console.error('Error fetching ProfData: ', profError);
+                // Si es un profesor nuevo, solo setear el DNI
+                this.profileForm.patchValue({ dni: this.perfilDni });
               }
             );
           }
         },
         (userError) => {
-          console.error('Error fetching UserData: ', userError);
+          this.profileForm.patchValue({ dni: this.perfilDni });
         }
       );
     } else {
-      console.error('No se pudo obtener el DNI del token.');
+      this.profileForm.patchValue({ dni: this.perfilDni });
     }
   }
-  
+
   borrarUsuario() {
     if (this.perfilDni) {
-      this.usuariosService.deleteUser(this.perfilDni).subscribe(
-        () => {
-          console.log(`Usuario Eliminado`);
-          this.router.navigate(['/vInicio']);
-        },
-        (error) => {
-          console.error(`Error al eliminar user: ${error}`);
-        }
-      );
+      // Si el usuario autenticado es profesor y el usuario a eliminar es alumno, usar el endpoint específico
+      if (this.selectedRole === 'profesor' && this.UserData.rol === 'user') {
+        this.usuariosService.deleteUserAlum(this.perfilDni).subscribe(
+          () => {
+            console.log(`Alumno eliminado correctamente`);
+            this.router.navigate(['/vInicio']);
+          },
+          (error) => {
+            console.error(`Error al eliminar alumno: ${error}`);
+          }
+        );
+      } else {
+        // Admin o cualquier otro caso permitido
+        this.usuariosService.deleteUser(this.perfilDni).subscribe(
+          () => {
+            console.log(`Usuario Eliminado`);
+            this.router.navigate(['/vInicio']);
+          },
+          (error) => {
+            console.error(`Error al eliminar user: ${error}`);
+          }
+        );
+      }
     }
   }
-  
-  crearAlumno(dataAlum:any = {} ){
+
+  crearAlumno(dataAlum: any = {}) {
     this.usuariosService.createUserAlum(dataAlum).subscribe(
       (response) => {
         console.log('Alumno creado con éxito', response);
       },
     );
   }
-  crearProfesor(dataProf:any = {} ){
+  crearProfesor(dataProf: any = {}) {
     this.usuariosService.createUserProf(dataProf).subscribe(
       (response) => {
         console.log('Profesor creado con éxito', response);
       },
     );
   }
-  editarAlumno(dataAlum:any = {} ){
+  editarAlumno(dataAlum: any = {}) {
     this.usuariosService.updateUserAlum(this.perfilDni, dataAlum).subscribe(
       (response) => {
         console.log('Alumno actualizado con éxito', response);
       }
     );
   }
-  editarProfesor(dataProf:any = {} ){
+  editarProfesor(dataProf: any = {}) {
     this.usuariosService.updateUserProf(this.perfilDni, dataProf).subscribe(
       (response) => {
         console.log('Profesor actualizado con éxito', response);
@@ -202,21 +250,35 @@ export class PerfilComponent implements OnInit {
     );
   }
 
-
   submit() {
-    if (this.profileForm.valid) {
+    let isFormValid = false;
+    
+    if (this.UserData.rol === 'user') {
+      isFormValid = this.profileForm.valid;
+    } else if (this.UserData.rol === 'profesor' || this.UserData.rol === 'admin') {
+      isFormValid = this.canSubmitForm();
+    }
+
+    if (isFormValid) {
       if (this.UserData.rol === 'user') {
         console.log("Datos alumno:", this.profileForm.value);
-  
+
         this.usuariosService.getUserAlum(this.perfilDni).subscribe(
           (alumData) => {
+            console.log("El alumno ya existe. Actualizando...");
             this.editarAlumno(this.profileForm.value);
             window.location.reload();
           },
           (alumError) => {
-            this.profileForm.value.dni = this.perfilDni
-            this.crearAlumno(this.profileForm.value);
-            window.location.reload();
+            if (alumError.status === 404) {
+              console.log("El alumno no existe. Creando nuevo registro...");
+              this.profileForm.value.dni = this.perfilDni
+              this.crearAlumno(this.profileForm.value);
+              window.location.reload();
+            } else {
+              console.error('Error al verificar alumno:', alumError);
+              alert("Complete el formulario del alumno");
+            }
           }
         );
       } else if (this.UserData.rol === 'profesor' || this.UserData.rol === 'admin') {
@@ -226,23 +288,92 @@ export class PerfilComponent implements OnInit {
             window.location.reload();
           },
           (profError) => {
-            this.profileForm.value.dni = this.perfilDni
+            this.profileForm.value.dni = this.perfilDni;
             this.crearProfesor(this.profileForm.value);
             window.location.reload();
           }
         );
       }
     } else {
-      alert('Formulario inválido');
+      if (this.UserData.rol === 'user') {
+        alert('Complete todos los campos requeridos del alumno');
+      } else if (this.UserData.rol === 'profesor') {
+        alert('Debe completar una especialidad válida (mínimo 3 caracteres)');
+      }
     }
   }
-  
+
+  canSubmitForm(): boolean {
+    if (this.UserData.rol === 'user') {
+      // Para alumnos, validar todo el formulario
+      return this.profileForm.valid;
+    } else if (this.UserData.rol === 'profesor') {
+      // Para profesores, solo validar que la especialidad sea válida si no está vacía
+      const especialidad = this.profileForm.get('especialidad')?.value;
+      
+      if (!especialidad || especialidad.trim() === '') {
+        return false; // No permitir enviar si está vacía
+      }
+      
+      // Si tiene contenido, validar que no tenga errores
+      const especialidadControl = this.profileForm.get('especialidad');
+      return !especialidadControl?.hasError('minlength') && 
+             !especialidadControl?.hasError('maxlength') && 
+             !especialidadControl?.hasError('pattern');
+    }
+    
+    return false;
+  }
+
+  shouldEditUser(): boolean {
+    if (this.UserData.rol === 'user') {
+      return this.AlumData !== null && Object.values(this.AlumData).some((value) => value !== null && value !== '');
+    } else if (this.UserData.rol === 'profesor') {
+      return this.ProfData !== null && Object.values(this.ProfData).some((value) => value !== null && value !== '');
+    } else {
+      return false;
+    }
+  }
+
 
   verPlanif(dni: string) {
-    const parametrosOcultos = {
-      dni: dni
-    };
-  
-    this.router.navigate(['/vPlanif'], { state: parametrosOcultos });;
+    if (this.AlumData !== null && Object.values(this.AlumData).some((value) => value !== null && value !== '')) {
+      const parametrosOcultos = {
+        dni: dni
+      };
+
+      this.router.navigate(['/vPlanif'], { state: parametrosOcultos });
+
+    } else {
+      alert("Complete los datos del alumno")
+
+    }
   }
+}
+
+function pesoRangoValidator(control: AbstractControl) {
+  if (!control.value) return null;
+  const valor = parseFloat(control.value.replace(',', '.'));
+  if (isNaN(valor)) return null;
+  if (valor < 40) return { minPeso: true };
+  if (valor > 200) return { maxPeso: true };
+  return null;
+}
+
+function alturaRangoValidator(control: AbstractControl) {
+  if (!control.value) return null;
+  const valor = parseFloat(control.value.replace(',', '.'));
+  if (isNaN(valor)) return null;
+  if (valor < 1.40) return { minAltura: true };
+  if (valor > 2.20) return { maxAltura: true };
+  return null;
+}
+
+function edadEnteraPositivaValidator(control: AbstractControl) {
+  if (!control.value) return null;
+  // Solo acepta números enteros positivos
+  if (!/^[0-9]+$/.test(control.value)) {
+    return { enteroPositivo: true };
+  }
+  return null;
 }

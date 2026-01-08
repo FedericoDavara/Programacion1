@@ -33,21 +33,36 @@ export class HomeComponent {
   arrayProfes = [
     {
       foto:'assets/profe2.jpg',
-      nombre:'Michael Jordan',
-      info:'Leyenda del baloncesto.',
+      nombre:'Alejandra Oliveras',
+      info:'Entrenadora personal y campeona de Boxeo.',
     },
     {
       foto:'assets/profe3.jpg',
-      nombre:'Mike Tyson',
-      info:'Campeón de boxeo.',
+      nombre:'Arnold Schwarzenegger',
+      info:'Entrenador personal y culturista profesional.',
     },
     {
       foto:'assets/profe4.jpg',
-      nombre:'Paula Pareto',
-      info:'Judoka olímpica.',
+      nombre:'Johnny Lawrence',
+      info:'Sensei de Karate.',
+    },
+    {
+      foto:'assets/profe5.jpg',
+      nombre:'Logan Chitwood',
+      info:'Entrenador personal.',
+    },
+    {
+      foto:'assets/profe6.jpg',
+      nombre:'Chuck Norris',
+      info:'Artista marcial y sensei Karate.',
+    },
+    {
+      foto:'assets/profe7.jpg',
+      nombre:'Cassius Clay',
+      info:'Entrenador personal y boxeador amateur.',
     },
   ]
-
+  
   arrayClases: any;
 
   constructor(
@@ -74,7 +89,7 @@ export class HomeComponent {
           const minutoA = parseInt(a.horario.split(":")[1]);
           const horaB = parseInt(b.horario.split(":")[0]);
           const minutoB = parseInt(b.horario.split(":")[1]);
-
+  
           if (horaA !== horaB) {
             return horaA - horaB;
           } else {
@@ -85,8 +100,8 @@ export class HomeComponent {
       return []
     }
   }
-
-
-
+  
+  
+  
 
 }

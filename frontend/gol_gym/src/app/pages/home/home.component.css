@@ -1,51 +1,16 @@
-* {
-  font-family: 'Noto Sans';
-}
-
-#Inicio {
-  background-image: url(../../../assets/blob.svg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+.row {
+    margin-right: 0;
+    margin-left: 0;
 }
 
 .portada {
-    max-height: 512px;
+    max-width: 95%;
     height: auto;
     display: block;
     margin: auto;
-    margin-top: 50px;
-    margin-bottom: 10px;
-    filter: drop-shadow(0px 5px 0px rgba(0, 0, 0, 1));
-    animation: flotar 1.5s ease-in-out infinite;
+    margin-top: 80px;
+    margin-bottom: 90px
 }
-
-.description {
-    font-size: 18pt;
-    font-family: 'Noto Sans';
-    font-weight: bold;
-    color: #D0FD50;
-    text-align: center;
-    text-shadow:
-      0px 1px 0px #000,
-      0px 2px 0px #000,
-      0px 3px 0px #000;
-    margin-bottom: 20px;
-}
-
-/* Animación de flotar */
-@keyframes flotar {
-    0% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(20px);
-    }
-    100% {
-        transform: translateY(0px);
-    }
-}
-
 /* Horarios */
 .card-hora-container {
     display: flex;
@@ -58,57 +23,11 @@
     border-radius: 15px;
     padding: 20px;
 }
-
-.class-title {
-  font-size: 20pt;
-  font-weight: bold;
-  color: #FEFDC3;
-  margin: 0;
-  text-shadow:
-    0px 1px 0px #000,
-    0px 2px 0px #000,
-    0px 3px 0px #000;
-}
-
-.class-hour {
-  font-size: 14pt;
-  font-style: italic;
-  color: #FEFDC3;
-  text-shadow:
-    0px 1px 0px #000,
-    0px 2px 0px #000,
-    0px 3px 0px #000;
-}
-
-.header-img {
-    width: 50%;
-    height: auto;
-    padding: 10px;
-    filter: drop-shadow(0px 5px 0px rgba(0, 0, 0, 1));
-}
-
-.card-c-header {
-  border-bottom: 3px solid #000;
-}
-
-.card-clase {
-    background-color: #00122080;
-    backdrop-filter: blur(10px);
-    border: 5px solid #000;
-    border-radius: 20px;
-    box-shadow: 0 10px 0px #000;
-    transition: 0.15s ease-in;
-}
-
-.card-clase:hover {
-    box-shadow: 0 0px 0px #000;
-    transform: translateY(10px);
-}
-
-.title-horarios {
+.tittle-horarios {
     font-size:30px;
-    font-family:'titlefont';
-    color:#d2ff52;
+    font-family:'tittlefont';
+    color:#f1be16;
+    letter-spacing: 1px;
   }
 .text-horarios{
     font-size:15px;
@@ -122,16 +41,16 @@
         animation-iteration-count: infinite;
         animation-timing-function: linear;
 }
-@keyframes parpadeo {
+@keyframes parpadeo {  
     0% { opacity: 1.0; }
     50% { opacity: 0.0; }
     100% { opacity: 1.0; }
 }
 
 
-/* Estilos para las clases */
+/* Estililos para las clases */
 #Clasesid{
-    background-image: url(../../../assets/waves.svg);
+    background-image: url(/assets/background_clases.jpg);
     background-size: cover;
     background-position: center;
 }
@@ -139,94 +58,66 @@
 
 /* Ajustar estilos de los Profes */
 #Profesid{
-    background-image:url(../../../assets/stacked.svg);
+    background-image:url(/assets/trining-rocky.gif);
     background-size: cover;
     background-position: center;
 }
 .card {
-    border-radius: 30px;
-    border: 5px solid #000;
-    background-color: #00122080;
-    backdrop-filter: blur(10px);
-    width: auto;
-    height: auto;
-    margin: 10px;
-    padding: 0px;
-    box-shadow: 0 10px 0px #000;
-    transition: 0.15s ease-in;
+    border-radius: 15px;
+    border: 2px solid rgb(241, 190, 22);
+    width: 17rem;
 }
-
-.card:hover {
-    box-shadow: 0 0px 0px #000;
-    transform: translateY(10px);
-}
-
 .card-img-top {
-    border-top-left-radius: 24px;
-    border-top-right-radius: 24px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
     object-fit: cover;
-    border-bottom: 5px solid #000;
 }
 .card-title {
-    color: #D1FE51;
-    font-family: 'Noto Sans';
-    font-weight: bold;
-    text-shadow: 0px 0px 5px #000;
+    color: #333;
     align-items: center;
     justify-content: center;
     display: flex;
     font-weight: bold;
-    /* min-height: 72px; */
-    font-size: 30px;
+    min-height: 72px;
+    font-size: 30px; 
 }
 .card-text {
-    color: #FFFDC3;
-    font-family: 'Noto Sans';
-    font-style: italic;
-    text-shadow: 0px 0px 5px #000;
+    color: #777;
     align-items: center;
     justify-content: center;
     display: flex;
-    /* min-height: 60px; */
-    font-size: 20px;
+    min-height: 60px;
+    font-size: 20px; 
 }
 #carouselExample{
-    margin-top: -50px;
-    margin-bottom: 0px;
+    margin-bottom: 50px
 }
 .button-container {
     width:4pc;
     height: 4pc;
-    background-color: #3EC382;
-    border-radius: 16px;
-    border: 5px solid #000;
-    box-shadow: 0 8px 0px #000;
-    transition: 0.1s ease-in-out;
+    background-color: rgba(241, 190, 22, 0.7);
+    border-radius: 50%;
 }
-
-.button-container:active {
-    box-shadow: 0 0px 0px #000;
-    transform: translateY(8px);
-}
-
 .btn{
     margin: 1%;
-    background-color: #D1FE51;
+    background-color: #fad201;
     color: black;
 }
 
 
 /* Ajustar estilos de las Promos */
-#Preciosid{
-    background-image:url(../../../assets/stacked.svg);
-    background-size: cover;
+#Promosid{
+    background-image: url(/assets/logo.png);
+    background-repeat: no-repeat;
     background-position: center;
+    background-size: contain;
+    background-size: 70%;
 }
 .promo {
     background-color: #f8f9fa;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
-    min-width: 170px;
+    min-width: 170px;   
     margin-right: 10px;
 }
 .promo-header{
@@ -251,18 +142,16 @@
 
 /* Estilos para Contactos */
 #Contactosid{
-    background-image:url(../../../assets/peaks.svg);
+    background-image: url(/assets/poly01.jpg);
     background-size: cover;
-    background-position: center;
 }
 
 
 /* Estilos para el footer */
 .footer {
-  font-family: 'Noto Sans';
     text-align: center;
-    background-color: #000;
+    background-color: #1e293b;
 }
 .footer_text{
-    color:#BACE96;
+    color:#929ea7
 }

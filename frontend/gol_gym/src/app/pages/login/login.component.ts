@@ -13,21 +13,22 @@ import jwtDecode from 'jwt-decode';
 })
 export class LoginComponent {
   loginForm!: FormGroup;
-
+ 
   constructor(
     private authService: AuthService,
     private router : Router,
     private formBuilder: FormBuilder
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      email: ['cr7@gmail.com', Validators.required],
-      password: ['madrid15', Validators.required]
-    });
+      email: ['c.portal@alumno.um.edu.ar', [Validators.required, Validators.email]],
+      password: ['hola123', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]]
+    })
   }
 
   login(dataLogin:any = {} ){
+    //dataLogin = {email: 'johnnylawrence@nomail.com', password: 'clave1234'}
     console.log('comprobando credenciales');
     this.authService.login(dataLogin).subscribe({
       next: (rta:any) => {
@@ -41,7 +42,7 @@ export class LoginComponent {
         if (localStorage.getItem('role') === 'admin' || localStorage.getItem('role') === 'profesor') {
           this.router.navigateByUrl('vInicio');
         } else if (localStorage.getItem('role') === 'user') {
-          this.router.navigateByUrl('/vista-perfil');
+          this.router.navigateByUrl('/vPerfil');
         } else {
           console.error('No posee rol de usuario');
         }
@@ -51,7 +52,7 @@ export class LoginComponent {
           localStorage.removeItem('dni');
           localStorage.removeItem('role');
           localStorage.removeItem('token');
-
+          
       }, complete: () => {
         console.log('Finalizo')
       }

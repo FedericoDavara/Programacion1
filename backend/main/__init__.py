@@ -62,10 +62,7 @@ def create_app():
 
     api.add_resource(resources.PermisoResource,"/permiso/<id>")
 
-
-    #api.add_resource(resources.PagoResource, "/pago/<id>")
-
-    #api.add_resource(resources.LoginResource, "/login")
+    api.add_resource(resources.ClasesPorProfesorResource, '/clases_por_profesor/<dni_profesor>')
 
     api.init_app(app)
 

@@ -1,104 +1,81 @@
 <app-navbar></app-navbar>
-<app-alert></app-alert>
-<div id="Inicio" class="altura-min-3">
-  <img src="assets/logo.png" class="portada img-fluid">
-  <h1 align="center"><b>¡Bienvenido a Gym Of Legends!</b></h1>
-  <p align="center" class="description">En Gym Of Legends, aprende de leyendas en deportes como Lionel Messi, Michael Jordan, Mike Tyson y Paula Pareto.<br>¡Conviértete en un campeón con nosotros!</p>
+
+<div>
+    <img src="assets/elChicho.png" class="portada" alt="Gimnasio-El Chicho">
 </div>
 
-  <!-- Clases -->
-  <div id="Clasesid" class="altura-min-3">
+
+<!-- Horario -->
+<div class="parpadea card-hora-container">
+    <div class="card-horario">
+        <p class="tittle-horarios">Horarios de Atención</p>
+        <div>
+            <p class="text-horarios">Lunes a Viernes de 8:00 a 20:00</p>
+            <p class="text-horarios">Sábado de 8:00 a 13:30</p>
+        </div>
+    </div>
+</div>
+
+
+<!-- Clases -->
+<div id="Clasesid" class="altura-min-1">
     <div>
-    <br>
-    <br>
-    <br>
-    <h1 class="text-center"><b>Nuestras clases</b></h1>
-    <p class="text-center description"><i>Exercise or DIE!!!</i></p>
+        <h1 class="text-center title-main">Clases</h1>
     </div>
     <div class="container" style="margin-bottom: 50px;">
-      <div class="row">
-        <div class="col-lg-4 col-md-6 card-space">
-          <div class="card-clase">
-            <div class="card-c-header">
-              <img src="assets/zumba.png" class="header-img">
+        <div class="row">
+            <div class="row">
+                <ng-container *ngFor="let dia of ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']">
+                    <div class="col-lg-4 col-md-6 card-space">
+                        <div class="card-clase">
+                            <div class="card-c-header">
+                                <h4 class="card-c-title">{{ dia }}</h4>
+                            </div>
+                            <div class="card-c-body">
+                                <ng-container *ngFor="let clase of getClasesPorDia(dia)">
+                                    <p class="card-c-text" *ngIf="clase.dia === dia">{{ clase.nombre }}: {{
+                                        clase.horario }}</p>
+                                </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
             </div>
-            <div class="card-c-body">
-              <p class="card-c-text text-center class-title">Zumba</p>
-              <p class="card-c-text text-center class-hour">19:00 a 21:00</p>
-            </div>
-          </div>
         </div>
-        <div class="col-lg-4 col-md-6 card-space">
-          <div class="card-clase">
-            <div class="card-c-header">
-              <img src="assets/maquina.png" class="header-img">
-            </div>
-            <div class="card-c-body">
-              <p class="card-c-text text-center class-title">Máquinas</p>
-              <p class="card-c-text text-center class-hour">7:00 a 22:00</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 card-space">
-          <div class="card-clase">
-            <div class="card-c-header">
-              <img src="assets/spinning.png" class="header-img">
-            </div>
-            <div class="card-c-body">
-              <p class="card-c-text text-center class-title">Spinning</p>
-              <p class="card-c-text text-center class-hour">7:00 a 22:00</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 card-space">
-          <div class="card-clase">
-            <div class="card-c-header">
-              <img src="assets/boxeo.png" class="header-img">
-            </div>
-            <div class="card-c-body">
-              <p class="card-c-text text-center class-title">Boxeo</p>
-            <p class="card-c-text text-center class-hour">17:00 a 20:00</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 card-space">
-          <div class="card-clase">
-            <div class="card-c-header">
-              <img src="assets/cardio.png" class="header-img">
-            </div>
-            <div class="card-c-body">
-              <p class="card-c-text text-center class-title">Cardio</p>
-              <p class="card-c-text text-center class-hour">9:00 a 12:00</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 card-space">
-          <div class="card-clase">
-            <div class="card-c-header">
-              <img src="assets/aerobics.png" class="header-img">
-            </div>
-            <div class="card-c-body">
-              <p class="card-c-text text-center class-title">Aerobics</p>
-              <p class="card-c-text text-center class-hour">9:00 a 12:00</p>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
+
+
+<!-- Promos -->
+<div id="Promosid" class="container altura-min-3">
+    <h1 class="text-center title-main">Promos</h1>
+    <div class="row mt-4 justify-content-center" style="margin-bottom: 50px">
+        <div *ngFor="let promo of arrayPromos" class="col-md-3">
+            <div class="promo">
+                <div class="promo-header">
+                    <h3 class="text-center">{{promo.mes}}</h3>
+                </div>
+                <div class="card-body text-center">
+                    <h4 class="promo-title">{{promo.precio}}</h4>
+                    <p class="promo-text">{{promo.info}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Profesores -->
 <div id="Profesid" class="altura-min-3">
-  <h1 class="text-center title-main"><b>Nuestros Profesores</b></h1>
+    <h1 class="text-center title-main">Nuestros Profes</h1>
     <div id="carouselExample" class="carousel slide">
         <div class="carousel-inner text-center">
             <div class="carousel-item active">
                 <div class="d-inline-block mx-auto">
                     <div class="card">
-                        <img src="assets/profe1.jpg" class="card-img-top">
+                        <img src="assets/profe1.jpg" class="card-img-top" alt="MikeO'Hearn">
                         <div class="card-body">
-                            <h5 class="card-title">Lionel Andrés Messi</h5>
-                            <p class="card-text">El GOAT.</p>
+                            <h5 class="card-title">Mike O'Hearn</h5>
+                            <p class="card-text">Entrenador personal y culturista.</p>
                         </div>
                     </div>
                 </div>
@@ -106,7 +83,7 @@
             <div *ngFor="let profe of arrayProfes" class="carousel-item">
                 <div class="d-inline-block mx-auto">
                     <div class="card">
-                        <img src={{profe.foto}} class="card-img-top">
+                        <img src={{profe.foto}} class="card-img-top" alt="AlejandraOliveras">
                         <div class="card-body">
                             <h5 class="card-title">{{profe.nombre}}</h5>
                             <p class="card-text">{{profe.info}}</p>
@@ -126,23 +103,48 @@
     </div>
 </div>
 
+
+<!-- Contacto -->
+<div id="Contactosid" class="altura-min-1">
+    <section class="contacto">
+        <h1 class="text-center mb-3 title-main">Contactanos</h1>
+        <div class="d-flex justify-content-center">
+            <form action="form-handler.php" method="post">
+                <div class="form-group">
+                    <input type="text" class="form-control mb-3" id="name" name="name" required placeholder="Nombre">
+                    <input type="email" class="form-control mb-3" id="email" name="email" required placeholder="Email">
+                    <textarea class="form-control mb-3" id="message" name="message"
+                        placeholder="Dejá tu mensaje acá..."></textarea>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-dark col-11">Enviar Mensaje</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+
+
 <!-- Pie de Página -->
 <footer class="footer py-3">
     <div class="text-center footer_text container">
         <div class="row">
             <div class="col-md-4">
-        <p><img src="assets/brand-instagram.svg"><b> @golgym</b></p>
+                <h4><span style="font-size: 24px;"></span>📍 Visitanos</h4>
+                <p>AV. Siempreviva 742 Mendoza, Argentina</p>
             </div>
             <div class="col-md-4">
-        <p><img src="assets/brand-x.svg"><b> @golgym</b></p>
+                <h4><span style="font-size: 24px;"></span>📞 Teléfono</h4>
+                <p>+54 261 4202017</p>
             </div>
             <div class="col-md-4">
-        <p><img src="assets/brand-facebook.svg"><b> /golgym</b></p>
+                <h4><span style="font-size: 24px;"></span>✉️ Email</h4>
+                <p>tresgrupo.p1@gmail.com</p>
             </div>
         </div>
         <div class="row mt-3">
             <div class="col-md-12">
-                <span>© 2023 Gym Of Legends, GOL GYM.</span>
+                <span>© 2023 Gimnasio "El Chicho".</span>
             </div>
         </div>
     </div>

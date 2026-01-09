@@ -3,8 +3,10 @@
         <div class="col-md-8">
             <div class="rounded-box">
                 <div class="d-flex align-items-center justify-content-center titulo-edit-alumno">
-                    <h1 style="margin-top: 15px; padding-right: 60px;">{{UserData.nombre}}  {{UserData.apellido}}</h1>
-                    <button *ngIf="selectedRole === 'admin'" data-bs-toggle="modal" data-bs-target="#editUsuarioModal" class="btn btn-primary btn-lm me-2"><i class="fa-solid fa-pen-to-square text-white fa-lg"></i></button>
+                    <h1 style="margin-top: 15px; padding-right: 60px;">{{UserData.nombre}} {{UserData.apellido}}</h1>
+                    <button *ngIf="selectedRole === 'admin' && UserData.rol !== 'admin'" data-bs-toggle="modal" data-bs-target="#editUsuarioModal"
+                        class="btn btn-primary btn-lm me-2"><i
+                            class="fa-solid fa-pen-to-square text-white fa-lg"></i></button>
                 </div>
                 <div *ngIf="UserData.rol === 'user'" class="d-flex mb-3">
                     <a type="button" (click)="verPlanif(UserData.dni)"
@@ -39,7 +41,7 @@
                 </div>
                 <div style="display: flex; justify-content: space-between;">
                     <div>
-                        <button *ngIf="selectedRole === 'admin'" class="btn btn-danger btn-lm" data-bs-toggle="modal" data-bs-target="#eliminarModal"><i class="fa-solid fa-trash fa-lg"></i></button>
+                        <button *ngIf="(selectedRole === 'admin' && UserData.rol !== 'admin') || (selectedRole === 'profesor' && UserData.rol === 'user')" class="btn btn-danger btn-lm" data-bs-toggle="modal" data-bs-target="#eliminarModal"><i class="fa-solid fa-trash fa-lg"></i></button>
                     </div>
                     <div>
                         <a *ngIf="selectedRole === 'admin' || selectedRole === 'profesor'" routerLink="/vInicio"><button class="btn btn-primary btn-lm"><i class="fa-solid fa-left-long fa-lg"></i></button></a>
@@ -52,60 +54,90 @@
 
 
 <!-- Editar Usuario -->
-<div class="modal fade" id="editUsuarioModal" tabindex="-1" aria-labelledby="editUsuarioModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="editUsuarioModal" tabindex="-1" aria-labelledby="editUsuarioModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editUsuarioModalLabel">Editar Usuario</h5>
+                <h5 class="modal-title" id="editUsuarioModalLabel">
+                    {{ shouldEditUser() ? 'Editar Usuario' : 'Crear Usuario' }}
+                </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <!-- Formulario para editar -->
                 <form [formGroup]='profileForm'>
                     <div class="mb-3" *ngIf="UserData.rol === 'user'">
-                        <label for="edad" class="form-label">Edad</label>
-                        <input type="number" class="form-control" formControlName="edad">
+                        <label for="edad" class="form-label">Edad <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="edad" 
+                               [class.is-invalid]="profileForm.get('edad')?.invalid && profileForm.get('edad')?.touched"
+                               placeholder="Ingrese su edad (13-100 años)">
+                        <div class="invalid-feedback" *ngIf="profileForm.get('edad')?.invalid && profileForm.get('edad')?.touched">
+                            <div *ngIf="profileForm.get('edad')?.errors?.['required']">La edad es requerida</div>
+                            <div *ngIf="profileForm.get('edad')?.errors?.['min']">La edad mínima es 13 años</div>
+                            <div *ngIf="profileForm.get('edad')?.errors?.['max']">La edad máxima es 100 años</div>
+                            <div *ngIf="profileForm.get('edad')?.errors?.['enteroPositivo']">Solo se permiten números enteros positivos</div>
+                        </div>
                     </div>
                     <div class="mb-3" *ngIf="UserData.rol === 'user'">
-                        <label for="peso" class="form-label">Peso</label>
-                        <input type="text" class="form-control" formControlName="peso">
+                        <label for="peso" class="form-label">Peso (kg, Ej: 70,54) <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="peso" 
+                               [class.is-invalid]="profileForm.get('peso')?.invalid && profileForm.get('peso')?.touched"
+                               placeholder="Ingrese su peso (ej: 70,5)">
+                        <div class="invalid-feedback" *ngIf="profileForm.get('peso')?.invalid && profileForm.get('peso')?.touched">
+                            <div *ngIf="profileForm.get('peso')?.errors?.['required']">El peso es requerido</div>
+                            <div *ngIf="profileForm.get('peso')?.errors?.['pattern']">Formato inválido, solo se permiten números con coma (ej: 70,5)</div>
+                            <div *ngIf="profileForm.get('peso')?.errors?.['minPeso']">El peso mínimo es 40 kg</div>
+                            <div *ngIf="profileForm.get('peso')?.errors?.['maxPeso']">El peso máximo es 200 kg</div>
+                        </div>
                     </div>
                     <div class="mb-3" *ngIf="UserData.rol === 'user'">
-                        <label for="altura" class="form-label">Altura</label>
-                        <input type="text" class="form-control" formControlName="altura">
+                        <label for="altura" class="form-label">Altura (m, Ej: 1,87) <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="altura" 
+                               [class.is-invalid]="profileForm.get('altura')?.invalid && profileForm.get('altura')?.touched"
+                               placeholder="Ingrese su altura (ej: 1,75)">
+                        <div class="invalid-feedback" *ngIf="profileForm.get('altura')?.invalid && profileForm.get('altura')?.touched">
+                            <div *ngIf="profileForm.get('altura')?.errors?.['required']">La altura es requerida</div>
+                            <div *ngIf="profileForm.get('altura')?.errors?.['pattern']">Formato inválido, solo se permiten números con coma (ej: 1,75)</div>
+                            <div *ngIf="profileForm.get('altura')?.errors?.['minAltura']">La altura mínima es 1,40 m</div>
+                            <div *ngIf="profileForm.get('altura')?.errors?.['maxAltura']">La altura máxima es 2,20 m</div>
+                        </div>
                     </div>
                     <div class="mb-3" *ngIf="UserData.rol === 'user'">
-                        <label for="sexo" class="form-label">Sexo</label>
-                        <input type="text" class="form-control" formControlName="sexo">
+                        <label for="sexo" class="form-label">Sexo <span class="text-danger">*</span></label>
+                        <select class="form-control" formControlName="sexo" 
+                                [class.is-invalid]="profileForm.get('sexo')?.invalid && profileForm.get('sexo')?.touched">
+                            <option value="">Seleccione su sexo</option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
+                        </select>
+                        <div class="invalid-feedback" *ngIf="profileForm.get('sexo')?.invalid && profileForm.get('sexo')?.touched">
+                            <div *ngIf="profileForm.get('sexo')?.errors?.['required']">El sexo es requerido</div>
+                        </div>
                     </div>
                     <div class="mb-3" *ngIf="UserData.rol === 'profesor'">
-                        <label for="especialidad" class="form-label">Especialidad</label>
-                        <input type="text" class="form-control" formControlName="especialidad" >
+                        <label for="especialidad" class="form-label">Especialidad <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="especialidad" 
+                               [class.is-invalid]="profileForm.get('especialidad')?.invalid && profileForm.get('especialidad')?.touched"
+                               placeholder="Ingrese su especialidad (ej: Entrenamiento Personal)">
+                        <div class="invalid-feedback" *ngIf="profileForm.get('especialidad')?.invalid && profileForm.get('especialidad')?.touched">
+                            <div *ngIf="profileForm.get('especialidad')?.errors?.['minlength']">La especialidad debe tener al menos 3 caracteres</div>
+                            <div *ngIf="profileForm.get('especialidad')?.errors?.['maxlength']">La especialidad no puede exceder 50 caracteres</div>
+                            <div *ngIf="profileForm.get('especialidad')?.errors?.['pattern']">Solo se permiten letras y espacios</div>
+                        </div>
+                        <small class="form-text text-muted">Debe completar este campo para guardar los cambios</small>
                     </div>
-<!--                    <div class="mb-3" *ngIf="UserData.rol === 'profesor'">
-                        <label for="clase" class="form-label">Clase</label>
-                        <input type="text" class="form-control" id="clase" name="nombre" [(ngModel)]=".clase">
-                    </div>
-                    <div class="mb-3" *ngIf="UserData.rol === 'profesor'">
-                        <label for="d-clase" class="form-label">Día Clase</label>
-                        <input type="text" class="form-control" id="d-clase" name="dia" [(ngModel)]=".clase">
-                    </div>
-                    <div class="mb-3" *ngIf="UserData.rol === 'profesor'">
-                        <label for="d-clase" class="form-label">Horario Clase</label>
-                        <input type="date" class="form-control" id="h-clase" name="horario" [(ngModel)]=".horario">
-                    </div> -->
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary btn-success" (click)="submit()" data-bs-dismiss="modal">Guardar</button>
+                <button type="button" class="btn btn-primary btn-success" (click)="submit()"
+                    [disabled]="!canSubmitForm()" data-bs-dismiss="modal">Guardar</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Eliminar? -->
+<!-- Eliminar? Usuario -->
 <div class="modal" id="eliminarModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -118,7 +150,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger" (click)="borrarUsuario()" data-bs-dismiss="modal">Eliminar</button>
+                <button type="button" class="btn btn-danger" (click)="borrarUsuario()"
+                    data-bs-dismiss="modal">Eliminar</button>
             </div>
         </div>
     </div>

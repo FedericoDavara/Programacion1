@@ -1,5 +1,4 @@
 <!-- Tabla de planificación -->
-
 <div class="container mt-5" style="margin-bottom: 50px;">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -8,85 +7,92 @@
 
                 <div class="d-flex align-items-center justify-content-center titulo-edit-alumno">
                     <h1 style="margin-top: 15px; padding-right: 50px;">Planificación</h1>
-                    <button *ngIf="selectedRole === 'admin' || selectedRole === 'profesor'" data-bs-toggle="modal" data-bs-target="#editarPlanificacion" class="btn btn-primary btn-lm me-2"><i class="fa-solid fa-pen-to-square text-white fa-lg"></i></button>
+                    <button *ngIf="selectedRole === 'admin' || selectedRole === 'profesor'" data-bs-toggle="modal"
+                        data-bs-target="#editarPlanificacion" class="btn btn-primary btn-lm me-2"><i
+                            class="fa-solid fa-pen-to-square text-white fa-lg"></i></button>
                 </div>
 
                 <div class="col-md-6" *ngIf="UserPlanif && UserPlanif.length > 0">
                     <h5>Descripción</h5>
-                    <h2>{{ UserPlanif[0]?.descripcion }}</h2>
+                    <h2>{{ DataPlanif?.descripcion }}</h2>
                     <hr>
                     <h5>Fecha</h5>
-                    <h2>{{ UserPlanif[0]?.fecha }}</h2>
+                    <h2>{{ DataPlanif?.fecha }}</h2>
                     <hr>
 
                 </div>
-                <div style="display: flex; align-items: center; justify-content: flex-end;">
-                    <button class="btn btn-primary btn-lm" (click)="verPerfil(perfilDni)">
-                        <i class="fa-solid fa-left-long fa-lg"></i>
-                    </button>
+                <div style="display: flex; justify-content: space-between;">
+                    <div>
+                        <button *ngIf="selectedRole === 'admin' || selectedRole === 'profesor'" class="btn btn-danger btn-lm" data-bs-toggle="modal" data-bs-target="#eliminarModal"><i class="fa-solid fa-trash fa-lg"></i></button>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary btn-lm" (click)="verPerfil(perfilDni)">
+                            <i class="fa-solid fa-left-long fa-lg"></i>
+                        </button>
+                    </div>
                 </div>
 
             </div>
             <div>
                 <div class="container" style="margin-bottom: 50px;">
                     <div class="row">
-                        <div class="col-lg-4 col-md-6 card-space" *ngIf="UserPlanif[0]?.lunes">
+                        <div class="col-lg-4 col-md-6 card-space" *ngIf="DataPlanif.lunes">
                             <div class="card-clase">
                                 <div class="card-c-header">
                                     <h4 class="card-c-title">Lunes</h4>
                                 </div>
                                 <div class="card-c-body">
-                                    <p class="card-c-text text-center">{{ UserPlanif[0]?.lunes }}</p>
+                                    <p class="card-c-text">{{ DataPlanif?.lunes }}</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-6 card-space" *ngIf="UserPlanif[0]?.martes">
+                        <div class="col-lg-4 col-md-6 card-space" *ngIf="DataPlanif.martes">
                             <div class="card-clase">
                                 <div class="card-c-header">
                                     <h4 class="card-c-title">Martes</h4>
                                 </div>
                                 <div class="card-c-body">
-                                    <p class="card-c-text text-center">{{ UserPlanif[0]?.martes }}</p>
+                                    <p class="card-c-text">{{ DataPlanif?.martes }}</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-6 card-space" *ngIf="UserPlanif[0]?.miercoles">
+                        <div class="col-lg-4 col-md-6 card-space" *ngIf="DataPlanif.miercoles">
                             <div class="card-clase">
                                 <div class="card-c-header">
                                     <h4 class="card-c-title">Miércoles</h4>
                                 </div>
                                 <div class="card-c-body">
-                                    <p class="card-c-text text-center">{{ UserPlanif[0]?.miercoles }}</p>
+                                    <p class="card-c-text">{{ DataPlanif?.miercoles }}</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-6 card-space" *ngIf="UserPlanif[0]?.jueves">
+                        <div class="col-lg-4 col-md-6 card-space" *ngIf="DataPlanif.jueves">
                             <div class="card-clase">
                                 <div class="card-c-header">
                                     <h4 class="card-c-title">Jueves</h4>
                                 </div>
                                 <div class="card-c-body">
-                                    <p class="card-c-text text-center">{{ UserPlanif[0]?.jueves }}</p>
+                                    <p class="card-c-text">{{ DataPlanif?.jueves }}</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-6 card-space" *ngIf="UserPlanif[0]?.viernes">
+                        <div class="col-lg-4 col-md-6 card-space" *ngIf="DataPlanif.viernes">
                             <div class="card-clase">
                                 <div class="card-c-header">
                                     <h4 class="card-c-title">Viernes</h4>
                                 </div>
                                 <div class="card-c-body">
-                                    <p class="card-c-text text-center">{{ UserPlanif[0]?.viernes }}</p>
+                                    <p class="card-c-text">{{ DataPlanif?.viernes }}</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-md-6 card-space" *ngIf="UserPlanif[0]?.sabado">
+                        <div class="col-lg-4 col-md-6 card-space" *ngIf="DataPlanif.sabado">
                             <div class="card-clase">
                                 <div class="card-c-header">
                                     <h4 class="card-c-title">Sábado</h4>
                                 </div>
                                 <div class="card-c-body">
-                                    <p class="card-c-text text-center">{{ UserPlanif[0]?.sabado }}</p>
+                                    <p class="card-c-text">{{ DataPlanif?.sabado }}</p>
                                 </div>
                             </div>
                         </div>
@@ -99,55 +105,131 @@
 
 
 <!-- Modal para agregar nueva planificación -->
-<div class="modal fade" id="editarPlanificacion" tabindex="-1" aria-labelledby="editarPlanificacionModalLabel" aria-hidden="true">
+<div class="modal fade" id="editarPlanificacion" tabindex="-1" aria-labelledby="editarPlanificacionModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="editarPlanificacionModalLabel">
-                    {{ UserPlanif && UserPlanif.length > 0 ? 'Editar Planificación' : 'Crear Planificación' }}
+                    {{ shouldEditPlanif() ? 'Editar Planificación' : 'Crear Planificación' }}
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <!-- Formulario para cargar una nueva planificación -->
-                <form #planificacionForm="ngForm">
+                <form [formGroup]="planifForm">
                     <div class="mb-3">
-                        <label for="descripcion" class="form-label">Descripción</label>
-                        <input type="text" class="form-control" id="descripcion" name="descripcion" [(ngModel)]="planificacionData.descripcion">
+                        <label for="descripcion" class="form-label">Descripción <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="descripcion" 
+                               [class.is-invalid]="planifForm.get('descripcion')?.invalid && planifForm.get('descripcion')?.touched"
+                               placeholder="Ingrese una descripción de la planificación">
+                        <div class="invalid-feedback" *ngIf="planifForm.get('descripcion')?.invalid && planifForm.get('descripcion')?.touched">
+                            <div *ngIf="planifForm.get('descripcion')?.errors?.['required']">La descripción es requerida</div>
+                            <div *ngIf="planifForm.get('descripcion')?.errors?.['minlength']">La descripción debe tener al menos 3 caracteres</div>
+                            <div *ngIf="planifForm.get('descripcion')?.errors?.['maxlength']">La descripción no puede exceder 200 caracteres</div>
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <label for="fecha" class="form-label">Fecha</label>
-                        <input type="date" class="form-control" id="fecha" name="fecha" [(ngModel)]="planificacionData.fecha">
+                        <label for="fecha" class="form-label">Fecha <span class="text-danger">*</span></label>
+                        <input type="date" class="form-control" formControlName="fecha"
+                               [class.is-invalid]="planifForm.get('fecha')?.invalid && planifForm.get('fecha')?.touched">
+                        <div class="invalid-feedback" *ngIf="planifForm.get('fecha')?.invalid && planifForm.get('fecha')?.touched">
+                            <div *ngIf="planifForm.get('fecha')?.errors?.['required']">La fecha es requerida</div>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="lunes" class="form-label">Lunes</label>
-                        <input type="text" class="form-control" id="lunes" name="lunes" [(ngModel)]="planificacionData.lunes">
+                        <input type="text" class="form-control" formControlName="lunes" 
+                               [class.is-invalid]="planifForm.get('lunes')?.invalid && planifForm.get('lunes')?.touched"
+                               placeholder="Ejercicios para el lunes">
+                        <div class="invalid-feedback" *ngIf="planifForm.get('lunes')?.invalid && planifForm.get('lunes')?.touched">
+                            <div *ngIf="planifForm.get('lunes')?.errors?.['maxlength']">No puede exceder 100 caracteres</div>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="martes" class="form-label">Martes</label>
-                        <input type="text" class="form-control" id="martes" name="martes" [(ngModel)]="planificacionData.martes">
+                        <input type="text" class="form-control" formControlName="martes"
+                               [class.is-invalid]="planifForm.get('martes')?.invalid && planifForm.get('martes')?.touched"
+                               placeholder="Ejercicios para el martes">
+                        <div class="invalid-feedback" *ngIf="planifForm.get('martes')?.invalid && planifForm.get('martes')?.touched">
+                            <div *ngIf="planifForm.get('martes')?.errors?.['maxlength']">No puede exceder 100 caracteres</div>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="miercoles" class="form-label">Miércoles</label>
-                        <input type="text" class="form-control" id="miercoles" name="miercoles" [(ngModel)]="planificacionData.miercoles">
+                        <input type="text" class="form-control" formControlName="miercoles"
+                               [class.is-invalid]="planifForm.get('miercoles')?.invalid && planifForm.get('miercoles')?.touched"
+                               placeholder="Ejercicios para el miércoles">
+                        <div class="invalid-feedback" *ngIf="planifForm.get('miercoles')?.invalid && planifForm.get('miercoles')?.touched">
+                            <div *ngIf="planifForm.get('miercoles')?.errors?.['maxlength']">No puede exceder 100 caracteres</div>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="jueves" class="form-label">Jueves</label>
-                        <input type="text" class="form-control" id="jueves" name="jueves" [(ngModel)]="planificacionData.jueves">
+                        <input type="text" class="form-control" formControlName="jueves"
+                               [class.is-invalid]="planifForm.get('jueves')?.invalid && planifForm.get('jueves')?.touched"
+                               placeholder="Ejercicios para el jueves">
+                        <div class="invalid-feedback" *ngIf="planifForm.get('jueves')?.invalid && planifForm.get('jueves')?.touched">
+                            <div *ngIf="planifForm.get('jueves')?.errors?.['maxlength']">No puede exceder 100 caracteres</div>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="viernes" class="form-label">Viernes</label>
-                        <input type="text" class="form-control" id="viernes" name="viernes" [(ngModel)]="planificacionData.viernes">
+                        <input type="text" class="form-control" formControlName="viernes"
+                               [class.is-invalid]="planifForm.get('viernes')?.invalid && planifForm.get('viernes')?.touched"
+                               placeholder="Ejercicios para el viernes">
+                        <div class="invalid-feedback" *ngIf="planifForm.get('viernes')?.invalid && planifForm.get('viernes')?.touched">
+                            <div *ngIf="planifForm.get('viernes')?.errors?.['maxlength']">No puede exceder 100 caracteres</div>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="sabado" class="form-label">Sábado</label>
-                        <input type="text" class="form-control" id="sabado" name="sabado" [(ngModel)]="planificacionData.sabado">
+                        <input type="text" class="form-control" formControlName="sabado"
+                               [class.is-invalid]="planifForm.get('sabado')?.invalid && planifForm.get('sabado')?.touched"
+                               placeholder="Ejercicios para el sábado">
+                        <div class="invalid-feedback" *ngIf="planifForm.get('sabado')?.invalid && planifForm.get('sabado')?.touched">
+                            <div *ngIf="planifForm.get('sabado')?.errors?.['maxlength']">No puede exceder 100 caracteres</div>
+                        </div>
+                    </div>
+                    <div *ngIf="!shouldEditPlanif()">
+                        <label for="nombre" class="form-label">Profesor <span class="text-danger">*</span></label>
+                        <div class="invalid-feedback d-block" *ngIf="planifForm.get('profesor_dni')?.invalid && planifForm.get('profesor_dni')?.touched">
+                            <div *ngIf="planifForm.get('profesor_dni')?.errors?.['required']">Debe seleccionar un profesor</div>
+                        </div>
+                    </div>
+                    <div class="btn-group d-flex justify-content-center" style="margin-bottom: 15px;" role="group" aria-label="Basic radio toggle button group" *ngIf="!shouldEditPlanif()">
+                        <ng-container *ngFor="let prof of allProf">
+                            <input type="radio" class="btn-check" name="profesor_dni" formControlName="profesor_dni" [value]="prof.dni" [id]="'btnradio' + prof.dni">
+                            <label class="btn btn-outline-primary" [for]="'btnradio' + prof.dni">{{ prof.nombre }}</label>
+                        </ng-container>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary btn-success" (click)="planificacionForm.form.valid && crearPlanificacion()" data-bs-dismiss="modal">Guardar</button>
+                <button type="button" class="btn btn-primary btn-success" (click)="submit()"
+                    [disabled]="planifForm.invalid" data-bs-dismiss="modal">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Eliminar? Planifiación -->
+<div class="modal" id="eliminarModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Eliminar Planificación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro que desea eliminar esta Planificación?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" (click)="borrarPlanifiacacion()"
+                    data-bs-dismiss="modal">Eliminar</button>
             </div>
         </div>
     </div>

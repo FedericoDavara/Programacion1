@@ -1,19 +1,7 @@
 <app-navbar></app-navbar>
 
-<div>
-    <img src="assets/elChicho.png" class="portada" alt="Gimnasio-El Chicho">
-</div>
-
-
-<!-- Horario -->
-<div class="parpadea card-hora-container">
-    <div class="card-horario">
-        <p class="tittle-horarios">Horarios de Atención</p>
-        <div>
-            <p class="text-horarios">Lunes a Viernes de 8:00 a 20:00</p>
-            <p class="text-horarios">Sábado de 8:00 a 13:30</p>
-        </div>
-    </div>
+<div style="height: 80vh;">
+    <img src="assets/logo.png" class="portada" alt="Logo GOL GYM">
 </div>
 
 
@@ -21,29 +9,79 @@
 <div id="Clasesid" class="altura-min-1">
     <div>
         <h1 class="text-center title-main">Clases</h1>
+    <p class="text-center description"><i>Exercise now or DIE!!!</i></p>
     </div>
     <div class="container" style="margin-bottom: 50px;">
-        <div class="row">
-            <div class="row">
-                <ng-container *ngFor="let dia of ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']">
-                    <div class="col-lg-4 col-md-6 card-space">
-                        <div class="card-clase">
-                            <div class="card-c-header">
-                                <h4 class="card-c-title">{{ dia }}</h4>
-                            </div>
-                            <div class="card-c-body">
-                                <ng-container *ngFor="let clase of getClasesPorDia(dia)">
-                                    <p class="card-c-text" *ngIf="clase.dia === dia">{{ clase.nombre }}: {{
-                                        clase.horario }}</p>
-                                </ng-container>
-                            </div>
-                        </div>
-                    </div>
-                </ng-container>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 card-space">
+          <div class="card-clase">
+            <div class="card-c-header">
+              <img src="assets/zumba.png" class="header-img">
             </div>
+            <div class="card-c-body">
+              <p class="card-c-text text-center class-title">Zumba</p>
+              <p class="card-c-text text-center class-hour">19:00 a 21:00</p>
+            </div>
+          </div>
         </div>
+        <div class="col-lg-4 col-md-6 card-space">
+          <div class="card-clase">
+            <div class="card-c-header">
+              <img src="assets/maquina.png" class="header-img">
+            </div>
+            <div class="card-c-body">
+              <p class="card-c-text text-center class-title">Máquinas</p>
+              <p class="card-c-text text-center class-hour">7:00 a 22:00</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 card-space">
+          <div class="card-clase">
+            <div class="card-c-header">
+              <img src="assets/spinning.png" class="header-img">
+            </div>
+            <div class="card-c-body">
+              <p class="card-c-text text-center class-title">Spinning</p>
+              <p class="card-c-text text-center class-hour">7:00 a 22:00</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 card-space">
+          <div class="card-clase">
+            <div class="card-c-header">
+              <img src="assets/boxeo.png" class="header-img">
+            </div>
+            <div class="card-c-body">
+              <p class="card-c-text text-center class-title">Boxeo</p>
+            <p class="card-c-text text-center class-hour">17:00 a 20:00</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 card-space">
+          <div class="card-clase">
+            <div class="card-c-header">
+              <img src="assets/cardio.png" class="header-img">
+            </div>
+            <div class="card-c-body">
+              <p class="card-c-text text-center class-title">Cardio</p>
+              <p class="card-c-text text-center class-hour">9:00 a 12:00</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 card-space">
+          <div class="card-clase">
+            <div class="card-c-header">
+              <img src="assets/aerobics.png" class="header-img">
+            </div>
+            <div class="card-c-body">
+              <p class="card-c-text text-center class-title">Aerobics</p>
+              <p class="card-c-text text-center class-hour">9:00 a 12:00</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
 
 
 <!-- Promos -->
@@ -66,16 +104,16 @@
 
 <!-- Profesores -->
 <div id="Profesid" class="altura-min-3">
-    <h1 class="text-center title-main">Nuestros Profes</h1>
+  <h1 class="text-center title-main"><b>Nuestros Profesores</b></h1>
     <div id="carouselExample" class="carousel slide">
         <div class="carousel-inner text-center">
             <div class="carousel-item active">
                 <div class="d-inline-block mx-auto">
                     <div class="card">
-                        <img src="assets/profe1.jpg" class="card-img-top" alt="MikeO'Hearn">
+                        <img src="assets/profe1.jpg" class="card-img-top">
                         <div class="card-body">
-                            <h5 class="card-title">Mike O'Hearn</h5>
-                            <p class="card-text">Entrenador personal y culturista.</p>
+                            <h5 class="card-title">Lionel Andrés Messi</h5>
+                            <p class="card-text">EL CABRA.</p>
                         </div>
                     </div>
                 </div>
@@ -83,7 +121,7 @@
             <div *ngFor="let profe of arrayProfes" class="carousel-item">
                 <div class="d-inline-block mx-auto">
                     <div class="card">
-                        <img src={{profe.foto}} class="card-img-top" alt="AlejandraOliveras">
+                        <img src={{profe.foto}} class="card-img-top">
                         <div class="card-body">
                             <h5 class="card-title">{{profe.nombre}}</h5>
                             <p class="card-text">{{profe.info}}</p>
@@ -144,7 +182,7 @@
         </div>
         <div class="row mt-3">
             <div class="col-md-12">
-                <span>© 2023 Gimnasio "El Chicho".</span>
+                <span>© 2026 GOL GYM.</span>
             </div>
         </div>
     </div>

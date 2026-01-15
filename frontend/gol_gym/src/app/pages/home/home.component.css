@@ -1,5 +1,5 @@
 * {
-  font-family: 'Noto Sans';
+  font-family: "Noto Sans";
 }
 
 #Inicio {
@@ -10,59 +10,59 @@
 }
 
 .portada {
-    max-height: 512px;
-    height: auto;
-    display: block;
-    margin: auto;
-    margin-top: 50px;
-    margin-bottom: 10px;
-    filter: drop-shadow(0px 5px 0px rgba(0, 0, 0, 1));
-    animation: flotar 1.5s ease-in-out infinite;
+  max-height: 512px;
+  height: auto;
+  display: block;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 10px;
+  filter: drop-shadow(0px 5px 0px rgba(0, 0, 0, 1));
+  animation: flotar 1.5s ease-in-out infinite;
 }
 
 .description {
-    font-size: 18pt;
-    font-family: 'Noto Sans';
-    font-weight: bold;
-    color: #D0FD50;
-    text-align: center;
-    text-shadow:
-      0px 1px 0px #000,
-      0px 2px 0px #000,
-      0px 3px 0px #000;
-    margin-bottom: 20px;
+  font-size: 18pt;
+  font-family: "Noto Sans";
+  font-weight: bold;
+  color: #d0fd50;
+  text-align: center;
+  text-shadow:
+    0px 1px 0px #000,
+    0px 2px 0px #000,
+    0px 3px 0px #000;
+  margin-bottom: 20px;
 }
 
 /* Animación de flotar */
 @keyframes flotar {
-    0% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(20px);
-    }
-    100% {
-        transform: translateY(0px);
-    }
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 /* Horarios */
 .card-hora-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 150px
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 150px;
 }
 .card-horario {
-    background-color: #1e293b;
-    border-radius: 15px;
-    padding: 20px;
+  background-color: #1e293b;
+  border-radius: 15px;
+  padding: 20px;
 }
 
 .class-title {
   font-size: 20pt;
   font-weight: bold;
-  color: #FEFDC3;
+  color: #fefdc3;
   margin: 0;
   text-shadow:
     0px 1px 0px #000,
@@ -73,7 +73,7 @@
 .class-hour {
   font-size: 14pt;
   font-style: italic;
-  color: #FEFDC3;
+  color: #fefdc3;
   text-shadow:
     0px 1px 0px #000,
     0px 2px 0px #000,
@@ -81,10 +81,10 @@
 }
 
 .header-img {
-    width: 50%;
-    height: auto;
-    padding: 10px;
-    filter: drop-shadow(0px 5px 0px rgba(0, 0, 0, 1));
+  width: 50%;
+  height: auto;
+  padding: 10px;
+  filter: drop-shadow(0px 5px 0px rgba(0, 0, 0, 1));
 }
 
 .card-c-header {
@@ -92,177 +92,178 @@
 }
 
 .card-clase {
-    background-color: #00122080;
-    backdrop-filter: blur(10px);
-    border: 5px solid #000;
-    border-radius: 20px;
-    box-shadow: 0 10px 0px #000;
-    transition: 0.15s ease-in;
+  background-color: #00122080;
+  backdrop-filter: blur(10px);
+  border: 5px solid #000;
+  border-radius: 20px;
+  box-shadow: 0 10px 0px #000;
+  transition: 0.15s ease-in;
 }
 
 .card-clase:hover {
-    box-shadow: 0 0px 0px #000;
-    transform: translateY(10px);
+  box-shadow: 0 0px 0px #000;
+  transform: translateY(10px);
 }
 
 .title-horarios {
-    font-size:30px;
-    font-family:'titlefont';
-    color:#d2ff52;
-  }
-.text-horarios{
-    font-size:15px;
-    font-weight: bold;
-    color:white;
+  font-size: 30px;
+  font-family: "titlefont";
+  color: #d2ff52;
+}
+.text-horarios {
+  font-size: 15px;
+  font-weight: bold;
+  color: white;
 }
 .parpadea {
-        animation-name: parpadeo;
-        animation-delay: 0s;
-        animation-duration: 4s;
-        animation-iteration-count: infinite;
-        animation-timing-function: linear;
+  animation-name: parpadeo;
+  animation-delay: 0s;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 @keyframes parpadeo {
-    0% { opacity: 1.0; }
-    50% { opacity: 0.0; }
-    100% { opacity: 1.0; }
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
-
 
 /* Estilos para las clases */
-#Clasesid{
-    background-image: url(../../../assets/waves.svg);
-    background-size: cover;
-    background-position: center;
+#Clasesid {
+  background-image: url(../../../assets/waves.svg);
+  background-size: cover;
+  background-position: center;
 }
-
 
 /* Ajustar estilos de los Profes */
-#Profesid{
-    background-image:url(../../../assets/stacked.svg);
-    background-size: cover;
-    background-position: center;
+#Profesid {
+  background-image: url(../../../assets/stacked.svg);
+  background-size: cover;
+  background-position: center;
 }
 .card {
-    border-radius: 30px;
-    border: 5px solid #000;
-    background-color: #00122080;
-    backdrop-filter: blur(10px);
-    width: auto;
-    height: auto;
-    margin: 10px;
-    padding: 0px;
-    box-shadow: 0 10px 0px #000;
-    transition: 0.15s ease-in;
+  border-radius: 30px;
+  border: 5px solid #000;
+  background-color: #00122080;
+  backdrop-filter: blur(10px);
+  width: auto;
+  height: auto;
+  margin: 10px;
+  padding: 0px;
+  box-shadow: 0 10px 0px #000;
+  transition: 0.15s ease-in;
 }
 
 .card:hover {
-    box-shadow: 0 0px 0px #000;
-    transform: translateY(10px);
+  box-shadow: 0 0px 0px #000;
+  transform: translateY(10px);
 }
 
 .card-img-top {
-    border-top-left-radius: 24px;
-    border-top-right-radius: 24px;
-    object-fit: cover;
-    border-bottom: 5px solid #000;
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  object-fit: cover;
+  border-bottom: 5px solid #000;
 }
 .card-title {
-    color: #D1FE51;
-    font-family: 'Noto Sans';
-    font-weight: bold;
-    text-shadow: 0px 0px 5px #000;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    font-weight: bold;
-    /* min-height: 72px; */
-    font-size: 30px;
+  color: #d1fe51;
+  font-family: "Noto Sans";
+  font-weight: bold;
+  text-shadow: 0px 0px 5px #000;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  font-weight: bold;
+  /* min-height: 72px; */
+  font-size: 30px;
 }
 .card-text {
-    color: #FFFDC3;
-    font-family: 'Noto Sans';
-    font-style: italic;
-    text-shadow: 0px 0px 5px #000;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    /* min-height: 60px; */
-    font-size: 20px;
+  color: #fffdc3;
+  font-family: "Noto Sans";
+  font-style: italic;
+  text-shadow: 0px 0px 5px #000;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  /* min-height: 60px; */
+  font-size: 20px;
 }
-#carouselExample{
-    margin-top: -50px;
-    margin-bottom: 0px;
+#carouselExample {
+  /* margin-top: -50px; */
+  margin-bottom: 0px;
 }
 .button-container {
-    width:4pc;
-    height: 4pc;
-    background-color: #3EC382;
-    border-radius: 16px;
-    border: 5px solid #000;
-    box-shadow: 0 8px 0px #000;
-    transition: 0.1s ease-in-out;
+  width: 4pc;
+  height: 4pc;
+  background-color: #3ec382;
+  border-radius: 16px;
+  border: 5px solid #000;
+  box-shadow: 0 8px 0px #000;
+  transition: 0.1s ease-in-out;
 }
 
 .button-container:active {
-    box-shadow: 0 0px 0px #000;
-    transform: translateY(8px);
+  box-shadow: 0 0px 0px #000;
+  transform: translateY(8px);
 }
 
-.btn{
-    margin: 1%;
-    background-color: #D1FE51;
-    color: black;
+.btn {
+  margin: 1%;
+  background-color: #d1fe51;
+  color: black;
 }
-
 
 /* Ajustar estilos de las Promos */
-#Preciosid{
-    background-image:url(../../../assets/stacked.svg);
-    background-size: cover;
-    background-position: center;
+#Preciosid {
+  background-image: url(../../../assets/stacked.svg);
+  background-size: cover;
+  background-position: center;
 }
 .promo {
-    background-color: #f8f9fa;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 15px;
-    min-width: 170px;
-    margin-right: 10px;
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  min-width: 170px;
+  margin-right: 10px;
 }
-.promo-header{
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    background-color: #59c9af;
+.promo-header {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  background-color: #59c9af;
 }
 .promo-title {
-    color: #333;
-    display: flex;
-    justify-content: center;
+  color: #333;
+  display: flex;
+  justify-content: center;
 }
 .promo-text {
-    color: #777;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    min-height: 50px;
-    padding: 0 10px;
+  color: #777;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  min-height: 50px;
+  padding: 0 10px;
 }
-
 
 /* Estilos para Contactos */
-#Contactosid{
-    background-image:url(../../../assets/peaks.svg);
-    background-size: cover;
-    background-position: center;
+#Contactosid {
+  background-image: url(../../../assets/peaks.svg);
+  background-size: cover;
+  background-position: center;
 }
-
 
 /* Estilos para el footer */
 .footer {
-  font-family: 'Noto Sans';
-    text-align: center;
-    background-color: #000;
+  font-family: "Noto Sans";
+  text-align: center;
+  background-color: #000;
 }
-.footer_text{
-    color:#BACE96;
+.footer_text {
+  color: #bace96;
 }

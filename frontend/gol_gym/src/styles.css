@@ -4,162 +4,160 @@
 }
 
 body {
-    background-image: url("assets/blob.svg");
-    background-size: cover;
-    background-position: center;
-    backgroun-repeat: no-repeat;
+  background-image: url("assets/blob.svg");
+  background-size: cover;
+  background-position: center;
+  backgroun-repeat: no-repeat;
 }
 
 h1 {
-    font-size: 40pt;
-    font-family: 'Noto Sans';
-    font-weight: bold;
-    color: #FFFDC3;
-    text-shadow:
-      0px 1px 0px #000,
-      0px 2px 0px #000,
-      0px 3px 0px #000,
-      0px 4px 0px #000,
-      0px 5px 0px #000,
-      0px 6px 0px #000,
-      0px 7px 0px #000;
+  font-size: 40pt;
+  font-family: "Noto Sans";
+  font-weight: bold;
+  color: #fffdc3;
+  text-shadow:
+    0px 1px 0px #000,
+    0px 2px 0px #000,
+    0px 3px 0px #000,
+    0px 4px 0px #000,
+    0px 5px 0px #000,
+    0px 6px 0px #000,
+    0px 7px 0px #000;
 }
 
-.title-main{
-    font-size: 45px;
-    text-align: center;
-    margin-bottom: 40px;
-    margin-top: 50px;
+.title-main {
+  font-size: 45px;
+  text-align: center;
+  /* margin-top: 50px; */
 }
-
 
 /* Otros Ajustes*/
 
-.altura-min-1{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 85vh;
+.altura-min-1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 85vh;
 }
-.altura-min-2{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 70vh;
+.altura-min-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
 }
-.altura-min-3{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: 100vh;
+.altura-min-3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
 }
 
 @font-face {
-    font-family: 'titlefont';
-    src: url(assets/commando-webfont.woff) format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "titlefont";
+  src: url(assets/commando-webfont.woff) format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
 /* clases y planificaciones*/
 
-.card-space{
-    padding-bottom: 20px;
+.card-space {
+  padding-bottom: 20px;
 }
 .card-clase {
-    background-position: center;
-    border-radius: 15px;
-    background-color: #00122080;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 5px 0 black;
-    border: 5px solid black;
+  background-position: center;
+  border-radius: 15px;
+  background-color: #00122080;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 5px 0 black;
+  border: 5px solid black;
 }
 .card-c-header {
-    text-align: center;
-    background-color: #d2ff52;
-    border-bottom: 5px solid black;
-    color: #000;
-    text-shadow: 0 0 0 transparent;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+  text-align: center;
+  background-color: #d2ff52;
+  border-bottom: 5px solid black;
+  color: #000;
+  text-shadow: 0 0 0 transparent;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 .card-c-body {
-    border-top: 0px solid black;
-    background-color: none;
+  border-top: 0px solid black;
+  background-color: none;
 }
 .event-card {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 .card-c-title {
-    font-weight: bold;
-    font-size: 16pt;
-    padding: 10px;
+  font-weight: bold;
+  font-size: 16pt;
+  padding: 10px;
 }
 .card-c-text {
-    font-size: 20px;
-    color: #fffdc3;
+  font-size: 20px;
+  color: #fffdc3;
 }
 
 /*botones navegacion*/
 
-.btn-primary{
-    background-color: #1e293b;
+.btn-primary {
+  background-color: #1e293b;
 }
 .btn-secondary {
-    background-color: #1e293b;
-    border-color: #d2ff52;
-    margin-bottom: 15px;
-  }
+  background-color: #1e293b;
+  border-color: #d2ff52;
+  margin-bottom: 15px;
+}
 .btn-secondary:hover {
-    background-color: #d2ff52;
+  background-color: #d2ff52;
 }
 .dropdown-item {
-    color: white;
+  color: white;
 }
 .dropdown-item:hover {
-    background-color: #d2ff52;
+  background-color: #d2ff52;
 }
 .dropdown-menu {
-    background-color: #000;
+  background-color: #000;
 }
-.btn-outline-secondary{
-    background-color: rgba(30, 41, 59, 0.7);
-    color: rgb(255,255,255);
+.btn-outline-secondary {
+  background-color: rgba(30, 41, 59, 0.7);
+  color: rgb(255, 255, 255);
 }
 
 /*paginacion*/
 
-.nav-bar-num{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-weight: bold;
+.nav-bar-num {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bold;
 }
 
 /* Vista datos usuario */
 .rounded-box {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    position: relative;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  position: relative;
 }
 .custom-button {
-    font-size: 24px;
-    text-align: center;
-    width: 200px;
+  font-size: 24px;
+  text-align: center;
+  width: 200px;
 }
 .icon-link {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 
 .list-group-item a {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
-.flecha{
-    background-position-x: right;
+.flecha {
+  background-position-x: right;
 }

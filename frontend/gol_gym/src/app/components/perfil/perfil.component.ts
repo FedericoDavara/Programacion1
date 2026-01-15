@@ -325,6 +325,36 @@ export class PerfilComponent implements OnInit {
     return false;
   }
 
+  // Permite solo números enteros (para edad)
+  onlyNumbers(event: KeyboardEvent): boolean {
+    const charCode = event.key;
+    if (!/^[0-9]$/.test(charCode)) {
+      event.preventDefault();
+      return false;
+    }
+    return true;
+  }
+
+  // Permite números y separadores decimales (para peso, altura)
+  onlyDecimalNumbers(event: KeyboardEvent): boolean {
+    const charCode = event.key;
+    const input = event.target as HTMLInputElement;
+    const value = input.value;
+    
+    // Permitir números
+    if (/^[0-9]$/.test(charCode)) {
+      return true;
+    }
+    
+    // Permitir punto o coma solo si no existe ya uno
+    if ((charCode === '.' || charCode === ',') && !value.includes('.') && !value.includes(',')) {
+      return true;
+    }
+    
+    event.preventDefault();
+    return false;
+  }
+
   shouldEditUser(): boolean {
     if (this.UserData.rol === 'user') {
       return this.AlumData !== null && Object.values(this.AlumData).some((value) => value !== null && value !== '');

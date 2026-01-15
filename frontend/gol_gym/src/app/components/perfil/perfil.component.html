@@ -68,9 +68,10 @@
                 <form [formGroup]='profileForm'>
                     <div class="mb-3" *ngIf="UserData.rol === 'user'">
                         <label for="edad" class="form-label">Edad <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" formControlName="edad" 
+                        <input type="text" inputmode="numeric" class="form-control" formControlName="edad" 
                                [class.is-invalid]="profileForm.get('edad')?.invalid && profileForm.get('edad')?.touched"
-                               placeholder="Ingrese su edad (13-100 años)">
+                               placeholder="Ingrese su edad (13-100 años)"
+                               (keypress)="onlyNumbers($event)">
                         <div class="invalid-feedback" *ngIf="profileForm.get('edad')?.invalid && profileForm.get('edad')?.touched">
                             <div *ngIf="profileForm.get('edad')?.errors?.['required']">La edad es requerida</div>
                             <div *ngIf="profileForm.get('edad')?.errors?.['min']">La edad mínima es 13 años</div>
@@ -80,9 +81,10 @@
                     </div>
                     <div class="mb-3" *ngIf="UserData.rol === 'user'">
                         <label for="peso" class="form-label">Peso (kg, Ej: 70,54) <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" formControlName="peso" 
+                        <input type="text" inputmode="decimal" class="form-control" formControlName="peso" 
                                [class.is-invalid]="profileForm.get('peso')?.invalid && profileForm.get('peso')?.touched"
-                               placeholder="Ingrese su peso (ej: 70,5)">
+                               placeholder="Ingrese su peso (ej: 70,5)"
+                               (keypress)="onlyDecimalNumbers($event)">
                         <div class="invalid-feedback" *ngIf="profileForm.get('peso')?.invalid && profileForm.get('peso')?.touched">
                             <div *ngIf="profileForm.get('peso')?.errors?.['required']">El peso es requerido</div>
                             <div *ngIf="profileForm.get('peso')?.errors?.['pattern']">Formato inválido, solo se permiten números con coma (ej: 70,5)</div>
@@ -92,9 +94,10 @@
                     </div>
                     <div class="mb-3" *ngIf="UserData.rol === 'user'">
                         <label for="altura" class="form-label">Altura (m, Ej: 1,87) <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" formControlName="altura" 
+                        <input type="text" inputmode="decimal" class="form-control" formControlName="altura" 
                                [class.is-invalid]="profileForm.get('altura')?.invalid && profileForm.get('altura')?.touched"
-                               placeholder="Ingrese su altura (ej: 1,75)">
+                               placeholder="Ingrese su altura (ej: 1,75)"
+                               (keypress)="onlyDecimalNumbers($event)">
                         <div class="invalid-feedback" *ngIf="profileForm.get('altura')?.invalid && profileForm.get('altura')?.touched">
                             <div *ngIf="profileForm.get('altura')?.errors?.['required']">La altura es requerida</div>
                             <div *ngIf="profileForm.get('altura')?.errors?.['pattern']">Formato inválido, solo se permiten números con coma (ej: 1,75)</div>

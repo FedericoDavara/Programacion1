@@ -13,7 +13,7 @@ import jwtDecode from 'jwt-decode';
 })
 export class LoginComponent {
   loginForm!: FormGroup;
- 
+
   constructor(
     private authService: AuthService,
     private router : Router,
@@ -22,13 +22,12 @@ export class LoginComponent {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      email: ['c.portal@alumno.um.edu.ar', [Validators.required, Validators.email]],
-      password: ['hola123', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]]
+      email: ['cr7@gmail.com', [Validators.required, Validators.email]],
+      password: ['madrid15', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]]
     })
   }
 
   login(dataLogin:any = {} ){
-    //dataLogin = {email: 'johnnylawrence@nomail.com', password: 'clave1234'}
     console.log('comprobando credenciales');
     this.authService.login(dataLogin).subscribe({
       next: (rta:any) => {
@@ -52,7 +51,7 @@ export class LoginComponent {
           localStorage.removeItem('dni');
           localStorage.removeItem('role');
           localStorage.removeItem('token');
-          
+
       }, complete: () => {
         console.log('Finalizo')
       }

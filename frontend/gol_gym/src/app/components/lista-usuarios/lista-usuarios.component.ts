@@ -43,8 +43,35 @@ export class ListaUsuariosComponent implements OnInit {
       apellido: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(/^[a-zA-ZÀ-ÿ\s]+$/)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
-      telefono: ['', [Validators.required, Validators.pattern(/^[0-9]{8,15}$/)]],
+      telefono: ['', [Validators.required, Validators.pattern(/^[0-9]{7,15}$/)]],
       rol: ['', Validators.required],
+      edad: [''],
+      peso: [''],
+      altura: [''],
+      sexo: ['']
+    });
+
+    this.newUserForm.get('rol')?.valueChanges.subscribe(rol => {
+      const edadControl = this.newUserForm.get('edad');
+      const pesoControl = this.newUserForm.get('peso');
+      const alturaControl = this.newUserForm.get('altura');
+      const sexoControl = this.newUserForm.get('sexo');
+
+      if (rol === 'user') {
+        edadControl?.setValidators([Validators.required, Validators.min(13), Validators.max(100)]);
+        pesoControl?.setValidators([Validators.required, Validators.min(40), Validators.max(200)]);
+        alturaControl?.setValidators([Validators.required, Validators.min(1.40), Validators.max(2.20)]);
+        sexoControl?.setValidators([Validators.required]);
+      } else {
+        edadControl?.clearValidators();
+        pesoControl?.clearValidators();
+        alturaControl?.clearValidators();
+        sexoControl?.clearValidators();
+      }
+      edadControl?.updateValueAndValidity();
+      pesoControl?.updateValueAndValidity();
+      alturaControl?.updateValueAndValidity();
+      sexoControl?.updateValueAndValidity();
     });
 
     this.editUserForm = this.formBuilder.group({
@@ -52,7 +79,7 @@ export class ListaUsuariosComponent implements OnInit {
       apellido: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(/^[a-zA-ZÀ-ÿ\s]+$/)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.minLength(6), Validators.maxLength(20)]],
-      telefono: ['', [Validators.required, Validators.pattern(/^[0-9]{8,15}$/)]],
+      telefono: ['', [Validators.required, Validators.pattern(/^[0-9]{7,15}$/)]],
     });
   }
 
@@ -155,7 +182,35 @@ export class ListaUsuariosComponent implements OnInit {
     });
   }
 
+  // Permite solo números enteros (para DNI, teléfono, edad)
+  onlyNumbers(event: KeyboardEvent): boolean {
+    const charCode = event.key;
+    if (!/^[0-9]$/.test(charCode)) {
+      event.preventDefault();
+      return false;
+    }
+    return true;
+  }
 
+  // Permite números y separadores decimales (para peso, altura)
+  onlyDecimalNumbers(event: KeyboardEvent): boolean {
+    const charCode = event.key;
+    const input = event.target as HTMLInputElement;
+    const value = input.value;
+    
+    // Permitir números
+    if (/^[0-9]$/.test(charCode)) {
+      return true;
+    }
+    
+    // Permitir punto o coma solo si no existe ya uno
+    if ((charCode === '.' || charCode === ',') && !value.includes('.') && !value.includes(',')) {
+      return true;
+    }
+    
+    event.preventDefault();
+    return false;
+  }
 
   selectedRole = localStorage.getItem('role');
 }

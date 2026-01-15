@@ -110,12 +110,13 @@
                     </div>
                     <div class="mb-3">
                         <label for="dni" class="form-label">DNI <span class="text-danger">*</span></label>
-                        <input type="number" class="form-control" formControlName="dni" 
+                        <input type="text" inputmode="numeric" class="form-control" formControlName="dni" 
                                [class.is-invalid]="newUserForm.get('dni')?.invalid && newUserForm.get('dni')?.touched"
-                               placeholder="Ingrese el DNI (7-8 dígitos)">
+                               placeholder="Ingrese el DNI (7-8 dígitos)"
+                               (keypress)="onlyNumbers($event)">
                         <div class="invalid-feedback" *ngIf="newUserForm.get('dni')?.invalid && newUserForm.get('dni')?.touched">
                             <div *ngIf="newUserForm.get('dni')?.errors?.['required']">El DNI es requerido</div>
-                            <div *ngIf="newUserForm.get('dni')?.errors?.['pattern']">El DNI debe contener solo números</div>
+                            <div *ngIf="newUserForm.get('dni')?.errors?.['pattern']">El DNI debe tener entre 7 y 8 dígitos</div>
                             <div *ngIf="newUserForm.get('dni')?.errors?.['minlength'] || newUserForm.get('dni')?.errors?.['maxlength']">El DNI debe tener entre 7 y 8 dígitos</div>
                         </div>
                     </div>
@@ -142,12 +143,66 @@
                     </div>
                     <div class="mb-3">
                         <label for="telefono" class="form-label">Teléfono <span class="text-danger">*</span></label>
-                        <input type="tel" class="form-control" formControlName="telefono" 
+                        <input type="text" inputmode="numeric" class="form-control" formControlName="telefono" 
                                [class.is-invalid]="newUserForm.get('telefono')?.invalid && newUserForm.get('telefono')?.touched"
-                               placeholder="Ingrese el número de teléfono">
+                               placeholder="Ingrese el número de teléfono"
+                               (keypress)="onlyNumbers($event)">
                         <div class="invalid-feedback" *ngIf="newUserForm.get('telefono')?.invalid && newUserForm.get('telefono')?.touched">
                             <div *ngIf="newUserForm.get('telefono')?.errors?.['required']">El teléfono es requerido</div>
-                            <div *ngIf="newUserForm.get('telefono')?.errors?.['pattern']">El teléfono debe tener entre 8 y 15 dígitos</div>
+                            <div *ngIf="newUserForm.get('telefono')?.errors?.['pattern']">El teléfono debe tener entre 7 y 15 dígitos</div>
+                        </div>
+                    </div>
+
+                    <!-- Campos adicionales para Alumno -->
+                    <div *ngIf="newUserForm.get('rol')?.value === 'user'">
+                        <div class="mb-3">
+                            <label for="edad" class="form-label">Edad <span class="text-danger">*</span></label>
+                            <input type="text" inputmode="numeric" class="form-control" formControlName="edad"
+                                   [class.is-invalid]="newUserForm.get('edad')?.invalid && newUserForm.get('edad')?.touched"
+                                   placeholder="Ingrese la edad (13-100)"
+                                   (keypress)="onlyNumbers($event)">
+                            <div class="invalid-feedback" *ngIf="newUserForm.get('edad')?.invalid && newUserForm.get('edad')?.touched">
+                                <div *ngIf="newUserForm.get('edad')?.errors?.['required']">La edad es requerida</div>
+                                <div *ngIf="newUserForm.get('edad')?.errors?.['min'] || newUserForm.get('edad')?.errors?.['max']">La edad debe estar entre 13 y 100 años</div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="peso" class="form-label">Peso (kg) <span class="text-danger">*</span></label>
+                                <input type="text" inputmode="decimal" class="form-control" formControlName="peso"
+                                       [class.is-invalid]="newUserForm.get('peso')?.invalid && newUserForm.get('peso')?.touched"
+                                       placeholder="Ej: 70.5"
+                                       (keypress)="onlyDecimalNumbers($event)">
+                                <div class="invalid-feedback" *ngIf="newUserForm.get('peso')?.invalid && newUserForm.get('peso')?.touched">
+                                    <div *ngIf="newUserForm.get('peso')?.errors?.['required']">El peso es requerido</div>
+                                    <div *ngIf="newUserForm.get('peso')?.errors?.['min'] || newUserForm.get('peso')?.errors?.['max']">El peso debe estar entre 40 y 200 kg</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="altura" class="form-label">Altura (m) <span class="text-danger">*</span></label>
+                                <input type="text" inputmode="decimal" class="form-control" formControlName="altura"
+                                       [class.is-invalid]="newUserForm.get('altura')?.invalid && newUserForm.get('altura')?.touched"
+                                       placeholder="Ej: 1.75"
+                                       (keypress)="onlyDecimalNumbers($event)">
+                                <div class="invalid-feedback" *ngIf="newUserForm.get('altura')?.invalid && newUserForm.get('altura')?.touched">
+                                    <div *ngIf="newUserForm.get('altura')?.errors?.['required']">La altura es requerida</div>
+                                    <div *ngIf="newUserForm.get('altura')?.errors?.['min'] || newUserForm.get('altura')?.errors?.['max']">La altura debe estar entre 1.40 y 2.20 m</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Sexo <span class="text-danger">*</span></label>
+                            <select class="form-select" formControlName="sexo"
+                                    [class.is-invalid]="newUserForm.get('sexo')?.invalid && newUserForm.get('sexo')?.touched">
+                                <option value="" disabled selected>Seleccione el sexo</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                            </select>
+                            <div class="invalid-feedback" *ngIf="newUserForm.get('sexo')?.invalid && newUserForm.get('sexo')?.touched">
+                                <div *ngIf="newUserForm.get('sexo')?.errors?.['required']">El sexo es requerido</div>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -220,12 +275,13 @@
                     </div>
                     <div class="mb-3">
                         <label for="telefono" class="form-label">Teléfono <span class="text-danger">*</span></label>
-                        <input type="tel" class="form-control" formControlName="telefono" 
+                        <input type="text" inputmode="numeric" class="form-control" formControlName="telefono" 
                                [class.is-invalid]="editUserForm.get('telefono')?.invalid && editUserForm.get('telefono')?.touched"
-                               placeholder="Ingrese el número de teléfono">
+                               placeholder="Ingrese el número de teléfono"
+                               (keypress)="onlyNumbers($event)">
                         <div class="invalid-feedback" *ngIf="editUserForm.get('telefono')?.invalid && editUserForm.get('telefono')?.touched">
                             <div *ngIf="editUserForm.get('telefono')?.errors?.['required']">El teléfono es requerido</div>
-                            <div *ngIf="editUserForm.get('telefono')?.errors?.['pattern']">El teléfono debe tener entre 8 y 15 dígitos</div>
+                            <div *ngIf="editUserForm.get('telefono')?.errors?.['pattern']">El teléfono debe tener entre 7 y 15 dígitos</div>
                         </div>
                     </div>
                 </form>

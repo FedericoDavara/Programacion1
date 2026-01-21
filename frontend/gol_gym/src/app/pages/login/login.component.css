@@ -3,11 +3,8 @@
 }
 
 body {
-    background-image: url("../../../assets/blob.svg");
-    background-size: cover;
-    background-position: center;
-    margin: 0; /* Agrega margen cero para asegurarte de que el fondo cubra toda la ventana */
-    padding: 0; /* Añade padding cero para evitar desbordamientos */
+    margin: 0;
+    padding: 0;
 }
 
 .login-centrado {

@@ -27,6 +27,19 @@ export class NavbarComponent {
     this.sidebarOpen = false;
   }
 
+  onLogoClick() {
+    this.closeSidebar();
+    const rutaActual = this.router.url;
+
+    if (rutaActual === '/home' || rutaActual === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      this.router.navigate(['/home']).then(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+  }
+
   scrollToTop() {
     this.closeSidebar();
     const rutaActual = this.router.url;

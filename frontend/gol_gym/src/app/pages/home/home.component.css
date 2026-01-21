@@ -3,10 +3,7 @@
 }
 
 #Inicio {
-  background-image: url(../../../assets/blob.svg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  /* Fondo heredado del body */
 }
 
 .portada {
@@ -136,16 +133,12 @@
 
 /* Estilos para las clases */
 #Clasesid {
-  background-image: url(../../../assets/waves.svg);
-  background-size: cover;
-  background-position: center;
+  /* Fondo heredado del body */
 }
 
 /* Ajustar estilos de los Profes */
 #Profesid {
-  background-image: url(../../../assets/stacked.svg);
-  background-size: cover;
-  background-position: center;
+  /* Fondo heredado del body */
 }
 .card {
   border-radius: 30px;
@@ -221,9 +214,7 @@
 
 /* Ajustar estilos de las Promos */
 #Preciosid {
-  background-image: url(../../../assets/stacked.svg);
-  background-size: cover;
-  background-position: center;
+  /* Fondo heredado del body */
 }
 .promo {
   background-color: #f8f9fa;
@@ -253,9 +244,7 @@
 
 /* Estilos para Contactos */
 #Contactosid {
-  background-image: url(../../../assets/peaks.svg);
-  background-size: cover;
-  background-position: center;
+  /* Fondo heredado del body */
 }
 
 /* Estilos para el footer */

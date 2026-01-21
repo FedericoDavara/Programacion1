@@ -35,38 +35,36 @@
 .btn-saber-mas {
   display: inline-block;
   padding: 15px 40px;
-  background-color: #d1fe51;
-  color: #000;
+  background: linear-gradient(135deg, #D1FE51 0%, #a8cb41 100%);
+  color: #001322;
   font-size: 18px;
   font-weight: bold;
   text-decoration: none;
-  border-radius: 15px;
-  border: 5px solid #000;
-  box-shadow: 0 8px 0px #000;
-  transition: 0.15s ease-in-out;
+  border-radius: 12px;
+  border: 3px solid rgba(0, 19, 34, 0.3);
+  box-shadow: 0 6px 0px rgba(209, 254, 81, 0.4);
+  transition: all 0.15s ease-in-out;
 }
 
 .btn-saber-mas:hover {
-  box-shadow: 0 4px 0px #000;
-  transform: translateY(4px);
-  color: #000;
+  box-shadow: 0 3px 0px rgba(209, 254, 81, 0.4);
+  transform: translateY(3px);
+  color: #001322;
+  background: linear-gradient(135deg, #dcff6b 0%, #b8d84d 100%);
 }
 
 .btn-saber-mas:active {
-  box-shadow: 0 0px 0px #000;
-  transform: translateY(8px);
+  box-shadow: 0 0px 0px rgba(209, 254, 81, 0.4);
+  transform: translateY(6px);
 }
 
 .description {
   font-size: 18pt;
   font-family: "Noto Sans";
   font-weight: bold;
-  color: #d0fd50;
+  color: #D1FE51;
   text-align: center;
-  text-shadow:
-    0px 1px 0px #000,
-    0px 2px 0px #000,
-    0px 3px 0px #000;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   margin-bottom: 20px;
 }
 
@@ -91,30 +89,25 @@
   margin-bottom: 150px;
 }
 .card-horario {
-  background-color: #1e293b;
+  background-color: rgba(0, 19, 34, 0.85);
   border-radius: 15px;
   padding: 20px;
+  border: 3px solid rgba(209, 254, 81, 0.3);
 }
 
 .class-title {
   font-size: 20pt;
   font-weight: bold;
-  color: #fefdc3;
+  color: #D1FE51;
   margin: 0;
-  text-shadow:
-    0px 1px 0px #000,
-    0px 2px 0px #000,
-    0px 3px 0px #000;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .class-hour {
   font-size: 14pt;
   font-style: italic;
-  color: #fefdc3;
-  text-shadow:
-    0px 1px 0px #000,
-    0px 2px 0px #000,
-    0px 3px 0px #000;
+  color: #FFFDC3;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .header-img {
@@ -125,32 +118,36 @@
 }
 
 .card-c-header {
-  border-bottom: 3px solid #000;
+  border-bottom: 3px solid rgba(0, 19, 34, 0.5);
+  background: linear-gradient(135deg, #D1FE51 0%, #a8cb41 100%);
+  border-top-left-radius: 17px;
+  border-top-right-radius: 17px;
 }
 
 .card-clase {
-  background-color: #00122080;
+  background-color: rgba(0, 19, 34, 0.8);
   backdrop-filter: blur(10px);
-  border: 5px solid #000;
+  border: 3px solid rgba(209, 254, 81, 0.3);
   border-radius: 20px;
-  box-shadow: 0 10px 0px #000;
-  transition: 0.15s ease-in;
+  box-shadow: 0 8px 0px rgba(209, 254, 81, 0.2);
+  transition: all 0.2s ease-in-out;
 }
 
 .card-clase:hover {
-  box-shadow: 0 0px 0px #000;
-  transform: translateY(10px);
+  box-shadow: 0 12px 25px rgba(209, 254, 81, 0.2);
+  transform: translateY(-5px);
+  border-color: #D1FE51;
 }
 
 .title-horarios {
   font-size: 30px;
   font-family: "titlefont";
-  color: #d2ff52;
+  color: #D1FE51;
 }
 .text-horarios {
   font-size: 15px;
   font-weight: bold;
-  color: white;
+  color: #FFFDC3;
 }
 .parpadea {
   animation-name: parpadeo;
@@ -181,28 +178,29 @@
   /* Fondo heredado del body */
 }
 .card {
-  border-radius: 30px;
-  border: 5px solid #000;
-  background-color: #00122080;
+  border-radius: 20px;
+  border: 3px solid rgba(209, 254, 81, 0.3);
+  background-color: rgba(0, 19, 34, 0.85);
   backdrop-filter: blur(10px);
   width: auto;
   height: auto;
   margin: 10px;
   padding: 0px;
-  box-shadow: 0 10px 0px #000;
-  transition: 0.15s ease-in;
+  box-shadow: 0 8px 0px rgba(209, 254, 81, 0.2);
+  transition: all 0.2s ease-in-out;
 }
 
 .card:hover {
-  box-shadow: 0 0px 0px #000;
-  transform: translateY(10px);
+  box-shadow: 0 12px 25px rgba(209, 254, 81, 0.2);
+  transform: translateY(-5px);
+  border-color: #D1FE51;
 }
 
 .card-img-top {
-  border-top-left-radius: 24px;
-  border-top-right-radius: 24px;
+  border-top-left-radius: 17px;
+  border-top-right-radius: 17px;
   object-fit: cover;
-  border-bottom: 5px solid #000;
+  border-bottom: 3px solid rgba(209, 254, 81, 0.3);
 }
 .card-title {
   color: #d1fe51;
@@ -234,22 +232,33 @@
 .button-container {
   width: 4pc;
   height: 4pc;
-  background-color: #3ec382;
-  border-radius: 16px;
-  border: 5px solid #000;
-  box-shadow: 0 8px 0px #000;
-  transition: 0.1s ease-in-out;
+  background: linear-gradient(135deg, #D1FE51 0%, #a8cb41 100%);
+  border-radius: 12px;
+  border: 3px solid rgba(0, 19, 34, 0.3);
+  box-shadow: 0 6px 0px rgba(209, 254, 81, 0.3);
+  transition: all 0.15s ease-in-out;
 }
 
 .button-container:active {
-  box-shadow: 0 0px 0px #000;
-  transform: translateY(8px);
+  box-shadow: 0 0px 0px rgba(209, 254, 81, 0.3);
+  transform: translateY(6px);
 }
 
 .btn {
   margin: 1%;
-  background-color: #d1fe51;
-  color: black;
+  background-color: #D1FE51;
+  color: #001322;
+  font-weight: bold;
+  border-radius: 10px;
+  border: 3px solid rgba(209, 254, 81, 0.5);
+  box-shadow: 0 4px 0px rgba(209, 254, 81, 0.3);
+  transition: all 0.15s ease;
+}
+
+.btn:hover {
+  background-color: #b8e048;
+  box-shadow: 0 0px 0px rgba(209, 254, 81, 0.3);
+  transform: translateY(4px);
 }
 
 /* Ajustar estilos de las Promos */

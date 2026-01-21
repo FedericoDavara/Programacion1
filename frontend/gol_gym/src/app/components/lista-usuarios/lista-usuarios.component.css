@@ -2,7 +2,7 @@
   font-family: "Noto Sans";
 }
 
-/* Ocultar spinners en inputs numéricos */
+/* Ocultar spinners en inputs numericos */
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -19,72 +19,124 @@ input[type="number"] {
 
 .btn {
     margin-bottom: 5px;
-    background-color: #D2FF52;
-    color: black;
+    background-color: #D1FE51;
+    color: #001322;
+    font-weight: bold;
     border-radius: 10px;
-    border: 5px solid #000;
-    box-shadow: 0 5px 0px #000;
-    transition: 0.15s ease-in;
+    border: 3px solid rgba(209, 254, 81, 0.5);
+    box-shadow: 0 5px 0px rgba(209, 254, 81, 0.3);
+    transition: all 0.15s ease-in;
 }
 
 .btn:hover {
-    box-shadow: 0 0px 0px #000;
+    background-color: #b8e048;
+    box-shadow: 0 0px 0px rgba(209, 254, 81, 0.3);
     transform: translateY(5px);
 }
 
 .list-group-item {
-  border-radius: 10px;
+  border-radius: 12px;
   margin-bottom: 10px;
-  border: 5px solid #000;
-  background-color: #00122080;
+  border: 2px solid rgba(209, 254, 81, 0.2);
+  background-color: rgba(0, 19, 34, 0.8);
   backdrop-filter: blur(10px);
   color: #FFFDC3;
-  text-shadow: 0 3px 0 black;
-  font-weight: bold;
-  box-shadow: 5px 5px 5px rgb(0 0 0 / 50%);
+  font-weight: 500;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
 }
 
 .list-group-item:hover {
-  color: #D2FF52;
+  color: #D1FE51;
+  border-color: rgba(209, 254, 81, 0.5);
+  transform: translateX(5px);
 }
 
 .form-control {
   border-radius: 10px;
   margin-bottom: 10px;
-  border: 5px solid #000;
-  background-color: #00122080;
+  border: 2px solid rgba(209, 254, 81, 0.3);
+  background-color: rgba(0, 19, 34, 0.8);
   backdrop-filter: blur(10px);
   color: #FFFDC3;
-  font-weight: bold;
-  box-shadow: 5px 5px 5px rgb(0 0 0 / 50%);
+  font-weight: 500;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #D1FE51;
+  box-shadow: 0 0 15px rgba(209, 254, 81, 0.3);
+  background-color: rgba(0, 19, 34, 0.9);
+  color: #FFFDC3;
 }
 
 .form-control::placeholder {
-  color: #FFFDC350;
+  color: rgba(255, 253, 195, 0.5);
 }
 
 .modal-content {
-  background-color: #00898280;
+  background-color: rgba(0, 19, 34, 0.95);
   border-radius: 20px;
-  border: solid 5px black;
-  backdrop-filter: blur(10px);
+  border: 3px solid rgba(209, 254, 81, 0.3);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.modal-header {
+  border-bottom: 1px solid rgba(209, 254, 81, 0.2);
+}
+
+.modal-footer {
+  border-top: 1px solid rgba(209, 254, 81, 0.2);
 }
 
 .modal-title {
-  color: #D2FF52;
+  color: #D1FE51;
   font-weight: bold;
-  text-shadow: 0 3px 0 black;
 }
 
 .form-label {
-  color: #D2FF52;
-  text-shadow: 0 3px 0 black;
+  color: #D1FE51;
+  font-weight: 600;
 }
 
-/* Cambiar el color del botón de paginación en Bootstrap */
+/* Paginacion */
 .page-link {
-  color: #D2FF52; /* Cambia el color del texto del botón */
-  background-color: #000; /* Cambia el color de fondo del botón */
-  border: 5px solid black; /* Cambia el color del borde del botón */
+  color: #D1FE51;
+  background-color: rgba(0, 19, 34, 0.9);
+  border: 2px solid rgba(209, 254, 81, 0.3);
+  border-radius: 8px;
+  margin: 0 2px;
+  transition: all 0.2s ease;
+}
+
+.page-link:hover {
+  background-color: rgba(209, 254, 81, 0.2);
+  border-color: #D1FE51;
+  color: #D1FE51;
+}
+
+.page-item.active .page-link {
+  background-color: #D1FE51;
+  border-color: #D1FE51;
+  color: #001322;
+}
+
+.btn-close {
+  filter: invert(1);
+}
+
+/* Select styling */
+.form-select {
   border-radius: 10px;
+  border: 2px solid rgba(209, 254, 81, 0.3);
+  background-color: rgba(0, 19, 34, 0.8);
+  color: #FFFDC3;
+  padding: 10px 15px;
+}
+
+.form-select:focus {
+  border-color: #D1FE51;
+  box-shadow: 0 0 15px rgba(209, 254, 81, 0.3);
 }

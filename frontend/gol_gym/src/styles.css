@@ -8,13 +8,13 @@ html {
 }
 
 body {
-  background-color: #001220;
+  background-color: #001322;
   background-image:
-    radial-gradient(ellipse 80% 60% at 10% 20%, rgba(0, 100, 116, 0.5) 0%, transparent 50%),
-    radial-gradient(ellipse 70% 50% at 90% 80%, rgba(0, 149, 134, 0.4) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 80% at 50% 50%, rgba(0, 65, 88, 0.5) 0%, transparent 50%),
-    radial-gradient(ellipse 50% 40% at 80% 20%, rgba(209, 254, 81, 0.15) 0%, transparent 40%),
-    radial-gradient(ellipse 90% 70% at 20% 90%, rgba(0, 33, 51, 0.6) 0%, transparent 50%);
+    radial-gradient(ellipse 80% 60% at 10% 20%, rgba(0, 100, 116, 0.4) 0%, transparent 50%),
+    radial-gradient(ellipse 70% 50% at 90% 80%, rgba(0, 149, 134, 0.3) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 80% at 50% 50%, rgba(0, 65, 88, 0.4) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 40% at 80% 20%, rgba(209, 254, 81, 0.1) 0%, transparent 40%),
+    radial-gradient(ellipse 90% 70% at 20% 90%, rgba(0, 33, 51, 0.5) 0%, transparent 50%);
   background-attachment: fixed;
   background-size: 200% 200%;
   min-height: 100vh;
@@ -55,7 +55,7 @@ h1 {
   font-size: 40pt;
   font-family: "Noto Sans";
   font-weight: bold;
-  color: #fffdc3;
+  color: #FFFDC3;
   text-shadow:
     0px 1px 0px #000,
     0px 2px 0px #000,
@@ -69,7 +69,6 @@ h1 {
 .title-main {
   font-size: 45px;
   text-align: center;
-  /* margin-top: 50px; */
 }
 
 /* Otros Ajustes*/
@@ -110,23 +109,32 @@ h1 {
 .card-clase {
   background-position: center;
   border-radius: 15px;
-  background-color: #00122080;
+  background-color: rgba(0, 19, 34, 0.8);
   backdrop-filter: blur(10px);
-  box-shadow: 0 5px 0 black;
-  border: 5px solid black;
+  box-shadow: 0 5px 0 rgba(209, 254, 81, 0.3);
+  border: 3px solid rgba(209, 254, 81, 0.3);
+  transition: all 0.2s ease;
 }
+
+.card-clase:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(209, 254, 81, 0.2);
+  border-color: #D1FE51;
+}
+
 .card-c-header {
   text-align: center;
-  background-color: #d2ff52;
-  border-bottom: 5px solid black;
-  color: #000;
+  background: linear-gradient(135deg, #D1FE51 0%, #a8cb41 100%);
+  border-bottom: 3px solid rgba(0, 19, 34, 0.3);
+  color: #001322;
   text-shadow: 0 0 0 transparent;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
 }
 .card-c-body {
   border-top: 0px solid black;
-  background-color: none;
+  background-color: transparent;
+  padding: 15px;
 }
 .event-card {
   margin-bottom: 20px;
@@ -135,37 +143,66 @@ h1 {
   font-weight: bold;
   font-size: 16pt;
   padding: 10px;
+  color: #001322;
 }
 .card-c-text {
   font-size: 20px;
-  color: #fffdc3;
+  color: #FFFDC3;
+}
+
+.class-title {
+  color: #D1FE51;
+  font-weight: bold;
+}
+
+.class-hour {
+  color: #FFFDC3;
+  font-size: 16px;
 }
 
 /*botones navegacion*/
 
 .btn-primary {
-  background-color: #1e293b;
+  background-color: rgba(0, 19, 34, 0.9);
+  border-color: rgba(209, 254, 81, 0.3);
 }
+
+.btn-primary:hover {
+  background-color: rgba(209, 254, 81, 0.2);
+  border-color: #D1FE51;
+}
+
 .btn-secondary {
-  background-color: #1e293b;
-  border-color: #d2ff52;
+  background-color: rgba(0, 19, 34, 0.9);
+  border-color: #D1FE51;
+  color: #D1FE51;
   margin-bottom: 15px;
 }
 .btn-secondary:hover {
-  background-color: #d2ff52;
+  background-color: #D1FE51;
+  color: #001322;
 }
 .dropdown-item {
-  color: white;
+  color: #FFFDC3;
 }
 .dropdown-item:hover {
-  background-color: #d2ff52;
+  background-color: #D1FE51;
+  color: #001322;
 }
 .dropdown-menu {
-  background-color: #000;
+  background-color: rgba(0, 19, 34, 0.95);
+  border: 2px solid rgba(209, 254, 81, 0.3);
 }
 .btn-outline-secondary {
-  background-color: rgba(30, 41, 59, 0.7);
-  color: rgb(255, 255, 255);
+  background-color: rgba(0, 19, 34, 0.7);
+  color: #FFFDC3;
+  border-color: rgba(209, 254, 81, 0.3);
+}
+
+.btn-outline-secondary:hover {
+  background-color: rgba(209, 254, 81, 0.2);
+  color: #D1FE51;
+  border-color: #D1FE51;
 }
 
 /*paginacion*/
@@ -179,11 +216,13 @@ h1 {
 
 /* Vista datos usuario */
 .rounded-box {
-  background-color: white;
+  background-color: rgba(0, 19, 34, 0.85);
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  border: 3px solid rgba(209, 254, 81, 0.3);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
   position: relative;
+  backdrop-filter: blur(10px);
 }
 .custom-button {
   font-size: 24px;
@@ -210,5 +249,101 @@ h1 {
 }
 
 .icon-black {
-  color: #000000;
+  color: #001322;
+}
+
+/* Global form styles */
+.form-control {
+  background-color: rgba(0, 19, 34, 0.8);
+  border: 2px solid rgba(209, 254, 81, 0.3);
+  border-radius: 10px;
+  color: #FFFDC3;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  background-color: rgba(0, 19, 34, 0.9);
+  border-color: #D1FE51;
+  box-shadow: 0 0 15px rgba(209, 254, 81, 0.3);
+  color: #FFFDC3;
+}
+
+.form-control::placeholder {
+  color: rgba(255, 253, 195, 0.5);
+}
+
+.form-label {
+  color: #D1FE51;
+  font-weight: 600;
+}
+
+/* Global modal styles */
+.modal-content {
+  background-color: rgba(0, 19, 34, 0.95);
+  border: 3px solid rgba(209, 254, 81, 0.3);
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+}
+
+.modal-header {
+  border-bottom: 1px solid rgba(209, 254, 81, 0.2);
+}
+
+.modal-footer {
+  border-top: 1px solid rgba(209, 254, 81, 0.2);
+}
+
+.modal-title {
+  color: #D1FE51;
+  font-weight: bold;
+}
+
+.btn-close {
+  filter: invert(1);
+}
+
+/* Global button styles */
+.btn {
+  font-weight: 600;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+/* Tables */
+.table {
+  color: #FFFDC3;
+}
+
+.table th {
+  color: #D1FE51;
+  border-color: rgba(209, 254, 81, 0.2);
+}
+
+.table td {
+  border-color: rgba(209, 254, 81, 0.1);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 19, 34, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(209, 254, 81, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #D1FE51;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(209, 254, 81, 0.3);
+  color: #FFFDC3;
 }

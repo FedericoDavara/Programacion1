@@ -3,7 +3,8 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    position: relative; /* Create a positioning context for the circle */
+    position: relative;
+    min-height: 80vh;
 }
 
 .error-image-container {
@@ -15,12 +16,14 @@
     position: absolute;
     width: 93vh;
     height: 93vh;
-    background-color: rgba(0, 0, 0, .85);
+    background: radial-gradient(circle, rgba(0, 19, 34, 0.9) 0%, rgba(0, 19, 34, 0.95) 100%);
+    border: 3px solid rgba(209, 254, 81, 0.3);
     border-radius: 50%;
     z-index: -1;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    box-shadow: 0 0 60px rgba(209, 254, 81, 0.2);
 }
 
 .error-image {
@@ -31,4 +34,34 @@
 
 .error-text {
     text-align: center;
+    color: #FFFDC3;
+}
+
+.error-text h1 {
+    color: #D1FE51;
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.error-text p {
+    color: #FFFDC3;
+    font-size: 18px;
+}
+
+.error-btn {
+    margin-top: 30px;
+    background-color: #D1FE51;
+    color: #001322;
+    font-weight: bold;
+    padding: 12px 30px;
+    border-radius: 10px;
+    border: none;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.error-btn:hover {
+    background-color: #b8e048;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(209, 254, 81, 0.3);
 }

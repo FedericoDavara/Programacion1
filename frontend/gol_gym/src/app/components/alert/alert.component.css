@@ -1,19 +1,20 @@
 .alert-top {
-    position: fixed;
-    top: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    max-width: 400px;
-    padding: 15px;
-    background: linear-gradient(45deg, #00f09b, #D2FF52);
-    border-radius: 20px;
-    border: 5px solid #000;
-    color: #000;
-    box-shadow: 0 5px 0px rgba(0, 0, 0, 1);
-    z-index: 1000;
-    text-align: center;
-    animation: alert-top 0.5s ease-in-out forwards, alert-hold 5s 0.5s forwards, alert-bottom 0.5s 7s ease-in-out forwards;
-  }
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 400px;
+  padding: 15px 25px;
+  background: linear-gradient(135deg, #D1FE51 0%, #a8cb41 100%);
+  border-radius: 15px;
+  border: 3px solid rgba(0, 19, 34, 0.3);
+  color: #001322;
+  box-shadow: 0 8px 30px rgba(209, 254, 81, 0.4);
+  z-index: 1000;
+  text-align: center;
+  font-weight: 600;
+  animation: alert-top 0.5s ease-in-out forwards, alert-hold 5s 0.5s forwards, alert-bottom 0.5s 7s ease-in-out forwards;
+}
 
 @keyframes alert-top {
   0% {
@@ -42,15 +43,43 @@
   }
 }
 
-  .alert-box {
-    padding: 20px;
-  }
+.alert-box {
+  padding: 20px;
+}
 
-  .close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    color: #000000; /* Color del icono de cierre */
-    font-size: 24px;
-  }
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  color: #001322;
+  font-size: 24px;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.close-button:hover {
+  opacity: 1;
+}
+
+/* Alert variants */
+.alert-success {
+  background: linear-gradient(135deg, #D1FE51 0%, #a8cb41 100%);
+  border-color: rgba(0, 19, 34, 0.3);
+}
+
+.alert-error {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
+  color: #fff;
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.alert-warning {
+  background: linear-gradient(135deg, #FFFDC3 0%, #f0e9a0 100%);
+  border-color: rgba(0, 19, 34, 0.3);
+}
+
+.alert-info {
+  background: linear-gradient(135deg, #73E5EB 0%, #5bc8d0 100%);
+  border-color: rgba(0, 19, 34, 0.3);
+}

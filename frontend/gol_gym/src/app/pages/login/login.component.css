@@ -16,23 +16,45 @@ body {
 
 .btn {
     margin: 10px;
-    background-color: #D2FF52;
-    color: black;
+    background-color: #D1FE51;
+    color: #001322;
+    font-weight: bold;
     border-radius: 10px;
-    border: 5px solid #000;
-    box-shadow: 0 5px 0px #000;
-    transition: 0.15s ease-in;
+    border: 3px solid #D1FE51;
+    box-shadow: 0 5px 0px rgba(209, 254, 81, 0.5);
+    transition: all 0.15s ease-in;
 }
 
 .btn:hover {
-    box-shadow: 0 0px 0px #000;
+    background-color: #b8e048;
+    box-shadow: 0 0px 0px rgba(209, 254, 81, 0.5);
     transform: translateY(5px);
 }
 
-
 .form-label {
-  color: #D2FF52;
-  text-shadow: 0 3px 0 black;
+  color: #D1FE51;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.form-control {
+  background-color: rgba(0, 19, 34, 0.8);
+  border: 2px solid rgba(209, 254, 81, 0.3);
+  border-radius: 10px;
+  color: #FFFDC3;
+  padding: 12px 15px;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  background-color: rgba(0, 19, 34, 0.9);
+  border-color: #D1FE51;
+  box-shadow: 0 0 10px rgba(209, 254, 81, 0.3);
+  color: #FFFDC3;
+}
+
+.form-control::placeholder {
+  color: rgba(255, 253, 195, 0.5);
 }
 
 #email {
@@ -41,4 +63,31 @@ body {
 
 #password {
     margin-bottom: 15px;
+}
+
+/* Login card container */
+.login-card {
+  background-color: rgba(0, 19, 34, 0.85);
+  backdrop-filter: blur(10px);
+  border: 3px solid rgba(209, 254, 81, 0.3);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.login-card h2,
+.login-card h3,
+.login-card h4 {
+  color: #D1FE51;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Links */
+a {
+  color: #D1FE51;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #FFFDC3;
 }

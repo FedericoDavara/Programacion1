@@ -10,12 +10,12 @@
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  background-color: #00122095;
+  background-color: #00132295;
   backdrop-filter: blur(10px);
-  border: 3px solid #d2ff52;
+  border: 3px solid #D1FE51;
   border-radius: 12px;
   padding: 16px 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(210, 255, 82, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(209, 254, 81, 0.2);
   max-width: 380px;
   pointer-events: all;
   position: relative;
@@ -50,24 +50,24 @@
 }
 
 .alert-icon {
-  color: #d2ff52;
+  color: #D1FE51;
   flex-shrink: 0;
   margin-top: 2px;
 }
 
 .alert-content {
-  color: #fffdc3;
+  color: #FFFDC3;
   font-size: 0.95rem;
   line-height: 1.5;
   font-family: "Noto Sans", sans-serif;
 }
 
 .alert-content b {
-  color: #d2ff52;
+  color: #D1FE51;
 }
 
 .alert-close {
-  color: #fffdc3;
+  color: #FFFDC3;
   font-size: 1.5rem;
   cursor: pointer;
   opacity: 0.6;
@@ -79,7 +79,7 @@
 
 .alert-close:hover {
   opacity: 1;
-  color: #d2ff52;
+  color: #D1FE51;
 }
 
 .alert-progress {
@@ -87,7 +87,7 @@
   bottom: 0;
   left: 0;
   height: 3px;
-  background: linear-gradient(90deg, #d2ff52, #fffdc3);
+  background: linear-gradient(90deg, #D1FE51, #FFFDC3);
   animation: progress 5s linear forwards;
   border-radius: 0 0 0 9px;
 }

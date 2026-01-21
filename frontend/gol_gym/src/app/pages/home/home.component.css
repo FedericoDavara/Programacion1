@@ -290,9 +290,74 @@
 /* Estilos para el footer */
 .footer {
   font-family: "Noto Sans";
-  text-align: center;
-  background-color: #000;
+  background: #001322;
+  border-top: 3px solid #D1FE51;
+  position: relative;
 }
-.footer_text {
-  color: #bace96;
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #D1FE51, transparent);
+}
+
+.footer-card {
+  padding: 25px 20px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.footer-card:hover {
+  transform: translateY(-5px);
+}
+
+.footer-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 15px;
+  background: linear-gradient(135deg, #D1FE51 0%, #a8cb41 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(209, 254, 81, 0.3);
+}
+
+.footer-icon i {
+  font-size: 24px;
+  color: #001322;
+}
+
+.footer-title {
+  color: #D1FE51;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.footer-text {
+  color: #FFFDC3;
+  font-size: 14px;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.footer-divider {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(209, 254, 81, 0.5), transparent);
+  margin: 30px 0 20px;
+}
+
+.footer-copyright {
+  color: #FFFDC3;
+  font-size: 13px;
+  margin: 0;
+  letter-spacing: 0.5px;
 }

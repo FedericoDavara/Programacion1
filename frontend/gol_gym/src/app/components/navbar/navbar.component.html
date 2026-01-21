@@ -19,24 +19,24 @@
   <nav class="sidebar-nav">
     <ul class="nav-list">
       <li class="nav-item">
-        <a (click)="scrollToTop()" class="nav-link">INICIO</a>
+        <a (click)="scrollToTop()" class="nav-link"><i class="bi bi-house-fill"></i> INICIO</a>
       </li>
       <li class="nav-item">
-        <a (click)="scrollToClases()" class="nav-link">CLASES</a>
+        <a (click)="scrollToClases()" class="nav-link"><i class="bi bi-calendar-event-fill"></i> CLASES</a>
       </li>
       <li class="nav-item">
-        <a (click)="scrollToPrecio()" class="nav-link">PRECIOS</a>
+        <a (click)="scrollToPrecio()" class="nav-link"><i class="bi bi-tag-fill"></i> PRECIOS</a>
       </li>
       <li class="nav-item">
-        <a (click)="scrollToProfes()" class="nav-link">PROFES</a>
+        <a (click)="scrollToProfes()" class="nav-link"><i class="bi bi-people-fill"></i> PROFES</a>
       </li>
       <li class="nav-item">
-        <a (click)="scrollToContacto()" class="nav-link">CONTACTO</a>
+        <a (click)="scrollToContacto()" class="nav-link"><i class="bi bi-envelope-fill"></i> CONTACTO</a>
       </li>
     </ul>
   </nav>
 
   <div class="sidebar-footer" *ngIf="rutavisible">
-    <a routerLink="/login" class="btn-ingresar" (click)="closeSidebar()">INGRESAR</a>
+    <a routerLink="/login" class="btn-ingresar" (click)="closeSidebar()"><i class="bi bi-box-arrow-in-right"></i> INGRESAR</a>
   </div>
 </aside>

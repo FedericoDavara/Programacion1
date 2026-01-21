@@ -92,6 +92,14 @@
   border-radius: 0 0 0 9px;
 }
 
+.alert-notification.paused .alert-progress {
+  animation-play-state: paused;
+}
+
+.alert-notification:not(.paused):not(.closing) .alert-progress {
+  animation: progress 5s linear forwards;
+}
+
 @keyframes progress {
   0% {
     width: 100%;

@@ -1,27 +1,42 @@
-<nav class="navbar navbar-expand-lg navbar-dark custom-bg-color fixed-top">
-  <div class="container-fluid">
-    <a routerLink="/home"><img src="assets/logo.png" class="logo"></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
-    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse flex-column justify-content-between px-0" id="navbarNav">
-      <ul class="navbar-nav fs-5 justify-content-center">
+<!-- Botón hamburguesa para móvil -->
+<button class="sidebar-toggle" (click)="toggleSidebar()" [class.active]="sidebarOpen">
+  <span class="bar"></span>
+  <span class="bar"></span>
+  <span class="bar"></span>
+</button>
 
-        <li *ngIf="rutavisible" class="nav-item">
-          <a routerLink="/login" class="nav-link">INGRESAR</a>
-        </li>
-        <li class="nav-item">
-          <a (click)="scrollToPrecio()" class="nav-link">PRECIOS</a>
-        </li>
-        <li class="nav-item">
-          <a (click)="scrollToProfes()" class="nav-link">PROFES</a>
-        </li>
-        <li class="nav-item">
-          <a (click)="scrollToContacto()" class="nav-link">CONTACTO</a>
-        </li>
-      </ul>
-    </div>
+<!-- Overlay para cerrar sidebar en móvil -->
+<div class="sidebar-overlay" [class.active]="sidebarOpen" (click)="closeSidebar()"></div>
 
+<!-- Sidebar -->
+<aside class="sidebar" [class.open]="sidebarOpen">
+  <div class="sidebar-header">
+    <a routerLink="/home" (click)="closeSidebar()">
+      <img src="assets/logo.png" class="logo" alt="Logo">
+    </a>
   </div>
-</nav>
+
+  <nav class="sidebar-nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a (click)="scrollToTop()" class="nav-link">INICIO</a>
+      </li>
+      <li class="nav-item">
+        <a (click)="scrollToClases()" class="nav-link">CLASES</a>
+      </li>
+      <li class="nav-item">
+        <a (click)="scrollToPrecio()" class="nav-link">PRECIOS</a>
+      </li>
+      <li class="nav-item">
+        <a (click)="scrollToProfes()" class="nav-link">PROFES</a>
+      </li>
+      <li class="nav-item">
+        <a (click)="scrollToContacto()" class="nav-link">CONTACTO</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="sidebar-footer" *ngIf="rutavisible">
+    <a routerLink="/login" class="btn-ingresar" (click)="closeSidebar()">INGRESAR</a>
+  </div>
+</aside>

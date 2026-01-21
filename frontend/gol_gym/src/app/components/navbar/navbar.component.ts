@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer2 } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
@@ -9,17 +9,58 @@ import { Router, NavigationEnd } from '@angular/router';
 export class NavbarComponent {
 
   rutavisible = true;
+  sidebarOpen = false;
 
-  constructor(private router: Router, private renderer: Renderer2, private el: ElementRef) { 
+  constructor(private router: Router) { 
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.rutavisible = event.url !== '/login';
       }
     });
   }
-  
+
+  toggleSidebar() {
+    this.sidebarOpen = !this.sidebarOpen;
+  }
+
+  closeSidebar() {
+    this.sidebarOpen = false;
+  }
+
+  scrollToTop() {
+    this.closeSidebar();
+    const rutaActual = this.router.url;
+
+    if (rutaActual === '/login') {
+      this.router.navigate(['/home']).then(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  scrollToClases() {
+    this.closeSidebar();
+    const rutaActual = this.router.url;
+
+    if (rutaActual === '/login') {
+      this.router.navigate(['/home']).then(() => {
+        const elementoDestino = document.getElementById('Clasesid');
+        if (elementoDestino) {
+          elementoDestino.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    } else {
+      const elementoDestino = document.getElementById('Clasesid');
+      if (elementoDestino) {
+        elementoDestino.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }
 
   scrollToPrecio() {
+    this.closeSidebar();
     const rutaActual = this.router.url;
 
     if (rutaActual === '/login') {
@@ -38,6 +79,7 @@ export class NavbarComponent {
   }
 
   scrollToProfes() {
+    this.closeSidebar();
     const rutaActual = this.router.url;
 
     if (rutaActual === '/login') {
@@ -56,6 +98,7 @@ export class NavbarComponent {
   }
 
   scrollToContacto() {
+    this.closeSidebar();
     const rutaActual = this.router.url;
 
     if (rutaActual === '/login') {
@@ -73,4 +116,3 @@ export class NavbarComponent {
     }
   }
 }
-

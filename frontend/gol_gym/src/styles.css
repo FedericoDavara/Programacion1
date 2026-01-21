@@ -10,6 +10,18 @@ body {
   backgroun-repeat: no-repeat;
 }
 
+/* Contenedor principal con margen para sidebar */
+.main-content {
+  margin-left: 200px;
+  transition: margin-left 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+  }
+}
+
 h1 {
   font-size: 40pt;
   font-family: "Noto Sans";

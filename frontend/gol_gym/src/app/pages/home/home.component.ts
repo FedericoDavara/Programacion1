@@ -65,6 +65,14 @@ export class HomeComponent {
       this.arrayClases = data;
     });
   }
+
+  scrollToClases() {
+    const elementoDestino = document.getElementById('Clasesid');
+    if (elementoDestino) {
+      elementoDestino.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
   getClasesPorDia(dia: string): any {
     if (this.arrayClases) {
       return this.arrayClases

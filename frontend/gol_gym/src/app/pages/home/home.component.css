@@ -257,29 +257,59 @@
   /* Fondo heredado del body */
 }
 .promo {
-  background-color: #f8f9fa;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 15px;
+  background-color: #001322;
+  border: 3px solid #D1FE51;
+  border-radius: 20px;
   min-width: 170px;
-  margin-right: 10px;
+  margin: 10px;
+  box-shadow: 0 8px 0px rgba(209, 254, 81, 0.3);
+  transition: all 0.2s ease-in-out;
+  overflow: hidden;
 }
+
+.promo:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 20px rgba(209, 254, 81, 0.2);
+}
+
 .promo-header {
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-  background-color: #59c9af;
+  background: linear-gradient(135deg, #D1FE51 0%, #a8cb41 100%);
+  padding: 20px 15px;
+  position: relative;
 }
+
+.promo-header h3 {
+  color: #001322;
+  font-family: "Noto Sans";
+  font-weight: 800;
+  font-size: 22px;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.promo .card-body {
+  padding: 25px 15px;
+  background-color: #001322;
+}
+
 .promo-title {
-  color: #333;
-  display: flex;
-  justify-content: center;
+  color: #D1FE51;
+  font-family: "Noto Sans";
+  font-weight: 700;
+  font-size: 36px;
+  margin-bottom: 15px;
+  text-shadow: 0 0 10px rgba(209, 254, 81, 0.3);
 }
+
 .promo-text {
-  color: #777;
-  align-items: center;
-  justify-content: center;
-  display: flex;
+  color: #FFFDC3;
+  font-family: "Noto Sans";
+  font-size: 14px;
+  line-height: 1.6;
   min-height: 50px;
   padding: 0 10px;
+  margin: 0;
 }
 
 /* Estilos para Contactos */

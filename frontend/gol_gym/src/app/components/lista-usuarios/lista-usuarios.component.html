@@ -6,13 +6,13 @@
                 <input type="text" class="form-control me-2 flex-grow-1" placeholder="Buscar usuario..."[(ngModel)]="searchTerm" (input)="buscarUsuarios()">
 
                 <button *ngIf="selectedRole === 'admin'" class="btn btn-primary ms-2" data-bs-toggle="modal" data-bs-target="#nuevoUsuarioModal">
-                    <i class="fa-solid fa-plus"></i>
+                    <i class="bi bi-plus-lg fw-bold"></i>
                 </button>
             </div>
             
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                    aria-expanded="false"><span class="fa-solid fa-filter"></span>
+                    aria-expanded="false"><i class="bi bi-funnel-fill"></i>
                     Filtrar Por
                 </button>
                 <ul class="dropdown-menu">
@@ -30,7 +30,7 @@
                     {{user.nombre}} {{user.apellido}}
                     </a>
                     <div>
-                        <a type="button" *ngIf="selectedRole === 'admin'" (click)="saveDni(user)" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editarUsuarioModal"><i class="fa-solid fa-pen-to-square text-white"></i></a>
+                        <a type="button" *ngIf="selectedRole === 'admin'" (click)="saveDni(user)" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editarUsuarioModal"><i class="bi bi-pencil-fill icon-black"></i></a>
                     </div>
                 </li>
             </ul>
@@ -75,10 +75,9 @@
                         
                     </div>
                     
-                    <!-- MENSAJE QUE APARECE CUANDO SE SELECCIONA PROFESOR -->
                     <div class="alert alert-info d-flex align-items-center mb-3" role="alert" 
                          *ngIf="newUserForm.get('rol')?.value === 'profesor'">
-                        <i class="fa-solid fa-info-circle me-2"></i>
+                        <i class="bi bi-info-circle-fill me-2"></i>
                         <span><strong>Recordatorio:</strong> Recuerda que después de crear este usuario, deberás asignarle una especialidad en su perfil.</span>
                     </div>
                     

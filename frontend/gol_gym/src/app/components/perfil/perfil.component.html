@@ -6,7 +6,7 @@
                     <h1 style="margin-top: 15px; padding-right: 60px;">{{UserData.nombre}} {{UserData.apellido}}</h1>
                     <button *ngIf="selectedRole === 'admin' && UserData.rol !== 'admin'" data-bs-toggle="modal" data-bs-target="#editUsuarioModal"
                         class="btn btn-primary btn-lm me-2"><i
-                            class="fa-solid fa-pen-to-square text-white fa-lg"></i></button>
+                            class="bi bi-pencil-fill icon-black fs-5"></i></button>
                 </div>
                 <div *ngIf="UserData.rol === 'user'" class="d-flex mb-3">
                     <a type="button" (click)="verPlanif(UserData.dni)"
@@ -41,10 +41,10 @@
                 </div>
                 <div style="display: flex; justify-content: space-between;">
                     <div>
-                        <button *ngIf="(selectedRole === 'admin' && UserData.rol !== 'admin') || (selectedRole === 'profesor' && UserData.rol === 'user')" class="btn btn-danger btn-lm" data-bs-toggle="modal" data-bs-target="#eliminarModal"><i class="fa-solid fa-trash fa-lg"></i></button>
+                        <button *ngIf="(selectedRole === 'admin' && UserData.rol !== 'admin') || (selectedRole === 'profesor' && UserData.rol === 'user')" class="btn btn-danger btn-lm" data-bs-toggle="modal" data-bs-target="#eliminarModal"><i class="bi bi-trash-fill fs-5"></i></button>
                     </div>
                     <div>
-                        <a *ngIf="selectedRole === 'admin' || selectedRole === 'profesor'" routerLink="/vInicio"><button class="btn btn-primary btn-lm"><i class="fa-solid fa-left-long fa-lg"></i></button></a>
+                        <a *ngIf="selectedRole === 'admin' || selectedRole === 'profesor'" routerLink="/vInicio"><button class="btn btn-primary btn-lm"><i class="bi bi-arrow-left-short fs-4"></i></button></a>
                     </div>
                 </div>
             </div>

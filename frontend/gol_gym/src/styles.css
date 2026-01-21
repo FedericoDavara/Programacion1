@@ -202,3 +202,13 @@ h1 {
 .flecha {
   background-position-x: right;
 }
+
+/* Iconos sin sombra */
+.bi {
+  text-shadow: none;
+  filter: none;
+}
+
+.icon-black {
+  color: #000000;
+}

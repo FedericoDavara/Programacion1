@@ -9,7 +9,7 @@
                     <h1 style="margin-top: 15px; padding-right: 50px;">Planificación</h1>
                     <button *ngIf="selectedRole === 'admin' || selectedRole === 'profesor'" data-bs-toggle="modal"
                         data-bs-target="#editarPlanificacion" class="btn btn-primary btn-lm me-2"><i
-                            class="fa-solid fa-pen-to-square text-white fa-lg"></i></button>
+                            class="bi bi-pencil-fill icon-black fs-5"></i></button>
                 </div>
 
                 <div class="col-md-6" *ngIf="UserPlanif && UserPlanif.length > 0">
@@ -23,11 +23,11 @@
                 </div>
                 <div style="display: flex; justify-content: space-between;">
                     <div>
-                        <button *ngIf="selectedRole === 'admin' || selectedRole === 'profesor'" class="btn btn-danger btn-lm" data-bs-toggle="modal" data-bs-target="#eliminarModal"><i class="fa-solid fa-trash fa-lg"></i></button>
+                        <button *ngIf="selectedRole === 'admin' || selectedRole === 'profesor'" class="btn btn-danger btn-lm" data-bs-toggle="modal" data-bs-target="#eliminarModal"><i class="bi bi-trash-fill fs-5"></i></button>
                     </div>
                     <div>
                         <button class="btn btn-primary btn-lm" (click)="verPerfil(perfilDni)">
-                            <i class="fa-solid fa-left-long fa-lg"></i>
+                            <i class="bi bi-arrow-left-short fs-4"></i>
                         </button>
                     </div>
                 </div>

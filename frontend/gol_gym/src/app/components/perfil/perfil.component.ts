@@ -225,20 +225,35 @@ export class PerfilComponent implements OnInit {
     this.usuariosService.createUserAlum(dataAlum).subscribe(
       (response) => {
         console.log('Alumno creado con éxito', response);
+        window.location.reload();
       },
+      (error) => {
+        console.error('Error al crear alumno:', error);
+        alert('Error al crear alumno: ' + (error.error?.error || 'Error desconocido'));
+      }
     );
   }
   crearProfesor(dataProf: any = {}) {
     this.usuariosService.createUserProf(dataProf).subscribe(
       (response) => {
         console.log('Profesor creado con éxito', response);
+        window.location.reload();
       },
+      (error) => {
+        console.error('Error al crear profesor:', error);
+        alert('Error al crear profesor: ' + (error.error?.error || 'Error desconocido'));
+      }
     );
   }
   editarAlumno(dataAlum: any = {}) {
     this.usuariosService.updateUserAlum(this.perfilDni, dataAlum).subscribe(
       (response) => {
         console.log('Alumno actualizado con éxito', response);
+        window.location.reload();
+      },
+      (error) => {
+        console.error('Error al actualizar alumno:', error);
+        alert('Error al actualizar alumno: ' + (error.error?.error || 'Error desconocido'));
       }
     );
   }
@@ -246,7 +261,12 @@ export class PerfilComponent implements OnInit {
     this.usuariosService.updateUserProf(this.perfilDni, dataProf).subscribe(
       (response) => {
         console.log('Profesor actualizado con éxito', response);
+        window.location.reload();
       },
+      (error) => {
+        console.error('Error al actualizar profesor:', error);
+        alert('Error al actualizar profesor: ' + (error.error?.error || 'Error desconocido'));
+      }
     );
   }
 
@@ -267,14 +287,12 @@ export class PerfilComponent implements OnInit {
           (alumData) => {
             console.log("El alumno ya existe. Actualizando...");
             this.editarAlumno(this.profileForm.value);
-            window.location.reload();
           },
           (alumError) => {
             if (alumError.status === 404) {
               console.log("El alumno no existe. Creando nuevo registro...");
               this.profileForm.value.dni = this.perfilDni
               this.crearAlumno(this.profileForm.value);
-              window.location.reload();
             } else {
               console.error('Error al verificar alumno:', alumError);
               alert("Complete el formulario del alumno");
@@ -285,12 +303,10 @@ export class PerfilComponent implements OnInit {
         this.usuariosService.getUserProf(this.perfilDni).subscribe(
           (profData) => {
             this.editarProfesor(this.profileForm.value);
-            window.location.reload();
           },
           (profError) => {
             this.profileForm.value.dni = this.perfilDni;
             this.crearProfesor(this.profileForm.value);
-            window.location.reload();
           }
         );
       }

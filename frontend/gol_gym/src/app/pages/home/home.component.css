@@ -232,15 +232,24 @@
 .button-container {
   width: 4pc;
   height: 4pc;
-  background: linear-gradient(135deg, #D1FE51 0%, #a8cb41 100%);
+  background: linear-gradient(135deg, #D1FE51 0%, #73E5EB 100%);
   border-radius: 12px;
-  border: 3px solid rgba(0, 19, 34, 0.3);
-  box-shadow: 0 6px 0px rgba(209, 254, 81, 0.3);
+  border: 3px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 0px rgba(0, 0, 0, 0.3);
   transition: all 0.15s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-container i {
+  font-size: 24px;
+  color: #001322;
+  font-weight: bold;
 }
 
 .button-container:active {
-  box-shadow: 0 0px 0px rgba(209, 254, 81, 0.3);
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0.3);
   transform: translateY(6px);
 }
 

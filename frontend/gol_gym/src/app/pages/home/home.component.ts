@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClasesService } from 'src/app/services/clases.service';
+import { ContactoService } from 'src/app/services/contacto.service';
 
 @Component({
   selector: 'app-home',
@@ -50,10 +52,24 @@ export class HomeComponent {
 
   arrayClases: any;
 
+  // Formulario de contacto
+  contactoForm: FormGroup;
+  enviando: boolean = false;
+  mensajeExito: string = '';
+  mensajeError: string = '';
+
   constructor(
     private router: Router,
-    private clasesService: ClasesService
-  ) {}
+    private clasesService: ClasesService,
+    private contactoService: ContactoService,
+    private fb: FormBuilder
+  ) {
+    this.contactoForm = this.fb.group({
+      nombre: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['', [Validators.required, Validators.email]],
+      mensaje: ['', [Validators.required, Validators.minLength(10)]]
+    });
+  }
 
   ngOnInit(): void {
     this.cargarClases();
@@ -94,7 +110,29 @@ export class HomeComponent {
     }
   }
 
+  enviarContacto() {
+    // Limpiar mensajes previos
+    this.mensajeExito = '';
+    this.mensajeError = '';
 
+    // Validar formulario
+    if (this.contactoForm.invalid) {
+      this.contactoForm.markAllAsTouched();
+      return;
+    }
 
+    this.enviando = true;
 
+    this.contactoService.enviarMensaje(this.contactoForm.value).subscribe({
+      next: (response) => {
+        this.mensajeExito = 'Mensaje enviado correctamente. Nos pondremos en contacto pronto.';
+        this.contactoForm.reset();
+        this.enviando = false;
+      },
+      error: (error) => {
+        this.mensajeError = error.error?.message || 'Error al enviar el mensaje. Intente nuevamente.';
+        this.enviando = false;
+      }
+    });
+  }
 }

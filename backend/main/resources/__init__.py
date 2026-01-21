@@ -8,9 +8,12 @@ from .planificacion import Planificacion as PlanificacionResource
 from .planificacion import Planificaciones as PlanificacionesResource
 from .planificacion import PlanificacionAlumno as PlanificacionAlumnoResource
 from .planificacion import PlanificacionProfesor as PlanificacionProfesorResource
-from .planificacion import PlanificacionesProfesores as PlanificacionesProfesoresResource
+from .planificacion import (
+    PlanificacionesProfesores as PlanificacionesProfesoresResource,
+)
 from .clases import Clase as ClaseResource
 from .clases import Clases as ClasesResource
 from .clases import ClasesPorProfesor as ClasesPorProfesorResource
 from .permiso import Permiso as PermisoResource
 from .permiso import Permisos as PermisosResource
+from .contacto import Contacto as ContactoResource

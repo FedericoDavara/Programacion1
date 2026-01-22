@@ -68,7 +68,7 @@ def create_app():
         resources.ClasesPorProfesorResource, "/clases_por_profesor/<dni_profesor>"
     )
 
-    api.add_resource(resources.ContactoResource, "/contacto")
+    #api.add_resource(resources.ContactoResource, "/contacto")
 
     api.init_app(app)
 

@@ -16,4 +16,4 @@ from .clases import Clases as ClasesResource
 from .clases import ClasesPorProfesor as ClasesPorProfesorResource
 from .permiso import Permiso as PermisoResource
 from .permiso import Permisos as PermisosResource
-from .contacto import Contacto as ContactoResource
+#from .contacto import Contacto as ContactoResource

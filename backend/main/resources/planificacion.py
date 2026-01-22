@@ -65,7 +65,7 @@ class Planificacion(Resource):
                         
                         result = sendMail(
                             to=[usuario_alumno.email],
-                            subject="📝 Planificación Actualizada - Gym El Chicho",
+                            subject="🚀 Level Up! Actualizamos la planificación en GOL GYM. ¿Estás listo para el próximo nivel?",
                             template="planificacion_actualizada",  # Crear este template también
                             **email_data
                         )
@@ -169,7 +169,7 @@ class Planificaciones(Resource):
                         # Enviar email
                         result = sendMail(
                             to=[usuario_alumno.email],
-                            subject="🏋️ Nueva Planificación Disponible - Gym El Chicho",
+                            subject="📋 Aviso Importante: Ya actualizamos las rutinas en GOL GYM. ¡Vení a buscar la tuya y a romperla!",
                             template="nueva_planificacion",
                             **email_data
                         )

@@ -118,3 +118,13 @@ table {
 th {
   color: #D1FE51;
 }
+
+/* Fix for day title color */
+.card-c-title {
+  color: #001322;
+}
+
+/* Fix for delete popup text color */
+.modal-body {
+  color: #FFFDC3;
+}

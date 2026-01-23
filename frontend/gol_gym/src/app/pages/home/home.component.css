@@ -32,6 +32,32 @@
   }
 }
 
+.hero-message {
+  font-size: 24px;
+  font-weight: bold;
+  color: #D1FE51;
+  text-align: center;
+  text-shadow: 0px 2px 8px rgba(0, 0, 0, 0.7);
+  margin: 0;
+  max-width: 90%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-message {
+    font-size: 18px;
+  }
+}
+
 .btn-saber-mas {
   display: inline-block;
   padding: 15px 40px;

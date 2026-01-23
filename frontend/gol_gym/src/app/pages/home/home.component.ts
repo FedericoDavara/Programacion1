@@ -13,22 +13,22 @@ export class HomeComponent {
   arrayPromos = [
     {
       mes:'1 Mes',
-      precio:'$9.999',
+      precio:'$12.000',
       info:'1 mes de suscripción estándar.',
     },
     {
       mes:'3 Meses',
-      precio:'$24.999',
+      precio:'$14.900',
       info:'Oferta por 3 meses de suscripción.',
     },
     {
       mes:'6 Meses',
-      precio:'$44.999',
+      precio:'$19.999',
       info:'Oferta por 6 meses de suscripción.',
     },
     {
       mes:'1 Año',
-      precio:'$84.999',
+      precio:'$114.000',
       info:'Oferta por 1 año de suscripción.',
     }
   ]

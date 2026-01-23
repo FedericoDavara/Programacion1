@@ -1,26 +1,24 @@
 <app-navbar></app-navbar>
 
 <div class="main-content" id="top">
-
-<div class="seccion-hero">
-    <img src="assets/logo.png" class="portada" alt="Logo GOL GYM">
-    <p class="hero-message"><b>Entrena como un campeón, juega para ganar</b></p>
+  <div class="seccion-hero">
+    <img src="assets/logo.png" class="portada" alt="Logo GOL GYM" />
+    <p class="hero-message"><b>¡Bienvenido a Gym Of Legends!</b></p>
     <button (click)="scrollToClases()" class="btn-saber-mas">Saber más</button>
-</div>
+  </div>
 
-
-<!-- Clases -->
-<div id="Clasesid" class="altura-min-1">
+  <!-- Clases -->
+  <div id="Clasesid" class="altura-min-1">
     <div>
-        <h1 class="text-center title-main">Clases</h1>
-    <p class="text-center description"><i>Exercise now or DIE!!!</i></p>
+      <h1 class="text-center title-main">Clases</h1>
+      <p class="text-center description"><i>Exercise now or DIE!!!</i></p>
     </div>
-    <div class="container" style="margin-bottom: 50px;">
+    <div class="container" style="margin-bottom: 50px">
       <div class="row">
         <div class="col-lg-4 col-md-6 card-space">
           <div class="card-clase">
             <div class="card-c-header">
-              <img src="assets/zumba.png" class="header-img">
+              <img src="assets/zumba.png" class="header-img" />
             </div>
             <div class="card-c-body">
               <p class="card-c-text text-center class-title">Zumba</p>
@@ -31,7 +29,7 @@
         <div class="col-lg-4 col-md-6 card-space">
           <div class="card-clase">
             <div class="card-c-header">
-              <img src="assets/maquina.png" class="header-img">
+              <img src="assets/maquina.png" class="header-img" />
             </div>
             <div class="card-c-body">
               <p class="card-c-text text-center class-title">Máquinas</p>
@@ -42,7 +40,7 @@
         <div class="col-lg-4 col-md-6 card-space">
           <div class="card-clase">
             <div class="card-c-header">
-              <img src="assets/spinning.png" class="header-img">
+              <img src="assets/spinning.png" class="header-img" />
             </div>
             <div class="card-c-body">
               <p class="card-c-text text-center class-title">Spinning</p>
@@ -53,18 +51,18 @@
         <div class="col-lg-4 col-md-6 card-space">
           <div class="card-clase">
             <div class="card-c-header">
-              <img src="assets/boxeo.png" class="header-img">
+              <img src="assets/boxeo.png" class="header-img" />
             </div>
             <div class="card-c-body">
               <p class="card-c-text text-center class-title">Boxeo</p>
-            <p class="card-c-text text-center class-hour">17:00 a 20:00</p>
+              <p class="card-c-text text-center class-hour">17:00 a 20:00</p>
             </div>
           </div>
         </div>
         <div class="col-lg-4 col-md-6 card-space">
           <div class="card-clase">
             <div class="card-c-header">
-              <img src="assets/cardio.png" class="header-img">
+              <img src="assets/cardio.png" class="header-img" />
             </div>
             <div class="card-c-body">
               <p class="card-c-text text-center class-title">Cardio</p>
@@ -75,7 +73,7 @@
         <div class="col-lg-4 col-md-6 card-space">
           <div class="card-clase">
             <div class="card-c-header">
-              <img src="assets/aerobics.png" class="header-img">
+              <img src="assets/aerobics.png" class="header-img" />
             </div>
             <div class="card-c-body">
               <p class="card-c-text text-center class-title">Aerobics</p>
@@ -87,155 +85,220 @@
     </div>
   </div>
 
-
-<!-- Precios -->
-<div id="Promosid" class="container altura-min-3">
+  <!-- Precios -->
+  <div id="Promosid" class="container altura-min-3">
     <h1 class="text-center title-main">Precios</h1>
     <div class="row mt-4 justify-content-center" style="margin-bottom: 50px">
-        <div *ngFor="let promo of arrayPromos" class="col-md-3">
-            <div class="promo">
-                <div class="promo-header">
-                    <h3 class="text-center">{{promo.mes}}</h3>
-                </div>
-                <div class="card-body text-center">
-                    <h4 class="promo-title">{{promo.precio}}</h4>
-                    <p class="promo-text">{{promo.info}}</p>
-                </div>
-            </div>
+      <div *ngFor="let promo of arrayPromos" class="col-md-3">
+        <div class="promo">
+          <div class="promo-header">
+            <h3 class="text-center">{{ promo.mes }}</h3>
+          </div>
+          <div class="card-body text-center">
+            <h4 class="promo-title">{{ promo.precio }}</h4>
+            <p class="promo-text">{{ promo.info }}</p>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
 
-<!-- Profesores -->
-<div id="Profesid" class="altura-min-3">
-  <h1 class="text-center title-main"><b>Nuestros Profesores</b></h1>
+  <!-- Profesores -->
+  <div id="Profesid" class="altura-min-3">
+    <h1 class="text-center title-main"><b>Nuestros Profesores</b></h1>
     <div id="carouselExample" class="carousel slide">
-        <div class="carousel-inner text-center">
-            <div class="carousel-item active">
-                <div class="d-inline-block mx-auto">
-                    <div class="card">
-                        <img src="assets/profe1.jpg" class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">Lionel Andrés Messi</h5>
-                            <p class="card-text">EL CABRA.</p>
-                        </div>
-                    </div>
-                </div>
+      <div class="carousel-inner text-center">
+        <div class="carousel-item active">
+          <div class="d-inline-block mx-auto">
+            <div class="card">
+              <img src="assets/profe1.jpg" class="card-img-top" />
+              <div class="card-body">
+                <h5 class="card-title">Lionel Andrés Messi</h5>
+                <p class="card-text">EL CABRA.</p>
+              </div>
             </div>
-            <div *ngFor="let profe of arrayProfes" class="carousel-item">
-                <div class="d-inline-block mx-auto">
-                    <div class="card">
-                        <img src={{profe.foto}} class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">{{profe.nombre}}</h5>
-                            <p class="card-text">{{profe.info}}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-            <span class="button-container d-flex align-items-center justify-content-center" aria-hidden="true">
-                <i class="bi bi-chevron-left"></i>
-            </span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-            <span class="button-container d-flex align-items-center justify-content-center" aria-hidden="true">
-                <i class="bi bi-chevron-right"></i>
-            </span>
-            <span class="visually-hidden">Next</span>
-        </button>
+        <div *ngFor="let profe of arrayProfes" class="carousel-item">
+          <div class="d-inline-block mx-auto">
+            <div class="card">
+              <img src="{{ profe.foto }}" class="card-img-top" />
+              <div class="card-body">
+                <h5 class="card-title">{{ profe.nombre }}</h5>
+                <p class="card-text">{{ profe.info }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExample"
+        data-bs-slide="prev"
+      >
+        <span
+          class="button-container d-flex align-items-center justify-content-center"
+          aria-hidden="true"
+        >
+          <i class="bi bi-chevron-left"></i>
+        </span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExample"
+        data-bs-slide="next"
+      >
+        <span
+          class="button-container d-flex align-items-center justify-content-center"
+          aria-hidden="true"
+        >
+          <i class="bi bi-chevron-right"></i>
+        </span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
-</div>
+  </div>
 
-
-<!-- Contacto -->
-<div id="Contactosid" class="altura-min-1">
+  <!-- Contacto -->
+  <div id="Contactosid" class="altura-min-1">
     <section class="contacto">
-        <h1 class="text-center mb-3 title-main">Contactanos</h1>
-        <div class="d-flex justify-content-center">
-            <form [formGroup]="contactoForm" (ngSubmit)="enviarContacto()">
-                <div class="form-group">
-                    <input type="text" class="form-control mb-3" id="nombre" formControlName="nombre" placeholder="Nombre"
-                        [class.is-invalid]="contactoForm.get('nombre')?.invalid && contactoForm.get('nombre')?.touched">
-                    <div class="invalid-feedback" *ngIf="contactoForm.get('nombre')?.invalid && contactoForm.get('nombre')?.touched">
-                        El nombre es requerido (min. 2 caracteres)
-                    </div>
-                    
-                    <input type="email" class="form-control mb-3" id="email" formControlName="email" placeholder="Email"
-                        [class.is-invalid]="contactoForm.get('email')?.invalid && contactoForm.get('email')?.touched">
-                    <div class="invalid-feedback" *ngIf="contactoForm.get('email')?.invalid && contactoForm.get('email')?.touched">
-                        Ingrese un email valido
-                    </div>
-                    
-                    <textarea class="form-control mb-3" id="mensaje" formControlName="mensaje" rows="4"
-                        placeholder="Deja tu mensaje aca..."
-                        [class.is-invalid]="contactoForm.get('mensaje')?.invalid && contactoForm.get('mensaje')?.touched"></textarea>
-                    <div class="invalid-feedback" *ngIf="contactoForm.get('mensaje')?.invalid && contactoForm.get('mensaje')?.touched">
-                        El mensaje es requerido (min. 10 caracteres)
-                    </div>
-                </div>
-                
-                <!-- Mensajes de exito/error -->
-                <div *ngIf="mensajeExito" class="alert alert-success mb-3">
-                    {{ mensajeExito }}
-                </div>
-                <div *ngIf="mensajeError" class="alert alert-danger mb-3">
-                    {{ mensajeError }}
-                </div>
-                
-                <div class="text-center">
-                    <button type="submit" class="btn btn-dark col-11" [disabled]="enviando">
-                        <span *ngIf="!enviando">Enviar Mensaje</span>
-                        <span *ngIf="enviando">Enviando...</span>
-                    </button>
-                </div>
-            </form>
-        </div>
+      <h1 class="text-center mb-3 title-main">Contactanos</h1>
+      <div class="d-flex justify-content-center">
+        <form [formGroup]="contactoForm" (ngSubmit)="enviarContacto()">
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control mb-3"
+              id="nombre"
+              formControlName="nombre"
+              placeholder="Nombre"
+              [class.is-invalid]="
+                contactoForm.get('nombre')?.invalid &&
+                contactoForm.get('nombre')?.touched
+              "
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="
+                contactoForm.get('nombre')?.invalid &&
+                contactoForm.get('nombre')?.touched
+              "
+            >
+              El nombre es requerido (min. 2 caracteres)
+            </div>
+
+            <input
+              type="email"
+              class="form-control mb-3"
+              id="email"
+              formControlName="email"
+              placeholder="Email"
+              [class.is-invalid]="
+                contactoForm.get('email')?.invalid &&
+                contactoForm.get('email')?.touched
+              "
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="
+                contactoForm.get('email')?.invalid &&
+                contactoForm.get('email')?.touched
+              "
+            >
+              Ingrese un email valido
+            </div>
+
+            <textarea
+              class="form-control mb-3"
+              id="mensaje"
+              formControlName="mensaje"
+              rows="4"
+              placeholder="Deja tu mensaje aca..."
+              [class.is-invalid]="
+                contactoForm.get('mensaje')?.invalid &&
+                contactoForm.get('mensaje')?.touched
+              "
+            ></textarea>
+            <div
+              class="invalid-feedback"
+              *ngIf="
+                contactoForm.get('mensaje')?.invalid &&
+                contactoForm.get('mensaje')?.touched
+              "
+            >
+              El mensaje es requerido (min. 10 caracteres)
+            </div>
+          </div>
+
+          <!-- Mensajes de exito/error -->
+          <div *ngIf="mensajeExito" class="alert alert-success mb-3">
+            {{ mensajeExito }}
+          </div>
+          <div *ngIf="mensajeError" class="alert alert-danger mb-3">
+            {{ mensajeError }}
+          </div>
+
+          <div class="text-center">
+            <button
+              type="submit"
+              class="btn btn-dark col-11"
+              [disabled]="enviando"
+            >
+              <span *ngIf="!enviando">Enviar Mensaje</span>
+              <span *ngIf="enviando">Enviando...</span>
+            </button>
+          </div>
+        </form>
+      </div>
     </section>
-</div>
+  </div>
 
-
-<!-- Pie de Página -->
-<footer class="footer py-5">
+  <!-- Pie de Página -->
+  <footer class="footer py-5">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-4 col-sm-6 mb-4 mb-md-0">
-                <div class="footer-card">
-                    <div class="footer-icon">
-                        <i class="bi bi-geo-alt-fill"></i>
-                    </div>
-                    <h5 class="footer-title">Visitanos</h5>
-                    <p class="footer-text">AV. Siempreviva 742<br>Mendoza, Argentina</p>
-                </div>
+      <div class="row justify-content-center">
+        <div class="col-md-4 col-sm-6 mb-4 mb-md-0">
+          <div class="footer-card">
+            <div class="footer-icon">
+              <i class="bi bi-geo-alt-fill"></i>
             </div>
-            <div class="col-md-4 col-sm-6 mb-4 mb-md-0">
-                <div class="footer-card">
-                    <div class="footer-icon">
-                        <i class="bi bi-telephone-fill"></i>
-                    </div>
-                    <h5 class="footer-title">Teléfono</h5>
-                    <p class="footer-text">+54 261 4202017</p>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="footer-card">
-                    <div class="footer-icon">
-                        <i class="bi bi-envelope-fill"></i>
-                    </div>
-                    <h5 class="footer-title">Email</h5>
-                    <p class="footer-text">grupobfacultad&#64;gmail.com</p>
-                </div>
-            </div>
+            <h5 class="footer-title">Visitanos</h5>
+            <p class="footer-text">
+              AV. Siempreviva 742<br />Mendoza, Argentina
+            </p>
+          </div>
         </div>
-        <hr class="footer-divider">
-        <div class="row">
-            <div class="col-12 text-center">
-                <p class="footer-copyright">&copy; 2026 GOL GYM. Todos los derechos reservados.</p>
+        <div class="col-md-4 col-sm-6 mb-4 mb-md-0">
+          <div class="footer-card">
+            <div class="footer-icon">
+              <i class="bi bi-telephone-fill"></i>
             </div>
+            <h5 class="footer-title">Teléfono</h5>
+            <p class="footer-text">+54 261 4202017</p>
+          </div>
         </div>
+        <div class="col-md-4 col-sm-6">
+          <div class="footer-card">
+            <div class="footer-icon">
+              <i class="bi bi-envelope-fill"></i>
+            </div>
+            <h5 class="footer-title">Email</h5>
+            <p class="footer-text">grupobfacultad&#64;gmail.com</p>
+          </div>
+        </div>
+      </div>
+      <hr class="footer-divider" />
+      <div class="row">
+        <div class="col-12 text-center">
+          <p class="footer-copyright">
+            &copy; 2026 GOL GYM. Todos los derechos reservados.
+          </p>
+        </div>
+      </div>
     </div>
-</footer>
-
-</div> <!-- Cierre de main-content -->
+  </footer>
+</div>
+<!-- Cierre de main-content -->

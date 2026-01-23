@@ -197,10 +197,10 @@
                             <div *ngIf="planifForm.get('profesor_dni')?.errors?.['required']">Debe seleccionar un profesor</div>
                         </div>
                     </div>
-                    <div class="btn-group d-flex justify-content-center" style="margin-bottom: 15px;" role="group" aria-label="Basic radio toggle button group" *ngIf="!shouldEditPlanif()">
+                    <div class="d-flex flex-wrap justify-content-center gap-2 mb-3" role="group" *ngIf="!shouldEditPlanif()">
                         <ng-container *ngFor="let prof of allProf">
                             <input type="radio" class="btn-check" name="profesor_dni" formControlName="profesor_dni" [value]="prof.dni" [id]="'btnradio' + prof.dni">
-                            <label class="btn btn-outline-primary" [for]="'btnradio' + prof.dni">{{ prof.nombre }}</label>
+                            <label class="btn btn-profesor-select" [for]="'btnradio' + prof.dni">{{ prof.nombre }}</label>
                         </ng-container>
                     </div>
                 </form>

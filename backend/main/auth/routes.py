@@ -21,6 +21,9 @@ def login():
             "dni": str(usuario.dni),
             "email": usuario.email,
             "access_token": access_token,
+            "nombre": usuario.nombre,
+            "apellido": usuario.apellido,
+            "rol": usuario.rol,
         }
 
         return data, 200

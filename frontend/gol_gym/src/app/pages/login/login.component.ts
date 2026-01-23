@@ -33,6 +33,8 @@ export class LoginComponent {
       next: (rta:any) => {
         console.log('Respuesta login: ',rta.access_token);
         localStorage.setItem('token', rta.access_token)
+        localStorage.setItem('nombre', rta.nombre)
+        localStorage.setItem('apellido', rta.apellido)
 
         const decodedToken: any = jwtDecode(rta.access_token);
         localStorage.setItem('role', decodedToken.rol)

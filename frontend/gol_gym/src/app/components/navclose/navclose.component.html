@@ -1,8 +1,15 @@
 <nav class="navbar sesion">
-    <div class="container justify-content-end">
+    <div class="container d-flex justify-content-between align-items-center">
+        <div class="user-info d-flex align-items-center" *ngIf="nombreUsuario">
+            <i class="bi bi-person-circle" style="font-size: 2rem; margin-right: 10px;"></i>
+            <div class="d-flex flex-column" style="line-height: 1.2;">
+                <span class="fw-bold">{{ nombreUsuario }}</span>
+                <small class="text-uppercase">{{ rolUsuario }}</small>
+            </div>
+        </div>
+
         <a type="button" (click)="cerrarSesion()" class="btn btn-outline-warning">Cerrar Sesión
             <i class="bi bi-box-arrow-right fw-bold" style="margin-left: 7px"></i>
         </a>
     </div>
 </nav>
-  

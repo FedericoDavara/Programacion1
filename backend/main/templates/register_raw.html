@@ -1,61 +1,127 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <style>
-    .main {
-      border: 1px solid black;
-      padding: 30px;
-      background-color: #fbdc74;
-      margin: 0px;
-    }
-    .services {
-      background-color: #bbfbf3;
-      box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-      padding: 10px;
-      margin-right: 50px;
-      border: 1px solid black;
-      width: 250px;
-    }
-    h1 {
-      font-weight: bold;
-      font-size: 25px;
-      color: #063940;
-    }
-    .button {
-      background-color: #3680f2;
-      border-radius: 2px;
-      border: 1px solid black;
-      display: inline-block;
-      color: #ffffff;
-      font-size: 13px;
-      padding: 6px 24px;
-      text-decoration: none;
-      margin-right: 3px;
-    }
-    .container {
-        display: flex;
-        align-items:center;
-    }
-  </style>
-</head>
-<body style="background-color: #ffffff;">
-  <br/>
-  <div class="main">
-    <h1>¡Bienvenido {{usuario.nombre}} {{usuario.apellido}}!</h1>
-    <p>¡Bienvenido a GOL GYM!</p>
-    <div class= "container">
-        <div class="services">
-          <p>Con nuestro servicio podrás:</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bienvenido a GOL GYM</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      .wrapper {
+        width: 100%;
+        background-color: #f4f4f4;
+        padding: 40px 0;
+      }
+      .main {
+        background-color: #001829;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 600px;
+        color: #ffffff;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
+      h1 {
+        color: #bcea42;
+        font-weight: bold;
+        font-size: 28px;
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 20px;
+      }
+      .highlight {
+        color: #bcea42;
+        font-weight: bold;
+      }
+      .content-text {
+        font-size: 16px;
+        line-height: 1.6;
+        text-align: center;
+        color: #e0e0e0;
+      }
+      .services-box {
+        background-color: rgba(255, 255, 255, 0.05);
+        border: 1px solid #bcea42;
+        border-radius: 8px;
+        padding: 25px;
+        margin: 30px 0;
+      }
+      .services-title {
+        color: #bcea42;
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        text-align: center;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+      li {
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+      }
+      li:last-child {
+        border-bottom: none;
+      }
+      .image-container {
+        text-align: center;
+        margin-top: 30px;
+      }
+      img {
+        border-radius: 8px;
+        border: 2px solid #bcea42;
+        max-width: 100%;
+        height: auto;
+      }
+      .footer {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 12px;
+        color: #6c757d;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="main">
+        <h1>¡Bienvenido {{usuario.nombre}} {{usuario.apellido}}!</h1>
+
+        <p class="content-text">
+          Estamos muy contentos de que te unas a
+          <span class="highlight">GOL GYM</span>. Prepárate para alcanzar tus
+          metas.
+        </p>
+
+        <div class="services-box">
+          <div class="services-title">Con nuestro servicio podrás:</div>
           <ul>
-            <li><a>Elegir tu entrenador.</a></li>
-            <li><a>Ver tus Planificaciones.</a></li>
-            <li><a>Participar de clases exclusivas.</a></li>
+            <li>💪 Elegir tu entrenador personal</li>
+            <li>📅 Ver tus planificaciones</li>
+            <li>🔥 Participar de clases exclusivas</li>
           </ul>
         </div>
-        <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZDE1OTBmZmRlZGQ2OWVmOTA3ZTNiYWU0ZjU3NDRmNTQxMWFkMzlhYiZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/dxiby8E15lZKjJyQgC/giphy.gif" width="240">
+
+        <div class="image-container">
+          <img
+            src="https://c.tenor.com/JCAqQVtFSSYAAAAd/tenor.gif"
+            width="300"
+            alt="Training"
+          />
+        </div>
+
+        <div class="footer">
+          <p>&copy; 2026 GOL GYM. Tu mejor versión.</p>
+        </div>
+      </div>
     </div>
-    <br>
-  </div>
-</body>
+  </body>
 </html>
+

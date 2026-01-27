@@ -30,6 +30,15 @@
                     {{user.nombre}} {{user.apellido}}
                     </a>
                     <div>
+                        <button *ngIf="canSuspend(user)" 
+                                class="btn btn-sm me-2" 
+                                [ngClass]="user.is_suspended ? 'btn-danger' : 'btn-warning'"
+                                data-bs-toggle="modal" 
+                                data-bs-target="#suspensionModal"
+                                (click)="prepareSuspension(user)"
+                                [title]="user.is_suspended ? 'Gestionar suspensión' : 'Suspender usuario'">
+                            <i class="bi" [ngClass]="user.is_suspended ? 'bi-exclamation-octagon-fill' : 'bi-pause-circle-fill'"></i>
+                        </button>
                         <a type="button" *ngIf="selectedRole === 'admin'" (click)="saveDni(user)" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editarUsuarioModal"><i class="bi bi-pencil-fill icon-black"></i></a>
                     </div>
                 </li>
@@ -312,5 +321,40 @@
         </div>
     </div>
 </div>
+
+<!-- Modal para suspender usuario -->
+<div class="modal fade" id="suspensionModal" tabindex="-1" aria-labelledby="suspensionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="suspensionModalLabel">
+                    {{ userToSuspend?.is_suspended ? 'Gestionar Suspensión' : 'Suspender Usuario' }}
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="suspensionDate" class="form-label">Fecha hasta <span class="text-danger">*</span></label>
+                    <input type="datetime-local" class="form-control" id="suspensionDate" [(ngModel)]="suspensionDate">
+                </div>
+                <div class="mb-3">
+                    <label for="suspensionReason" class="form-label">Motivo</label>
+                    <textarea class="form-control" id="suspensionReason" rows="3" [(ngModel)]="suspensionReason"></textarea>
+                </div>
+                <div *ngIf="userToSuspend?.is_suspended" class="alert alert-warning">
+                    El usuario se encuentra actualmente suspendido hasta: {{ userToSuspend?.fecha_suspension | date:'short' }}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button *ngIf="userToSuspend?.is_suspended" type="button" class="btn btn-success" (click)="activateUser()" data-bs-dismiss="modal">Habilitar</button>
+                <button type="button" class="btn btn-primary" (click)="suspendUser()" [disabled]="!suspensionDate" data-bs-dismiss="modal">
+                    {{ userToSuspend?.is_suspended ? 'Actualizar Fecha' : 'Suspender' }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 

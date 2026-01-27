@@ -49,10 +49,14 @@ export class LoginComponent {
         }
 
       }, error:(error) => {
-          alert('Credenciales incorrectas');
-          localStorage.removeItem('dni');
-          localStorage.removeItem('role');
-          localStorage.removeItem('token');
+          if (error.status === 403 && error.error.error === 'suspended') {
+            this.router.navigate(['/vError'], { queryParams: { suspended: true, fecha: error.error.fecha, motivo: error.error.motivo } });
+          } else {
+            alert('Credenciales incorrectas');
+            localStorage.removeItem('dni');
+            localStorage.removeItem('role');
+            localStorage.removeItem('token');
+          }
 
       }, complete: () => {
         console.log('Finalizo')

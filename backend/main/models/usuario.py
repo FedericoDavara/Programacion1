@@ -1,6 +1,7 @@
 from .. import db
 import json
 import re
+from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import validates
 from sqlalchemy import event
@@ -14,6 +15,8 @@ class Usuario(db.Model):
     password = db.Column(db.String(100), nullable=False)
     telefono = db.Column(db.Integer, nullable=False)
     rol = db.Column(db.String(10), nullable=True)
+    fecha_suspension = db.Column(db.DateTime, nullable=True)
+    motivo_suspension = db.Column(db.Text, nullable=True)
 
     profesor = db.relationship(
         "Profesor",
@@ -135,6 +138,13 @@ class Usuario(db.Model):
             raise ValueError("Password hash es requerido")
         return password
 
+    @property
+    def is_suspended(self):
+        """Returns True if the user is suspended (fecha_suspension is set and in the future)."""
+        if self.fecha_suspension is None:
+            return False
+        return self.fecha_suspension > datetime.utcnow()
+
     def __repr__(self):
         return "<Usuario: %r %r %r %r %r %r>" % (
             self.dni,
@@ -154,6 +164,11 @@ class Usuario(db.Model):
             "telefono": str(self.telefono),
             "password": str(self.password),
             "rol": str(self.rol),
+            "fecha_suspension": self.fecha_suspension.isoformat()
+            if self.fecha_suspension
+            else None,
+            "motivo_suspension": self.motivo_suspension,
+            "is_suspended": self.is_suspended,
         }
         if self.profesor:
             usuario_json["especialidad"] = self.profesor.especialidad
@@ -171,6 +186,11 @@ class Usuario(db.Model):
             "telefono": str(self.telefono),
             "rol": str(self.rol),
             "password": str(self.password),
+            "fecha_suspension": self.fecha_suspension.isoformat()
+            if self.fecha_suspension
+            else None,
+            "motivo_suspension": self.motivo_suspension,
+            "is_suspended": self.is_suspended,
             "alumno": alumno,
             "profesor": profesor,
         }
@@ -183,6 +203,7 @@ class Usuario(db.Model):
             "apellido": str(self.apellido),
             "telefono": str(self.telefono),
             "rol": str(self.rol),
+            "is_suspended": self.is_suspended,
         }
         return usuario_json
 

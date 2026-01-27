@@ -157,12 +157,37 @@ export class UsuariosService {
       return this.httpClient.get<any>(this.url + '/usuarios_p', {headers: headers});
   }
 
-  deleteUserAlum(dni: number) {
-    const auth_token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${auth_token}`
-    });
-    return this.httpClient.delete(this.url + '/usuario_a/' + dni, { headers: headers });
-  }
+   deleteUserAlum(dni: number) {
+     const auth_token = localStorage.getItem('token');
+     const headers = new HttpHeaders({
+       'Content-Type': 'application/json',
+       'Authorization': `Bearer ${auth_token}`
+     });
+     return this.httpClient.delete(this.url + '/usuario_a/' + dni, { headers: headers });
+   }
+
+   suspendUser(dni: number, date: string, reason: string): Observable<any> {
+     const auth_token = localStorage.getItem('token');
+     const headers = new HttpHeaders({
+       'Content-Type': 'application/json',
+       'Authorization': `Bearer ${auth_token}`
+     });
+      const userData = {
+        fecha_suspension: date,
+        motivo_suspension: reason
+      };
+     return this.httpClient.put(this.url + '/usuario/' + dni, userData, { headers: headers });
+   }
+
+   activateUser(dni: number): Observable<any> {
+     const auth_token = localStorage.getItem('token');
+     const headers = new HttpHeaders({
+       'Content-Type': 'application/json',
+       'Authorization': `Bearer ${auth_token}`
+     });
+     const userData = {
+       fecha_suspension: null
+     };
+     return this.httpClient.put(this.url + '/usuario/' + dni, userData, { headers: headers });
+   }
 }

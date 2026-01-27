@@ -228,6 +228,48 @@ export class ListaUsuariosComponent implements OnInit {
     return false;
   }
 
+  suspensionDate: string = '';
+  suspensionReason: string = '';
+  userToSuspend: any = {};
+
+  prepareSuspension(user: any) {
+    this.userToSuspend = user;
+    if (user.fecha_suspension) {
+        this.suspensionDate = user.fecha_suspension.substring(0, 16); 
+    } else {
+        this.suspensionDate = '';
+    }
+    this.suspensionReason = user.motivo_suspension || '';
+  }
+
+  suspendUser() {
+    if (this.userToSuspend && this.suspensionDate) {
+      this.usuariosService.suspendUser(this.userToSuspend.dni, this.suspensionDate, this.suspensionReason)
+        .subscribe(() => {
+          this.cargarUsuarios();
+        });
+    }
+  }
+
+  activateUser() {
+    if (this.userToSuspend) {
+      this.usuariosService.activateUser(this.userToSuspend.dni)
+        .subscribe(() => {
+          this.cargarUsuarios();
+        });
+    }
+  }
+
+  canSuspend(user: any): boolean {
+    const role = this.selectedRole;
+    if (role === 'admin') {
+      return user.rol === 'profesor' || user.rol === 'user';
+    } else if (role === 'profesor') {
+      return user.rol === 'user';
+    }
+    return false;
+  }
+
   selectedRole = localStorage.getItem('role');
 }
 

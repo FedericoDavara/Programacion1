@@ -16,6 +16,14 @@ def login():
     )
 
     if usuario.validate_pass(request.get_json().get("password")):
+        # Check if user is suspended after password validation
+        if usuario.is_suspended:
+            return {
+                "error": "suspended",
+                "fecha": usuario.fecha_suspension.isoformat(),
+                "motivo": usuario.motivo_suspension,
+            }, 403
+
         access_token = create_access_token(identity=usuario)
         data = {
             "dni": str(usuario.dni),

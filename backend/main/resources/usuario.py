@@ -11,6 +11,8 @@ from main.models import (
 from sqlalchemy import func, desc, or_, and_
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from main.auth.decorators import role_required
+from main.mail.functions import sendMail
+from datetime import datetime
 
 
 def validate_json_data(data, required_fields):
@@ -63,26 +65,99 @@ class Usuario(Resource):
     def put(self, dni):
         usuario = db.session.query(UsuarioModel).get_or_404(dni)
         data = request.get_json()
+        current_identity = get_jwt_identity()
+        usuario_actual = db.session.query(UsuarioModel).get(current_identity)
 
         try:
-            for key, value in data.items():
-                # Si la clave que se está actualizando es la contraseña, cifra la nueva contraseña
-                if key == "password":
-                    usuario.plain_password = (
-                        value  # Utiliza el setter para cifrar la contraseña
+            # Check if data contains suspension fields
+            has_suspension_fields = (
+                "fecha_suspension" in data or "motivo_suspension" in data
+            )
+
+            if has_suspension_fields:
+                # Permission check: Only admin or profesor can suspend users
+                if not usuario_actual or usuario_actual.rol not in [
+                    "admin",
+                    "profesor",
+                ]:
+                    return {
+                        "error": "Solo administradores y profesores pueden suspender usuarios"
+                    }, 403
+
+                # Permission check: Profesor can only suspend users (rol == "user")
+                if usuario_actual.rol == "profesor" and usuario.rol != "user":
+                    return {
+                        "error": "Los profesores solo pueden suspender alumnos"
+                    }, 403
+
+                # Get old suspension state before modification
+                was_suspended = usuario.fecha_suspension is not None
+
+                # Handle fecha_suspension
+                if "fecha_suspension" in data:
+                    fecha_value = data["fecha_suspension"]
+                    if fecha_value is None:
+                        usuario.fecha_suspension = None
+                    elif isinstance(fecha_value, str):
+                        # Convert ISO format string to datetime
+                        usuario.fecha_suspension = datetime.fromisoformat(fecha_value)
+                    else:
+                        usuario.fecha_suspension = fecha_value
+
+                # Handle motivo_suspension
+                if "motivo_suspension" in data:
+                    usuario.motivo_suspension = data["motivo_suspension"]
+
+                db.session.add(usuario)
+                db.session.flush()  # Ensure the object is updated with the data from data dict
+
+                # Determine action and send appropriate email
+                is_suspended_now = usuario.fecha_suspension is not None
+
+                if is_suspended_now:
+                    # User is suspended (new or updated) - send suspension email
+                    sent = sendMail(
+                        [usuario.email],
+                        "Suspensión de cuenta",
+                        "suspension",
+                        usuario=usuario,
+                        motivo=usuario.motivo_suspension or "No especificado",
+                        fecha=usuario.fecha_suspension.isoformat()
+                        if usuario.fecha_suspension
+                        else "",
                     )
-                elif key == "especialidad" and usuario.profesor:
-                    usuario.profesor.especialidad = value
-                elif key == "edad" and usuario.alumno:
-                    usuario.alumno.edad = value
-                elif key == "peso" and usuario.alumno:
-                    usuario.alumno.peso = value
-                elif key == "altura" and usuario.alumno:
-                    usuario.alumno.altura = value
-                elif key == "sexo" and usuario.alumno:
-                    usuario.alumno.sexo = value
-                elif hasattr(usuario, key):
-                    setattr(usuario, key, value)
+                    if sent:
+                        print(f"INFO: Email de suspensión enviado a {usuario.email}")
+                elif was_suspended and not is_suspended_now:
+                    # User is being activated - send activation email
+                    sent = sendMail(
+                        [usuario.email],
+                        "Activación de cuenta",
+                        "activacion",
+                        usuario=usuario,
+                    )
+                    if sent:
+                        print(f"INFO: Email de activación enviado a {usuario.email}")
+            else:
+                # Handle other field updates (non-suspension related)
+                for key, value in data.items():
+                    # Si la clave que se está actualizando es la contraseña, cifra la nueva contraseña
+                    if key == "password":
+                        usuario.plain_password = (
+                            value  # Utiliza el setter para cifrar la contraseña
+                        )
+                    elif key == "especialidad" and usuario.profesor:
+                        usuario.profesor.especialidad = value
+                    elif key == "edad" and usuario.alumno:
+                        usuario.alumno.edad = value
+                    elif key == "peso" and usuario.alumno:
+                        usuario.alumno.peso = value
+                    elif key == "altura" and usuario.alumno:
+                        usuario.alumno.altura = value
+                    elif key == "sexo" and usuario.alumno:
+                        usuario.alumno.sexo = value
+                    elif hasattr(usuario, key):
+                        setattr(usuario, key, value)
 
             db.session.add(usuario)
             db.session.commit()

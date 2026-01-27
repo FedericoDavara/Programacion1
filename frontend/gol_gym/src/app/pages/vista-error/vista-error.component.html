@@ -1,13 +1,22 @@
 <div class="error-container">
     <div class="error-content">
         <div class="error-image-container">
-            <img src="assets/error.png" alt="Error 404" class="error-image">
+            <img src="assets/error.png" alt="Error" class="error-image">
         </div>
         <div class="error-text">
-            <h1>Error 404</h1>
-            <h2>Página no encontrada</h2>
-            <p>Lo sentimos, la página que buscas no existe o ha sido movida.</p>
-            <a routerLink="/" class="error-btn">Volver al inicio</a>
+            <ng-container *ngIf="!isSuspended">
+                <h1>Error 404</h1>
+                <h2>Página no encontrada</h2>
+                <p>Lo sentimos, la página que buscas no existe o ha sido movida.</p>
+                <a routerLink="/" class="error-btn">Volver al inicio</a>
+            </ng-container>
+
+            <ng-container *ngIf="isSuspended">
+                <h1>Suspendido</h1>
+                <h2>Hasta el {{ fecha | date:'dd/MM/yyyy HH:mm' }}</h2>
+                <p>Motivo: {{ motivo }}</p>
+                <button (click)='salir()' class="error-btn">Salir</button>
+            </ng-container>
         </div>
     </div>
 </div>

@@ -1,6 +1,6 @@
 from flask import request, jsonify, Blueprint
 from .. import db
-from main.models import UsuarioModel, AlumnoModel
+from main.models import UsuarioModel, AlumnoModel, ProfesorModel
 from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token
 from main.mail.functions import sendMail
 
@@ -59,6 +59,16 @@ def register():
                 }
                 alumno = AlumnoModel.from_json(alumno_data)
                 db.session.add(alumno)
+                db.session.commit()
+
+            # Si el rol es 'profesor', crear también el registro de Profesor
+            if usuario.rol == "profesor":
+                profesor_data = {
+                    "dni": usuario.dni,
+                    "especialidad": data.get("especialidad"),
+                }
+                profesor = ProfesorModel.from_json(profesor_data)
+                db.session.add(profesor)
                 db.session.commit()
 
             sent = sendMail([usuario.email], "Welcome!", "register", usuario=usuario)

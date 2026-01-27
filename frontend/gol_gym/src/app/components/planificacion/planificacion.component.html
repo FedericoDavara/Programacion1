@@ -191,17 +191,18 @@
                             <div *ngIf="planifForm.get('sabado')?.errors?.['maxlength']">No puede exceder 100 caracteres</div>
                         </div>
                     </div>
-                    <div *ngIf="!shouldEditPlanif()">
-                        <label for="nombre" class="form-label">Profesor <span class="text-danger">*</span></label>
-                        <div class="invalid-feedback d-block" *ngIf="planifForm.get('profesor_dni')?.invalid && planifForm.get('profesor_dni')?.touched">
+                    <div class="mb-3" *ngIf="!shouldEditPlanif()">
+                        <label for="profesor_dni" class="form-label">Profesor <span class="text-danger">*</span></label>
+                        <select class="form-select" formControlName="profesor_dni"
+                                [class.is-invalid]="planifForm.get('profesor_dni')?.invalid && planifForm.get('profesor_dni')?.touched">
+                            <option value="" disabled selected>Seleccione un profesor</option>
+                            <option *ngFor="let prof of allProf" [value]="prof.dni">
+                                {{ prof.nombre }} {{ prof.apellido }} ({{ prof.especialidad }})
+                            </option>
+                        </select>
+                        <div class="invalid-feedback" *ngIf="planifForm.get('profesor_dni')?.invalid && planifForm.get('profesor_dni')?.touched">
                             <div *ngIf="planifForm.get('profesor_dni')?.errors?.['required']">Debe seleccionar un profesor</div>
                         </div>
-                    </div>
-                    <div class="d-flex flex-wrap justify-content-center gap-2 mb-3" role="group" *ngIf="!shouldEditPlanif()">
-                        <ng-container *ngFor="let prof of allProf">
-                            <input type="radio" class="btn-check" name="profesor_dni" formControlName="profesor_dni" [value]="prof.dni" [id]="'btnradio' + prof.dni">
-                            <label class="btn btn-profesor-select" [for]="'btnradio' + prof.dni">{{ prof.nombre }}</label>
-                        </ng-container>
                     </div>
                 </form>
             </div>

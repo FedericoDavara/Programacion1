@@ -155,6 +155,8 @@ class Usuario(db.Model):
             "password": str(self.password),
             "rol": str(self.rol),
         }
+        if self.profesor:
+            usuario_json["especialidad"] = self.profesor.especialidad
         return usuario_json
 
     def to_json_complete(self):

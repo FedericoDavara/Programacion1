@@ -48,7 +48,8 @@ export class ListaUsuariosComponent implements OnInit {
       edad: [''],
       peso: [''],
       altura: [''],
-      sexo: ['']
+      sexo: [''],
+      especialidad: ['']
     });
 
     this.newUserForm.get('rol')?.valueChanges.subscribe(rol => {
@@ -56,22 +57,32 @@ export class ListaUsuariosComponent implements OnInit {
       const pesoControl = this.newUserForm.get('peso');
       const alturaControl = this.newUserForm.get('altura');
       const sexoControl = this.newUserForm.get('sexo');
+      const especialidadControl = this.newUserForm.get('especialidad');
 
       if (rol === 'user') {
         edadControl?.setValidators([Validators.required, Validators.min(13), Validators.max(100)]);
         pesoControl?.setValidators([Validators.required, Validators.min(40), Validators.max(200)]);
         alturaControl?.setValidators([Validators.required, Validators.min(1.40), Validators.max(2.20)]);
         sexoControl?.setValidators([Validators.required]);
+        especialidadControl?.clearValidators();
+      } else if (rol === 'profesor') {
+        especialidadControl?.setValidators([Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.pattern(/^[a-zA-ZÀ-ÿ\s]+$/)]);
+        edadControl?.clearValidators();
+        pesoControl?.clearValidators();
+        alturaControl?.clearValidators();
+        sexoControl?.clearValidators();
       } else {
         edadControl?.clearValidators();
         pesoControl?.clearValidators();
         alturaControl?.clearValidators();
         sexoControl?.clearValidators();
+        especialidadControl?.clearValidators();
       }
       edadControl?.updateValueAndValidity();
       pesoControl?.updateValueAndValidity();
       alturaControl?.updateValueAndValidity();
       sexoControl?.updateValueAndValidity();
+      especialidadControl?.updateValueAndValidity();
     });
 
     this.editUserForm = this.formBuilder.group({
@@ -80,6 +91,7 @@ export class ListaUsuariosComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.minLength(6), Validators.maxLength(20)]],
       telefono: ['', [Validators.required, Validators.pattern(/^[0-9]{7,15}$/)]],
+      especialidad: ['']
     });
   }
 
@@ -168,6 +180,7 @@ export class ListaUsuariosComponent implements OnInit {
       email: user.email,
       password: '',
       telefono: user.telefono,
+      especialidad: user.especialidad || ''
     })
   }
 
@@ -175,6 +188,9 @@ export class ListaUsuariosComponent implements OnInit {
     const datosUsuario = { ...this.editUserForm.value };
     if (!datosUsuario.password || datosUsuario.password.trim() === '') {
       delete datosUsuario.password;
+    }
+    if (this.usuarioAEditar.rol !== 'profesor') {
+      delete datosUsuario.especialidad;
     }
     this.usuariosService.updateUser(this.usuarioAEditar.dni, datosUsuario).subscribe((data: any) => {
       console.log('Usuario editado:', data);

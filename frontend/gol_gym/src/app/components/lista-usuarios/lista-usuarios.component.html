@@ -75,14 +75,20 @@
                         
                     </div>
                     
-                    <div class="alert alert-info d-flex align-items-center mb-3" role="alert" 
-                         *ngIf="newUserForm.get('rol')?.value === 'profesor'">
-                        <i class="bi bi-info-circle-fill me-2"></i>
-                        <span><strong>Recordatorio:</strong> Recuerda que después de crear este usuario, deberás asignarle una especialidad en su perfil.</span>
-                    </div>
-                    
                     <div class="invalid-feedback d-block" *ngIf="newUserForm.get('rol')?.invalid && newUserForm.get('rol')?.touched">
                         <div *ngIf="newUserForm.get('rol')?.errors?.['required']">Debe seleccionar un rol</div>
+                    </div>
+                    <div class="mb-3" *ngIf="newUserForm.get('rol')?.value === 'profesor'">
+                        <label for="especialidad" class="form-label">Especialidad <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="especialidad" 
+                               [class.is-invalid]="newUserForm.get('especialidad')?.invalid && newUserForm.get('especialidad')?.touched"
+                               placeholder="Ingrese la especialidad (ej: Musculación, Pilates)">
+                        <div class="invalid-feedback" *ngIf="newUserForm.get('especialidad')?.invalid && newUserForm.get('especialidad')?.touched">
+                            <div *ngIf="newUserForm.get('especialidad')?.errors?.['required']">La especialidad es requerida</div>
+                            <div *ngIf="newUserForm.get('especialidad')?.errors?.['minlength']">La especialidad debe tener al menos 3 caracteres</div>
+                            <div *ngIf="newUserForm.get('especialidad')?.errors?.['maxlength']">La especialidad no puede exceder 50 caracteres</div>
+                            <div *ngIf="newUserForm.get('especialidad')?.errors?.['pattern']">Solo se permiten letras y espacios</div>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre <span class="text-danger">*</span></label>
@@ -228,6 +234,18 @@
             <div class="modal-body">
                 <!-- Formulario para editar un usuario -->
                 <form [formGroup]="editUserForm">
+                    <div class="mb-3" *ngIf="usuarioAEditar.rol === 'profesor'">
+                        <label for="especialidad" class="form-label">Especialidad <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="especialidad" 
+                               [class.is-invalid]="editUserForm.get('especialidad')?.invalid && editUserForm.get('especialidad')?.touched"
+                               placeholder="Ingrese la especialidad">
+                        <div class="invalid-feedback" *ngIf="editUserForm.get('especialidad')?.invalid && editUserForm.get('especialidad')?.touched">
+                            <div *ngIf="editUserForm.get('especialidad')?.errors?.['required']">La especialidad es requerida</div>
+                            <div *ngIf="editUserForm.get('especialidad')?.errors?.['minlength']">La especialidad debe tener al menos 3 caracteres</div>
+                            <div *ngIf="editUserForm.get('especialidad')?.errors?.['maxlength']">La especialidad no puede exceder 50 caracteres</div>
+                            <div *ngIf="editUserForm.get('especialidad')?.errors?.['pattern']">Solo se permiten letras y espacios</div>
+                        </div>
+                    </div>
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" formControlName="nombre" 

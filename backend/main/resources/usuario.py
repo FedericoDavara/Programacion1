@@ -71,7 +71,17 @@ class Usuario(Resource):
                     usuario.plain_password = (
                         value  # Utiliza el setter para cifrar la contraseña
                     )
-                else:
+                elif key == "especialidad" and usuario.profesor:
+                    usuario.profesor.especialidad = value
+                elif key == "edad" and usuario.alumno:
+                    usuario.alumno.edad = value
+                elif key == "peso" and usuario.alumno:
+                    usuario.alumno.peso = value
+                elif key == "altura" and usuario.alumno:
+                    usuario.alumno.altura = value
+                elif key == "sexo" and usuario.alumno:
+                    usuario.alumno.sexo = value
+                elif hasattr(usuario, key):
                     setattr(usuario, key, value)
 
             db.session.add(usuario)
@@ -294,10 +304,12 @@ class UsuariosProfesores(Resource):
 
         for usuario_p in usuarios_p:
             nombre = usuario_p.usuario.nombre if usuario_p.usuario else None
+            apellido = usuario_p.usuario.apellido if usuario_p.usuario else None
             resultado = {
                 "dni": usuario_p.dni,
                 "especialidad": usuario_p.especialidad,
                 "nombre": nombre,
+                "apellido": apellido,
             }
             resultados.append(resultado)
         return jsonify(resultados)

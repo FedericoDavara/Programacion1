@@ -13,6 +13,7 @@
   align-items: center;
   height: 100vh;
   gap: 30px;
+  scroll-snap-align: start;
 }
 
 .portada {
@@ -367,6 +368,7 @@
   background: #001322;
   border-top: 3px solid #D1FE51;
   position: relative;
+  scroll-snap-align: start;
 }
 
 .footer::before {

@@ -341,15 +341,15 @@
                     <label for="suspensionReason" class="form-label">Motivo</label>
                     <textarea class="form-control" id="suspensionReason" rows="3" [(ngModel)]="suspensionReason"></textarea>
                 </div>
-                <div *ngIf="userToSuspend?.is_suspended" class="alert alert-warning">
+                <div *ngIf="userToSuspend?.fecha_suspension" class="alert alert-warning">
                     El usuario se encuentra actualmente suspendido hasta: {{ userToSuspend?.fecha_suspension | date:'short' }}
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button *ngIf="userToSuspend?.is_suspended" type="button" class="btn btn-success" (click)="activateUser()" data-bs-dismiss="modal">Habilitar</button>
+                <button *ngIf="userToSuspend?.fecha_suspension" type="button" class="btn btn-success" (click)="activateUser()" data-bs-dismiss="modal">Habilitar</button>
                 <button type="button" class="btn btn-primary" (click)="suspendUser()" [disabled]="!suspensionDate" data-bs-dismiss="modal">
-                    {{ userToSuspend?.is_suspended ? 'Actualizar Fecha' : 'Suspender' }}
+                    {{ userToSuspend?.fecha_suspension ? 'Actualizar Fecha' : 'Suspender' }}
                 </button>
             </div>
         </div>

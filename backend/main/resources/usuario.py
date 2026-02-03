@@ -12,7 +12,8 @@ from sqlalchemy import func, desc, or_, and_
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from main.auth.decorators import role_required
 from main.mail.functions import sendMail
-from datetime import datetime
+from datetime import datetime, date, time
+import traceback
 
 
 def validate_json_data(data, required_fields):
@@ -75,6 +76,9 @@ class Usuario(Resource):
             )
 
             if has_suspension_fields:
+                # Prepare defaults for response metadata
+                action = None
+                mail_sent = False
                 # Permission check: Only admin or profesor can suspend users
                 if not usuario_actual or usuario_actual.rol not in [
                     "admin",
@@ -99,8 +103,14 @@ class Usuario(Resource):
                     if fecha_value is None:
                         usuario.fecha_suspension = None
                     elif isinstance(fecha_value, str):
-                        # Convert ISO format string to datetime
-                        usuario.fecha_suspension = datetime.fromisoformat(fecha_value)
+                        # Convert ISO format string to datetime. If only a date is provided,
+                        # normalize it to a datetime at midnight to avoid date/datetime
+                        # comparison issues elsewhere in the code.
+                        parsed = datetime.fromisoformat(fecha_value)
+                        # If parsed is a date without time, convert to datetime
+                        if isinstance(parsed, date) and not isinstance(parsed, datetime):
+                            parsed = datetime.combine(parsed, time.min)
+                        usuario.fecha_suspension = parsed
                     else:
                         usuario.fecha_suspension = fecha_value
 
@@ -116,28 +126,51 @@ class Usuario(Resource):
 
                 if is_suspended_now:
                     # User is suspended (new or updated) - send suspension email
-                    sent = sendMail(
-                        [usuario.email],
-                        "Suspensión de cuenta",
-                        "suspension",
-                        usuario=usuario,
-                        motivo=usuario.motivo_suspension or "No especificado",
-                        fecha=usuario.fecha_suspension.isoformat()
-                        if usuario.fecha_suspension
-                        else "",
-                    )
-                    if sent:
-                        print(f"INFO: Email de suspensión enviado a {usuario.email}")
+                    try:
+                        sent = sendMail(
+                            [usuario.email],
+                            "Suspensión de cuenta",
+                            "suspension",
+                            usuario=usuario,
+                            motivo=usuario.motivo_suspension or "No especificado",
+                            fecha=usuario.fecha_suspension.isoformat()
+                            if usuario.fecha_suspension
+                            else "",
+                        )
+                        if sent:
+                            print(f"INFO: Email de suspensión enviado a {usuario.email}")
+                        else:
+                            print(f"WARN: No se pudo enviar email de suspensión a {usuario.email}")
+                    except Exception as e:
+                        # Just log and continue; do not allow mail issues to break the operation
+                        print(f"Error sending suspension email: {e}")
+                        traceback.print_exc()
+                        sent = False
                 elif was_suspended and not is_suspended_now:
                     # User is being activated - send activation email
-                    sent = sendMail(
-                        [usuario.email],
-                        "Activación de cuenta",
-                        "activacion",
-                        usuario=usuario,
-                    )
-                    if sent:
-                        print(f"INFO: Email de activación enviado a {usuario.email}")
+                    try:
+                        sent = sendMail(
+                            [usuario.email],
+                            "Activación de cuenta",
+                            "activacion",
+                            usuario=usuario,
+                        )
+                        if sent:
+                            print(f"INFO: Email de activación enviado a {usuario.email}")
+                        else:
+                            print(f"WARN: No se pudo enviar email de activación a {usuario.email}")
+                    except Exception as e:
+                        print(f"Error sending activation email: {e}")
+                        traceback.print_exc()
+                        sent = False
+                # Prepare response metadata for frontend
+                if is_suspended_now:
+                    action = "suspension"
+                    # 'sent' may be set in the try/except above; guard if not
+                    mail_sent = bool(locals().get('sent', False))
+                elif was_suspended and not is_suspended_now:
+                    action = "activacion"
+                    mail_sent = bool(locals().get('sent', False))
             else:
                 # Handle other field updates (non-suspension related)
                 for key, value in data.items():
@@ -161,12 +194,18 @@ class Usuario(Resource):
 
             db.session.add(usuario)
             db.session.commit()
+            # If suspension fields were present, return metadata so frontend can react
+            if has_suspension_fields:
+                return {"usuario": usuario.to_json(), "mail_sent": mail_sent, "action": action}, 200
             return usuario.to_json(), 200
         except ValueError as e:
             db.session.rollback()
             return {"error": str(e)}, 400
         except Exception as e:
             db.session.rollback()
+            # Log detailed exception for debugging
+            print(f"Unexpected error in Usuario.put: {e}")
+            traceback.print_exc()
             return {"error": "Error interno del servidor"}, 500
 
 

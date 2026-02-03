@@ -245,8 +245,24 @@ export class ListaUsuariosComponent implements OnInit {
   suspendUser() {
     if (this.userToSuspend && this.suspensionDate) {
       this.usuariosService.suspendUser(this.userToSuspend.dni, this.suspensionDate, this.suspensionReason)
-        .subscribe(() => {
-          this.cargarUsuarios();
+        .subscribe((res: any) => {
+          // Backend returns metadata when suspension performed
+          const updated = res?.usuario || res;
+          // Update local list and modal state
+          if (updated) {
+            // Replace in arrayUsers
+            const idx = this.arrayUsers.findIndex((u: any) => u.dni === updated.dni);
+            if (idx !== -1) this.arrayUsers[idx] = updated;
+            // Update userToSuspend reference
+            this.userToSuspend = updated;
+            // Update suspensionDate shown in modal
+            this.suspensionDate = updated.fecha_suspension ? updated.fecha_suspension.substring(0, 16) : '';
+            this.suspensionReason = updated.motivo_suspension || '';
+          }
+          if (res?.mail_sent === false) {
+            // Inform the user that email couldn't be sent
+            alert('Operación completada, pero no se pudo enviar el email de suspensión.');
+          }
         });
     }
   }
@@ -254,8 +270,18 @@ export class ListaUsuariosComponent implements OnInit {
   activateUser() {
     if (this.userToSuspend) {
       this.usuariosService.activateUser(this.userToSuspend.dni)
-        .subscribe(() => {
-          this.cargarUsuarios();
+        .subscribe((res: any) => {
+          const updated = res?.usuario || res;
+          if (updated) {
+            const idx = this.arrayUsers.findIndex((u: any) => u.dni === updated.dni);
+            if (idx !== -1) this.arrayUsers[idx] = updated;
+            this.userToSuspend = updated;
+            this.suspensionDate = updated.fecha_suspension ? updated.fecha_suspension.substring(0, 16) : '';
+            this.suspensionReason = updated.motivo_suspension || '';
+          }
+          if (res?.mail_sent === false) {
+            alert('Operación completada, pero no se pudo enviar el email de activación.');
+          }
         });
     }
   }

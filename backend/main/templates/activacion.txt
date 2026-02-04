@@ -1,0 +1,19 @@
+✅ ¡Bienvenido/a a GolGym!
+-----------------------------------------
+
+Estimado/a {{ nombre }},
+
+Nos complace informarte que tu cuenta ha sido activada exitosamente. Ya puedes acceder a todas nuestras funciones y comenzar tu entrenamiento.
+
+=========================================
+DETALLES DE LA CUENTA:
+Usuario: {{ email }}
+Estado: Activo
+=========================================
+
+Si tienes alguna duda sobre cómo empezar, nuestro equipo de soporte está disponible para ayudarte en support@gmail.com.
+
+¡Gracias por elegirnos!
+
+Atentamente,
+El equipo de GolGym

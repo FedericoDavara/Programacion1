@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .container { font-family: Arial, sans-serif; max-width: 600px; margin: auto; border-top: 3px solid #27ae60; padding: 20px; }
+        .header { color: #27ae60; font-size: 24px; font-weight: bold; margin-bottom: 20px; }
+        .success-icon { margin-right: 10px; }
+        .box { background-color: #eafaf1; border-left: 5px solid #2ecc71; padding: 20px; margin: 20px 0; }
+        .footer { margin-top: 30px; font-size: 14px; color: #333; }
+        .button { background-color: #27ae60; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <span class="success-icon">✅</span> ¡Bienvenido/a a GolGym!
+        </div>
+        
+        <p>Estimado/a <strong>{{ nombre }}</strong>,</p>
+        
+        <p>Nos complace informarte que tu cuenta ha sido activada exitosamente. Ya puedes acceder a todas nuestras funciones y comenzar tu entrenamiento.</p>
+        
+        <div class="box">
+            <p><strong>Detalles de la cuenta:</strong><br>
+            Usuario: {{ email }}<br>
+            Estado: <strong>Activo</strong></p>
+        </div>
+        
+        <p>Si tienes alguna duda sobre cómo empezar, nuestro equipo de soporte está disponible para ayudarte en <a href="mailto:support@gmail.com">support@gmail.com</a>.</p>
+        
+        <p>¡Gracias por elegirnos!</p>
+        
+        <div class="footer">
+            Atentamente,<br>
+            <strong>El equipo de GolGym</strong>
+        </div>
+    </div>
+</body>
+</html>

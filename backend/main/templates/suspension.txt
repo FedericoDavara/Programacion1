@@ -1,0 +1,23 @@
+⚠️ Suspensión de Cuenta
+-----------------------------------------
+
+Estimado/a {{ nombre }},
+
+Le informamos que su cuenta ha sido suspendida debido a una violación de nuestras políticas de servicio.
+
+=========================================
+RAZÓN DE LA SUSPENSIÓN:
+{{ razon }}
+
+FECHA DE SUSPENSIÓN HASTA:
+{{ fecha_limite }}
+=========================================
+
+Durante este período, no podrá acceder a su cuenta ni utilizar ninguno de los servicios asociados.
+
+Si considera que esta acción es un error o desea apelar esta decisión, por favor contacte a nuestro equipo de soporte enviando un correo a support@gmail.com con los detalles de su caso.
+
+Agradecemos su comprensión.
+
+Atentamente,
+El equipo de GolGym

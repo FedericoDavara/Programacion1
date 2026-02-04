@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .container { font-family: Arial, sans-serif; max-width: 600px; margin: auto; border-top: 3px solid #c0392b; padding: 20px; }
+        .header { color: #c0392b; font-size: 24px; font-weight: bold; margin-bottom: 20px; }
+        .warning-icon { color: #f1c40f; margin-right: 10px; }
+        .box { background-color: #fdf2d0; border-left: 5px solid #f39c12; padding: 20px; margin: 20px 0; }
+        .footer { margin-top: 30px; font-size: 14px; color: #333; }
+        .support-link { color: #2980b9; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <span class="warning-icon">⚠️</span> Suspensión de Cuenta
+        </div>
+        
+        <p>Estimado/a <strong>{{ nombre }}</strong>,</p>
+        
+        <p>Le informamos que su cuenta ha sido suspendida debido a una violación de nuestras políticas de servicio.</p>
+        
+        <div class="box">
+            <p><strong>Razón de la suspensión:</strong><br>
+            {{ razon }}</p>
+            
+            <p><strong>Fecha de suspensión hasta:</strong><br>
+            {{ fecha_limite }}</p>
+        </div>
+        
+        <p>Durante este período, no podrá acceder a su cuenta ni utilizar ninguno de los servicios asociados.</p>
+        
+        <p>Si considera que esta acción es un error o desea apelar esta decisión, por favor contacte a nuestro equipo de soporte enviando un correo a <a href="mailto:support@gmail.com" class="support-link">support@gmail.com</a> con los detalles de su caso.</p>
+        
+        <p>Agradecemos su comprensión.</p>
+        
+        <div class="footer">
+            Atentamente,<br>
+            <strong>El equipo de GolGym</strong>
+        </div>
+    </div>
+</body>
+</html>

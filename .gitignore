@@ -5,22 +5,28 @@ __pycache__/
 *.pyo
 *.pyd
 
-# Entornos Virtuales (Esto soluciona tu problema actual)
+# Entornos Virtuales y archivos de configuración de venv
 env/
 venv/
 .venv/
-
-# Variables de entorno y secretos (¡MUY IMPORTANTE!)
+bin/
+include/
+lib/
+lib64/
+pyvenv.cfg
+share/
+backend/lib64/
+# Variables de entorno y secretos
 .env
 .flaskenv
 
-# Bases de datos (No se suben, son locales)
+# Bases de datos (Locales)
 *.db
 *.sqlite3
 instance/
 
 # --- ANGULAR / NODE (Frontend) ---
-# Dependencias (Nunca subir esto, pesa demasiado)
+# Dependencias
 node_modules/
 
 # Builds de producción
@@ -32,7 +38,6 @@ build/
 .sass-cache/
 connect.lock
 coverage/
-lib/
 
 # Logs de errores
 npm-debug.log
@@ -42,4 +47,3 @@ yarn-error.log
 .vscode/
 .idea/
 .DS_Store
-.sisyphus/*

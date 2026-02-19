@@ -191,7 +191,7 @@
                             <div *ngIf="planifForm.get('sabado')?.errors?.['maxlength']">No puede exceder 100 caracteres</div>
                         </div>
                     </div>
-                    <div class="mb-3" *ngIf="!shouldEditPlanif()">
+                    <div class="mb-3">
                         <label for="profesor_dni" class="form-label">Profesor <span class="text-danger">*</span></label>
                         <select class="form-select" formControlName="profesor_dni"
                                 [class.is-invalid]="planifForm.get('profesor_dni')?.invalid && planifForm.get('profesor_dni')?.touched">

@@ -14,7 +14,7 @@ export class PlanificacionComponent implements OnInit {
   planifForm!: FormGroup
   selectedRole = localStorage.getItem('role');
 
-  UserPlanif: any
+  UserPlanif: any = null;
 
   DataPlanif: any = {
     "descripcion": null,
@@ -31,10 +31,10 @@ export class PlanificacionComponent implements OnInit {
 
   private parametrosOcultos: any;
 
-  PlanifID: any = Number;
+  PlanifID: number = 0;
 
-  userDNI: any = Number;
-  perfilDni: any = Number;
+  userDNI: number = 0;
+  perfilDni: number = 0;
 
   allProf: any[] = [];
 
@@ -60,7 +60,7 @@ export class PlanificacionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userDNI = this.usuariosService.getUserDNIFromToken();
+    this.userDNI = this.usuariosService.getUserDNIFromToken() || 0;
     this.parametrosOcultos = history.state;
 
     this.route.params.subscribe((params: Params) => {
@@ -114,6 +114,7 @@ export class PlanificacionComponent implements OnInit {
           };
         } else {
           // No hay planificación existente, inicializar DataPlanif como objeto vacío
+          this.UserPlanif = null;
           this.DataPlanif = {
             "descripcion": null,
             "fecha": null,
@@ -130,6 +131,7 @@ export class PlanificacionComponent implements OnInit {
       },
       (error) => {
         console.error('Error al obtener planificación:', error);
+        this.UserPlanif = null;
         // En caso de error, también inicializar DataPlanif
         this.DataPlanif = {
           "descripcion": null,
@@ -187,6 +189,9 @@ export class PlanificacionComponent implements OnInit {
   }
   submit() {
     this.debugFormulario();
+
+    console.log('UserPlanif value:', this.UserPlanif);
+    console.log('shouldEditPlanif result:', this.shouldEditPlanif());
 
     if (this.planifForm.valid) {
       // ✅ Objeto con los datos limpios y con tipos correctos

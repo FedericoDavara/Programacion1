@@ -58,23 +58,11 @@
                         <label for="dia" class="form-label">Día <span class="text-danger">*</span></label>
                         <div class="btn-group d-flex justify-content-center" style="margin-bottom: 15px;" role="group" aria-label="Basic radio toggle button group">
                         
-                            <input type="radio" class="btn-check" name="dia" formControlName="dia"  value="Lunes" id="btnradio1">
-                            <label class="btn btn-outline-primary" for="btnradio1">Lunes</label>
+                            <ng-container *ngFor="let dia of diasSemana; let i = index">
+                                <input type="radio" class="btn-check" name="dia" formControlName="dia" [value]="dia" [id]="'btnradio' + (i + 1)">
+                                <label class="btn btn-outline-primary" [for]="'btnradio' + (i + 1)">{{ dia }}</label>
+                            </ng-container>
                             
-                            <input type="radio" class="btn-check" name="dia" formControlName="dia"  value="Martes" id="btnradio2">
-                            <label class="btn btn-outline-primary" for="btnradio2">Martes</label>
-                            
-                            <input type="radio" class="btn-check" name="dia" formControlName="dia"  value="Miércoles" id="btnradio3">
-                            <label class="btn btn-outline-primary" for="btnradio3">Miércoles</label>
-
-                            <input type="radio" class="btn-check" name="dia" formControlName="dia"  value="Jueves" id="btnradio4">
-                            <label class="btn btn-outline-primary" for="btnradio4">Jueves</label>
-                            
-                            <input type="radio" class="btn-check" name="dia" formControlName="dia" value="Viernes" id="btnradio5">
-                            <label class="btn btn-outline-primary" for="btnradio5">Viernes</label>
-                            
-                            <input type="radio" class="btn-check" name="dia" formControlName="dia" value="Sábado" id="btnradio6">
-                            <label class="btn btn-outline-primary" for="btnradio6">Sábado</label>
                         </div>
                         <div class="invalid-feedback d-block" *ngIf="newclaseForm.get('dia')?.invalid && newclaseForm.get('dia')?.touched">
                             <div *ngIf="newclaseForm.get('dia')?.errors?.['required']">Debe seleccionar un día</div>
@@ -131,12 +119,7 @@
                         <select class="form-control" formControlName="dia" 
                                 [class.is-invalid]="claseForm.get('dia')?.invalid && claseForm.get('dia')?.touched">
                             <option value="">Seleccione un día</option>
-                            <option value="Lunes">Lunes</option>
-                            <option value="Martes">Martes</option>
-                            <option value="Miércoles">Miércoles</option>
-                            <option value="Jueves">Jueves</option>
-                            <option value="Viernes">Viernes</option>
-                            <option value="Sábado">Sábado</option>
+                            <option *ngFor="let dia of diasSemana" [value]="dia">{{ dia }}</option>
                         </select>
                         <div class="invalid-feedback" *ngIf="claseForm.get('dia')?.invalid && claseForm.get('dia')?.touched">
                             <div *ngIf="claseForm.get('dia')?.errors?.['required']">El día es requerido</div>

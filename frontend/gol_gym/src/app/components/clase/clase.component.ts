@@ -6,12 +6,24 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 
+// Días de la semana - constante reutilizable
+const DIAS_SEMANA = [
+  'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'
+];
+
+// Validadores reutilizables
+const NOMBRE_VALIDATORS = [Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.pattern(/^[a-zA-ZÀ-ÿ\s0-9]+$/)];
+const HORARIO_VALIDATOR = Validators.pattern(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9](-([0-1]?[0-9]|2[0-3]):[0-5][0-9])?$/);
+
 @Component({
   selector: 'app-clase',
   templateUrl: './clase.component.html',
   styleUrls: ['./clase.component.css']
 })
 export class ClaseComponent implements OnInit {
+
+  // Días expuestos al template
+  diasSemana = DIAS_SEMANA;
 
   claseForm!: FormGroup
   newclaseForm!: FormGroup
@@ -38,15 +50,15 @@ export class ClaseComponent implements OnInit {
     private formBuilder: FormBuilder,
   ) {
     this.claseForm = this.formBuilder.group({
-      nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.pattern(/^[a-zA-ZÀ-ÿ\s0-9]+$/)]],
+      nombre: ['', NOMBRE_VALIDATORS],
       dia: ['', [Validators.required]],
-      horario: ['', [Validators.required, Validators.pattern(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9](-([0-1]?[0-9]|2[0-3]):[0-5][0-9])?$/)]],
+      horario: ['', [Validators.required, HORARIO_VALIDATOR]],
       id: []
     });
     this.newclaseForm = this.formBuilder.group({
-      nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.pattern(/^[a-zA-ZÀ-ÿ\s0-9]+$/)]],
+      nombre: ['', NOMBRE_VALIDATORS],
       dia: ['', [Validators.required]],
-      horario: ['', [Validators.required, Validators.pattern(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9](-([0-1]?[0-9]|2[0-3]):[0-5][0-9])?$/)]],
+      horario: ['', [Validators.required, HORARIO_VALIDATOR]],
       profesores: [[]]
     });
 

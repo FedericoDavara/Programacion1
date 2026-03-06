@@ -82,6 +82,10 @@ input[type="number"] {
   backdrop-filter: blur(15px);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 }
+.modal-body {
+  color: #fff;
+}
+
 
 .modal-header {
   border-bottom: 1px solid rgba(209, 254, 81, 0.2);

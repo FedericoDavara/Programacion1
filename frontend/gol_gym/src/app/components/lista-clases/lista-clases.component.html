@@ -1,0 +1,167 @@
+<div class="container mt-5">
+    <div class="row center">
+        <div class="col-md-8 offset-md-2">
+            <div class="d-flex mb-3">
+                <h2 class="me-auto">Clases</h2>
+                <button *ngIf="selectedRole === 'admin'" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nuevaClaseModal">
+                    <i class="bi bi-plus-lg fw-bold"></i>
+                </button>
+            </div>
+            
+            <ul *ngFor="let clase of arrayClases" class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>{{clase.nombre}} - {{clase.dia}} - {{clase.horario}}</span>
+                    <div *ngIf="selectedRole === 'admin'">
+                        <button (click)="initFormForEdit(clase)" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editarClaseModal">
+                            <i class="bi bi-pencil-fill icon-black"></i>
+                        </button>
+                        <button (click)="prepareDelete(clase)" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#eliminarClaseModal">
+                            <i class="bi bi-trash-fill"></i>
+                        </button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para crear nueva clase -->
+<div class="modal fade" id="nuevaClaseModal" tabindex="-1" aria-labelledby="nuevaClaseModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="nuevaClaseModalLabel">Crear Nueva Clase</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="newClaseForm">
+                    <div class="mb-3">
+                        <label for="dia" class="form-label">Día <span class="text-danger">*</span></label>
+                        <div class="btn-group d-flex justify-content-center" style="margin-bottom: 15px;" role="group" aria-label="Basic radio toggle button group">
+                            <ng-container *ngFor="let dia of diasSemana; let i = index">
+                                <input type="radio" class="btn-check" name="dia" formControlName="dia" [value]="dia" [id]="'btnradioClaseNew' + (i + 1)">
+                                <label class="btn btn-outline-primary" [for]="'btnradioClaseNew' + (i + 1)">{{ dia }}</label>
+                            </ng-container>
+                        </div>
+                        <div class="invalid-feedback d-block" *ngIf="newClaseForm.get('dia')?.invalid && newClaseForm.get('dia')?.touched">
+                            <div *ngIf="newClaseForm.get('dia')?.errors?.['required']">Debe seleccionar un día</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="nombre" 
+                               [class.is-invalid]="newClaseForm.get('nombre')?.invalid && newClaseForm.get('nombre')?.touched"
+                               placeholder="Ingrese el nombre de la clase">
+                        <div class="invalid-feedback" *ngIf="newClaseForm.get('nombre')?.invalid && newClaseForm.get('nombre')?.touched">
+                            <div *ngIf="newClaseForm.get('nombre')?.errors?.['required']">El nombre es requerido</div>
+                            <div *ngIf="newClaseForm.get('nombre')?.errors?.['minlength']">El nombre debe tener al menos 3 caracteres</div>
+                            <div *ngIf="newClaseForm.get('nombre')?.errors?.['maxlength']">El nombre no puede exceder 50 caracteres</div>
+                            <div *ngIf="newClaseForm.get('nombre')?.errors?.['pattern']">Solo se permiten letras, números y espacios</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="horario" class="form-label">Horario <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="horario" 
+                               [class.is-invalid]="newClaseForm.get('horario')?.invalid && newClaseForm.get('horario')?.touched"
+                               placeholder="Formato: 08:00-09:00 o 08:00">
+                        <small class="form-text text-muted">Ejemplos: 08:00, 14:30-15:30</small>
+                        <div class="invalid-feedback" *ngIf="newClaseForm.get('horario')?.invalid && newClaseForm.get('horario')?.touched">
+                            <div *ngIf="newClaseForm.get('horario')?.errors?.['required']">El horario es requerido</div>
+                            <div *ngIf="newClaseForm.get('horario')?.errors?.['pattern']">Formato inválido. Use HH:MM o HH:MM-HH:MM</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="imagen" class="form-label">Imagen (URL)</label>
+                        <input type="text" class="form-control" formControlName="imagen" 
+                               placeholder="Ingrese la URL de la imagen">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary btn-success" (click)="crearClase()" 
+                        [disabled]="newClaseForm.invalid" data-bs-dismiss="modal">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para editar clase -->
+<div class="modal fade" id="editarClaseModal" tabindex="-1" aria-labelledby="editarClaseModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editarClaseModalLabel">Editar Clase</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="editClaseForm">
+                    <div class="mb-3">
+                        <label for="dia" class="form-label">Día <span class="text-danger">*</span></label>
+                        <div class="btn-group d-flex justify-content-center" style="margin-bottom: 15px;" role="group" aria-label="Basic radio toggle button group">
+                            <ng-container *ngFor="let dia of diasSemana; let i = index">
+                                <input type="radio" class="btn-check" name="dia" formControlName="dia" [value]="dia" [id]="'btnradioClaseEdit' + (i + 1)">
+                                <label class="btn btn-outline-primary" [for]="'btnradioClaseEdit' + (i + 1)">{{ dia }}</label>
+                            </ng-container>
+                        </div>
+                        <div class="invalid-feedback d-block" *ngIf="editClaseForm.get('dia')?.invalid && editClaseForm.get('dia')?.touched">
+                            <div *ngIf="editClaseForm.get('dia')?.errors?.['required']">Debe seleccionar un día</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="nombre" 
+                               [class.is-invalid]="editClaseForm.get('nombre')?.invalid && editClaseForm.get('nombre')?.touched"
+                               placeholder="Ingrese el nombre de la clase">
+                        <div class="invalid-feedback" *ngIf="editClaseForm.get('nombre')?.invalid && editClaseForm.get('nombre')?.touched">
+                            <div *ngIf="editClaseForm.get('nombre')?.errors?.['required']">El nombre es requerido</div>
+                            <div *ngIf="editClaseForm.get('nombre')?.errors?.['minlength']">El nombre debe tener al menos 3 caracteres</div>
+                            <div *ngIf="editClaseForm.get('nombre')?.errors?.['maxlength']">El nombre no puede exceder 50 caracteres</div>
+                            <div *ngIf="editClaseForm.get('nombre')?.errors?.['pattern']">Solo se permiten letras, números y espacios</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="horario" class="form-label">Horario <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="horario" 
+                               [class.is-invalid]="editClaseForm.get('horario')?.invalid && editClaseForm.get('horario')?.touched"
+                               placeholder="Formato: 08:00-09:00 o 08:00">
+                        <small class="form-text text-muted">Ejemplos: 08:00, 14:30-15:30</small>
+                        <div class="invalid-feedback" *ngIf="editClaseForm.get('horario')?.invalid && editClaseForm.get('horario')?.touched">
+                            <div *ngIf="editClaseForm.get('horario')?.errors?.['required']">El horario es requerido</div>
+                            <div *ngIf="editClaseForm.get('horario')?.errors?.['pattern']">Formato inválido. Use HH:MM o HH:MM-HH:MM</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="imagen" class="form-label">Imagen (URL)</label>
+                        <input type="text" class="form-control" formControlName="imagen" 
+                               placeholder="Ingrese la URL de la imagen">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary btn-success" (click)="editarClase()" 
+                        [disabled]="editClaseForm.invalid" data-bs-dismiss="modal">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para eliminar clase -->
+<div class="modal fade" id="eliminarClaseModal" tabindex="-1" aria-labelledby="eliminarClaseModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eliminarClaseModalLabel">Eliminar Clase</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro que desea eliminar esta clase?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" (click)="borrarClase()" data-bs-dismiss="modal">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -16,6 +16,7 @@ import { VistaErrorComponent } from './pages/vista-error/vista-error.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClaseComponent } from './components/clase/clase.component';
+import { ListaClasesComponent } from './components/lista-clases/lista-clases.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ClaseComponent } from './components/clase/clase.component';
     ListaUsuariosComponent,
     VistaErrorComponent,
     ClaseComponent,
+    ListaClasesComponent,
 
   ],
   imports: [

@@ -18,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClaseComponent } from './components/clase/clase.component';
 import { ListaClasesComponent } from './components/lista-clases/lista-clases.component';
 import { ListaPreciosComponent } from './components/lista-precios/lista-precios.component';
+import { ListaProfesoresComponent } from './components/lista-profesores/lista-profesores.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ListaPreciosComponent } from './components/lista-precios/lista-precios.
     ClaseComponent,
     ListaClasesComponent,
     ListaPreciosComponent,
+    ListaProfesoresComponent,
 
   ],
   imports: [

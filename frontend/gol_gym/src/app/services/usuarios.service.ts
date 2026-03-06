@@ -149,12 +149,10 @@ export class UsuariosService {
   }
 
   getAllProf(): Observable<any> {
-    let auth_token=localStorage.getItem('token');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${auth_token}`   
     });
-      return this.httpClient.get<any>(this.url + '/usuarios_p', {headers: headers});
+    return this.httpClient.get<any>(this.url + '/usuarios_p', {headers: headers});
   }
 
    deleteUserAlum(dni: number) {

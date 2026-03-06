@@ -1,0 +1,58 @@
+<div class="container mt-5">
+    <div class="row center">
+        <div class="col-md-8 offset-md-2">
+            <div class="d-flex mb-3">
+                <h2 class="me-auto">Profesores</h2>
+            </div>
+            
+            <ul *ngFor="let profe of arrayProfes" class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>{{profe.nombre}} {{profe.apellido}} - {{profe.especialidad}}</span>
+                    <div *ngIf="selectedRole === 'admin'">
+                        <button (click)="initFormForEdit(profe)" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editarProfeModal">
+                            <i class="bi bi-pencil-fill icon-black"></i>
+                        </button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para editar profesor -->
+<div class="modal fade" id="editarProfeModal" tabindex="-1" aria-labelledby="editarProfeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editarProfeModalLabel">Editar Profesor</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="editProfeForm">
+                    <input type="hidden" formControlName="dni">
+                    <div class="mb-3">
+                        <label for="foto" class="form-label">Foto (URL)</label>
+                        <input type="text" class="form-control" formControlName="foto" 
+                               placeholder="Ruta de la imagen (ej: assets/profe1.jpg)">
+                    </div>
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label">Descripción <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="descripcion" 
+                               [class.is-invalid]="editProfeForm.get('descripcion')?.invalid && editProfeForm.get('descripcion')?.touched"
+                               placeholder="Ingrese la descripción del profesor">
+                        <div class="invalid-feedback" *ngIf="editProfeForm.get('descripcion')?.invalid && editProfeForm.get('descripcion')?.touched">
+                            <div *ngIf="editProfeForm.get('descripcion')?.errors?.['required']">La descripción es requerida</div>
+                            <div *ngIf="editProfeForm.get('descripcion')?.errors?.['minlength']">La descripción debe tener al menos 3 caracteres</div>
+                            <div *ngIf="editProfeForm.get('descripcion')?.errors?.['maxlength']">La descripción no puede exceder 250 caracteres</div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary btn-success" (click)="editarProfe()" 
+                        [disabled]="editProfeForm.invalid" data-bs-dismiss="modal">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

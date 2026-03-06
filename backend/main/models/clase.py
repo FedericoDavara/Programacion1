@@ -8,6 +8,7 @@ class Clase(db.Model):
     nombre = db.Column(db.String(100), nullable=False)
     dia = db.Column(db.String(100), nullable=False)
     horario = db.Column(db.String(250), nullable=False)
+    imagen = db.Column(db.String(250), nullable=True)
 
     @validates('nombre')
     def validate_nombre(self, key, nombre):
@@ -49,8 +50,8 @@ class Clase(db.Model):
             'id': self.id,
             'nombre': str(self.nombre),
             'dia': str(self.dia),
-            'horario': str(self.horario)
-
+            'horario': str(self.horario),
+            'imagen': str(self.imagen) if self.imagen else None
         }
         return clase_json
 
@@ -59,8 +60,8 @@ class Clase(db.Model):
             'id': self.id,
             'nombre': str(self.nombre),
             'dia': str(self.dia),
-            'horario': str(self.horario)
-
+            'horario': str(self.horario),
+            'imagen': str(self.imagen) if self.imagen else None
         }
         return clase_json
 
@@ -71,10 +72,9 @@ class Clase(db.Model):
         nombre = clase_json.get('nombre')
         dia = clase_json.get('dia')
         horario = clase_json.get('horario')
-        
+        imagen = clase_json.get('imagen')
         return Clase(id=id,
                     nombre=nombre,
                     dia=dia,
                     horario=horario,
-
-                    )
+                    imagen=imagen)

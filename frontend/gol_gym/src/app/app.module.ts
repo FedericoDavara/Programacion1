@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClaseComponent } from './components/clase/clase.component';
 import { ListaClasesComponent } from './components/lista-clases/lista-clases.component';
+import { ListaPreciosComponent } from './components/lista-precios/lista-precios.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ListaClasesComponent } from './components/lista-clases/lista-clases.com
     VistaErrorComponent,
     ClaseComponent,
     ListaClasesComponent,
+    ListaPreciosComponent,
 
   ],
   imports: [

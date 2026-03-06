@@ -424,6 +424,8 @@ class UsuariosProfesores(Resource):
                 "especialidad": usuario_p.especialidad,
                 "nombre": nombre,
                 "apellido": apellido,
+                "foto": usuario_p.foto,
+                "descripcion": usuario_p.descripcion,
             }
             resultados.append(resultado)
         return jsonify(resultados)

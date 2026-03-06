@@ -37,11 +37,11 @@
       <div *ngFor="let promo of arrayPromos" class="col-md-3">
         <div class="promo">
           <div class="promo-header">
-            <h3 class="text-center">{{ promo.mes }}</h3>
+            <h3 class="text-center">{{ promo.nombre }}</h3>
           </div>
           <div class="card-body text-center">
             <h4 class="promo-title">{{ promo.precio }}</h4>
-            <p class="promo-text">{{ promo.info }}</p>
+            <p class="promo-text">{{ promo.descripcion }}</p>
           </div>
         </div>
       </div>
@@ -53,24 +53,13 @@
     <h1 class="text-center title-main"><b>Nuestros Profesores</b></h1>
     <div id="carouselExample" class="carousel slide">
       <div class="carousel-inner text-center">
-        <div class="carousel-item active">
+        <div *ngFor="let profe of arrayProfes; let i = index" class="carousel-item" [class.active]="i === 0">
           <div class="d-inline-block mx-auto">
             <div class="card">
-              <img src="assets/profe1.jpg" class="card-img-top" />
+              <img [src]="profe.foto" class="card-img-top" />
               <div class="card-body">
-                <h5 class="card-title">Lionel Andrés Messi</h5>
-                <p class="card-text">EL CABRA.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div *ngFor="let profe of arrayProfes" class="carousel-item">
-          <div class="d-inline-block mx-auto">
-            <div class="card">
-              <img src="{{ profe.foto }}" class="card-img-top" />
-              <div class="card-body">
-                <h5 class="card-title">{{ profe.nombre }}</h5>
-                <p class="card-text">{{ profe.info }}</p>
+                <h5 class="card-title">{{ profe.nombre }} {{ profe.apellido }}</h5>
+                <p class="card-text">{{ profe.descripcion }}</p>
               </div>
             </div>
           </div>

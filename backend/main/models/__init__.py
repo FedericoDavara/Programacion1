@@ -3,4 +3,5 @@ from .alumno import Alumno as AlumnoModel
 from .profesor import Profesor as ProfesorModel
 from .planificacion import Planificacion as PlanificacionModel
 from .clase import Clase as ClaseModel
+from .precio import Precio as PrecioModel
 from .permiso import Permiso as PermisoModel

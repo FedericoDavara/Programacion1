@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClasesService } from 'src/app/services/clases.service';
 import { ContactoService } from 'src/app/services/contacto.service';
+import { PreciosService } from 'src/app/services/precios.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-home',
@@ -10,46 +12,8 @@ import { ContactoService } from 'src/app/services/contacto.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  arrayPromos = [
-    {
-      mes:'1 Mes',
-      precio:'$12.000',
-      info:'1 mes de suscripción estándar.',
-    },
-    {
-      mes:'3 Meses',
-      precio:'$14.900',
-      info:'Oferta por 3 meses de suscripción.',
-    },
-    {
-      mes:'6 Meses',
-      precio:'$19.999',
-      info:'Oferta por 6 meses de suscripción.',
-    },
-    {
-      mes:'1 Año',
-      precio:'$114.000',
-      info:'Oferta por 1 año de suscripción.',
-    }
-  ]
-  arrayProfes = [
-    {
-      foto:'assets/profe2.jpg',
-      nombre:'Michael Jordan',
-      info:'Leyenda del baloncesto.',
-    },
-    {
-      foto:'assets/profe3.jpg',
-      nombre:'Mike Tyson',
-      info:'Campeón de boxeo.',
-    },
-    {
-      foto:'assets/profe4.jpg',
-      nombre:'Paula Pareto',
-      info:'Judoka olímpica.',
-    },
-  ]
-
+  arrayPromos: any[] = [];
+  arrayProfes: any[] = [];
   arrayClases: any;
 
   // Formulario de contacto
@@ -62,6 +26,8 @@ export class HomeComponent {
     private router: Router,
     private clasesService: ClasesService,
     private contactoService: ContactoService,
+    private preciosService: PreciosService,
+    private usuariosService: UsuariosService,
     private fb: FormBuilder
   ) {
     this.contactoForm = this.fb.group({
@@ -73,12 +39,26 @@ export class HomeComponent {
 
   ngOnInit(): void {
     this.cargarClases();
+    this.cargarPrecios();
+    this.cargarProfesores();
   }
 
   cargarClases() {
     this.clasesService.getClases().subscribe((data: any) => {
       console.log('JSON data:', data);
       this.arrayClases = data;
+    });
+  }
+
+  cargarPrecios() {
+    this.preciosService.getPrecios().subscribe((data: any) => {
+      this.arrayPromos = data;
+    });
+  }
+
+  cargarProfesores() {
+    this.usuariosService.getAllProf().subscribe((data: any) => {
+      this.arrayProfes = data;
     });
   }
 

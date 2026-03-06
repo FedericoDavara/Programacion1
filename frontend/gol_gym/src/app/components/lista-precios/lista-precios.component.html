@@ -1,0 +1,137 @@
+<div class="container mt-5">
+    <div class="row center">
+        <div class="col-md-8 offset-md-2">
+            <div class="d-flex mb-3">
+                <h2 class="me-auto">Precios</h2>
+                <button *ngIf="selectedRole === 'admin'" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nuevoPrecioModal">
+                    <i class="bi bi-plus-lg fw-bold"></i>
+                </button>
+            </div>
+            
+            <ul *ngFor="let precio of arrayPrecios" class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>{{precio.nombre}} - {{precio.precio}}</span>
+                    <div *ngIf="selectedRole === 'admin'">
+                        <button (click)="initFormForEdit(precio)" class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editarPrecioModal">
+                            <i class="bi bi-pencil-fill icon-black"></i>
+                        </button>
+                        <button (click)="prepareDelete(precio)" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#eliminarPrecioModal">
+                            <i class="bi bi-trash-fill"></i>
+                        </button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para crear nuevo precio -->
+<div class="modal fade" id="nuevoPrecioModal" tabindex="-1" aria-labelledby="nuevoPrecioModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="nuevoPrecioModalLabel">Crear Nuevo Precio</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="newPrecioForm">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="nombre" 
+                               [class.is-invalid]="newPrecioForm.get('nombre')?.invalid && newPrecioForm.get('nombre')?.touched"
+                               placeholder="Ej: 1 Mes, 3 Meses, 1 Año">
+                        <div class="invalid-feedback" *ngIf="newPrecioForm.get('nombre')?.invalid && newPrecioForm.get('nombre')?.touched">
+                            <div *ngIf="newPrecioForm.get('nombre')?.errors?.['required']">El nombre es requerido</div>
+                            <div *ngIf="newPrecioForm.get('nombre')?.errors?.['minlength']">El nombre debe tener al menos 2 caracteres</div>
+                            <div *ngIf="newPrecioForm.get('nombre')?.errors?.['maxlength']">El nombre no puede exceder 50 caracteres</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="precio" class="form-label">Precio <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="precio" 
+                               [class.is-invalid]="newPrecioForm.get('precio')?.invalid && newPrecioForm.get('precio')?.touched"
+                               placeholder="Ej: $12.000">
+                        <div class="invalid-feedback" *ngIf="newPrecioForm.get('precio')?.invalid && newPrecioForm.get('precio')?.touched">
+                            <div *ngIf="newPrecioForm.get('precio')?.errors?.['required']">El precio es requerido</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <input type="text" class="form-control" formControlName="descripcion" 
+                               placeholder="Descripción del plan">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary btn-success" (click)="crearPrecio()" 
+                        [disabled]="newPrecioForm.invalid" data-bs-dismiss="modal">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para editar precio -->
+<div class="modal fade" id="editarPrecioModal" tabindex="-1" aria-labelledby="editarPrecioModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editarPrecioModalLabel">Editar Precio</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="editPrecioForm">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="nombre" 
+                               [class.is-invalid]="editPrecioForm.get('nombre')?.invalid && editPrecioForm.get('nombre')?.touched"
+                               placeholder="Ej: 1 Mes, 3 Meses, 1 Año">
+                        <div class="invalid-feedback" *ngIf="editPrecioForm.get('nombre')?.invalid && editPrecioForm.get('nombre')?.touched">
+                            <div *ngIf="editPrecioForm.get('nombre')?.errors?.['required']">El nombre es requerido</div>
+                            <div *ngIf="editPrecioForm.get('nombre')?.errors?.['minlength']">El nombre debe tener al menos 2 caracteres</div>
+                            <div *ngIf="editPrecioForm.get('nombre')?.errors?.['maxlength']">El nombre no puede exceder 50 caracteres</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="precio" class="form-label">Precio <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="precio" 
+                               [class.is-invalid]="editPrecioForm.get('precio')?.invalid && editPrecioForm.get('precio')?.touched"
+                               placeholder="Ej: $12.000">
+                        <div class="invalid-feedback" *ngIf="editPrecioForm.get('precio')?.invalid && editPrecioForm.get('precio')?.touched">
+                            <div *ngIf="editPrecioForm.get('precio')?.errors?.['required']">El precio es requerido</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <input type="text" class="form-control" formControlName="descripcion" 
+                               placeholder="Descripción del plan">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary btn-success" (click)="editarPrecio()" 
+                        [disabled]="editPrecioForm.invalid" data-bs-dismiss="modal">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para eliminar precio -->
+<div class="modal fade" id="eliminarPrecioModal" tabindex="-1" aria-labelledby="eliminarPrecioModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eliminarPrecioModalLabel">Eliminar Precio</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro que desea eliminar este precio?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" (click)="borrarPrecio()" data-bs-dismiss="modal">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>

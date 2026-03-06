@@ -12,6 +12,8 @@ procla = db.Table("procla",
 class Profesor(db.Model):
     dni = db.Column(db.Integer, db.ForeignKey(UsuarioModel.dni), primary_key=True)
     especialidad = db.Column(db.String(100), nullable=False)
+    foto = db.Column(db.String(250), nullable=True)
+    descripcion = db.Column(db.String(250), nullable=True)
 
     clases = db.relationship('Clase', secondary=procla, backref=db.backref('profesores', lazy='dynamic'),cascade="all")
     
@@ -37,7 +39,9 @@ class Profesor(db.Model):
     def to_json(self):
         profesor_json = {
             'dni': self.dni,
-            'especialidad': str(self.especialidad)
+            'especialidad': str(self.especialidad),
+            'foto': str(self.foto) if self.foto else None,
+            'descripcion': str(self.descripcion) if self.descripcion else None
         }
         return profesor_json
 
@@ -46,14 +50,18 @@ class Profesor(db.Model):
         profesor_json = {
             'dni': self.dni,
             'especialidad': str(self.especialidad),
+            'foto': str(self.foto) if self.foto else None,
+            'descripcion': str(self.descripcion) if self.descripcion else None,
             'planificaciones':planificaciones
         }
-        return profesor_json    
+        return profesor_json
 
     def to_json_short(self):
         profesor_json = {
             'dni': self.dni,
-            'especialidad': str(self.especialidad)
+            'especialidad': str(self.especialidad),
+            'foto': str(self.foto) if self.foto else None,
+            'descripcion': str(self.descripcion) if self.descripcion else None
         }
         return profesor_json
 
@@ -62,6 +70,10 @@ class Profesor(db.Model):
     def from_json(profesor_json):
         dni = profesor_json.get('dni')
         especialidad = profesor_json.get('especialidad')
+        foto = profesor_json.get('foto')
+        descripcion = profesor_json.get('descripcion')
         return Profesor(dni=dni,
                     especialidad=especialidad,
+                    foto=foto,
+                    descripcion=descripcion
                     )

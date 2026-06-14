@@ -68,11 +68,13 @@ cp .env-example .env     # Configurar variables de entorno
 bash boot.sh             # Inicia el servidor en http://localhost:5000
 ```
 
-### Cargar los planes de membresía (primera vez)
+### Cargar datos semilla completos (primera vez)
 ```bash
 cd backend
-python3 seed_planes.py
+python3 seed_data.py   # usuarios, alumnos, profesores, clases, planificaciones y cuotas
 ```
+
+> También existe `seed_planes.py` si sólo querés repoblar los planes sin tocar el resto.
 
 ### Frontend
 ```bash

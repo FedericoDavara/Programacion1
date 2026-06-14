@@ -123,6 +123,7 @@ Documentación detallada disponible en [`docs/`](./docs/README.md):
 - [Endpoints REST](docs/backend/endpoints.md)
 - [Autenticación y permisos](docs/backend/auth.md)
 - [Módulo de Cuotas](docs/backend/cuotas.md)
+- [Datos Semilla](docs/backend/seed.md)
 - [Componentes Angular](docs/frontend/componentes.md)
 - [Servicios Angular](docs/frontend/servicios.md)
 - [Routing y guards](docs/frontend/routing.md)

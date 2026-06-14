@@ -463,3 +463,35 @@ Crea una nueva regla de permiso.
 
 Actualiza una regla de permiso.  
 **Respuesta 200:** permiso actualizado
+
+---
+
+## Contacto — `/contacto`
+
+### POST `/contacto` — `[público]`
+
+Recibe un mensaje del formulario de contacto público y lo reenvía por email al buzón del gimnasio (`MAIL_USERNAME`).
+
+**Body:**
+```json
+{
+  "nombre": "Juan Perez",
+  "email": "juan@mail.com",
+  "mensaje": "Quiero información sobre los planes."
+}
+```
+
+**Respuesta 200:**
+```json
+{ "message": "Mensaje enviado correctamente. Te responderemos a la brevedad." }
+```
+
+**Errores:**
+- `400` — si falta `nombre`, `email` o `mensaje`
+- `500` — si el servidor SMTP no puede enviar el email
+
+**Efecto secundario:** envía email al admin del gym con template `contacto`. El campo `Reply-To` apunta al email del visitante para facilitar la respuesta directa.
+
+**Notas:**
+- No requiere autenticación (accesible desde la página pública).
+- Los campos se limpian con `.strip()` antes de validar.

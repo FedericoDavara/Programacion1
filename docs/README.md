@@ -53,6 +53,7 @@ Programacion1/
 - [Flujos de usuario](flujos.md)
 - [Posibles mejoras y preguntas](mejoras.md)
 - [Módulo de Cuotas / Suscripción](backend/cuotas.md)
+- [Datos Semilla](backend/seed.md)
 
 ## Cómo levantar el proyecto
 

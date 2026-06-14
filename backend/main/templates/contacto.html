@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0; }
+    .container { max-width: 600px; margin: 40px auto; background: #1a1a1a; border-radius: 12px; overflow: hidden; }
+    .header { background: #8dc63f; padding: 24px 32px; }
+    .header h1 { margin: 0; color: #111; font-size: 20px; }
+    .body { padding: 32px; color: #eee; }
+    .field { margin-bottom: 20px; }
+    .field .label { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+    .field .value { font-size: 15px; color: #eee; }
+    .mensaje-box { background: #111; border-left: 3px solid #8dc63f; padding: 16px; border-radius: 4px; font-size: 14px; line-height: 1.6; color: #ccc; white-space: pre-wrap; }
+    .footer { text-align: center; padding: 16px; font-size: 12px; color: #555; border-top: 1px solid #222; }
+    .reply-btn { display: inline-block; margin-top: 20px; background: #8dc63f; color: #111; padding: 10px 24px; border-radius: 6px; font-weight: bold; text-decoration: none; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>📬 Nueva consulta desde GOL GYM</h1>
+    </div>
+    <div class="body">
+      <div class="field">
+        <div class="label">Nombre</div>
+        <div class="value">{{ nombre }}</div>
+      </div>
+      <div class="field">
+        <div class="label">Email de contacto</div>
+        <div class="value">{{ email }}</div>
+      </div>
+      <div class="field">
+        <div class="label">Mensaje</div>
+        <div class="mensaje-box">{{ mensaje }}</div>
+      </div>
+      <a class="reply-btn" href="mailto:{{ email }}">Responder a {{ nombre }}</a>
+    </div>
+    <div class="footer">GOL GYM — Panel de administración</div>
+  </div>
+</body>
+</html>

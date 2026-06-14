@@ -1,0 +1,10 @@
+📬 Nueva consulta desde el formulario de GOL GYM
+
+De:      {{ nombre }}
+Email:   {{ email }}
+
+Mensaje:
+{{ mensaje }}
+
+---
+Responder a: {{ email }}

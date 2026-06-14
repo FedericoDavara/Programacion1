@@ -23,6 +23,7 @@ backend/lib64/
 # Bases de datos (Locales)
 *.db
 *.sqlite3
+*.bak
 instance/
 
 # --- ANGULAR / NODE (Frontend) ---

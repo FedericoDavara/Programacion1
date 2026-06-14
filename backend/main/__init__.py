@@ -72,7 +72,7 @@ def create_app():
 
     api.add_resource(resources.PrecioResource, "/precio/<id>")
 
-    #api.add_resource(resources.ContactoResource, "/contacto")
+    api.add_resource(resources.ContactoResource, "/contacto")
 
     api.add_resource(resources.CuotasResource, "/cuotas")
     api.add_resource(resources.CuotaResource, "/cuota/<int:id>")

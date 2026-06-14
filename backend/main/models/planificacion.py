@@ -15,6 +15,7 @@ class Planificacion(db.Model):
     jueves = db.Column(db.String(1000), nullable=True)
     viernes = db.Column(db.String(1000), nullable=True)
     sabado = db.Column(db.String(1000), nullable=True)
+    domingo = db.Column(db.String(1000), nullable=True)
 
     alumno_dni = db.Column(db.Integer, db.ForeignKey("alumno.dni"), nullable=False)
     alumno = db.relationship(
@@ -36,7 +37,7 @@ class Planificacion(db.Model):
             raise ValueError("Descripción no puede exceder 200 caracteres")
         return descripcion.strip()
 
-    @validates("lunes", "martes", "miercoles", "jueves", "viernes", "sabado")
+    @validates("lunes", "martes", "miercoles", "jueves", "viernes", "sabado", "domingo")
     def validate_day_activity(self, key, activity):
         if activity is not None and activity.strip():
             if len(activity.strip()) > 1000:
@@ -88,6 +89,7 @@ class Planificacion(db.Model):
             "jueves": str(self.jueves),
             "viernes": str(self.viernes),
             "sabado": str(self.sabado),
+            "domingo": str(self.domingo),
             "alumno": alumno_data,
             "profesor": profesor_data,
         }
@@ -104,6 +106,7 @@ class Planificacion(db.Model):
             "jueves": str(self.jueves),
             "viernes": str(self.viernes),
             "sabado": str(self.sabado),
+            "domingo": str(self.domingo),
         }
         return planificacion_json
 
@@ -118,6 +121,7 @@ class Planificacion(db.Model):
         jueves = planificacion_json.get("jueves")
         viernes = planificacion_json.get("viernes")
         sabado = planificacion_json.get("sabado")
+        domingo = planificacion_json.get("domingo")
         alumno_dni = planificacion_json.get("alumno_dni")
         profesor_dni = planificacion_json.get("profesor_dni")
         return Planificacion(
@@ -130,6 +134,7 @@ class Planificacion(db.Model):
             jueves=jueves,
             viernes=viernes,
             sabado=sabado,
+            domingo=domingo,
             alumno_dni=alumno_dni,
             profesor_dni=profesor_dni,
         )

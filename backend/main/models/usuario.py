@@ -43,8 +43,8 @@ class Usuario(db.Model):
             raise ValueError("Contraseña es requerida")
         if len(password) < 6:
             raise ValueError("Contraseña debe tener al menos 6 caracteres")
-        if len(password) > 20:
-            raise ValueError("Contraseña no puede exceder 20 caracteres")
+        if len(password) > 128:
+            raise ValueError("Contraseña no puede exceder 128 caracteres")
         self.password = generate_password_hash(password)
 
     def validate_pass(self, password):

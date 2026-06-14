@@ -3,3 +3,5 @@
 !.gitignore
 !seed_data.py
 !seed_planes.py
+!migrations/
+!migrations/**

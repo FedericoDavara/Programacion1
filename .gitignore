@@ -47,4 +47,6 @@ yarn-error.log
 # --- IDEs y SISTEMA ---
 .vscode/
 .idea/
-.DS_Storecorreos.md
+.DS_Store
+correos.md
+retomar.txt

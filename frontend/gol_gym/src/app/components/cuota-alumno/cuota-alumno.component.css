@@ -1,0 +1,119 @@
+.cuota-wrapper { padding: 16px 0; }
+
+.cargando, .sin-cuota {
+  text-align: center;
+  padding: 32px;
+  color: #555;
+}
+.sin-cuota-icon { font-size: 48px; margin-bottom: 8px; }
+.sin-cuota h3 { color: #888; margin: 0 0 8px; }
+.sin-cuota p { font-size: 13px; }
+
+/* Card principal */
+.cuota-card {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+  transition: border-color 0.2s;
+}
+.cuota-card.estado-al-dia    { border-color: #8dc63f; }
+.cuota-card.estado-por-vencer { border-color: #f39c12; }
+.cuota-card.estado-rechazado  { border-color: #e67e22; }
+.cuota-card.estado-vencida    { border-color: #e74c3c; }
+
+.estado-top { margin-bottom: 16px; }
+.estado-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.estado-al-dia    { background: #1a3a1a; color: #8dc63f; }
+.estado-pendiente { background: #1a1a2a; color: #aaa; }
+.estado-por-vencer { background: #3a2a00; color: #f39c12; }
+.estado-rechazado { background: #2a1a00; color: #e67e22; }
+.estado-vencida   { background: #3a0f0f; color: #e74c3c; }
+
+/* Countdown */
+.countdown {
+  text-align: center;
+  margin: 16px 0;
+}
+.dias-num {
+  font-size: 56px;
+  font-weight: 900;
+  color: #e74c3c;
+  line-height: 1;
+}
+.dias-label {
+  font-size: 13px;
+  color: #888;
+  margin-top: 4px;
+}
+
+/* Monto */
+.monto-section { margin: 16px 0; }
+.monto-label { font-size: 11px; color: #555; text-transform: uppercase; letter-spacing: 1px; }
+.monto-valor {
+  font-size: 36px;
+  font-weight: 900;
+  color: #fff;
+  margin: 4px 0;
+}
+.moneda { font-size: 16px; color: #888; font-weight: 400; }
+.monto-recargo { font-size: 12px; color: #f39c12; margin-top: 4px; }
+
+/* Vencimiento */
+.venc-section {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #888;
+  margin: 12px 0;
+}
+.venc-section.pagado { color: #8dc63f; }
+.venc-icon { font-size: 14px; }
+
+/* Plan */
+.plan-section {
+  margin: 16px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid #222;
+}
+.plan-label { font-size: 11px; color: #555; text-transform: uppercase; letter-spacing: 1px; }
+.plan-nombre { font-size: 14px; color: #ccc; margin-top: 4px; }
+
+/* CTA */
+.cta {
+  margin-top: 16px;
+  background: #1a0a0a;
+  border-left: 3px solid #e74c3c;
+  padding: 12px;
+  border-radius: 4px;
+}
+.cta-texto { margin: 0; font-size: 13px; color: #ff9090; }
+
+/* Historial */
+.historial h4 { color: #555; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+.historial-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid #1a1a1a;
+  font-size: 13px;
+}
+.hest {
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.hplan { color: #888; flex: 1; }
+.hmonto { color: #ccc; font-weight: 600; flex-shrink: 0; }
+.hfecha { color: #555; flex-shrink: 0; }

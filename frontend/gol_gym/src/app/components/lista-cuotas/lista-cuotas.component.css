@@ -1,0 +1,212 @@
+.cuotas-container {
+  padding: 24px;
+  color: #eee;
+}
+
+.cuotas-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.cuotas-header h2 {
+  margin: 0;
+  font-size: 28px;
+  color: #fff;
+}
+
+.subtitulo {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: #888;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.tag {
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.tag.al-dia    { background: #1a3a1a; color: #8dc63f; }
+.tag.por-vencer { background: #3a2a00; color: #f39c12; }
+.tag.vencidas  { background: #3a0f0f; color: #e74c3c; }
+
+.acciones-header {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-procesar {
+  background: transparent;
+  border: 1px solid #f39c12;
+  color: #f39c12;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.2s;
+}
+.btn-procesar:hover { background: #3a2a00; }
+
+.btn-nueva {
+  background: #8dc63f;
+  border: none;
+  color: #111;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+}
+.btn-nueva:hover { background: #7ab030; }
+
+/* Alertas */
+.alerta {
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+.alerta.exito { background: #1a3a1a; border-left: 4px solid #8dc63f; color: #8dc63f; }
+.alerta.error { background: #3a0f0f; border-left: 4px solid #e74c3c; color: #ff8080; }
+
+/* Formulario */
+.form-nueva-cuota {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.form-nueva-cuota h3 { margin: 0 0 16px; color: #8dc63f; }
+.form-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.form-group { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 160px; }
+.form-group label { font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+.form-group input,
+.form-group select {
+  background: #111;
+  border: 1px solid #333;
+  color: #eee;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+.btn-guardar {
+  margin-top: 16px;
+  background: #8dc63f;
+  border: none;
+  color: #111;
+  padding: 10px 24px;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn-guardar:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Filtros */
+.filtros {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.filtros button {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  color: #888;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+.filtros button:hover { border-color: #555; color: #eee; }
+.filtros button.activo { border-color: #8dc63f; color: #8dc63f; background: #1a2a10; }
+.filtros button .count {
+  background: #333;
+  border-radius: 10px;
+  padding: 1px 7px;
+  font-size: 11px;
+  color: #ccc;
+}
+
+/* Tabla */
+.tabla-wrapper { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+thead tr { background: #111; }
+th { padding: 12px 16px; text-align: left; font-size: 11px; color: #555; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #222; }
+td { padding: 14px 16px; border-bottom: 1px solid #1a1a1a; font-size: 14px; vertical-align: middle; }
+tr:hover td { background: #1a1a1a; }
+
+.socio-info { display: flex; align-items: center; gap: 12px; }
+.avatar {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: #333; display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 14px; color: #8dc63f; flex-shrink: 0;
+}
+.email { font-size: 12px; color: #666; margin-top: 2px; }
+
+.plan-badge {
+  background: #1a1a2a;
+  border: 1px solid #333;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #aaa;
+}
+
+.estado-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.estado-al-dia    { background: #1a3a1a; color: #8dc63f; }
+.estado-pendiente { background: #1a1a2a; color: #aaa; }
+.estado-por-vencer { background: #3a2a00; color: #f39c12; }
+.estado-rechazado { background: #2a1a00; color: #e67e22; }
+.estado-vencida   { background: #3a0f0f; color: #e74c3c; }
+
+.monto-debe { color: #e74c3c; font-weight: 700; }
+.monto-ok   { color: #555; }
+
+.acciones-tabla { display: flex; align-items: center; gap: 8px; }
+.btn-pagar {
+  background: #8dc63f;
+  border: none;
+  color: #111;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-pagar:hover { background: #7ab030; }
+.cobrado { color: #8dc63f; font-size: 13px; }
+.btn-eliminar {
+  background: transparent;
+  border: 1px solid #333;
+  color: #666;
+  padding: 5px 9px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+.btn-eliminar:hover { border-color: #e74c3c; color: #e74c3c; }
+
+.cargando, .sin-resultados {
+  text-align: center;
+  padding: 40px;
+  color: #555;
+}

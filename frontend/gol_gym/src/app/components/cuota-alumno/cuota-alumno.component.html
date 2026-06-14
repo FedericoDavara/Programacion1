@@ -1,0 +1,67 @@
+<div class="cuota-wrapper">
+
+  <div *ngIf="cargando" class="cargando">Cargando membresía...</div>
+
+  <div *ngIf="!cargando && !cuotaActual" class="sin-cuota">
+    <div class="sin-cuota-icon">🎮</div>
+    <h3>Sin membresía activa</h3>
+    <p>Contactate con el gym para activar tu plan.</p>
+  </div>
+
+  <div *ngIf="!cargando && cuotaActual" class="cuota-card" [ngClass]="getEstadoClass(cuotaActual.estado)">
+    <!-- Estado badge -->
+    <div class="estado-top">
+      <span class="estado-badge" [ngClass]="getEstadoClass(cuotaActual.estado)">
+        {{ getEstadoLabel(cuotaActual.estado) }}
+      </span>
+    </div>
+
+    <!-- Contador de días si está por vencer o vencida -->
+    <div class="countdown" *ngIf="cuotaActual.estado === 'POR_VENCER' || cuotaActual.estado === 'VENCIDA' || cuotaActual.estado === 'RECHAZADO'">
+      <div class="dias-num">{{ diasRestantes(cuotaActual.fecha_vencimiento) > 0 ? diasRestantes(cuotaActual.fecha_vencimiento) : 0 }}</div>
+      <div class="dias-label">días {{ diasRestantes(cuotaActual.fecha_vencimiento) > 0 ? 'restantes' : 'vencida' }}</div>
+    </div>
+
+    <!-- Monto -->
+    <div class="monto-section">
+      <div class="monto-label">Tu cuota</div>
+      <div class="monto-valor">${{ cuotaActual.monto_total | number:'1.0-0' }} <span class="moneda">ARS</span></div>
+      <div class="monto-recargo" *ngIf="cuotaActual.monto_total > cuotaActual.monto_base">
+        ⚠️ Incluye recargo del {{ cuotaActual.recargo_porcentaje }}% por mora
+      </div>
+    </div>
+
+    <!-- Vencimiento -->
+    <div class="venc-section" *ngIf="!cuotaActual.fecha_pago">
+      <span class="venc-icon">📅</span>
+      Vence el {{ cuotaActual.fecha_vencimiento | date:'dd \'de\' MMMM yyyy':'':'es' }}
+    </div>
+    <div class="venc-section pagado" *ngIf="cuotaActual.fecha_pago">
+      <span>✅</span>
+      Pagado el {{ cuotaActual.fecha_pago | date:'dd \'de\' MMMM yyyy':'':'es' }}
+    </div>
+
+    <!-- Plan -->
+    <div class="plan-section">
+      <div class="plan-label">Tu plan</div>
+      <div class="plan-nombre">🎮 {{ cuotaActual.plan }}</div>
+    </div>
+
+    <!-- CTA si está vencida -->
+    <div class="cta" *ngIf="cuotaActual.estado === 'VENCIDA' || cuotaActual.estado === 'RECHAZADO'">
+      <p class="cta-texto">🪙 INSERT COIN — Acercate al gym o contactate con el administrador para regularizar tu pago.</p>
+    </div>
+  </div>
+
+  <!-- Historial -->
+  <div class="historial" *ngIf="historial.length > 1">
+    <h4>Historial de cuotas</h4>
+    <div class="historial-item" *ngFor="let c of historial">
+      <span class="hest" [ngClass]="getEstadoClass(c.estado)">{{ getEstadoLabel(c.estado) }}</span>
+      <span class="hplan">{{ c.plan | slice:0:25 }}...</span>
+      <span class="hmonto">${{ c.monto_total | number:'1.0-0' }}</span>
+      <span class="hfecha">{{ c.fecha_vencimiento | date:'MMM yyyy':'':'es' }}</span>
+    </div>
+  </div>
+
+</div>

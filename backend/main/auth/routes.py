@@ -1,8 +1,11 @@
 from flask import request, jsonify, Blueprint
+from datetime import datetime, timezone, timedelta
 from .. import db
-from main.models import UsuarioModel, AlumnoModel, ProfesorModel
+from main.models import UsuarioModel, AlumnoModel, ProfesorModel, CuotaModel
 from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token
 from main.mail.functions import sendMail
+
+DIAS_GRACIA = 3
 
 auth = Blueprint("auth", __name__, url_prefix="/auth")
 
@@ -58,6 +61,7 @@ def register():
 
             # Si el rol es 'user' (alumno), crear también el registro de Alumno
             if usuario.rol == "user":
+                plan_elegido = data.get("plan", "Street Fighter II (The World Warrior)")
                 alumno_data = {
                     "dni": usuario.dni,
                     "edad": data.get("edad"),
@@ -66,8 +70,31 @@ def register():
                     "sexo": data.get("sexo"),
                 }
                 alumno = AlumnoModel.from_json(alumno_data)
+                alumno.plan = plan_elegido
                 db.session.add(alumno)
                 db.session.commit()
+
+                # Crear primera cuota con vencimiento en 30 días
+                monto = float(data.get("monto", 22000))
+                cuota = CuotaModel(
+                    alumno_dni=usuario.dni,
+                    plan=plan_elegido,
+                    monto_base=monto,
+                    recargo_porcentaje=10.0,
+                    fecha_emision=datetime.now(timezone.utc).replace(tzinfo=None),
+                    fecha_vencimiento=datetime.now(timezone.utc).replace(tzinfo=None) + timedelta(days=30),
+                )
+                db.session.add(cuota)
+                db.session.commit()
+
+                sendMail(
+                    [usuario.email],
+                    "🪙 INSERT COIN — Tu primera cuota en GOL GYM",
+                    "primera_cuota",
+                    usuario=usuario,
+                    cuota=cuota,
+                    dias_gracia=DIAS_GRACIA,
+                )
 
             # Si el rol es 'profesor', crear también el registro de Profesor
             if usuario.rol == "profesor":
@@ -79,7 +106,7 @@ def register():
                 db.session.add(profesor)
                 db.session.commit()
 
-            sent = sendMail([usuario.email], "Welcome!", "register", usuario=usuario)
+            sent = sendMail([usuario.email], "¡Bienvenido a GOL GYM!", "register", usuario=usuario)
         except Exception as error:
             db.session.rollback()
             return str(error), 409

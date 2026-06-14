@@ -1,0 +1,12 @@
+✅ PLAYER 1 READY — Membresía activa, {{ usuario.nombre }}!
+
+Tu pago fue registrado exitosamente.
+
+  Plan: {{ cuota.plan }}
+  Monto abonado: ${{ cuota.monto_total }} ARS
+  Fecha de pago: {{ cuota.fecha_pago.strftime('%d/%m/%Y') }}
+  Próximo vencimiento: {{ proximo_vencimiento }}
+
+¡A entrenar sin interrupciones!
+
+— El equipo de GOL GYM 🥊

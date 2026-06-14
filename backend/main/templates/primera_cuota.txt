@@ -1,0 +1,14 @@
+🎮 NEW CHALLENGER APPROACHING — Bienvenido a GOL GYM, {{ usuario.nombre }}!
+
+Tu registro está casi completo. Para activar tu membresía, realizá el pago de tu primera cuota:
+
+  Plan: {{ cuota.plan }}
+  Monto: ${{ cuota.monto_base }} ARS
+  Vence el: {{ cuota.fecha_vencimiento.strftime('%d/%m/%Y') }}
+
+🪙 INSERT COIN — Realizá tu pago antes del vencimiento para no perder acceso.
+
+⚠️  Si no se registra el pago antes de la fecha, se aplicará un recargo del {{ cuota.recargo_porcentaje }}% sobre el monto.
+
+¡Nos vemos en el gym!
+— El equipo de GOL GYM

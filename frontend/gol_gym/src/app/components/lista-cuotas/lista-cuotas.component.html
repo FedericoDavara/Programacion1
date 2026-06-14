@@ -1,0 +1,124 @@
+<div class="cuotas-container">
+
+  <!-- HEADER -->
+  <div class="cuotas-header">
+    <div>
+      <h2>Socios</h2>
+      <p class="subtitulo">
+        Control de cuotas:
+        <span class="tag al-dia">{{ resumen.al_dia }} al día</span>
+        <span class="tag por-vencer">{{ resumen.por_vencer }} por vencer</span>
+        <span class="tag vencidas">{{ resumen.vencidas }} vencidas</span>
+      </p>
+    </div>
+    <div class="acciones-header">
+      <button class="btn-procesar" (click)="procesarVencimientos()">⚡ Procesar vencimientos</button>
+      <button class="btn-nueva" (click)="mostrarFormulario = !mostrarFormulario">
+        {{ mostrarFormulario ? '✕ Cancelar' : '+ Nueva cuota' }}
+      </button>
+    </div>
+  </div>
+
+  <!-- ALERTAS -->
+  <div class="alerta exito" *ngIf="mensajeExito">{{ mensajeExito }}</div>
+  <div class="alerta error" *ngIf="mensajeError">{{ mensajeError }}</div>
+
+  <!-- FORMULARIO NUEVA CUOTA -->
+  <div class="form-nueva-cuota" *ngIf="mostrarFormulario">
+    <h3>🪙 Nueva cuota</h3>
+    <form [formGroup]="formNuevaCuota" (ngSubmit)="crearCuota()">
+      <div class="form-row">
+        <div class="form-group">
+          <label>DNI del alumno</label>
+          <input type="number" formControlName="alumno_dni" placeholder="1234567">
+        </div>
+        <div class="form-group">
+          <label>Plan</label>
+          <select formControlName="plan">
+            <option value="Street Fighter II (The World Warrior)">Street Fighter II (The World Warrior) — $22.000</option>
+            <option value="Street Fighter II Turbo (Hyper Fighting)">Street Fighter II Turbo (Hyper Fighting) — $28.000</option>
+            <option value="Super Street Fighter II Turbo (The Ultimate Championship)">Super SF II Turbo (The Ultimate Championship) — $35.000</option>
+            <option value="Ultra Street Fighter IV (Arcade Edition)">Ultra Street Fighter IV (Arcade Edition) — $42.000</option>
+            <option value="Super Street Fighter II: The New Challengers">Super SF II: The New Challengers — $24.000</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Monto base (ARS)</label>
+          <input type="number" formControlName="monto_base" placeholder="22000">
+        </div>
+        <div class="form-group">
+          <label>Fecha de vencimiento</label>
+          <input type="date" formControlName="fecha_vencimiento">
+        </div>
+      </div>
+      <button type="submit" class="btn-guardar" [disabled]="formNuevaCuota.invalid">Crear cuota</button>
+    </form>
+  </div>
+
+  <!-- FILTROS -->
+  <div class="filtros">
+    <button
+      *ngFor="let f of filtros"
+      [class.activo]="filtroActivo === f.valor"
+      (click)="aplicarFiltro(f.valor)">
+      {{ f.label }}
+      <span class="count" *ngIf="f.valor === 'AL_DIA'">{{ resumen.al_dia }}</span>
+      <span class="count" *ngIf="f.valor === 'POR_VENCER'">{{ resumen.por_vencer }}</span>
+      <span class="count" *ngIf="f.valor === 'RECHAZADO'">{{ resumen.rechazado }}</span>
+      <span class="count" *ngIf="f.valor === 'VENCIDA'">{{ resumen.vencidas }}</span>
+    </button>
+  </div>
+
+  <!-- TABLA -->
+  <div class="tabla-wrapper">
+    <div *ngIf="cargando" class="cargando">Cargando socios...</div>
+    <table *ngIf="!cargando && cuotas.length > 0">
+      <thead>
+        <tr>
+          <th>SOCIO</th>
+          <th>PLAN</th>
+          <th>ESTADO</th>
+          <th>PRÓXIMO PAGO</th>
+          <th>DEBE</th>
+          <th>ACCIÓN</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of cuotas">
+          <td>
+            <div class="socio-info">
+              <div class="avatar">{{ (c.nombre || '?')[0] }}{{ (c.apellido || '?')[0] }}</div>
+              <div>
+                <strong>{{ c.nombre }} {{ c.apellido }}</strong>
+                <div class="email">{{ c.email }}</div>
+              </div>
+            </div>
+          </td>
+          <td><span class="plan-badge">{{ c.plan | slice:0:20 }}...</span></td>
+          <td><span class="estado-badge" [ngClass]="getEstadoClass(c.estado)">{{ getEstadoLabel(c.estado) }}</span></td>
+          <td>{{ c.fecha_vencimiento ? (c.fecha_vencimiento | date:'dd MMM yyyy':'':'es') : '—' }}</td>
+          <td>
+            <span *ngIf="c.estado !== 'AL_DIA'" class="monto-debe">${{ c.monto_total | number:'1.0-0' }}</span>
+            <span *ngIf="c.estado === 'AL_DIA'" class="monto-ok">—</span>
+          </td>
+          <td>
+            <div class="acciones-tabla">
+              <button
+                *ngIf="c.estado !== 'AL_DIA'"
+                class="btn-pagar"
+                (click)="registrarPago(c.id)">
+                + Registrar pago
+              </button>
+              <span *ngIf="c.estado === 'AL_DIA'" class="cobrado">✔ Cobrada</span>
+              <button class="btn-eliminar" (click)="eliminarCuota(c.id)" title="Eliminar">✕</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="!cargando && cuotas.length === 0" class="sin-resultados">
+      No hay cuotas para mostrar con el filtro seleccionado.
+    </div>
+  </div>
+
+</div>

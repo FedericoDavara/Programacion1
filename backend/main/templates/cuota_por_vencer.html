@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body { font-family: Arial, sans-serif; background: #111; color: #eee; margin: 0; padding: 0; }
+    .container { max-width: 600px; margin: 40px auto; background: #1a1a1a; border-radius: 12px; overflow: hidden; }
+    .header { background: #f39c12; padding: 32px; text-align: center; }
+    .header h1 { margin: 0; color: #111; font-size: 28px; }
+    .header p { margin: 6px 0 0; color: #111; font-size: 13px; }
+    .body { padding: 32px; }
+    .body h2 { color: #f39c12; margin-top: 0; }
+    .countdown { text-align: center; background: #2a1f00; border: 2px solid #f39c12; border-radius: 12px; padding: 20px; margin: 20px 0; }
+    .countdown .days { font-size: 64px; font-weight: bold; color: #f39c12; line-height: 1; }
+    .countdown .label { font-size: 14px; color: #ccc; margin-top: 4px; }
+    .card { background: #222; border: 1px solid #333; border-radius: 8px; padding: 20px; margin: 20px 0; }
+    .footer { text-align: center; padding: 20px; font-size: 12px; color: #555; border-top: 1px solid #222; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>⚡ GOL GYM</h1>
+      <p>⚠️ CONTINUE? {{ dias_restantes }}...</p>
+    </div>
+    <div class="body">
+      <h2>¡Tu cuota vence pronto, {{ usuario.nombre }}!</h2>
+
+      <div class="countdown">
+        <div class="days">{{ dias_restantes }}</div>
+        <div class="label">día(s) restante(s)</div>
+      </div>
+
+      <div class="card">
+        <strong>{{ cuota.plan }}</strong><br>
+        <span style="color:#8dc63f;font-size:20px;font-weight:bold">${{ cuota.monto_base }} ARS</span><br>
+        <span style="color:#888;font-size:13px">Vence el {{ cuota.fecha_vencimiento.strftime('%d/%m/%Y') }}</span>
+      </div>
+
+      <p>🪙 <strong>INSERT COIN</strong> antes de que se acabe el tiempo y seguí entrenando sin interrupciones.</p>
+    </div>
+    <div class="footer">
+      GOL GYM — ¡No te quedes sin tu membresía! 🥊
+    </div>
+  </div>
+</body>
+</html>

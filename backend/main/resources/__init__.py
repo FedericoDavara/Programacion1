@@ -19,3 +19,8 @@ from .precio import Precios as PreciosResource
 from .permiso import Permiso as PermisoResource
 from .permiso import Permisos as PermisosResource
 # from .contacto import Contacto as ContactoResource
+from .cuota import Cuota as CuotaResource
+from .cuota import Cuotas as CuotasResource
+from .cuota import CuotaPagar as CuotaPagarResource
+from .cuota import CuotasAlumno as CuotasAlumnoResource
+from .cuota import ProcesarVencimientos as ProcesarVencimientosResource

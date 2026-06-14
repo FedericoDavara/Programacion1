@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body { font-family: Arial, sans-serif; background: #111; color: #eee; margin: 0; padding: 0; }
+    .container { max-width: 600px; margin: 40px auto; background: #1a1a1a; border-radius: 12px; overflow: hidden; }
+    .header { background: #8dc63f; padding: 32px; text-align: center; }
+    .header h1 { margin: 0; color: #111; font-size: 28px; }
+    .header p { margin: 6px 0 0; color: #111; font-size: 13px; }
+    .body { padding: 32px; }
+    .body h2 { color: #8dc63f; margin-top: 0; }
+    .check { text-align: center; font-size: 64px; margin: 16px 0; }
+    .card { background: #0f1f0f; border: 1px solid #8dc63f; border-radius: 8px; padding: 20px; margin: 20px 0; }
+    .monto { font-size: 28px; font-weight: bold; color: #8dc63f; }
+    .detail { font-size: 13px; color: #888; margin-top: 4px; }
+    .badge { display: inline-block; background: #8dc63f; color: #111; padding: 6px 16px; border-radius: 20px; font-weight: bold; font-size: 13px; margin-top: 8px; }
+    .footer { text-align: center; padding: 20px; font-size: 12px; color: #555; border-top: 1px solid #222; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>⚡ GOL GYM</h1>
+      <p>✅ PLAYER 1 READY</p>
+    </div>
+    <div class="body">
+      <h2>¡Pago confirmado, {{ usuario.nombre }}!</h2>
+      <div class="check">🥊</div>
+
+      <div class="card">
+        <strong>{{ cuota.plan }}</strong>
+        <div class="monto">${{ cuota.monto_total }} ARS</div>
+        <div class="detail">Pagado el {{ cuota.fecha_pago.strftime('%d/%m/%Y') }}</div>
+        <div class="detail">Próximo vencimiento: <strong>{{ proximo_vencimiento }}</strong></div>
+        <span class="badge">✅ Membresía activa</span>
+      </div>
+
+      <p>¡Tu membresía está activa! A entrenar sin interrupciones. 💪</p>
+    </div>
+    <div class="footer">
+      GOL GYM — ¡Seguí peleando! 🏆
+    </div>
+  </div>
+</body>
+</html>

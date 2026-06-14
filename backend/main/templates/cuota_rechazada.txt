@@ -1,0 +1,13 @@
+💀 GAME OVER (por ahora) — Pago no registrado, {{ usuario.nombre }}
+
+Tu cuota del mes venció sin registrar pago. Todavía estás a tiempo de regularizar.
+
+  Plan: {{ cuota.plan }}
+  Monto con recargo ({{ cuota.recargo_porcentaje }}%): ${{ cuota.monto_total }} ARS
+  Intentos restantes: {{ intentos_restantes }}
+
+Vamos a reintentar el cobro automáticamente. Si no se regulariza en los próximos {{ intentos_restantes }} día(s), tu cuenta será SUSPENDIDA.
+
+🪙 INSERT COIN y seguí peleando.
+
+— El equipo de GOL GYM

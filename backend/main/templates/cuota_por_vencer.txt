@@ -1,0 +1,11 @@
+⚠️ CONTINUE? {{ dias_restantes }}... — Tu cuota vence pronto, {{ usuario.nombre }}!
+
+  Plan: {{ cuota.plan }}
+  Monto: ${{ cuota.monto_base }} ARS
+  Vence el: {{ cuota.fecha_vencimiento.strftime('%d/%m/%Y') }}
+
+Quedan {{ dias_restantes }} día(s) para el vencimiento. Regularizá tu pago para seguir entrenando sin interrupciones.
+
+🪙 INSERT COIN antes de que se acabe el tiempo.
+
+— El equipo de GOL GYM

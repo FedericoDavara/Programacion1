@@ -52,6 +52,7 @@ Programacion1/
 - [Frontend — Routing y guards](frontend/routing.md)
 - [Flujos de usuario](flujos.md)
 - [Posibles mejoras y preguntas](mejoras.md)
+- [Módulo de Cuotas / Suscripción](backend/cuotas.md)
 
 ## Cómo levantar el proyecto
 

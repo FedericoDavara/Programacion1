@@ -5,7 +5,7 @@ from sqlalchemy.orm import validates
 
 class Precio(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    nombre = db.Column(db.String(100), nullable=False)  # e.g. "1 Mes", "3 Meses"
+    nombre = db.Column(db.String(200), nullable=False)
     precio = db.Column(db.String(50), nullable=False)  # e.g. "$12.000"
     descripcion = db.Column(
         db.String(250), nullable=True
@@ -17,8 +17,8 @@ class Precio(db.Model):
             raise ValueError("Nombre del precio es requerido")
         if len(nombre.strip()) < 2:
             raise ValueError("Nombre del precio debe tener al menos 2 caracteres")
-        if len(nombre.strip()) > 50:
-            raise ValueError("Nombre del precio no puede exceder 50 caracteres")
+        if len(nombre.strip()) > 200:
+            raise ValueError("Nombre del precio no puede exceder 200 caracteres")
         return nombre.strip()
 
     @validates("precio")

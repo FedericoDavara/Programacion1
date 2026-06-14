@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body { font-family: Arial, sans-serif; background: #111; color: #eee; margin: 0; padding: 0; }
+    .container { max-width: 600px; margin: 40px auto; background: #1a1a1a; border-radius: 12px; overflow: hidden; }
+    .header { background: #8dc63f; padding: 32px; text-align: center; }
+    .header h1 { margin: 0; color: #111; font-size: 28px; letter-spacing: 1px; }
+    .header p { margin: 6px 0 0; color: #111; font-size: 13px; opacity: 0.8; }
+    .body { padding: 32px; }
+    .body h2 { color: #8dc63f; margin-top: 0; }
+    .card { background: #222; border: 1px solid #333; border-radius: 8px; padding: 20px; margin: 20px 0; }
+    .card .label { font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+    .card .value { font-size: 22px; font-weight: bold; color: #8dc63f; margin: 4px 0 0; }
+    .card .plan { font-size: 14px; color: #ccc; margin-top: 4px; }
+    .badge { display: inline-block; background: #f39c12; color: #111; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; margin-top: 8px; }
+    .btn { display: block; width: fit-content; margin: 24px auto 0; background: #8dc63f; color: #111; padding: 14px 32px; border-radius: 8px; font-weight: bold; text-decoration: none; font-size: 16px; }
+    .footer { text-align: center; padding: 20px; font-size: 12px; color: #555; border-top: 1px solid #222; }
+    .warning { background: #2a1f00; border-left: 4px solid #f39c12; padding: 12px 16px; border-radius: 4px; margin-top: 20px; font-size: 13px; color: #f0c060; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>⚡ GOL GYM</h1>
+      <p>🎮 NEW CHALLENGER APPROACHING</p>
+    </div>
+    <div class="body">
+      <h2>¡Bienvenido, {{ usuario.nombre }}!</h2>
+      <p>Tu registro está casi completo. Para activar tu membresía, necesitás abonar tu primera cuota:</p>
+
+      <div class="card">
+        <div class="label">Tu plan</div>
+        <div class="plan">{{ cuota.plan }}</div>
+        <div class="label" style="margin-top:16px">Monto a pagar</div>
+        <div class="value">${{ cuota.monto_base }} ARS</div>
+        <div class="label" style="margin-top:16px">Fecha de vencimiento</div>
+        <div class="plan">{{ cuota.fecha_vencimiento.strftime('%d/%m/%Y') }}</div>
+        <span class="badge">🪙 INSERT COIN</span>
+      </div>
+
+      <div class="warning">
+        ⚠️ Si no se registra el pago antes del vencimiento, se aplicará un <strong>recargo del {{ cuota.recargo_porcentaje }}%</strong> y se reintentará el cobro durante {{ dias_gracia }} días. Pasado ese plazo, la cuenta será suspendida.
+      </div>
+    </div>
+    <div class="footer">
+      ¡Nos vemos en el gym! — El equipo de GOL GYM 🥊
+    </div>
+  </div>
+</body>
+</html>

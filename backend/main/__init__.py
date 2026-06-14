@@ -74,7 +74,11 @@ def create_app():
 
     #api.add_resource(resources.ContactoResource, "/contacto")
 
-
+    api.add_resource(resources.CuotasResource, "/cuotas")
+    api.add_resource(resources.CuotaResource, "/cuota/<int:id>")
+    api.add_resource(resources.CuotaPagarResource, "/cuota/<int:id>/pagar")
+    api.add_resource(resources.CuotasAlumnoResource, "/cuotas_alumno/<int:dni>")
+    api.add_resource(resources.ProcesarVencimientosResource, "/cuotas/procesar_vencimientos")
 
     api.init_app(app)
 

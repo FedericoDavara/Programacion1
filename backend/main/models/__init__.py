@@ -5,3 +5,4 @@ from .planificacion import Planificacion as PlanificacionModel
 from .clase import Clase as ClaseModel
 from .precio import Precio as PrecioModel
 from .permiso import Permiso as PermisoModel
+from .cuota import Cuota as CuotaModel

@@ -10,9 +10,14 @@ class Alumno(db.Model):
     altura = db.Column(db.Integer, nullable=False)
     sexo = db.Column(db.String(100), nullable=False)
     
+    estado_membresia = db.Column(db.String(20), nullable=False, default="ACTIVO")
+    plan = db.Column(db.String(150), nullable=True)
+
     usuario = db.relationship("Usuario", uselist=False, back_populates="alumno",cascade="all, delete-orphan", single_parent=True)
 
     planificaciones = db.relationship("Planificacion", back_populates="alumno",cascade="all, delete-orphan")
+
+    cuotas = db.relationship("Cuota", back_populates="alumno", cascade="all, delete-orphan")
 
     @validates('edad')
     def validate_edad(self, key, edad):
@@ -88,21 +93,25 @@ class Alumno(db.Model):
             'edad': str(self.edad),
             'peso': str(self.peso),
             'altura': str(self.altura),
-            'sexo': str(self.sexo)
-
+            'sexo': str(self.sexo),
+            'estado_membresia': self.estado_membresia,
+            'plan': self.plan,
         }
         return alumno_json
 
     def to_json_complete(self):
         planificaciones = [planificacion.to_json() for planificacion in self.planificaciones]
+        cuotas = [cuota.to_json_short() for cuota in self.cuotas]
         alumno_json = {
             'dni': str(self.dni),
             'edad': str(self.edad),
             'peso': str(self.peso),
             'altura': str(self.altura),
             'sexo': str(self.sexo),
-            'planificaciones':planificaciones
-
+            'estado_membresia': self.estado_membresia,
+            'plan': self.plan,
+            'planificaciones': planificaciones,
+            'cuotas': cuotas,
         }
         return alumno_json
 
@@ -113,7 +122,8 @@ class Alumno(db.Model):
             'peso': str(self.peso),
             'altura': str(self.altura),
             'sexo': str(self.sexo),
-
+            'estado_membresia': self.estado_membresia,
+            'plan': self.plan,
         }
         return alumno_json
 

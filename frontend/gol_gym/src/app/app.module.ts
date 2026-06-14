@@ -19,6 +19,9 @@ import { ClaseComponent } from './components/clase/clase.component';
 import { ListaClasesComponent } from './components/lista-clases/lista-clases.component';
 import { ListaPreciosComponent } from './components/lista-precios/lista-precios.component';
 import { ListaProfesoresComponent } from './components/lista-profesores/lista-profesores.component';
+import { ListaCuotasComponent } from './components/lista-cuotas/lista-cuotas.component';
+import { CuotaAlumnoComponent } from './components/cuota-alumno/cuota-alumno.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,8 @@ import { ListaProfesoresComponent } from './components/lista-profesores/lista-pr
     ListaClasesComponent,
     ListaPreciosComponent,
     ListaProfesoresComponent,
-
+    ListaCuotasComponent,
+    CuotaAlumnoComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +51,7 @@ import { ListaProfesoresComponent } from './components/lista-profesores/lista-pr
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

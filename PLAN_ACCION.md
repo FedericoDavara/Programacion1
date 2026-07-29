@@ -17,15 +17,26 @@ hacer una sin las otras y el proyecto sigue funcionando.
   `GUIA_REPASO.md` actualizados. Pendiente opcional: actualizar menciones a
   `Permiso` en `docs/` (README.md, docs/backend/*.md, docs/arquitectura.md,
   docs/mejoras.md) — no estaban en el alcance original del plan.
-- ⬜ **Fase 3 — Dividir panel admin en vistas**: sin empezar. Es la
-  siguiente en el orden recomendado.
-- ⬜ **Fase 4 — `HttpInterceptor`**: sin empezar.
+- ✅ **Fase 3 — Dividir panel admin en vistas**: hecha y probada con los 3
+  roles, en rama `mejora/panel-admin-rutas`. `VistaInicioComponent` (los 5
+  `<app-lista-x>` apilados) reemplazado por `PanelAdminComponent` con
+  pestañas y rutas hijas (`/vInicio/usuarios`, `/vInicio/cuotas`, etc.),
+  cada una carga sus datos solo al entrar. Guard de sesión en la ruta
+  padre, verificado que aplica también a navegación directa por URL a una
+  hija. De paso se achicó el badge "Al día" en la vista de cuota del
+  alumno (`cuota-alumno.component.css`).
+- ⬜ **Fase 4 — `HttpInterceptor`**: sin empezar. Es la siguiente en el
+  orden recomendado.
 - ⬜ **Fase 5 — Limpieza general**: sin empezar.
 - ⬜ **Fase 6 — Automatizar vencimientos (opcional)**: sin empezar.
 
-**Para retomar:** seguir con Fase 3, o volver a la Fase 1 pendiente
+**Idea futura fuera de alcance:** que el profesor pueda registrar cobros
+de cuota desde su panel (hoy `CuotaPagarResource` es solo `admin`) — ver
+detalle en la sección correspondiente más abajo.
+
+**Para retomar:** seguir con Fase 4, o volver a la Fase 1 pendiente
 (credenciales precargadas en el login) si se prioriza tener una demo rápida
-antes que seguir con la Fase 3.
+antes que seguir con la Fase 4.
 
 **Regla general para todas las fases:** trabajar en una rama propia
 (`git checkout -b mejora/nombre-corto`), probar manualmente con los 3 roles
@@ -232,6 +243,25 @@ de la entrega o dejarla como "trabajo futuro" documentado.
    `ProcesarVencimientosResource.post()`.
 3. Mantener el botón manual como acción de "forzar ahora", además del job
    automático (no hace falta sacarlo).
+
+---
+
+## Idea futura (fuera del alcance de la auditoría) — Profesor puede registrar cobros
+
+Surgió al probar la Fase 3: hoy `CuotaPagarResource` (`backend/main/resources/cuota.py`,
+endpoint `POST /cuota/<id>/pagar`) está restringido a `@role_required(roles=["admin"])`.
+La idea es que el profesor también pueda marcar una cuota como pagada desde
+la pestaña "Cuotas" de su panel, sin pasar por el admin.
+
+Antes de encararla, definir:
+- ¿El profesor puede cobrar cualquier cuota, o solo de alumnos de sus propias clases?
+- ¿Mismo endpoint (sumar `"profesor"` a la lista de roles) o uno separado con más
+  restricciones?
+- ¿Necesita un registro de qué profesor cobró cada cuota (auditoría), o alcanza con
+  el estado actual del modelo `Cuota`?
+
+No es un hallazgo de la auditoría — es una mejora de producto. Retomar después de
+terminar las Fases 4, 5 y 6 si queda tiempo.
 
 ---
 

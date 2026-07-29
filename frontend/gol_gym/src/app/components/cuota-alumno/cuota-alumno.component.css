@@ -26,9 +26,9 @@
 .estado-top { margin-bottom: 16px; }
 .estado-badge {
   display: inline-block;
-  padding: 4px 14px;
+  padding: 2px 10px;
   border-radius: 20px;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 700;
 }
 .estado-al-dia    { background: #1a3a1a; color: #8dc63f; }

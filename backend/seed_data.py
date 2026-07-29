@@ -2,7 +2,6 @@
 Datos semilla para GOL GYM.
 
 Estrategia:
-  - Conserva los permisos existentes (son config del sistema).
   - Limpia usuarios, alumnos, profesores, clases, planificaciones y cuotas.
   - Recrea todo con datos coherentes con el sistema actual.
   - Los correos reales (correos.md) quedan asignados a usuarios que
@@ -21,7 +20,7 @@ from main import db
 from main.models import (
     UsuarioModel, AlumnoModel, ProfesorModel,
     ClaseModel, PlanificacionModel, CuotaModel,
-    PermisoModel, PrecioModel,
+    PrecioModel,
 )
 from datetime import datetime, timedelta, timezone
 
@@ -196,7 +195,7 @@ def cuota_fechas(estado: str):
 # ── ejecución ─────────────────────────────────────────────────────────────────
 
 with app.app_context():
-    print("🗑️  Limpiando datos anteriores (se conservan permisos)...")
+    print("🗑️  Limpiando datos anteriores...")
 
     db.session.query(CuotaModel).delete()
     db.session.query(PlanificacionModel).delete()
@@ -307,32 +306,13 @@ with app.app_context():
     db.session.commit()
     print(f"   ✓ {len(PLANIFICACIONES)} planificaciones creadas\n")
 
-    # ── Permisos de cuotas (si faltan) ────────────────────────────────────
-    print("🔐 Verificando permisos de cuotas...")
-    permisos_cuota = [
-        ("admin",   "cuotas",               "GET"),
-        ("profesor","cuotas",               "GET"),
-        ("admin",   "cuotas",               "POST"),
-        ("admin",   "cuota",                "DELETE"),
-        ("admin",   "cuotapagar",           "PUT"),
-        ("admin",   "procesarvencimientos", "POST"),
-    ]
-    existentes = {(p.rol, p.recurso, p.metodo) for p in db.session.query(PermisoModel).all()}
-    agregados = 0
-    for rol, recurso, metodo in permisos_cuota:
-        if (rol, recurso, metodo) not in existentes:
-            db.session.add(PermisoModel(rol=rol, recurso=recurso, metodo=metodo))
-            agregados += 1
-    db.session.commit()
-    print(f"   ✓ {agregados} permisos nuevos de cuota agregados\n")
-
     # ── Resumen final ─────────────────────────────────────────────────────
     print("=" * 55)
     print("✅ SEED COMPLETADO")
     print("=" * 55)
 
     from sqlalchemy import text
-    for tabla in ["usuario", "alumno", "profesor", "clase", "planificacion", "cuota", "precio", "permiso"]:
+    for tabla in ["usuario", "alumno", "profesor", "clase", "planificacion", "cuota", "precio"]:
         n = db.session.execute(text(f'SELECT COUNT(*) FROM "{tabla}"')).scalar()
         print(f"   {tabla:<18} {n} filas")
 

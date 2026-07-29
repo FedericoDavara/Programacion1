@@ -60,10 +60,6 @@ def create_app():
 
     api.add_resource(resources.ClaseResource, "/clase/<id>")
 
-    api.add_resource(resources.PermisosResource, "/permisos")
-
-    api.add_resource(resources.PermisoResource, "/permiso/<id>")
-
     api.add_resource(
         resources.ClasesPorProfesorResource, "/clases_por_profesor/<dni_profesor>"
     )

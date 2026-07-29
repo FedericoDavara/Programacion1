@@ -57,25 +57,20 @@ def user_identity_lookup(usuario):
 **Dónde está en el código:** conceptual (estándar JWT); la generación puntual está en `routes.py:30` y `decorators.py:31-38`.
 
 **Pregunta:** ¿Cómo se protege una ruta en el backend?
-**Respuesta:** Con `@jwt_required()` (solo exige token válido) o con `@role_required(roles=[...])` (exige token válido **y** que el rol tenga permiso, según una tabla en base de datos). Si falta o es inválido, Flask-JWT-Extended devuelve 401 automáticamente.
+**Respuesta:** Con `@jwt_required()` (solo exige token válido) o con `@role_required(roles=[...])` (exige token válido **y** que el rol del claim esté en la lista `roles` pasada al decorador). Si falta o es inválido, Flask-JWT-Extended devuelve 401 automáticamente.
 **Dónde está en el código:** `backend/main/resources/usuario.py` línea 42 (`@jwt_required()`) y línea 51 (`@role_required(roles=["admin","profesor"])`)
 
 **Pregunta:** ¿Cómo funciona el sistema de permisos por rol (`role_required`)? — es lo más particular de este proyecto
-**Respuesta:** No es un simple `if rol == 'admin'` fijo en el código: consulta la tabla `Permiso` (rol, recurso, endpoint) en la base de datos. Si existe una fila para ese endpoint pero el rol del usuario no está permitido, devuelve 403. Si el endpoint no tiene reglas cargadas, deja pasar. Esto permite cambiar permisos sin tocar código.
-**Dónde está en el código:** `backend/main/auth/decorators.py` líneas 8-25
+**Respuesta:** Es una comparación directa contra la lista `roles` que recibe el decorador, sin consultar la base de datos: si el rol del claim del JWT no está en esa lista, devuelve 403. Antes existía una tabla `Permiso` (rol, recurso, endpoint) consultada en cada request — se sacó porque era **fail-open**: si un endpoint nuevo no tenía filas cargadas en `Permiso`, el chequeo lo dejaba pasar sin restricción por defecto. El enfoque actual es fail-closed: todo endpoint protegido con `@role_required(roles=[...])` queda restringido de una, sin depender de datos en una tabla.
+**Dónde está en el código:** `backend/main/auth/decorators.py` líneas 8-19
 ```python
 def role_required(roles):
     def decorator(fn):
         def wrapper(*args, **kwargs):
             verify_jwt_in_request()
             claims = get_jwt()
-            resource = request.endpoint
-            rol = claims['rol']
-            exists = db.session.query(PermisoModel).filter(PermisoModel.recurso == resource).first()
-            if exists:
-                rol_not_permitted = db.session.query(PermisoModel)...scalar() is None
-                if rol_not_permitted:
-                    return 'Rol sin permisos de acceso al recurso', 403
+            if claims['rol'] not in roles:
+                return 'Rol sin permisos de acceso al recurso', 403
             return fn(*args, **kwargs)
         return wrapper
     return decorator
@@ -332,7 +327,7 @@ clases = db.relationship('Clase', secondary=procla, backref=db.backref('profesor
 **Dónde está en el código:** `backend/main/resources/usuario.py` — la clase `Usuario` define `get`, `delete`, `put` (no hay `post` en el recurso singular, ese va en `Usuarios`)
 
 **Pregunta:** ¿Qué roles tiene el sistema y qué puede hacer cada uno?
-**Respuesta:** `admin` (control total: usuarios, cuotas, permisos), `profesor` (gestiona alumnos y planificaciones, puede suspender alumnos pero no crear cuotas ni borrar usuarios no-alumnos) y `user` (alumno: ve su perfil, su cuota, su planificación). El rol se valida server-side en cada endpoint sensible con `role_required`.
+**Respuesta:** `admin` (control total: usuarios, cuotas, clases, precios), `profesor` (gestiona alumnos y planificaciones, puede suspender alumnos pero no crear cuotas ni borrar usuarios no-alumnos) y `user` (alumno: ve su perfil, su cuota, su planificación). El rol se valida server-side en cada endpoint sensible con `role_required`.
 **Dónde está en el código:** `backend/main/models/usuario.py` línea 130 (`valid_roles = ["admin", "profesor", "user"]`) y `backend/main/resources/usuario.py` líneas 57-60 (ejemplo de restricción: un profesor solo puede borrar usuarios con rol `user`)
 
 ---

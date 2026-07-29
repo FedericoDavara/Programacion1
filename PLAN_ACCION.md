@@ -4,6 +4,29 @@ Basado en `AUDITORIA.md`. Ordenado por fases: primero lo de bajo esfuerzo y
 alto impacto, después lo estructural. Cada fase es independiente — se puede
 hacer una sin las otras y el proyecto sigue funcionando.
 
+## Estado (actualizado 29/07/2026)
+
+- ✅ **Fase 1 — Seguridad rápida**: hecha. Login sin credenciales
+  precargadas y `.gitignore` de backend en lista negra.
+  **Pendiente aparte:** volver a dejar credenciales precargadas en el login
+  para agilizar las demos (decisión explícita, no es un revert del cambio
+  de seguridad — ver detalle abajo).
+- ✅ **Fase 2 — Retirar tabla `Permiso`**: hecha y probada con los 3 roles.
+  `role_required` ahora compara directo contra `roles`, sin tabla en BD.
+  Migración `407093b3edec_drop_tabla_permiso` aplicada. Seed, Postman y
+  `GUIA_REPASO.md` actualizados. Pendiente opcional: actualizar menciones a
+  `Permiso` en `docs/` (README.md, docs/backend/*.md, docs/arquitectura.md,
+  docs/mejoras.md) — no estaban en el alcance original del plan.
+- ⬜ **Fase 3 — Dividir panel admin en vistas**: sin empezar. Es la
+  siguiente en el orden recomendado.
+- ⬜ **Fase 4 — `HttpInterceptor`**: sin empezar.
+- ⬜ **Fase 5 — Limpieza general**: sin empezar.
+- ⬜ **Fase 6 — Automatizar vencimientos (opcional)**: sin empezar.
+
+**Para retomar:** seguir con Fase 3, o volver a la Fase 1 pendiente
+(credenciales precargadas en el login) si se prioriza tener una demo rápida
+antes que seguir con la Fase 3.
+
 **Regla general para todas las fases:** trabajar en una rama propia
 (`git checkout -b mejora/nombre-corto`), probar manualmente con los 3 roles
 (admin, profesor, user) antes de mergear a `main`, y poder explicar el

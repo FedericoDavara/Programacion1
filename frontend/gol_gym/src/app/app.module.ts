@@ -11,7 +11,6 @@ import { VistaPlanificacionComponent } from './pages/vista-planificacion/vista-p
 import { ListaUsuariosComponent } from './components/lista-usuarios/lista-usuarios.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { VistaPerfilComponent } from './pages/vista-perfil/vista-perfil.component';
-import { VistaInicioComponent } from './pages/vista-inicio/vista-inicio.component';
 import { VistaErrorComponent } from './pages/vista-error/vista-error.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -21,6 +20,7 @@ import { ListaProfesoresComponent } from './components/lista-profesores/lista-pr
 import { ListaCuotasComponent } from './components/lista-cuotas/lista-cuotas.component';
 import { CuotaAlumnoComponent } from './components/cuota-alumno/cuota-alumno.component';
 import { DatePipe } from '@angular/common';
+import { PanelAdminComponent } from './pages/panel-admin/panel-admin.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,6 @@ import { DatePipe } from '@angular/common';
     VistaPlanificacionComponent,
     PerfilComponent,
     VistaPerfilComponent,
-    VistaInicioComponent,
     ListaUsuariosComponent,
     VistaErrorComponent,
     ListaClasesComponent,
@@ -41,6 +40,7 @@ import { DatePipe } from '@angular/common';
     ListaProfesoresComponent,
     ListaCuotasComponent,
     CuotaAlumnoComponent,
+    PanelAdminComponent,
   ],
   imports: [
     BrowserModule,

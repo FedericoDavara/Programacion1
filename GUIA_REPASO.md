@@ -97,8 +97,8 @@ if (exp && Date.now() >= exp * 1000) {
 **Dónde está en el código:** conceptual — la clave vive en `backend/main/__init__.py:85`, tomada de `.env` (no versionado, ver `.gitignore`).
 
 **Pregunta:** ¿Cómo llega el token del backend al frontend y de ahí a cada request?
-**Respuesta:** El backend lo devuelve en el JSON de `/auth/login`. El componente de login lo guarda en `localStorage`. Como **no hay interceptor HTTP**, cada método de cada `service` arma manualmente un header `Authorization: Bearer <token>` leyendo `localStorage.getItem('token')` antes de cada petición protegida.
-**Dónde está en el código:** `frontend/gol_gym/src/app/pages/login/login.component.ts` línea 35 (`localStorage.setItem('token', rta.access_token)`) y `frontend/gol_gym/src/app/services/usuarios.service.ts` líneas 17-21 (armado manual del header)
+**Respuesta:** El backend lo devuelve en el JSON de `/auth/login`. El componente de login lo guarda en `localStorage`. Un `HttpInterceptor` (`AuthInterceptor`) intercepta cada request saliente y le clona el header `Authorization: Bearer <token>` si hay token en `localStorage` — ya no se arma a mano en cada `service`.
+**Dónde está en el código:** `frontend/gol_gym/src/app/pages/login/login.component.ts` línea 35 (`localStorage.setItem('token', rta.access_token)`) y `frontend/gol_gym/src/app/interceptors/auth.interceptor.ts` (`intercept()`)
 
 ---
 
@@ -145,8 +145,8 @@ export const authsessionGuard: CanActivateFn = (route, state) => {
 *Importante:* el guard **no** valida el rol contra la ruta (no hay `data.roles` en el routing), solo autenticación + expiración. La restricción por rol se aplica del lado del backend (`role_required`) y ocultando/mostrando botones en el HTML con `*ngIf`.
 
 **Pregunta:** ¿Hay un HttpInterceptor en este proyecto?
-**Respuesta:** **No.** Es una mejora pendiente documentada en `retomar.txt`. Actualmente cada `service` arma el header `Authorization` a mano en cada método, repitiendo el mismo bloque de código muchas veces.
-**Dónde está en el código:** no existe `*.interceptor.ts` en `frontend/gol_gym/src/app/` (verificado con `find`). Ejemplo del patrón manual repetido: `frontend/gol_gym/src/app/services/usuarios.service.ts` líneas 16-30.
+**Respuesta:** **Sí.** `AuthInterceptor` implementa `HttpInterceptor` y clona cada `HttpRequest` saliente agregándole el header `Authorization: Bearer <token>` (leído de `localStorage`) solo si hay token. Reemplazó el patrón anterior de armar el header a mano en cada método de cada `service` (29 repeticiones detectadas en la auditoría).
+**Dónde está en el código:** `frontend/gol_gym/src/app/interceptors/auth.interceptor.ts` (`intercept()`), registrado en `frontend/gol_gym/src/app/app.module.ts` como `{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }`.
 
 **Pregunta:** ¿Dónde se guarda el token y los datos de sesión en el frontend?
 **Respuesta:** Principalmente en `localStorage` (`token`, `role`, `dni`, `nombre`, `apellido`), que sobrevive a cerrar el navegador. La vista de perfil usa además `sessionStorage` para recordar qué DNI se estaba viendo tras un F5, sin pisar el DNI del propio usuario logueado.
@@ -343,8 +343,8 @@ clases = db.relationship('Clase', secondary=procla, backref=db.backref('profesor
 **Dónde está en el código:** `backend/main/models/cuota.py` líneas 12 y 21 (ver sección Base de datos)
 
 **Pregunta:** ¿Qué pasa si el token expira? ¿Lo maneja algún interceptor?
-**Respuesta:** No hay interceptor. El guard de rutas (`authsessionGuard`) revisa la expiración *antes* de entrar a una vista protegida y redirige a login/home si venció. Si el token vence en medio de una sesión activa (sin cambiar de ruta), el backend simplemente devolverá 401 en la próxima petición y ese error no está centralizado — cada `subscribe(...error...)` lo maneja por separado (ver `login.component.ts` líneas 51-59 como ejemplo del patrón de manejo de errores usado).
-**Dónde está en el código:** `frontend/gol_gym/src/app/guards/authsession.guard.ts`
+**Respuesta:** Hay un `AuthInterceptor`, pero solo se ocupa de **agregar** el header `Authorization` a cada request — no valida expiración ni maneja el error de vuelta. El guard de rutas (`authsessionGuard`) revisa la expiración *antes* de entrar a una vista protegida y redirige a login/home si venció. Si el token vence en medio de una sesión activa (sin cambiar de ruta), el backend simplemente devolverá 401 en la próxima petición y ese error no está centralizado — cada `subscribe(...error...)` lo maneja por separado (ver `login.component.ts` líneas 51-59 como ejemplo del patrón de manejo de errores usado). Manejar el 401 de forma centralizada en el interceptor (forzando logout) sería una mejora natural sobre lo que ya existe.
+**Dónde está en el código:** `frontend/gol_gym/src/app/guards/authsession.guard.ts` y `frontend/gol_gym/src/app/interceptors/auth.interceptor.ts`
 
 **Pregunta:** ¿Diferencia entre `localStorage` y `sessionStorage`?
 **Respuesta:** `localStorage` persiste indefinidamente (sobrevive a cerrar el navegador) y es compartido entre pestañas del mismo origen. `sessionStorage` se borra al cerrar la pestaña y es exclusivo de esa pestaña. El proyecto usa `localStorage` para la sesión del usuario logueado, y `sessionStorage` puntualmente para no perder de vista qué perfil ajeno se estaba mirando tras un F5.
@@ -370,9 +370,9 @@ clases = db.relationship('Clase', secondary=procla, backref=db.backref('profesor
 **Respuesta:** Ver sección Base de datos — script versionado e incremental que modifica el esquema sin perder datos, generado comparando el estado de los modelos contra la BD actual.
 **Dónde está en el código:** `backend/migrations/versions/`
 
-**Pregunta:** Se ve una inconsistencia entre backend y frontend en la validación de contraseña — ¿cuál es?
-**Respuesta:** El modelo (`plain_password` setter) permite contraseñas de hasta 128 caracteres, pero los formularios reactivos del frontend (login y alta de usuario) todavía validan `Validators.maxLength(20)`. Es una desprolijidad real del código actual: el backend fue actualizado (commit `bb684cb`) pero los formularios del frontend no se tocaron. Si te preguntan "¿por qué el input no te deja poner una password larga si el backend la acepta?", la respuesta es esta.
-**Dónde está en el código:** backend permite 128 en `backend/main/models/usuario.py` línea 47; frontend sigue en 20 en `frontend/gol_gym/src/app/pages/login/login.component.ts` línea 26 y `frontend/gol_gym/src/app/components/lista-usuarios/lista-usuarios.component.ts` línea 45.
+**Pregunta:** ¿Había una inconsistencia entre backend y frontend en la validación de contraseña?
+**Respuesta:** Sí, hasta la Fase 5 del plan de mejoras: el modelo (`plain_password` setter) permite contraseñas de hasta 128 caracteres, pero los formularios reactivos del frontend (login y alta/edición de usuario) validaban `Validators.maxLength(20)` — el backend se había actualizado (commit `bb684cb`) sin tocar el frontend. Se corrigió igualando el `maxLength` del frontend a 128.
+**Dónde está en el código:** backend permite 128 en `backend/main/models/usuario.py` línea 47; frontend ahora también en 128 en `frontend/gol_gym/src/app/pages/login/login.component.ts` y `frontend/gol_gym/src/app/components/lista-usuarios/lista-usuarios.component.ts`.
 
 **Pregunta:** ¿Cómo se envían los mails automáticos del sistema (cuotas, suspensión, bienvenida)?
 **Respuesta:** Con `Flask-Mail`, configurado con credenciales SMTP de Gmail (App Password) vía variables de entorno. Cada evento de negocio (registro, primera cuota, cuota rechazada, cuota pagada, suspensión, activación) dispara un `sendMail(...)` con una plantilla distinta.

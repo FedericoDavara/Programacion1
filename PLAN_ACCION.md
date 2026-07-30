@@ -25,18 +25,41 @@ hacer una sin las otras y el proyecto sigue funcionando.
   padre, verificado que aplica también a navegación directa por URL a una
   hija. De paso se achicó el badge "Al día" en la vista de cuota del
   alumno (`cuota-alumno.component.css`).
-- ⬜ **Fase 4 — `HttpInterceptor`**: sin empezar. Es la siguiente en el
-  orden recomendado.
-- ⬜ **Fase 5 — Limpieza general**: sin empezar.
-- ⬜ **Fase 6 — Automatizar vencimientos (opcional)**: sin empezar.
+- ✅ **Fase 4 — `HttpInterceptor`**: hecha, en rama `mejora/http-interceptor`.
+  `AuthInterceptor` (`ng generate interceptor interceptors/auth`) agrega
+  `Authorization: Bearer <token>` a cada request saliente si hay token en
+  `localStorage`, registrado en `app.module.ts` vía `HTTP_INTERCEPTORS`
+  (`multi: true`). Se sacó el armado manual de `HttpHeaders` de los 6
+  servicios que lo tenían (`usuarios`, `clases`, `precios`,
+  `planificacion`, `cuotas`, `contacto` — `auth.service.ts` no lo
+  necesitaba). Build compila sin errores. **Pendiente de verificar
+  manualmente:** login → vista protegida → confirmar en la pestaña Network
+  del navegador que el header sigue llegando igual (paso 5 del plan, no se
+  pudo hacer sin navegador conectado).
+- ✅ **Fase 5 — Limpieza general**: hecha, en rama `mejora/limpieza-general`
+  (sobre `mejora/http-interceptor`). Los 7 `window.location.reload()` de
+  `planificacion.component.ts` y `perfil.component.ts` se reemplazaron por
+  métodos que vuelven a pedir los datos al backend (`cargarPlanificacion()`,
+  `cargarDatos()`) y reasignan el estado del componente, sin recargar el
+  navegador. Se sacaron los 35 `console.log` de debug (incluía uno que
+  logueaba el `access_token` completo en `login.component.ts` — detalle de
+  seguridad menor de paso). Se igualó `Validators.maxLength` del frontend
+  (era 20) al límite real del backend (128) en `login.component.ts` y
+  `lista-usuarios.component.ts`. Se reemplazó el único password de ejemplo
+  del Postman collection que no llegaba al mínimo de 6 caracteres (`"1234"`
+  → `"clave1234"`); `"hola123"` y `"clavepatino"` ya cumplían. Build
+  compila sin errores.
+- ⬜ **Fase 6 — Automatizar vencimientos (opcional)**: sin empezar, a
+  evaluar si vale la pena antes de la entrega.
 
 **Idea futura fuera de alcance:** que el profesor pueda registrar cobros
 de cuota desde su panel (hoy `CuotaPagarResource` es solo `admin`) — ver
 detalle en la sección correspondiente más abajo.
 
-**Para retomar:** seguir con Fase 4, o volver a la Fase 1 pendiente
-(credenciales precargadas en el login) si se prioriza tener una demo rápida
-antes que seguir con la Fase 4.
+**Para retomar:** decidir sobre Fase 6 (ver sección correspondiente),
+confirmar visualmente la Fase 4 en el navegador (Network tab), o volver a
+la Fase 1 pendiente (credenciales precargadas en el login) si se prioriza
+tener una demo rápida.
 
 **Regla general para todas las fases:** trabajar en una rama propia
 (`git checkout -b mejora/nombre-corto`), probar manualmente con los 3 roles

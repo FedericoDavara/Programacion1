@@ -68,7 +68,6 @@ export class PerfilComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const userDNI = this.usuariosService.getUserDNIFromToken();
     this.parametrosOcultos = history.state;
 
     this.route.params.subscribe((params: Params) => {
@@ -84,6 +83,12 @@ export class PerfilComponent implements OnInit {
       sexo: ['', [Validators.required, Validators.pattern(/^(Masculino|Femenino)$/)]],
       especialidad: ['', [Validators.minLength(3), Validators.maxLength(50), Validators.pattern(/^[a-zA-ZÀ-ÿ\s]+$/)]]
     });
+
+    this.cargarDatos();
+  }
+
+  private cargarDatos(): void {
+    const userDNI = this.usuariosService.getUserDNIFromToken();
 
     if (userDNI && this.selectedRole === 'user') {
       this.usuariosService.getUser(userDNI).subscribe(
@@ -166,9 +171,7 @@ export class PerfilComponent implements OnInit {
             this.usuariosService.getUserProf(this.perfilDni).subscribe(
               (profData) => {
                 this.ProfData = profData;
-                console.log('ProfData: ', this.ProfData);
-                
-                // ✅ NO RECREAR EL FORMULARIO. SOLO ACTUALIZAR VALORES.
+
                 if (this.ProfData) {
                   this.profileForm.patchValue({
                     dni: this.perfilDni,
@@ -177,7 +180,6 @@ export class PerfilComponent implements OnInit {
                 }
               },
               (profError) => {
-                console.error('Error fetching ProfData: ', profError);
                 // Si es un profesor nuevo, solo setear el DNI
                 this.profileForm.patchValue({ dni: this.perfilDni });
               }
@@ -199,7 +201,6 @@ export class PerfilComponent implements OnInit {
       if (this.selectedRole === 'profesor' && this.UserData.rol === 'user') {
         this.usuariosService.deleteUserAlum(this.perfilDni).subscribe(
           () => {
-            console.log(`Alumno eliminado correctamente`);
             this.router.navigate(['/vInicio']);
           },
           (error) => {
@@ -210,7 +211,6 @@ export class PerfilComponent implements OnInit {
         // Admin o cualquier otro caso permitido
         this.usuariosService.deleteUser(this.perfilDni).subscribe(
           () => {
-            console.log(`Usuario Eliminado`);
             this.router.navigate(['/vInicio']);
           },
           (error) => {
@@ -224,8 +224,7 @@ export class PerfilComponent implements OnInit {
   crearAlumno(dataAlum: any = {}) {
     this.usuariosService.createUserAlum(dataAlum).subscribe(
       (response) => {
-        console.log('Alumno creado con éxito', response);
-        window.location.reload();
+        this.cargarDatos();
       },
       (error) => {
         console.error('Error al crear alumno:', error);
@@ -236,8 +235,7 @@ export class PerfilComponent implements OnInit {
   crearProfesor(dataProf: any = {}) {
     this.usuariosService.createUserProf(dataProf).subscribe(
       (response) => {
-        console.log('Profesor creado con éxito', response);
-        window.location.reload();
+        this.cargarDatos();
       },
       (error) => {
         console.error('Error al crear profesor:', error);
@@ -248,8 +246,7 @@ export class PerfilComponent implements OnInit {
   editarAlumno(dataAlum: any = {}) {
     this.usuariosService.updateUserAlum(this.perfilDni, dataAlum).subscribe(
       (response) => {
-        console.log('Alumno actualizado con éxito', response);
-        window.location.reload();
+        this.cargarDatos();
       },
       (error) => {
         console.error('Error al actualizar alumno:', error);
@@ -260,8 +257,7 @@ export class PerfilComponent implements OnInit {
   editarProfesor(dataProf: any = {}) {
     this.usuariosService.updateUserProf(this.perfilDni, dataProf).subscribe(
       (response) => {
-        console.log('Profesor actualizado con éxito', response);
-        window.location.reload();
+        this.cargarDatos();
       },
       (error) => {
         console.error('Error al actualizar profesor:', error);
@@ -281,16 +277,12 @@ export class PerfilComponent implements OnInit {
 
     if (isFormValid) {
       if (this.UserData.rol === 'user') {
-        console.log("Datos alumno:", this.profileForm.value);
-
         this.usuariosService.getUserAlum(this.perfilDni).subscribe(
           (alumData) => {
-            console.log("El alumno ya existe. Actualizando...");
             this.editarAlumno(this.profileForm.value);
           },
           (alumError) => {
             if (alumError.status === 404) {
-              console.log("El alumno no existe. Creando nuevo registro...");
               this.profileForm.value.dni = this.perfilDni
               this.crearAlumno(this.profileForm.value);
             } else {

@@ -42,7 +42,7 @@ export class ListaUsuariosComponent implements OnInit {
       nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(/^[a-zA-ZÀ-ÿ\s]+$/)]],
       apellido: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(/^[a-zA-ZÀ-ÿ\s]+$/)]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(128)]],
       telefono: ['', [Validators.required, Validators.pattern(/^[0-9]{7,15}$/)]],
       rol: ['', Validators.required],
       edad: [''],
@@ -89,7 +89,7 @@ export class ListaUsuariosComponent implements OnInit {
       nombre: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(/^[a-zA-ZÀ-ÿ\s]+$/)]],
       apellido: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern(/^[a-zA-ZÀ-ÿ\s]+$/)]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.minLength(6), Validators.maxLength(20)]],
+      password: ['', [Validators.minLength(6), Validators.maxLength(128)]],
       telefono: ['', [Validators.required, Validators.pattern(/^[0-9]{7,15}$/)]],
       especialidad: ['']
     });
@@ -102,7 +102,6 @@ export class ListaUsuariosComponent implements OnInit {
   cargarUsuarios() {
     this.usuariosService.getUsers(this.currentPage, this.perPage, this.filtroRol)
       .subscribe((data: any) => {
-        console.log('JSON data:', data);
         this.arrayUsers = data.usuarios;
       });
   }
@@ -122,8 +121,6 @@ export class ListaUsuariosComponent implements OnInit {
       if (data.usuarios && data.usuarios.length > 0) {
         this.currentPage = nextPage;
         this.cargarUsuarios();
-      } else {
-        console.log('No users on the next page.');
       }
     });
   }
@@ -162,7 +159,6 @@ export class ListaUsuariosComponent implements OnInit {
     if (this.newUserForm.valid) {
       this.usuariosService.registerUser(this.newUserForm.value).subscribe(
         (data: any) => {
-          console.log('Usuario creado:', data);
           this.cargarUsuarios();
         },
       );
@@ -193,7 +189,6 @@ export class ListaUsuariosComponent implements OnInit {
       delete datosUsuario.especialidad;
     }
     this.usuariosService.updateUser(this.usuarioAEditar.dni, datosUsuario).subscribe((data: any) => {
-      console.log('Usuario editado:', data);
       this.cargarUsuarios();
     });
   }

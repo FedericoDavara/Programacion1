@@ -72,17 +72,19 @@ export class PlanificacionComponent implements OnInit {
     this.usuariosService.getAllProf().subscribe(
       (data) => {
         this.allProf = data;
-        console.log('Datos de profesores:', this.allProf);
       },
       (error) => {
         console.error('Error al obtener datos de profesores:', error);
       }
     );
 
+    this.cargarPlanificacion();
+  }
+
+  private cargarPlanificacion(): void {
     this.planificacionService.getPlanif(this.perfilDni).subscribe(
       (userPlanif) => {
         this.UserPlanif = userPlanif;
-        console.log('UserPlanif: ', this.UserPlanif);
 
         if (Array.isArray(userPlanif) && userPlanif.length > 0) {
           const planif = userPlanif[0];
@@ -152,11 +154,7 @@ export class PlanificacionComponent implements OnInit {
   crearPlanificacion(dataPLanif: any = {}) {
     this.planificacionService.createPlanif(dataPLanif).subscribe(
       (response) => {
-        console.log('Planificación creada con éxito', response);
-        // Recargar solo cuando sea exitoso
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
+        this.cargarPlanificacion();
       },
       (error) => {
         console.error('Error al crear planificación:', error);
@@ -164,15 +162,9 @@ export class PlanificacionComponent implements OnInit {
     );
   }
   editarPlanificacion(dataPlanif: any = {}) {
-    // Ya no es necesario limpiar los datos aquí si se hace en submit()
-    console.log("Enviando para editar:", dataPlanif);
     this.planificacionService.updatePlanif(this.PlanifID, dataPlanif).subscribe(
       (response) => {
-        console.log('Planificación actualizada con éxito', response);
-        // Recargar solo cuando sea exitoso
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
+        this.cargarPlanificacion();
       },
       (error) => {
         console.error('Error al actualizar planificación:', error);
@@ -183,25 +175,17 @@ export class PlanificacionComponent implements OnInit {
   eliminarPlanificacion() {
     this.planificacionService.deletePlanif(this.PlanifID).subscribe(
       (response) => {
-        console.log('Planificación eliminada con éxito', response);
+        this.cargarPlanificacion();
       }
     );
   }
   submit() {
-    this.debugFormulario();
-
-    console.log('UserPlanif value:', this.UserPlanif);
-    console.log('shouldEditPlanif result:', this.shouldEditPlanif());
-
     if (this.planifForm.valid) {
-      // ✅ Objeto con los datos limpios y con tipos correctos
       const datosParaEnviar = {
         ...this.planifForm.value,
-        alumno_dni: Number(this.planifForm.value.alumno_dni),    // <-- Convertir a número
-        profesor_dni: Number(this.planifForm.value.profesor_dni) // <-- Convertir a número (por seguridad)
+        alumno_dni: Number(this.planifForm.value.alumno_dni),
+        profesor_dni: Number(this.planifForm.value.profesor_dni)
       };
-
-      console.log("✅ Datos limpios a enviar:", datosParaEnviar);
 
       if (this.shouldEditPlanif()) {
         this.editarPlanificacion(datosParaEnviar);
@@ -209,7 +193,6 @@ export class PlanificacionComponent implements OnInit {
         this.crearPlanificacion(datosParaEnviar);
       }
     } else {
-      console.log("Formulario inválido");
       alert('Formulario inválido. Revisa los campos marcados en rojo.');
     }
   }
@@ -221,7 +204,6 @@ export class PlanificacionComponent implements OnInit {
 
   borrarPlanifiacacion(){
     this.eliminarPlanificacion();
-    window.location.reload();
   }
 
   verPerfil(dni: number) {
@@ -229,24 +211,5 @@ export class PlanificacionComponent implements OnInit {
       dni: dni
     };
     this.router.navigate(['/vPerfil'], { state: parametrosOcultos });
-  }
-
-  debugFormulario() {
-    console.log('=== DEBUG FORMULARIO ===');
-    console.log('Formulario válido:', this.planifForm.valid);
-    console.log('Valores del formulario:', this.planifForm.value);
-    console.log('perfilDni:', this.perfilDni);
-    
-    Object.keys(this.planifForm.controls).forEach(key => {
-      const control = this.planifForm.get(key);
-      console.log(`${key}:`, {
-        value: control?.value,
-        valid: control?.valid,
-        errors: control?.errors,
-        dirty: control?.dirty,
-        touched: control?.touched
-      });
-    });
-    console.log('=== FIN DEBUG ===');
   }
 }

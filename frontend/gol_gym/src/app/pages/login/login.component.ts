@@ -23,15 +23,13 @@ export class LoginComponent {
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]]
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(128)]]
     })
   }
 
   login(dataLogin:any = {} ){
-    console.log('comprobando credenciales');
     this.authService.login(dataLogin).subscribe({
       next: (rta:any) => {
-        console.log('Respuesta login: ',rta.access_token);
         localStorage.setItem('token', rta.access_token)
         localStorage.setItem('nombre', rta.nombre)
         localStorage.setItem('apellido', rta.apellido)
@@ -58,15 +56,12 @@ export class LoginComponent {
             localStorage.removeItem('token');
           }
 
-      }, complete: () => {
-        console.log('Finalizo')
       }
     })
   }
 
   submit() {
     if(this.loginForm.valid) {
-      console.log('Form login: ',this.loginForm.value);
       this.login(this.loginForm.value)
     } else {
       alert('Formulario inválido');

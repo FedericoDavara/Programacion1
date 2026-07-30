@@ -45,7 +45,6 @@ export class HomeComponent {
 
   cargarClases() {
     this.clasesService.getClases().subscribe((data: any) => {
-      console.log('JSON data:', data);
       this.arrayClases = data;
     });
   }

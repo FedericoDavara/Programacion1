@@ -22,7 +22,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n        \"apellido\": \"Estrella\",\n        \"password\": \"1234\",\n        \"dni\": \"42439347\",\n        \"email\": \"patricio.estrella@hotmail.com\",\n        \"nombre\": \"Patricio\",\n        \"telefono\": \"542617494678\",\n        \"rol\": \"user\"\n}",
+							"raw": "{\n        \"apellido\": \"Estrella\",\n        \"password\": \"clave1234\",\n        \"dni\": \"42439347\",\n        \"email\": \"patricio.estrella@hotmail.com\",\n        \"nombre\": \"Patricio\",\n        \"telefono\": \"542617494678\",\n        \"rol\": \"user\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface ContactoData {
@@ -21,9 +21,6 @@ export class ContactoService {
   constructor(private httpClient: HttpClient) { }
 
   enviarMensaje(data: ContactoData): Observable<ContactoResponse> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-    return this.httpClient.post<ContactoResponse>(this.url + '/contacto', data, { headers });
+    return this.httpClient.post<ContactoResponse>(this.url + '/contacto', data);
   }
 }

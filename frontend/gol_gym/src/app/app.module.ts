@@ -12,7 +12,7 @@ import { ListaUsuariosComponent } from './components/lista-usuarios/lista-usuari
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { VistaPerfilComponent } from './pages/vista-perfil/vista-perfil.component';
 import { VistaErrorComponent } from './pages/vista-error/vista-error.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListaClasesComponent } from './components/lista-clases/lista-clases.component';
 import { ListaPreciosComponent } from './components/lista-precios/lista-precios.component';
@@ -21,6 +21,7 @@ import { ListaCuotasComponent } from './components/lista-cuotas/lista-cuotas.com
 import { CuotaAlumnoComponent } from './components/cuota-alumno/cuota-alumno.component';
 import { DatePipe } from '@angular/common';
 import { PanelAdminComponent } from './pages/panel-admin/panel-admin.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,10 @@ import { PanelAdminComponent } from './pages/panel-admin/panel-admin.component';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [DatePipe],
+  providers: [
+    DatePipe,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http'
 import jwtDecode from 'jwt-decode';
 import { Observable } from 'rxjs';
 
@@ -12,21 +12,15 @@ export class UsuariosService {
   constructor(
     private httpClient: HttpClient,
   ) { }
-  
-  getUsers(page: number, perPage: number, filtroRol: string): Observable<any> {
-    let auth_token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${auth_token}`
-    });
 
+  getUsers(page: number, perPage: number, filtroRol: string): Observable<any> {
     const params = {
       page: page.toString(),
       per_page: perPage.toString(),
       rol: filtroRol
     };
 
-    return this.httpClient.get(`${this.url}/usuarios`, { headers, params });
+    return this.httpClient.get(`${this.url}/usuarios`, { params });
   }
 
   getUserDNIFromToken(): number | null {
@@ -39,40 +33,19 @@ export class UsuariosService {
   }
 
   getUser(userDNI: number){
-    let auth_token=localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${auth_token}`   
-    });
-      return this.httpClient.get(this.url + '/usuario/' + userDNI, {headers: headers});
+    return this.httpClient.get(this.url + '/usuario/' + userDNI);
   }
 
   getUserAlum(userDNI: number){
-    let auth_token=localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${auth_token}`   
-    });
-      return this.httpClient.get(this.url + '/usuario_a/' + userDNI, {headers: headers});
+    return this.httpClient.get(this.url + '/usuario_a/' + userDNI);
   }
 
   getUserProf(userDNI: number){
-    let auth_token=localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${auth_token}`   
-    });
-      return this.httpClient.get(this.url + '/usuario_p/' + userDNI, {headers: headers});
+    return this.httpClient.get(this.url + '/usuario_p/' + userDNI);
   }
 
-  
-  searchUsers(searchTerm: string, filtroRol: string): Observable<any> {
-    let auth_token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${auth_token}`
-    });
 
+  searchUsers(searchTerm: string, filtroRol: string): Observable<any> {
     const params: any = {
         search_term: searchTerm,
     };
@@ -81,111 +54,58 @@ export class UsuariosService {
         params.rol = filtroRol;
     }
 
-    return this.httpClient.get(`${this.url}/usuarios`, { headers, params });
+    return this.httpClient.get(`${this.url}/usuarios`, { params });
   }
 
-    
+
   registerUser(userData: any) {
-    const auth_token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${auth_token}`
-    });
-    return this.httpClient.post(this.url + '/auth/register', userData, { headers: headers });
+    return this.httpClient.post(this.url + '/auth/register', userData);
   }
 
   updateUser(dni: number, userData: any) {
-    const auth_token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${auth_token}`
-    });
-    return this.httpClient.put(this.url + '/usuario/' + dni, userData, { headers: headers });
+    return this.httpClient.put(this.url + '/usuario/' + dni, userData);
   }
 
   deleteUser(dni: number) {
-    const auth_token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${auth_token}`
-    });
-    return this.httpClient.delete(this.url + '/usuario/' + dni, { headers: headers });
+    return this.httpClient.delete(this.url + '/usuario/' + dni);
   }
 
   createUserAlum(userData: any) {
-    const auth_token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${auth_token}`
-    });
-    return this.httpClient.post(this.url + '/usuarios_a', userData,{ headers: headers });
+    return this.httpClient.post(this.url + '/usuarios_a', userData);
   }
 
   updateUserAlum(dni: number, userData: any) {
-    const auth_token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${auth_token}`
-    });
-    return this.httpClient.put(this.url + '/usuario_a/' + dni, userData, { headers: headers });
+    return this.httpClient.put(this.url + '/usuario_a/' + dni, userData);
   }
 
   createUserProf(userData: any) {
-    const auth_token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${auth_token}`
-    });
-    return this.httpClient.post(this.url + '/usuarios_p', userData,{ headers: headers });
+    return this.httpClient.post(this.url + '/usuarios_p', userData);
   }
 
   updateUserProf(dni: number, userData: any) {
-    const auth_token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${auth_token}`
-    });
-    return this.httpClient.put(this.url + '/usuario_p/' + dni, userData, { headers: headers });
+    return this.httpClient.put(this.url + '/usuario_p/' + dni, userData);
   }
 
   getAllProf(): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-    return this.httpClient.get<any>(this.url + '/usuarios_p', {headers: headers});
+    return this.httpClient.get<any>(this.url + '/usuarios_p');
   }
 
    deleteUserAlum(dni: number) {
-     const auth_token = localStorage.getItem('token');
-     const headers = new HttpHeaders({
-       'Content-Type': 'application/json',
-       'Authorization': `Bearer ${auth_token}`
-     });
-     return this.httpClient.delete(this.url + '/usuario_a/' + dni, { headers: headers });
+     return this.httpClient.delete(this.url + '/usuario_a/' + dni);
    }
 
    suspendUser(dni: number, date: string, reason: string): Observable<any> {
-     const auth_token = localStorage.getItem('token');
-     const headers = new HttpHeaders({
-       'Content-Type': 'application/json',
-       'Authorization': `Bearer ${auth_token}`
-     });
       const userData = {
         fecha_suspension: date,
         motivo_suspension: reason
       };
-     return this.httpClient.put(this.url + '/usuario/' + dni, userData, { headers: headers });
+     return this.httpClient.put(this.url + '/usuario/' + dni, userData);
    }
 
    activateUser(dni: number): Observable<any> {
-     const auth_token = localStorage.getItem('token');
-     const headers = new HttpHeaders({
-       'Content-Type': 'application/json',
-       'Authorization': `Bearer ${auth_token}`
-     });
      const userData = {
        fecha_suspension: null
      };
-     return this.httpClient.put(this.url + '/usuario/' + dni, userData, { headers: headers });
+     return this.httpClient.put(this.url + '/usuario/' + dni, userData);
    }
 }

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import jwtDecode from 'jwt-decode';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -11,38 +10,18 @@ export class PlanificacionService {
   constructor(private httpClient: HttpClient) {}
 
   getPlanif(userDNI: number) {
-    const auth_token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${auth_token}`
-    });
-    return this.httpClient.get(this.url + '/planificacion_a/' + userDNI, { headers: headers });
+    return this.httpClient.get(this.url + '/planificacion_a/' + userDNI);
   }
 
   createPlanif(planificacionData: any) {
-    const auth_token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${auth_token}`
-    });
-    return this.httpClient.post(this.url + '/planificaciones', planificacionData, { headers: headers });
+    return this.httpClient.post(this.url + '/planificaciones', planificacionData);
   }
 
   updatePlanif(id: number, planificacionData: any) {
-    const auth_token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${auth_token}`
-    });
-    return this.httpClient.put(this.url + '/planificacion/' + id, planificacionData, { headers: headers });
+    return this.httpClient.put(this.url + '/planificacion/' + id, planificacionData);
   }
 
   deletePlanif(id: number) {
-    const auth_token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${auth_token}`
-    });
-    return this.httpClient.delete(this.url + '/planificacion/' + id, { headers: headers });
+    return this.httpClient.delete(this.url + '/planificacion/' + id);
   }
 }
